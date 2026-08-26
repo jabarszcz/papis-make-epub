@@ -1,0 +1,46 @@
+language: en
+media_count: 0
+media_extensions: {}
+package:
+  landmarks:
+  - href: content.xhtml#p1.abstract1
+    text: Start
+    type: bodymatter
+  manifest:
+    content.xhtml: application/xhtml+xml
+    fonts/dejavu.ttf: font/ttf
+    fonts/stix.ttf: font/ttf
+    nav.xhtml: application/xhtml+xml nav
+    style.css: text/css
+    toc.ncx: application/x-dtbncx+xml
+  metadata:
+    creator: null
+    identifier: https://arxiv.org/html/2201.03611
+    language: en
+    title: arxiv-listings-2201.03611
+  spine:
+  - content.xhtml
+  toc:
+  - Abstract
+  - I Introduction
+  - II Background in IR and Compiler Design
+  - 'III Shine : A Language-Oriented Compiler'
+  - IV Clearly Separating Optimizing from Code Generation
+parts:
+- epub_type: titlepage
+  text_length: 296
+  toc:
+  - Abstract
+- epub_type: null
+  text_length: 600
+  toc:
+  - I Introduction
+  - II Background in IR and Compiler Design
+  - 'III Shine : A Language-Oriented Compiler'
+  - IV Clearly Separating Optimizing from Code Generation
+stats:
+  dead_links: 0
+  images: 0
+  math: 0
+  math_fallback: 0
+  math_images: 0

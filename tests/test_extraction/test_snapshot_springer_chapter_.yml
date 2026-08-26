@@ -1,0 +1,240 @@
+language: en
+media_count: 139
+media_extensions:
+  png: 139
+package:
+  landmarks:
+  - href: content.xhtml#part-abstract
+    text: Start
+    type: bodymatter
+  - href: content.xhtml#part-bibliography
+    text: References
+    type: bibliography
+  manifest:
+    content.xhtml: application/xhtml+xml mathml
+    fonts/stix.ttf: font/ttf
+    images/figure-10.png: image/png
+    images/figure-100.png: image/png
+    images/figure-101.png: image/png
+    images/figure-102.png: image/png
+    images/figure-103.png: image/png
+    images/figure-104.png: image/png
+    images/figure-105.png: image/png
+    images/figure-106.png: image/png
+    images/figure-107.png: image/png
+    images/figure-108.png: image/png
+    images/figure-109.png: image/png
+    images/figure-11.png: image/png
+    images/figure-110.png: image/png
+    images/figure-111.png: image/png
+    images/figure-112.png: image/png
+    images/figure-113.png: image/png
+    images/figure-114.png: image/png
+    images/figure-115.png: image/png
+    images/figure-116.png: image/png
+    images/figure-117.png: image/png
+    images/figure-118.png: image/png
+    images/figure-119.png: image/png
+    images/figure-12.png: image/png
+    images/figure-120.png: image/png
+    images/figure-121.png: image/png
+    images/figure-122.png: image/png
+    images/figure-123.png: image/png
+    images/figure-124.png: image/png
+    images/figure-125.png: image/png
+    images/figure-126.png: image/png
+    images/figure-127.png: image/png
+    images/figure-128.png: image/png
+    images/figure-129.png: image/png
+    images/figure-13.png: image/png
+    images/figure-130.png: image/png
+    images/figure-131.png: image/png
+    images/figure-132.png: image/png
+    images/figure-133.png: image/png
+    images/figure-134.png: image/png
+    images/figure-135.png: image/png
+    images/figure-136.png: image/png
+    images/figure-137.png: image/png
+    images/figure-138.png: image/png
+    images/figure-139.png: image/png
+    images/figure-14.png: image/png
+    images/figure-15.png: image/png
+    images/figure-16.png: image/png
+    images/figure-17.png: image/png
+    images/figure-18.png: image/png
+    images/figure-19.png: image/png
+    images/figure-2.png: image/png
+    images/figure-20.png: image/png
+    images/figure-21.png: image/png
+    images/figure-22.png: image/png
+    images/figure-23.png: image/png
+    images/figure-24.png: image/png
+    images/figure-25.png: image/png
+    images/figure-26.png: image/png
+    images/figure-27.png: image/png
+    images/figure-28.png: image/png
+    images/figure-29.png: image/png
+    images/figure-3.png: image/png
+    images/figure-30.png: image/png
+    images/figure-31.png: image/png
+    images/figure-32.png: image/png
+    images/figure-33.png: image/png
+    images/figure-34.png: image/png
+    images/figure-35.png: image/png
+    images/figure-36.png: image/png
+    images/figure-37.png: image/png
+    images/figure-38.png: image/png
+    images/figure-39.png: image/png
+    images/figure-4.png: image/png
+    images/figure-40.png: image/png
+    images/figure-41.png: image/png
+    images/figure-42.png: image/png
+    images/figure-43.png: image/png
+    images/figure-44.png: image/png
+    images/figure-45.png: image/png
+    images/figure-46.png: image/png
+    images/figure-47.png: image/png
+    images/figure-48.png: image/png
+    images/figure-49.png: image/png
+    images/figure-5.png: image/png
+    images/figure-50.png: image/png
+    images/figure-51.png: image/png
+    images/figure-52.png: image/png
+    images/figure-53.png: image/png
+    images/figure-54.png: image/png
+    images/figure-55.png: image/png
+    images/figure-56.png: image/png
+    images/figure-57.png: image/png
+    images/figure-58.png: image/png
+    images/figure-59.png: image/png
+    images/figure-6.png: image/png
+    images/figure-60.png: image/png
+    images/figure-61.png: image/png
+    images/figure-62.png: image/png
+    images/figure-63.png: image/png
+    images/figure-64.png: image/png
+    images/figure-65.png: image/png
+    images/figure-66.png: image/png
+    images/figure-67.png: image/png
+    images/figure-68.png: image/png
+    images/figure-69.png: image/png
+    images/figure-7.png: image/png
+    images/figure-70.png: image/png
+    images/figure-71.png: image/png
+    images/figure-72.png: image/png
+    images/figure-73.png: image/png
+    images/figure-74.png: image/png
+    images/figure-75.png: image/png
+    images/figure-76.png: image/png
+    images/figure-77.png: image/png
+    images/figure-78.png: image/png
+    images/figure-79.png: image/png
+    images/figure-8.png: image/png
+    images/figure-80.png: image/png
+    images/figure-81.png: image/png
+    images/figure-82.png: image/png
+    images/figure-83.png: image/png
+    images/figure-84.png: image/png
+    images/figure-85.png: image/png
+    images/figure-86.png: image/png
+    images/figure-87.png: image/png
+    images/figure-88.png: image/png
+    images/figure-89.png: image/png
+    images/figure-9.png: image/png
+    images/figure-90.png: image/png
+    images/figure-91.png: image/png
+    images/figure-92.png: image/png
+    images/figure-93.png: image/png
+    images/figure-94.png: image/png
+    images/figure-95.png: image/png
+    images/figure-96.png: image/png
+    images/figure-97.png: image/png
+    images/figure-98.png: image/png
+    images/figure-99.png: image/png
+    images/figure.png: image/png
+    nav.xhtml: application/xhtml+xml nav
+    style.css: text/css
+    toc.ncx: application/x-dtbncx+xml
+  metadata:
+    creator:
+    - João Paulo Pizani Flor
+    - Wouter Swierstra
+    identifier: 10.1007/978-3-319-94821-8_30
+    language: en
+    title: Verified Timing Transformations in Synchronous Circuits with λπ-Ware
+  spine:
+  - content.xhtml
+  toc:
+  - Abstract
+  - 1 Introduction
+  - 2 Overview
+  - 3 λ π -Ware
+  - 4 Semantics and Properties
+  - 5 Combinational and Sequential Combinators:
+    - 5.1 Convertibility of Combinational and Sequential Versions
+    - 5.2 Applications of the Combinational and Sequential Combinators
+  - 6 Discussion:
+    - 6.1 Related Work
+    - 6.2 Future Work
+  - 7 Conclusion
+  - Notes
+  - References
+  - Acknowledgments
+parts:
+- epub_type: titlepage
+  text_length: 109
+  toc: []
+- epub_type: abstract
+  text_length: 1053
+  toc:
+  - Abstract
+- epub_type: null
+  text_length: 3814
+  toc:
+  - 1 Introduction
+- epub_type: null
+  text_length: 4165
+  toc:
+  - 2 Overview
+- epub_type: null
+  text_length: 3533
+  toc:
+  - 3 λ π -Ware
+- epub_type: null
+  text_length: 5228
+  toc:
+  - 4 Semantics and Properties
+- epub_type: null
+  text_length: 10385
+  toc:
+  - 5 Combinational and Sequential Combinators:
+    - 5.1 Convertibility of Combinational and Sequential Versions
+    - 5.2 Applications of the Combinational and Sequential Combinators
+- epub_type: null
+  text_length: 2555
+  toc:
+  - 6 Discussion:
+    - 6.1 Related Work
+    - 6.2 Future Work
+- epub_type: null
+  text_length: 1167
+  toc:
+  - 7 Conclusion
+- epub_type: null
+  text_length: 77
+  toc:
+  - Notes
+- epub_type: bibliography
+  text_length: 3755
+  toc:
+  - References
+- epub_type: null
+  text_length: 595
+  toc:
+  - Acknowledgments
+stats:
+  dead_links: 0
+  images: 139
+  math: 41
+  math_fallback: 0
+  math_images: 0

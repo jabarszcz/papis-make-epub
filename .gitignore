@@ -1,0 +1,16 @@
+__pycache__/
+*.py[cod]
+.mypy_cache/
+.ruff_cache/
+.pytest_cache/
+.coverage
+dist/
+result
+result-*
+*~
+\#*\#
+.\#*
+# the renderer-comparison EPUB (papis-make-epub-demo's default output)
+math-rendering-demo.epub
+# Claude Code session state (settings.local.json, worktrees)
+.claude/

@@ -1,0 +1,182 @@
+language: en
+media_count: 5
+media_extensions:
+  png: 5
+package:
+  landmarks:
+  - href: content.xhtml#part-abstract
+    text: Start
+    type: bodymatter
+  - href: content.xhtml#part-bibliography
+    text: References
+    type: bibliography
+  manifest:
+    content.xhtml: application/xhtml+xml mathml
+    fonts/dejavu.ttf: font/ttf
+    fonts/stix.ttf: font/ttf
+    images/figure-2.png: image/png
+    images/figure-3.png: image/png
+    images/figure-4.png: image/png
+    images/figure-5.png: image/png
+    images/figure.png: image/png
+    nav.xhtml: application/xhtml+xml nav
+    style.css: text/css
+    toc.ncx: application/x-dtbncx+xml
+  metadata:
+    creator:
+    - Alhussein Fawzi
+    - Matej Balog
+    - Aja Huang
+    - Thomas Hubert
+    - Bernardino Romera-Paredes
+    - Mohammadamin Barekatain
+    - Alexander Novikov
+    - Francisco J. R. Ruiz
+    - Julian Schrittwieser
+    - Grzegorz Swirszcz
+    - David Silver
+    - Demis Hassabis
+    - Pushmeet Kohli
+    identifier: 10.1038/s41586-022-05172-4
+    language: en
+    title: Discovering faster matrix multiplication algorithms with reinforcement
+      learning
+  spine:
+  - content.xhtml
+  toc:
+  - Abstract
+  - Main
+  - Algorithms as tensor decomposition:
+    - Algorithm 1
+  - DRL for algorithm discovery:
+    - Neural network architecture
+    - Synthetic demonstrations
+    - Change of basis
+    - Data augmentation
+  - Algorithm discovery results:
+    - Discovery of matrix multiplication algorithms
+    - Analysing the symmetries of matrix multiplication algorithms
+    - Beyond standard matrix multiplication
+    - Rapid tailored algorithm discovery
+  - Discussion
+  - Methods:
+    - TensorGame
+    - AlphaTensor
+    - Neural network
+    - Related work
+  - Data availability
+  - Code availability
+  - References
+  - Acknowledgements
+  - Ethics declarations:
+    - Competing interests
+  - Peer review:
+    - Peer review information
+  - Additional information
+  - Extended data figures and tables:
+    - Extended Data Fig. 1 Algorithm for multiplying 4 × 4 matrices in modular arithmetic
+      ( Z 2 ) with 47 multiplications.
+    - Extended Data Fig. 2 Algorithm for multiplying 4 × 5 by 5 × 5 matrices in standard
+      arithmetic with 76 multiplications.
+    - Extended Data Fig. 3 AlphaTensor’s network architecture.
+    - Extended Data Fig. 4 Detailed view of AlphaTensor’s architecture, included torso,
+      policy and value head.
+  - Supplementary information:
+    - Supplementary Information (download PDF )
+parts:
+- epub_type: titlepage
+  text_length: 314
+  toc: []
+- epub_type: abstract
+  text_length: 1676
+  toc:
+  - Abstract
+- epub_type: null
+  text_length: 4326
+  toc:
+  - Main
+- epub_type: null
+  text_length: 3132
+  toc:
+  - Algorithms as tensor decomposition:
+    - Algorithm 1
+- epub_type: null
+  text_length: 6689
+  toc:
+  - DRL for algorithm discovery:
+    - Neural network architecture
+    - Synthetic demonstrations
+    - Change of basis
+    - Data augmentation
+- epub_type: null
+  text_length: 10596
+  toc:
+  - Algorithm discovery results:
+    - Discovery of matrix multiplication algorithms
+    - Analysing the symmetries of matrix multiplication algorithms
+    - Beyond standard matrix multiplication
+    - Rapid tailored algorithm discovery
+- epub_type: null
+  text_length: 1762
+  toc:
+  - Discussion
+- epub_type: null
+  text_length: 23663
+  toc:
+  - Methods:
+    - TensorGame
+    - AlphaTensor
+    - Neural network
+    - Related work
+- epub_type: null
+  text_length: 245
+  toc:
+  - Data availability
+- epub_type: null
+  text_length: 509
+  toc:
+  - Code availability
+- epub_type: bibliography
+  text_length: 9139
+  toc:
+  - References
+- epub_type: null
+  text_length: 698
+  toc:
+  - Acknowledgements
+- epub_type: null
+  text_length: 203
+  toc:
+  - Ethics declarations:
+    - Competing interests
+- epub_type: null
+  text_length: 205
+  toc:
+  - Peer review:
+    - Peer review information
+- epub_type: null
+  text_length: 158
+  toc:
+  - Additional information
+- epub_type: null
+  text_length: 1413
+  toc:
+  - Extended data figures and tables:
+    - Extended Data Fig. 1 Algorithm for multiplying 4 × 4 matrices in modular arithmetic
+      ( Z 2 ) with 47 multiplications.
+    - Extended Data Fig. 2 Algorithm for multiplying 4 × 5 by 5 × 5 matrices in standard
+      arithmetic with 76 multiplications.
+    - Extended Data Fig. 3 AlphaTensor’s network architecture.
+    - Extended Data Fig. 4 Detailed view of AlphaTensor’s architecture, included torso,
+      policy and value head.
+- epub_type: null
+  text_length: 67
+  toc:
+  - Supplementary information:
+    - Supplementary Information (download PDF )
+stats:
+  dead_links: 0
+  images: 5
+  math: 107
+  math_fallback: 2
+  math_images: 0

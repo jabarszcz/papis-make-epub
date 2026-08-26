@@ -1,0 +1,161 @@
+language: en
+media_count: 16
+media_extensions:
+  svg: 16
+package:
+  landmarks:
+  - href: content.xhtml#abstract1
+    text: Start
+    type: bodymatter
+  - href: content.xhtml#part-bibliography
+    text: References
+    type: bibliography
+  manifest:
+    content.xhtml: application/xhtml+xml mathml svg
+    fonts/dejavu.ttf: font/ttf
+    fonts/stix.ttf: font/ttf
+    images/architecture.svg: image/svg+xml
+    images/copying.svg: image/svg+xml
+    images/dna_length.svg: image/svg+xml
+    images/dna_scaling.svg: image/svg+xml
+    images/induction.svg: image/svg+xml
+    images/mamba_inference.svg: image/svg+xml
+    images/pile_2k.svg: image/svg+xml
+    images/pile_2k_ablations_h3.svg: image/svg+xml
+    images/pile_2k_ablations_mamba.svg: image/svg+xml
+    images/pile_8k.svg: image/svg+xml
+    images/selection.svg: image/svg+xml
+    images/species.svg: image/svg+xml
+    images/ssm_scan.svg: image/svg+xml
+    images/youtubemix.svg: image/svg+xml
+    images/youtubemix_ablations.svg: image/svg+xml
+    images/youtubemix_ablations_center.svg: image/svg+xml
+    nav.xhtml: application/xhtml+xml nav
+    style.css: text/css
+    toc.ncx: application/x-dtbncx+xml
+  metadata:
+    creator:
+    - Albert Gu
+    - Tri Dao
+    identifier: arxiv:2312.00752v2
+    language: en
+    title: 'Mamba: Linear-Time Sequence Modeling with Selective State Spaces'
+  spine:
+  - content.xhtml
+  toc:
+  - Abstract
+  - 1 Introduction
+  - 2 State Space Models
+  - 3 Selective State Space Models:
+    - '3.1 Motivation: Selection as a Means of Compression'
+    - 3.2 Improving SSMs with Selection
+    - 3.3 Efficient Implementation of Selective SSMs
+    - 3.4 A Simplified SSM Architecture
+    - 3.5 Properties of Selection Mechanisms
+    - 3.6 Additional Model Details
+  - 4 Empirical Evaluation:
+    - 4.1 Synthetic Tasks
+    - 4.2 Language Modeling
+    - 4.3 DNA Modeling
+    - 4.4 Audio Modeling and Generation
+    - 4.5 Speed and Memory Benchmarks
+    - 4.6 Model Ablations
+  - 5 Discussion
+  - 6 Conclusion
+  - References
+  - 'Appendix A Discussion: Selection Mechanism'
+  - Appendix B Related Work:
+    - B.1 S4 Variants and Derivatives
+    - B.2 SSM Architectures
+    - B.3 Relationship to RNNs
+    - B.4 Linear Attention
+    - B.5 Long Context Models
+  - Appendix C Mechanics of Selective SSMs
+  - Appendix D Hardware-aware Algorithm For Selective SSMs
+  - Appendix E Experimental Details and Additional Results:
+    - E.1 Synthetic Tasks
+    - E.2 Language Modeling
+    - E.3 DNA Modeling
+    - E.4 Audio Details
+    - E.5 Efficiency Benchmark
+parts:
+- epub_type: titlepage
+  text_length: 2003
+  toc:
+  - Abstract
+- epub_type: null
+  text_length: 7148
+  toc:
+  - 1 Introduction
+- epub_type: null
+  text_length: 8149
+  toc:
+  - 2 State Space Models
+- epub_type: null
+  text_length: 22413
+  toc:
+  - 3 Selective State Space Models:
+    - '3.1 Motivation: Selection as a Means of Compression'
+    - 3.2 Improving SSMs with Selection
+    - 3.3 Efficient Implementation of Selective SSMs
+    - 3.4 A Simplified SSM Architecture
+    - 3.5 Properties of Selection Mechanisms
+    - 3.6 Additional Model Details
+- epub_type: null
+  text_length: 24841
+  toc:
+  - 4 Empirical Evaluation:
+    - 4.1 Synthetic Tasks
+    - 4.2 Language Modeling
+    - 4.3 DNA Modeling
+    - 4.4 Audio Modeling and Generation
+    - 4.5 Speed and Memory Benchmarks
+    - 4.6 Model Ablations
+- epub_type: null
+  text_length: 1739
+  toc:
+  - 5 Discussion
+- epub_type: null
+  text_length: 795
+  toc:
+  - 6 Conclusion
+- epub_type: bibliography
+  text_length: 26687
+  toc:
+  - References
+- epub_type: appendix
+  text_length: 4100
+  toc:
+  - 'Appendix A Discussion: Selection Mechanism'
+- epub_type: appendix
+  text_length: 11506
+  toc:
+  - Appendix B Related Work:
+    - B.1 S4 Variants and Derivatives
+    - B.2 SSM Architectures
+    - B.3 Relationship to RNNs
+    - B.4 Linear Attention
+    - B.5 Long Context Models
+- epub_type: appendix
+  text_length: 1854
+  toc:
+  - Appendix C Mechanics of Selective SSMs
+- epub_type: appendix
+  text_length: 4776
+  toc:
+  - Appendix D Hardware-aware Algorithm For Selective SSMs
+- epub_type: appendix
+  text_length: 27257
+  toc:
+  - Appendix E Experimental Details and Additional Results:
+    - E.1 Synthetic Tasks
+    - E.2 Language Modeling
+    - E.3 DNA Modeling
+    - E.4 Audio Details
+    - E.5 Efficiency Benchmark
+stats:
+  dead_links: 0
+  images: 16
+  math: 558
+  math_fallback: 0
+  math_images: 0

@@ -1,0 +1,41 @@
+language: en
+media_count: 0
+media_extensions: {}
+package:
+  landmarks:
+  - href: content.xhtml#abstract1
+    text: Start
+    type: bodymatter
+  manifest:
+    content.xhtml: application/xhtml+xml mathml
+    fonts/stix.ttf: font/ttf
+    nav.xhtml: application/xhtml+xml nav
+    style.css: text/css
+    toc.ncx: application/x-dtbncx+xml
+  metadata:
+    creator: null
+    identifier: https://arxiv.org/html/2602.09464
+    language: en
+    title: arxiv-missing-labels-2602.09464
+  spine:
+  - content.xhtml
+  toc:
+  - Abstract
+  - Appendix A Background on Program Verification:
+    - A.1 The Anatomy of a Verified Program
+parts:
+- epub_type: titlepage
+  text_length: 196
+  toc:
+  - Abstract
+- epub_type: appendix
+  text_length: 616
+  toc:
+  - Appendix A Background on Program Verification:
+    - A.1 The Anatomy of a Verified Program
+stats:
+  dead_links: 0
+  images: 0
+  math: 2
+  math_fallback: 0
+  math_images: 0

@@ -1,0 +1,917 @@
+==== part 0 (titlepage)
+The area of a rough black hole
+John D. Barrow
+
+==== part 1 (abstract)
+Abstract
+We investigate the consequences for the black hole area of introducing fractal structure for the horizon geometry. We create a three-dimensional spherical analogue of a ‘Koch Snowflake’ using a infinite diminishing hierarchy of touching spheres around the Schwarzschild
+event horizon
+. We can create a fractal structure for the horizon with finite volume and infinite (or finite) area. This is a toy model for the possible effects of quantum gravitational spacetime foam, with significant implications for assessments of the entropy of black holes and the universe, which is generally larger than in standard picture of black hole structure and thermodynamics, potentially by very considerable factors. The entropy of the observable universe today becomes
+S
+≈
+10
+120
+(
+1
++
+Δ
+/
+2
+)
+, where
+0
+≤
+Δ
+≤
+1
+, with
+Δ
+=
+0
+for a smooth spacetime structure and
+Δ
+=
+1
+for the most intricate. The Hawking lifetime of black holes is also reduced.
+
+==== part 2 (None)
+1. Introduction
+Mathematicians are familiar with constructions like the Koch snowflake
+[1]
+in which a two-dimensional self-similar object, constructed iteratively, can possess finite area and infinite perimeter. In three dimensions, the Sierpinski Gasket
+[2]
+and the Menger Sponge
+[3]
+have analogous properties, with finite volume and infinite surface area. These features are perfectly consistent with the isoperimetric theorems that relate surface area,
+A
+, with enclosed volume,
+V
+, for a 3-dimensional body by the inequality
+A
+3
+≥
+36
+π
+V
+2
+, with equality for the sphere. Since we are being bombarded with animations and pictures of the Covid-19 virus as a sphere with a number of attachments leading off its surface to increase its surface area and provide links to latch on to other cells, we question whether, at the quantum gravitational level, space and black hole surfaces might be like that, with intricate structure down to arbitrarily small scales (or to a cut-off scale of order the Planck length), leading to an increase over the expected surface area. The surface area of a black hole is a key feature that gives its entropy and information content. It obeys a ‘second law’, or Area Theorem, subject to energy conditions, that requires it to be non-decreasing. Bekenstein
+[4]
+and Hawking
+[5]
+discovered many of these crucial classical properties whose significance for
+physics
+is wider than the study of black holes. Hawking
+[6]
+showed that they are not mere coincidences or analogies with
+thermodynamic laws
+, as was once thought, but deep consequences of the
+quantum structure
+of a black hole: black holes are black bodies.
+In section
+2
+, we outline a fractal extension of the surface structure of the static, spherically symmetric
+Schwarzschild black hole
+and determine conditions needed for the volume to remain finite while the surface area tends to infinity in the limit of increasing intricacy on arbitrarily small scales. We highlight a number of consequences for the entropy and Hawking lifetime of black holes and for assessments of the entropy of the observable universe. In section
+3
+we discuss the physical bases for this type of horizon structure and in section
+4
+we discuss our results and their limitations.
+
+==== part 3 (None)
+2. Black hole with an intricate surface
+We will construct a fractal horizon surface starting from a
+Schwarzschild black hole
+of mass
+M
+and radius
+R
+g
+=
+2
+G
+M
+/
+c
+2
+by attaching some number of smaller spheres to touch its outer surface with yet smaller spheres touching the surfaces of those spheres, and so on. The original Koch snowflake boundary in 2-dimensions is made of a crenellated structure of increasingly small triangles whose sides have the middle third converted into the base of a new equilateral triangle with sides that are three times smaller: our boundary will be composed of surfaces of hierarchically smaller, touching, spheres. An animation of the construction for this ‘sphereflake’ can be see in ref.
+[7]
+. Suppose that each step to smaller scale intricacy leads to the attachment of
+N
+spheres of radius
+λ
+times smaller than the sphere to the sphere to which they are attached tangentially. Therefore, the hierarchy of radii is just
+r
+n
++
+1
+=
+λ
+r
+n
+over
+N
+steps, where
+r
+0
+=
+R
+g
+, is the
+Schwarzschild radius
+.
+If we allow this process of adding smaller spheres to touch the surface, then the total volume of the black hole after an infinite number of steps,
+V
+∞
+, will be
+(1)
+V
+∞
+=
+∑
+n
+=
+0
+∞
+N
+n
+4
+π
+3
+(
+λ
+n
+R
+g
+)
+3
+=
+4
+π
+R
+g
+3
+3
+∑
+n
+=
+0
+∞
+(
+N
+λ
+3
+)
+n
+.
+This is a finite convergent so long as
+N
+λ
+3
+<
+1
+. This ensures the geometric series on the right-hand side of eq.
+(1)
+converges. In that case, the
+N
+→
+∞
+limit is
+(2)
+V
+∞
+=
+4
+π
+R
+g
+3
+3
+(
+1
+−
+N
+λ
+3
+)
+>
+4
+π
+R
+g
+3
+3
+Therefore, the volume of the extended fractal black hole is finite under these conditions.
+Similarly, the total surface area after an infinite number steps,
+A
+∞
+, is
+(3)
+A
+∞
+=
+∑
+n
+=
+0
+∞
+N
+n
+4
+π
+(
+λ
+n
+R
+g
+)
+2
+=
+4
+π
+R
+g
+2
+∑
+n
+=
+0
+∞
+(
+N
+λ
+2
+)
+n
+>
+4
+π
+R
+g
+2
+.
+Since we want the surface area to diverge in the limit we require
+N
+λ
+2
+>
+1
+. When
+N
+λ
+2
+<
+1
+, the area converges to
+(4)
+A
+∞
+=
+4
+π
+R
+g
+2
+1
+−
+N
+λ
+2
+.
+Hence, the volume will be finite but the surface area will be infinite if
+(5)
+λ
+−
+2
+<
+N
+<
+λ
+−
+3
+.
+The divergence of the surface area in the limit, if it is achieved rather than the sum being cut off at some small finite radius, renders the black hole entropy infinite, and probably meaningless as a physical indicator. However, if it converges to a finite limit, or has a cut-off length, the area is again always greater than the spherical Schwarzschild surface area, eq.
+(3)
+, as we might expect from the classical area theorem.
+There is another restriction to consider: the number of spheres that will fit around the sphere of the previous iteration. If we just consider a two-dimensional slice and fit as many circles of radius
+r
+around a bigger circle of radius
+R
+g
+, then the circle that passes through the centres of all the smaller circles that touch the larger one has radius
+R
+g
++
+r
+. The maximum number of circles we can pack in the first level of the hierarchy is given by
+N
+r
+=
+π
+(
+R
+g
++
+r
+)
+; so, if
+r
+=
+λ
+R
+g
+, as above, we have the bound
+(6)
+N
+≤
+π
+(
+λ
+−
+1
++
+1
+)
+.
+The true bound will be 3-dimensional, but this is slice estimate is indicative and concordant with eq.
+(5)
+.
+The surface area,
+A
+g
+=
+4
+π
+R
+g
+2
+, of a Schwarzschild black hole determines its entropy,
+S
+=
+A
+g
+c
+3
+/
+4
+G
+ħ
+≈
+A
+g
+/
+A
+p
+l
+, where
+A
+p
+l
+is the Planck area: the entropy is the number of Planck areas in the horizon area. Thus, we see that with intricate horizon structure, if the thermodynamic interpretation of the area still holds as its fundamental thermodynamic basis might suggest, then the entropy of the black hole can be much larger than the standard Schwarzschild value as it is arising in a quantum gravitational extension of
+general relativity
+and its usually assumed spacetime structure. Thus we cannot assume that the usual principles for black holes (no hair, entropy bound etc) will hold in unchanged form. The increased value is what we could expect from an Area Theorem,
+d
+A
+/
+d
+t
+≥
+0
+,
+with the increased complexity and information needed to describe the horizon structure, leading to a higher entropy. Likewise, in this context the evaporating quantum black hole with the increased area will lead to more rapid evaporation by Stefan's law. There will be a shorter lifetime before the black hole explodes, since the luminosity is proportional to
+A
+g
+T
+g
+4
+, and
+T
+g
+∝
+M
+−
+1
+is the black hole temperature. If the area increases by a scaling
+A
+g
+→
+α
+A
+g
+, via eq.
+(3)
+, with
+α
+≥
+1
+, then the black hole's Hawking lifetime,
+t
+b
+h
+, falls as
+t
+b
+h
+∝
+M
+3
+/
+α
+2
+as the intricacy,
+α
+, increases. If there is no upper bound on
+α
+, then
+primordial black holes
+will explode very quickly and may leave no direct explosive remnants today.
+In a more general scheme, where the surface of the black hole is a pure fractal we know that the surface area will vary as the radius to a power
+R
+2
++
+Δ
+, where
+0
+≤
+Δ
+≤
+1
+, with
+Δ
+=
+0
+corresponding to the simplest horizon structure, and
+Δ
+=
+1
+to the most intricate, where it behaves from an information perspective as if it possessed one geometric dimension higher even though geometrically it is an area. This can have implications for other formulae involving the entropy. In effect, the area wiggles around sufficiently to cover a whole volume. Thus, from this perspective the black hole entropy would vary as
+S
+≈
+(
+A
+/
+A
+p
+l
+)
+≈
+(
+A
+g
+/
+A
+p
+l
+)
+(
+2
++
+Δ
+)
+/
+2
+. For an application of this formula to the observable universe inside the particle horizon today we take
+A
+g
+≈
+(
+c
+t
+0
+)
+2
+, with the present cosmic age
+t
+0
+≈
+10
+17
+s
+, so we have
+(7)
+S
+u
+≈
+(
+10
+17
+/
+10
+−
+43
+)
+(
+2
++
+Δ
+)
+≈
+10
+120
+(
+1
++
+Δ
+/
+2
+)
+,
+and it ranges between the usual 10
+120
+with smooth spacetime structure and 10
+180
+with the most fractalised. Likewise, the entropy of a fractal black hole possesses a similar enormous range of possible entropy values for a given mass.
+
+==== part 4 (None)
+3. Physical motivations
+Our toy example is just intended to show that near the scale where
+quantum gravity
+effects impinge, the surface area of a black hole can greatly exceed
+4
+π
+R
+g
+2
+because of intricate small-scale structure of fractal type. This will occur for any external intricacy with a Hausdorff dimension exceeding 2. In effect, the 2-dimensional geometrical surface behaves as through it has more than two dimensions and approaches the behaviour of a 3-dimensional surface in the limit of maximum intricacy, showing that it has the information content and intricacy of a geometrical volume.
+1
+Although we know almost nothing about spacetime structure on scales within a few orders of magnitude of the Planck scale, where we might expect to find these complexities in the geometry, the first suggestions of a spacetime foam structure were suggested by Wheeler
+[8]
+as a model of spacetime structure on the Planck scale, see also
+[9]
+,
+[10]
+. On larger scales, this model has become one of three paradigms for observational testing on larger astronomical scales. Recently, the strongest limits have been found using Espresso
+[11]
+at the
+VLT
+through its effect on images and the profile stability of the FeII metal-line velocity,
+v
+. Under the assumption that the effects are proportional to
+(
+E
+/
+E
+p
+l
+)
+a
+, where
+E
+p
+l
+is the Planck energy, the effects on
+Δ
+v
+/
+c
+are proportional to
+(
+1
++
+z
+)
+−
+1
+−
+a
+, with
+1
+/
+2
+≤
+a
+≤
+1
+, where the
+light source
+is at redshift
+z
+=
+2.34
+, about 5.8 Gpc away from us. The
+random walk
+model has
+a
+=
+1
+/
+2
+, the holographic model has
+a
+=
+2
+/
+3
+, while Wheeler's model ha
+a
+=
+1
+; but Wheeler's model, unlike the other two, produces no
+cumulative effects
+over the spacetime path from source to detector and so is not open to investigation by observing light from high-redshift astronomical sources. The limits from the first two scenarios are that
+a
+≥
+0.625
+, so they exclude some random-walk models. If photons take discrete random walk steps en route to us then those steps must be at least 10
+13.2
+Planck lengths
+(
+10
+−
+29.8
+cm
+)
+in size. This is a 3-4 order of magnitude improvement over earlier bounds on spacetime foam from observations of distant
+quasars
+by the Chandra x-ray Satellite and the Fermi Gamma-ray Space Telescope, coupled with ground-based gamma-ray observations from the Very
+Energetic
+Radiation Imaging Telescope Array (VERITAS)
+[12]
+. They claim that spacetime must be uniform down to distances of order
+10
+−
+16
+cm in order not to diffuse incoming light from the
+quasars
+and degrade image quality by unacceptable levels, but this is still far above the
+10
+−
+33
+cm Planck length scale at which quantum gravitational foam might be expected.
+Other scenarios with a foam-like picture of spacetime microstructure have been studied in some detail, for example the spinfoam theory
+[13]
+. The most generic property of
+quantum theories
+, including a quantum gravity theory that is yet to be found, which motivates our simple fractal-like structure for the black hole horizon, is that of the fractal nature of quantum paths. This was first mentioned in Snyder
+[14]
+and has been reviewed in ref.
+[15]
+, and references therein.
+Feynman and Hibbs
+[16]
+pointed out that the ‘typical path of a quantum particle is highly irregular on a small scale.. in other words [it is] non-differentiable’, and illustrate the structure pictorially. Many other authors observe similarities between Brownian and quantum-mechanical motions (see, for example, Nelson
+[17]
+and references herein). Similarly, the dimension of the quantum path was also discussed as the dimension of a non-differentiable path in
+quantum field theories
+by Kraemmer et al.
+[18]
+. Later, after the introduction of the fractal terminology by Mandelbrot in 1972
+[19]
+, Abbott and Wise
+[20]
+later calculated that the fractal (Hausdorff) dimension of the quantum path in one dimension is 2, i.e. maximal, so with the information content of an area. The reason for this fractal behaviour is fundamental and this is why we expect it to be possible on very small Planck length scales in 3-dimensional space around the rough black hole horizon. The reason for its domination of quantum paths is the Heisenberg Uncertainty Principle (HUP). As a particle becomes more localized in a region Δ
+r
+its momentum becomes of order
+1
+/
+Δ
+r
+and its motion becomes more erratic. Abbott and Wise
+[20]
+show that when the step-lengths are much larger than the quantum wavelength of the particle the Hausdorff dimension,
+D
+, approaches 1 but when the step-lengths are smaller than the quantum wavelength
+D
+approaches 2, with the information content of a geometric volume, thus showing the fractal character on arbitrary small scales that we have exploited in our simple model above. In between these limiting cases the fractal dimension varies rapidly but exceeds 1. Theories of generalised Hagedorn type with a continuously rising spectrum of mass states of the form
+g
+(
+m
+)
+∝
+(
+m
+/
+m
+0
+)
+β
+, for constants
+m
+0
+>
+0
+and
+β
+>
+1
+, display structure on arbitrarily small scales as the quantum wavelength of the mass states declines when
+m
+→
+∞
+,
+[21]
+, and again such scenarios are well suited to create microscopic fractal structure in combination with quantum random motion.
+An interesting extension of these calculations is to replace the HUP by its extension when gravitational forces are included. The uncertainty in position Δ
+r
+and momentum Δ
+p
+in one dimension is then
+(8)
+Δ
+r
+≃
+1
+Δ
+p
++
+λ
+l
+p
+l
+2
+Δ
+p
+.
+The first term on the right-hand side of eq.
+(8)
+is the term in the usual HUP. The second term reflects the horizon fluctuation,
+Λ
+R
+g
+≃
+Δ
+M
+b
+h
+≃
+Δ
+p
+, where
+λ
+is some geometrical constant of order unity) and the intricate structure we have argued should appear near the horizon on length scales close to the Planck length.
+
+==== part 5 (None)
+4. Discussion
+The deficiencies of our model are clear. We do not create the fractal substructures by any single
+quantum gravity
+model (because there is no such standard model). However, we have discussed some particular theories for spacetime foam and the non-differentiable character of quantum particle paths, with and without the presence of gravity, to motivate our scenario. The fact that it can rest on such simple general physical principle adds to its plausibility and makes the hypothesis worthy of further exploration. There are many other ways we could have constructed a ‘snowflake’ structure of the horizon on arbitrarily small scales but we chose the simplest toy model. Using this, we have explored the general effect on the
+event horizon
+areas of black holes and inside the cosmological particle horizon. Similar effects can alter the assessment of the ‘likelihood’ of the whole universe as the black hole entropy formula is often used to assess the gravitational entropy of the universe, by asking for the entropy of the largest black hole that could fit into it
+[22]
+,
+[23]
+,
+[24]
+, or the number of Planck volumes that will fit inside the particle horizon. We have seen how these black-hole and cosmological entropies can even be infinite if there is no small-scale cut-off to the intricacies. This is often assumed but is not proven. The laboratory analogue studies of black hole horizons might also be able to investigate these changes to the horizon intricacy directly
+[25]
+,
+[26]
+. We also discussed new observational probes of the scale of any spacetime foam structure using its effects on astronomical images and
+spectral lines
+. Since this paper was first posted a number of detailed studies have appeared examining the observational consequences of the fractalised area for
+dark matter
+and Hubble tension
+[27]
+,
+[28]
+,
+[29]
+and for aspects
+of black hole thermodynamics
+[30]
+,
+[31]
+and the spontaneous ‘wrinklification’ of AdS black holes
+[32]
+.
+This is a fascinating, albeit very model dependent although now we are only able to probe far larger length scales than we expect fractal effects to make the horizon of a black hole ‘fuzzy’, they are welcome steps towards closing the link between theory and observation.
+
+==== part 6 (None)
+Declaration of Competing Interest
+The authors declare that they have no known competing financial interests or personal relationships that could have appeared to influence the work reported in this paper.
+
+==== part 7 (None)
+Acknowledgement
+The author is supported by the Science and Technology Funding Council of the UK (
+STFC
+RG84196
+) and thanks S. Cotsakis, E. Vagenas, M. Da̧browski and S. Vagnozzi for helpful inputs and references.
+
+==== part 8 (bibliography)
+References
+[1]
+H. van Koch
+Ark. Mat., 1 (1904), p. 681
+[2]
+W. Sierpinski
+C. R. Acad. Sci. Paris., 160 (1915), p. 302
+see
+https://gallica.bnf.fr/
+[3]
+K. Menger
+Allgemeine Räume und Cartesische Räume I
+Comm. Amsterdam Acad. Sci. (1926)
+English transl.
+G.A. Edgar (Ed.), Classics on Fractals, Studies in Nonlinearity, Westview Press, Advanced Book Program, Boulder, CO (2004)
+[4]
+J.D. Bekenstein
+Lett. Nuovo Cimento, 4 (1972), p. 737
+J.D. Bekenstein
+Phys. Rev., 7 (1973), p. 2333
+[5]
+S.W. Hawking
+Phys. Rev. Lett., 26 (1971), p. 1344
+S.W. Hawking
+Commun. Math. Phys., 25 (1972), p. 152
+[6]
+S.W. Hawking
+Nature, 248 (1974), p. 30
+[7]
+See
+https://www.youtube.com/watch?v=pPb5NKEYCD8
+[8]
+J.A. Wheeler
+Phys. Rev., 97 (1955), p. 511
+C. Misner, K. Thorne, J.A. Wheeler
+Gravitation
+W.H. Freeman, San Francisco (1973)
+[9]
+S.W. Hawking
+Nucl. Phys. B, 144 (1978), p. 349
+[10]
+G. t'Hooft
+Nucl. Phys. B, 256 (1985), p. 727
+[11]
+R. Cooke, L. Welch, M. Fumagalli, M. Pettini
+arXiv:2001.06016
+[12]
+E.S. Perlman,
+et al.
+Astrophys. J., 805 (2015), p. 10
+[13]
+J.C. Baez
+Lect. Notes Phys., 543 (2000), p. 25
+A. Perez
+Living Rev. Relativ., 16 (2013)
+arXiv:1205.2019
+[14]
+H.S. Snyder
+Phys. Rev., 71 (1947), p. 38
+[15]
+R. Casadio, F. Scardigli
+arXiv:1305.3195
+[16]
+R. Feynman, A.R. Hibbs
+Quantum Mechanics and Path Integrals
+McGraw Hill, New York (1965)
+D.F. Styer (ed.), 2005 edn. See figure 7.1 and caption showing erratic non-differential path characteristics on arbitrary small scales – what would later be called a ‘fractal’ path by B. Mandelbrot, who drew attention to these remarks
+[17]
+E. Nelson
+Quantum fluctuations
+Phys. Rev., 150 (1966), p. 1079
+E. Nelson
+Quantum Fluctuations
+Princeton Univ. Press, Princeton (1966)
+[18]
+A.B. Kraemmer, H.B. Nielsen, H.C. Tze
+Nucl. Phys., 81 (1974), p. 145
+[19]
+B. Mandelbrot
+Fractals: Form, Chance and Dimension
+W.H. Freeman, San Francisco (1977)
+[20]
+L.F. Abbott, M. Wise
+Am. J. Phys., 49 (1981), p. 37
+[21]
+J.D. Barrow, W.S. Hawthorne
+Mon. Not. R. Astron. Soc., 243 (1990), p. 608
+[22]
+R. Penrose
+Singularities and time asymmetry
+S.W. Hawking, W. Israel (Eds.), General Relativity: an Einstein Centenary Volume, Cambridge U.P., Cambridge, UK (1979), pp. 581-638
+[23]
+J.D. Barrow, F.J. Tipler
+The Anthropic Cosmological Principle
+Oxford U.P., Oxford (1986)
+[24]
+J.D. Barrow
+New Astron., 4 (1999), p. 333
+[25]
+C. Barceló
+Nat. Phys., 15 (2019), p. 210
+[26]
+W.G. Unruh
+Proc. R. Soc. A, 366 (2008), p. 2905
+[27]
+F.K. Anagnostopoulos, S. Basilakos, E.N. Saridakis
+Observational constraints on Barrow holographic dark energy
+arXiv:2005.10302
+[28]
+E.N. Saridakis
+Barrow holographic dark energy
+arXiv:2005.04115
+[29]
+E.N. Saridakis
+Modified cosmology through spacetime thermodynamics and Barrow horizon entropy
+arXiv:2006.01105
+[30]
+E.M.C. Abreu, J.A. Neto, E.M. Barboza Jr.
+Barrow's black hole entropy and the equipartition theorem
+arXiv:2005.11609
+[31]
+E.N. Saridakis, S. Basilakos
+The generalized second law of thermodynamics with Barrow entropy
+arXiv:2005.08258
+[32]
+B. McInnes, Y.C. Ong
+Event horizon wrinklification
+arXiv:2006.09385

@@ -1,0 +1,112 @@
+author: Pizani Flor, João Paulo and Swierstra, Wouter
+author_list:
+- affiliation: []
+  family: Pizani Flor
+  given: João Paulo
+- affiliation: []
+  family: Swierstra
+  given: Wouter
+citations:
+- doi: 10.1145/1596638.1596644
+  unstructured: "Atkey, R., Lindley, S., Yallop, J.: Unembedding domain-specific languages.
+    In: Proceedings of the 2nd ACM SIGPLAN Symposium on Haskell, Haskell 2009, pp.
+    37–48. ACM, New York (2009). \nhttps://doi.org/10.1145/1596638.1596644\n\n. ISBN
+    978-1-60558-508-6"
+- author: E Axelsson
+  doi: 10.1007/11560548_4
+  first-page: '5'
+  series-title: Lecture Notes in Computer Science
+  unstructured: "Axelsson, E., Claessen, K., Sheeran, M.: Wired: wire-aware circuit
+    design. In: Borrione, D., Paul, W. (eds.) CHARME 2005. LNCS, vol. 3725, pp. 5–19.
+    Springer, Heidelberg (2005). \nhttps://doi.org/10.1007/11560548_4"
+  volume-title: Correct Hardware Design and Verification Methods
+  year: '2005'
+- doi: 10.3990/1.9789036538039
+  unstructured: "Baaij, C.P.R.: Digital circuits in C$${\\uplambda }$$aSH: functional
+    specifications and type-directed synthesis. info:eu-repo/semantics/doctoralThesis.
+    University of Twente, Enschede, January 2015. \nhttps://doi.org/10.3990/1.9789036538039"
+- doi: 10.1145/291251.289440
+  unstructured: "Bjesse, P., Claessen, K., Sheeran, M., Singh, S.: Lava: hardware
+    design in Haskell. ACM SIGPLAN Not. 34(1), 174–184 (1999). \nhttps://doi.org/10.1145/291251.289440\n\n.
+    ISSN 03621340"
+- unstructured: 'Boulton, R.J., Gordon, A.D., Gordon, M.J.C., Harrison, J., Herbert,
+    J., Van Tassel, J.: Experience with embedding hardware description languages in
+    HOL. In: TPCD, vol. 10, pp. 129–156 (1992)'
+- unstructured: 'Brady, E., Mckinna, J., Hammond, K.: Constructing correct circuits:
+    verification of functional aspects of hardware specifications with dependent types.
+    In: Trends in Functional Programming 2007 (2007)'
+- author: T Braibant
+  doi: 10.1007/978-3-642-25379-9_24
+  first-page: '330'
+  series-title: Lecture Notes in Computer Science
+  unstructured: "Braibant, T.: Coquet: a Coq library for verifying hardware. In: Jouannaud,
+    J.-P., Shao, Z. (eds.) CPP 2011. LNCS, vol. 7086, pp. 330–345. Springer, Heidelberg
+    (2011). \nhttps://doi.org/10.1007/978-3-642-25379-9_24"
+  volume-title: Certified Programs and Proofs
+  year: '2011'
+- author: T Braibant
+  doi: 10.1007/978-3-642-39799-8_14
+  first-page: '213'
+  series-title: Lecture Notes in Computer Science
+  unstructured: "Braibant, T., Chlipala, A.: Formal verification of hardware synthesis.
+    In: Sharygina, N., Veith, H. (eds.) CAV 2013. LNCS, vol. 8044, pp. 213–228. Springer,
+    Heidelberg (2013). \nhttps://doi.org/10.1007/978-3-642-39799-8_14"
+  volume-title: Computer Aided Verification
+  year: '2013'
+- doi: 10.1145/3110268.
+  unstructured: "Choi, J., Vijayaraghavan, M., Sherman, B., Chlipala, A., Arvind:
+    Kami: a platform for high-level parametric hardware specification and its modular
+    verification. Proc. ACM Program. Lang. 1(ICFP), 24:1–24:30 (2017). \nhttps://doi.org/10.1145/3110268.\n\n.
+    ISSN 2475-1421"
+- author: A Gill
+  doi: 10.1007/978-3-642-16478-1_2
+  first-page: '18'
+  series-title: Lecture Notes in Computer Science
+  unstructured: "Gill, A., Bull, T., Kimmell, G., Perrins, E., Komp, E., Werling,
+    B.: Introducing Kansas Lava. In: Morazán, M.T., Scholz, S.-B. (eds.) IFL 2009.
+    LNCS, vol. 6041, pp. 18–35. Springer, Heidelberg (2010). \nhttps://doi.org/10.1007/978-3-642-16478-1_2"
+  volume-title: Implementation and Application of Functional Languages
+  year: '2010'
+- unstructured: "Hanna, F.K., Daeche, N.: Dependent types and formal synthesis. Philos.
+    Trans. Phys. Sci. Eng. 339(1652), 121–135 (1992). \nhttp://www.jstor.org/stable/54016\n\n.
+    ISSN 0962-8428"
+- doi: 10.1017/CBO9780511569845
+  unstructured: "Melham, T.: Higher Order Logic and Hardware Verification. Cambridge
+    Tracts in Theoretical Computer Science, vol. 31. Cambridge University Press, Cambridge
+    (1993). \nhttps://doi.org/10.1017/CBO9780511569845\n\n. \nhttp://www.cs.ox.ac.uk/tom.melham/pub/Melham-1993-HOL.html\n\n.
+    ISBN 0-521-41718-X"
+- unstructured: 'Pizani Flor, J.P., Sijsling, Y., Swierstra, W.: $$\pi $$-ware: hardware
+    description and verification in Agda. In: Uustalu, T. (ed.) 21th International
+    Conference on Types for Proofs and Programs (TYPES 2015). Leibniz International
+    Proceedings in Informatics (LIPIcs) (2016)'
+- doi: 10.1109/TCAD.2003.819898
+  unstructured: "Sander, I., Jantsch, A.: System modeling and transformational design
+    refinement in ForSyDe [formal system design]. IEEE Trans. Comput. Aided Des. Integr.
+    Circuits Syst. 23(1), 17–32 (2004). \nhttps://doi.org/10.1109/TCAD.2003.819898\n\n.
+    ISSN 0278-0070"
+- unstructured: "Sheeran, M.: Hardware design and functional programming: a perfect
+    match (2005). \nhttp://www.jucs.org/jucs_11_7/hardware_design_and_functional/jucs_11_7_1135_1158_sheeran.pdf"
+- doi: 10.1145/800055.802026
+  unstructured: "Sheeran, M.: muFP, a language for VLSI design. In: Proceedings of
+    the 1984 ACM Symposium on LISP and Functional Programming, pp. 104–112. ACM Press
+    (1984). \nhttps://doi.org/10.1145/800055.802026\n\n. ISBN 0897911423"
+- doi: 10.1109/ICVD.2004.1260941
+  unstructured: "Singh, S.: Designing reconfigurable systems in lava. In: Proceedings
+    17th International Conference on VLSI Design 2004, pp. 299–306 (2004). \nhttps://doi.org/10.1109/ICVD.2004.1260941"
+doc_url: http://link.springer.com/content/pdf/10.1007/978-3-319-94821-8_30
+doi: 10.1007/978-3-319-94821-8_30
+files:
+- springer-chapter.html
+isbn: '9783319948218'
+journal: Lecture Notes in Computer Science
+license: CC BY 4.0
+month: 7
+pages: 504--522
+papis_id: dee976371436e917f736975f94b75e83
+publisher: Springer International Publishing
+ref: Verified_Timing_Pizani_2018
+time-added: 2026-10-03-01:51:34
+title: Verified Timing Transformations in Synchronous Circuits with λπ-Ware
+type: inbook
+url: https://doi.org/10.1007/978-3-319-94821-8_30
+year: 2018

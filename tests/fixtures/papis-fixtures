@@ -1,0 +1,11 @@
+#!/bin/sh
+# Run papis against the fixtures library in ./library, keeping the user's
+# papis configuration out of resolution (PAPIS_CONFIG_DIR with -c,
+# the combination papis.el's test setup uses). Runs from this
+# directory: the config's library dir is relative, so file arguments
+# should be absolute paths.
+#
+#   tests/fixtures/papis-fixtures list --all
+#   tests/fixtures/papis-fixtures add --batch --from doi <doi> ...
+cd "$(dirname "$(realpath "$0")")" || exit
+PAPIS_CONFIG_DIR=. exec papis -c ./papis.config -l fixtures "$@"

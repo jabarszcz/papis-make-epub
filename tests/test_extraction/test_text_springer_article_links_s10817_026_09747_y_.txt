@@ -1,0 +1,46 @@
+==== part 0 (titlepage)
+springer-article-links-s10817-026-09747-y
+
+==== part 1 (abstract)
+Abstract
+We present the first formal correctness proof of Edmonds’ blossom shrinking algorithm for maximum cardinality matching in general graphs.
+
+==== part 2 (None)
+6
+Searching for an Augmenting Path or a Blossom
+Below we describe in some detail our formal total correctness proof of the search algorithm. Although the algorithm has been treated by numerous authors [
+1
+,
+4
+,
+5
+,
+6
+], we believe that the following proof is more detailed than any previous exposition.
+cap
+(
+s
+)
+=
+{
+1
+if
+k
+=
+0
+k
+otherwise
+.
+
+==== part 3 (bibliography)
+References
+Edmonds, J.: Paths, trees, and flowers. Can. J. Math.
+17
+, 449–467 (1965).
+https://doi.org/10.4153/CJM-1965-045-4
+Mehlhorn, K., Näher, S.: LEDA: A Platform for Combinatorial and Geometric Computing, (1999).
+http://www.mpi-sb.mpg.de/%7Emehlhorn/LEDAbook.html
+Accessed 2023-10-09
+Korte, B., Vygen, J.: Comb. Optim. (2012).
+https://doi.org/10.1007/978-3-642-24488-9
+Schrijver, A.: Combinatorial Optimization: Polyhedra and Efficiency, (2003)

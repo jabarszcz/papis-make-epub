@@ -1,0 +1,16 @@
+==== part 0 (titlepage)
+sciencedirect-figure-downloads-S0167642321000502
+
+==== part 1 (abstract)
+Highlights
+• A general algorithmic schema incrementalizing typing algorithms with implementation.
+Abstract
+
+==== part 2 (None)
+2. The incremental schema in a nutshell
+Fig. 1
+. Three rules of the original type system
+T
+(upper part) and their corresponding incremental versions in the type system
+IT
+. (For interpretation of the colors in the figure(s), the reader is referred to the web version of this article.)

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><title>RISE &amp; Shine: Language-Oriented Compiler Design</title></head>
+<body>
+
+
+<div class="ltx_page_main">
+<div class="ltx_page_content">
+<article class="ltx_document ltx_authors_1line">
+<div class="ltx_para" id="p1"><span class="ltx_inline-logical-block ltx_framed ltx_framed_rectangle" id="p1.1">
+<h1 class="ltx_title ltx_title_inline-logical-block">
+RI<span class="ltx_text ltx_font_bold" id="p1.1.1">SE</span> &amp; Shine:
+Language-Oriented Compiler Design
+</h1>
+
+<div class="ltx_abstract" id="p1.abstract1"><h6 class="ltx_title ltx_title_abstract">Abstract</h6>
+<span class="ltx_p" id="p1.abstract1.1">The trend towards specialization of software and hardware — fueled by the end of Moore’s law and the still accelerating interest in domain-specific computing, such as machine learning — forces us to radically rethink our compiler designs.</span>
+
+
+</div>
+
+<section class="ltx_section" id="S1">
+<h2 class="ltx_title ltx_title_section"><span class="ltx_tag ltx_tag_section">I </span><span class="ltx_text ltx_font_smallcaps" id="S1.2">Introduction</span></h2>
+
+
+
+
+
+
+
+
+<section class="ltx_section" id="S2">
+<h2 class="ltx_title ltx_title_section"><span class="ltx_tag ltx_tag_section">II </span><span class="ltx_text ltx_font_smallcaps" id="S2.2">Background in IR and Compiler Design</span></h2>
+
+
+
+
+
+
+<section class="ltx_section" id="S3">
+<h2 class="ltx_title ltx_title_section"><span class="ltx_tag ltx_tag_section">III </span>Shine<span class="ltx_text ltx_font_smallcaps" id="S3.2">: A Language-Oriented Compiler</span></h2>
+
+
+
+
+
+
+<section class="ltx_section" id="S4">
+<h2 class="ltx_title ltx_title_section"><span class="ltx_tag ltx_tag_section">IV </span><span class="ltx_text ltx_font_smallcaps" id="S4.2">Clearly Separating Optimizing from Code Generation</span></h2>
+
+
+<span class="ltx_figure" id="S4.F2">
+<span class="ltx_listing ltx_lstlisting ltx_listing" id="S4.F2.2"><span class="ltx_listing_data"><a download="" href="data:text/plain;base64,ZGVmIG12ID0gZGVwRnVuKChuOiBOYXQsIG06IE5hdCkgPT4KICBmdW4oTTogQXJyYXlbbiwgQXJyYXlbbSwgZjMyXV0gPT4KICAgIGZ1bih4OiBBcnJheVttLCBmMzJdID0+CiAgICAgIE0gfD4gbWFwKGZ1bihyb3cgPT4KICAgICAgICAgIHppcChyb3cpKHgpIHw+CiAgICAgICAgICAgIG1hcChmdW4oYXggPT4gZnN0KGF4KSAqIHNuZChheCkpKSB8PgogICAgICAgICAgICAgIHJlZHVjZShhZGQpKDAuMGYpICkpICkpICk=">⬇</a></span>
+<span class="ltx_listingline" id="lstnumberx1"><span class="ltx_text ltx_lst_keywords3 ltx_font_bold" id="lstnumberx1.1" style="font-size:80%;--ltx-fg-color:#009900;">def</span><span class="ltx_text ltx_lst_space" id="lstnumberx1.2" style="font-size:80%;"> </span><span class="ltx_text ltx_lst_identifier" id="lstnumberx1.3" style="font-size:80%;">mv</span><span class="ltx_text ltx_lst_space" id="lstnumberx1.4" style="font-size:80%;"> </span><span class="ltx_text" id="lstnumberx1.5" style="font-size:80%;">=</span><span class="ltx_text ltx_lst_space" id="lstnumberx1.6" style="font-size:80%;"> </span><span class="ltx_text ltx_lst_keyword ltx_font_bold" id="lstnumberx1.7" style="font-size:80%;">depFun</span><span class="ltx_text" id="lstnumberx1.8" style="font-size:80%;">((</span><span class="ltx_text ltx_lst_identifier" id="lstnumberx1.9" style="font-size:80%;">n</span><span class="ltx_text" id="lstnumberx1.10" style="font-size:80%;">:</span><span class="ltx_text ltx_lst_space" id="lstnumberx1.11" style="font-size:80%;"> </span><span class="ltx_text ltx_lst_keywords2 ltx_font_bold" id="lstnumberx1.12" style="font-size:80%;--ltx-fg-color:#9600A8;">Nat</span><span class="ltx_text" id="lstnumberx1.13" style="font-size:80%;">,</span><span class="ltx_text ltx_lst_space" id="lstnumberx1.14" style="font-size:80%;"> </span><span class="ltx_text ltx_lst_identifier" id="lstnumberx1.15" style="font-size:80%;">m</span><span class="ltx_text" id="lstnumberx1.16" style="font-size:80%;">:</span><span class="ltx_text ltx_lst_space" id="lstnumberx1.17" style="font-size:80%;"> </span><span class="ltx_text ltx_lst_keywords2 ltx_font_bold" id="lstnumberx1.18" style="font-size:80%;--ltx-fg-color:#9600A8;">Nat</span><span class="ltx_text" id="lstnumberx1.19" style="font-size:80%;">)</span><span class="ltx_text ltx_lst_space" id="lstnumberx1.20" style="font-size:80%;"> </span><span class="ltx_text" id="lstnumberx1.21" style="font-size:80%;">=&gt;</span>
+</span>
+<span class="ltx_listingline" id="lstnumberx2"><span class="ltx_text ltx_lst_space" id="lstnumberx2.1" style="font-size:80%;"> </span><span class="ltx_text ltx_lst_keyword ltx_font_bold" id="lstnumberx2.2" style="font-size:80%;">fun</span><span class="ltx_text" id="lstnumberx2.3" style="font-size:80%;">(</span><span class="ltx_text ltx_lst_identifier" id="lstnumberx2.4" style="font-size:80%;">M</span><span class="ltx_text" id="lstnumberx2.5" style="font-size:80%;">:</span><span class="ltx_text ltx_lst_space" id="lstnumberx2.6" style="font-size:80%;"> </span><span class="ltx_text ltx_lst_keywords2 ltx_font_bold" id="lstnumberx2.7" style="font-size:80%;--ltx-fg-color:#9600A8;">Array</span><span class="ltx_text" id="lstnumberx2.8" style="font-size:80%;">[</span><span class="ltx_text ltx_lst_identifier" id="lstnumberx2.9" style="font-size:80%;">n</span><span class="ltx_text" id="lstnumberx2.10" style="font-size:80%;">,</span><span class="ltx_text ltx_lst_space" id="lstnumberx2.11" style="font-size:80%;"> </span><span class="ltx_text ltx_lst_keywords2 ltx_font_bold" id="lstnumberx2.12" style="font-size:80%;--ltx-fg-color:#9600A8;">Array</span><span class="ltx_text" id="lstnumberx2.13" style="font-size:80%;">[</span><span class="ltx_text ltx_lst_identifier" id="lstnumberx2.14" style="font-size:80%;">m</span><span class="ltx_text" id="lstnumberx2.15" style="font-size:80%;">,</span><span class="ltx_text ltx_lst_space" id="lstnumberx2.16" style="font-size:80%;"> </span><span class="ltx_text ltx_lst_keywords2 ltx_font_bold" id="lstnumberx2.17" style="font-size:80%;--ltx-fg-color:#9600A8;">f32</span><span class="ltx_text" id="lstnumberx2.18" style="font-size:80%;">]]</span><span class="ltx_text ltx_lst_space" id="lstnumberx2.19" style="font-size:80%;"> </span><span class="ltx_text" id="lstnumberx2.20" style="font-size:80%;">=&gt;</span>
+</span>
+<span class="ltx_listingline" id="lstnumberx3"><span class="ltx_text ltx_lst_space" id="lstnumberx3.1" style="font-size:80%;"> </span><span class="ltx_text ltx_lst_keyword ltx_font_bold" id="lstnumberx3.2" style="font-size:80%;">fun</span><span class="ltx_text" id="lstnumberx3.3" style="font-size:80%;">(</span><span class="ltx_text ltx_lst_identifier" id="lstnumberx3.4" style="font-size:80%;">x</span><span class="ltx_text" id="lstnumberx3.5" style="font-size:80%;">:</span><span class="ltx_text ltx_lst_space" id="lstnumberx3.6" style="font-size:80%;"> </span><span class="ltx_text ltx_lst_keywords2 ltx_font_bold" id="lstnumberx3.7" style="font-size:80%;--ltx-fg-color:#9600A8;">Array</span><span class="ltx_text" id="lstnumberx3.8" style="font-size:80%;">[</span><span class="ltx_text ltx_lst_identifier" id="lstnumberx3.9" style="font-size:80%;">m</span><span class="ltx_text" id="lstnumberx3.10" style="font-size:80%;">,</span><span class="ltx_text ltx_lst_space" id="lstnumberx3.11" style="font-size:80%;"> </span><span class="ltx_text ltx_lst_keywords2 ltx_font_bold" id="lstnumberx3.12" style="font-size:80%;--ltx-fg-color:#9600A8;">f32</span><span class="ltx_text" id="lstnumberx3.13" style="font-size:80%;">]</span><span class="ltx_text ltx_lst_space" id="lstnumberx3.14" style="font-size:80%;"> </span><span class="ltx_text" id="lstnumberx3.15" style="font-size:80%;">=&gt;</span>
+</span>
+<span class="ltx_listingline" id="lstnumberx4"><span class="ltx_text ltx_lst_space" id="lstnumberx4.1" style="font-size:80%;"> </span><span class="ltx_text ltx_lst_identifier" id="lstnumberx4.2" style="font-size:80%;">M</span><span class="ltx_text ltx_lst_space" id="lstnumberx4.3" style="font-size:80%;"> </span><span class="ltx_text" id="lstnumberx4.4" style="font-size:80%;">|&gt;</span><span class="ltx_text ltx_lst_space" id="lstnumberx4.5" style="font-size:80%;"> </span><span class="ltx_text ltx_lst_keyword ltx_font_bold" id="lstnumberx4.6" style="font-size:80%;">map</span><span class="ltx_text" id="lstnumberx4.7" style="font-size:80%;">(</span><span class="ltx_text ltx_lst_keyword ltx_font_bold" id="lstnumberx4.8" style="font-size:80%;">fun</span><span class="ltx_text" id="lstnumberx4.9" style="font-size:80%;">(</span><span class="ltx_text ltx_lst_identifier" id="lstnumberx4.10" style="font-size:80%;">row</span><span class="ltx_text ltx_lst_space" id="lstnumberx4.11" style="font-size:80%;"> </span><span class="ltx_text" id="lstnumberx4.12" style="font-size:80%;">=&gt;</span>
+</span>
+<span class="ltx_listingline" id="lstnumberx5"><span class="ltx_text ltx_lst_space" id="lstnumberx5.1" style="font-size:80%;"> </span><span class="ltx_text ltx_lst_keyword ltx_font_bold" id="lstnumberx5.2" style="font-size:80%;">zip</span><span class="ltx_text" id="lstnumberx5.3" style="font-size:80%;">(</span><span class="ltx_text ltx_lst_identifier" id="lstnumberx5.4" style="font-size:80%;">row</span><span class="ltx_text" id="lstnumberx5.5" style="font-size:80%;">)(</span><span class="ltx_text ltx_lst_identifier" id="lstnumberx5.6" style="font-size:80%;">x</span><span class="ltx_text" id="lstnumberx5.7" style="font-size:80%;">)</span><span class="ltx_text ltx_lst_space" id="lstnumberx5.8" style="font-size:80%;"> </span><span class="ltx_text" id="lstnumberx5.9" style="font-size:80%;">|&gt;</span>
+</span>
+<span class="ltx_listingline" id="lstnumberx6"><span class="ltx_text ltx_lst_space" id="lstnumberx6.1" style="font-size:80%;"> </span><span class="ltx_text ltx_lst_keyword ltx_font_bold" id="lstnumberx6.2" style="font-size:80%;">map</span><span class="ltx_text" id="lstnumberx6.3" style="font-size:80%;">(</span><span class="ltx_text ltx_lst_keyword ltx_font_bold" id="lstnumberx6.4" style="font-size:80%;">fun</span><span class="ltx_text" id="lstnumberx6.5" style="font-size:80%;">(</span><span class="ltx_text ltx_lst_identifier" id="lstnumberx6.6" style="font-size:80%;">ax</span><span class="ltx_text ltx_lst_space" id="lstnumberx6.7" style="font-size:80%;"> </span><span class="ltx_text" id="lstnumberx6.8" style="font-size:80%;">=&gt;</span><span class="ltx_text ltx_lst_space" id="lstnumberx6.9" style="font-size:80%;"> </span><span class="ltx_text ltx_lst_keyword ltx_font_bold" id="lstnumberx6.10" style="font-size:80%;">fst</span><span class="ltx_text" id="lstnumberx6.11" style="font-size:80%;">(</span><span class="ltx_text ltx_lst_identifier" id="lstnumberx6.12" style="font-size:80%;">ax</span><span class="ltx_text" id="lstnumberx6.13" style="font-size:80%;">)</span><span class="ltx_text ltx_lst_space" id="lstnumberx6.14" style="font-size:80%;"> </span><span class="ltx_text" id="lstnumberx6.15" style="font-size:80%;">*</span><span class="ltx_text ltx_lst_space" id="lstnumberx6.16" style="font-size:80%;"> </span><span class="ltx_text ltx_lst_keyword ltx_font_bold" id="lstnumberx6.17" style="font-size:80%;">snd</span><span class="ltx_text" id="lstnumberx6.18" style="font-size:80%;">(</span><span class="ltx_text ltx_lst_identifier" id="lstnumberx6.19" style="font-size:80%;">ax</span><span class="ltx_text" id="lstnumberx6.20" style="font-size:80%;">)))</span><span class="ltx_text ltx_lst_space" id="lstnumberx6.21" style="font-size:80%;"> </span><span class="ltx_text" id="lstnumberx6.22" style="font-size:80%;">|&gt;</span>
+</span>
+<span class="ltx_listingline" id="lstnumberx7"><span class="ltx_text ltx_lst_space" id="lstnumberx7.1" style="font-size:80%;"> </span><span class="ltx_text ltx_lst_keyword ltx_font_bold" id="lstnumberx7.2" style="font-size:80%;">reduce</span><span class="ltx_text" id="lstnumberx7.3" style="font-size:80%;">(</span><span class="ltx_text ltx_lst_identifier" id="lstnumberx7.4" style="font-size:80%;">add</span><span class="ltx_text" id="lstnumberx7.5" style="font-size:80%;">)(0.0</span><span class="ltx_text ltx_lst_identifier" id="lstnumberx7.6" style="font-size:80%;">f</span><span class="ltx_text" id="lstnumberx7.7" style="font-size:80%;">)</span><span class="ltx_text ltx_lst_space" id="lstnumberx7.8" style="font-size:80%;"> </span><span class="ltx_text" id="lstnumberx7.9" style="font-size:80%;">))</span><span class="ltx_text ltx_lst_space" id="lstnumberx7.10" style="font-size:80%;"> </span><span class="ltx_text" id="lstnumberx7.11" style="font-size:80%;">))</span><span class="ltx_text ltx_lst_space" id="lstnumberx7.12" style="font-size:80%;"> </span><span class="ltx_text" id="lstnumberx7.13" style="font-size:80%;">)</span>
+</span>
+</span>
+<span class="ltx_caption"><span class="ltx_tag ltx_tag_figure">Fig. 2: </span>
+Matrix-Vector-Multiplication expressed as a high-level program in RISE.
+No optimization or implementation choices have been made yet, there are many ways to compile this program to high-performance code.
+</span>
+</span>
+
+
+
+
+
+</section>
+</section>
+</section>
+</section></span>
+</div>
+</article>
+</div>
+</div>
+</body>
+</html>

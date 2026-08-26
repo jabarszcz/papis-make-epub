@@ -1,0 +1,42 @@
+==== part 0 (titlepage)
+acm-return-links-3776710
+
+==== part 1 (None)
+6 Formal Verification of the PikeVM Matching Algorithm
+The PikeVM algorithm [Cox 2009] is a popular linear-time matching algorithm for modern regexes with backtracking semantics. This algorithm is a descendant of NFA simulation [Thompson 1968], where the NFA is extended to encode priority and is represented as interpreted bytecode. With its encoding of priority, the PikeVM algorithm supports capture groups, and greedy and lazy quantifiers, and returns the same result as a backtracking algorithm but without the exponential complexity. In the examples above, all the linear engines supporting capture groups implement a PikeVM (among other linear algorithms): the RE2 library
+2
+, the Rust
+Regex
+crate
+3
+, the Go engine
+4
+and the linear engine of V8 for JavaScript regexes.
+5
+However, the execution of the PikeVM algorithm is vastly different from the execution of a backtracking algorithm. It explores several paths in parallel, and discards some paths to avoid the exponential complexity. As a result, a PikeVM can be challenging to implement. Worse: small variations in semantics can affect the correctness of the base algorithm, and
+Barrière and Pit-Claudel [2024]
+have shown that the PikeVM implementation deployed in V8 used to contain a semantic bug. While traditional NFA simulation itself has been formalized and verified many times (see Section 7), handling priority requires new formal arguments, and to the best of our knowledge the PikeVM has never been formally verified despite its widespread use in modern engines.
+
+==== part 2 (bibliography)
+References
+[1]
+Andrea Asperti. 2012. A Compact Proof of Decidability for Regular Expression Equivalence.
+In Interactive Theorem Proving Third International Conference, ITP 2012, Princeton, NJ, USA, August 13-15, 2012. Proceedings (Lecture Notes in Computer Science, Vol. 7406)
+, Lennart Beringer and Amy P Felty.(Eds.) Springer, 283-298.
+[2]
+Fahad Ausaf, Roy Dyckhoff, and Christian Urban. 2016. POSIX Lexing with Derivatives of Regular Expressions (Proof Pearl).
+In Interactive Theorem Proving - 7th International Conference, ITP 2016, Nancy, France, August 22-25, 2016, Proceedings (Lecture Notes in Computer Science, Vol. 9807)
+, Jasmin Christian Blanchette and Stephan Merz (Eds.). Springer, 69-86.
+[3]
+Auréle Barriére and Clément Pit-Claudel. 2024. Linear Matching of JavaScript Regular Expressions.
+Proc. ACM Program. Lang. 8
+, PLDI (2024), 1336-1360.
+[4]
+Auréle Barriére, Victor Deng, and Clément Pit-Claudel. 2025a.
+Artifact for "Formal Verification for JavaScript Regular Expressions: a Proven Mechanized Semantics and its Applications", at POPL
+2026.
+
+==== part 3 (None)
+Footnotes
+2
+https://github.com/google/re2/blob/main/re2/nfa.cc

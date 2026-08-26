@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+<head><title>A Formal Correctness Proof of Edmonds’ Blossom Shrinking Algorithm | Journal of Automated Reasoning | Springer Nature Link</title></head>
+<body class="">
+
+
+
+
+<article class="app-masthead__colour-14" id="main" lang="en">
+
+<div class="c-article-main u-container u-mt-24 u-mb-32 eds-l-with-sidebar app-force-direction-column-narrow" data-component="article-container" id="main-content">
+<main class="u-serif js-main-column" data-track-component="article body">
+
+
+<div class="c-article-body" data-article-body="true" data-track-component="article body">
+<section aria-labelledby="Abs1" data-title="Abstract" lang="en"><div class="c-article-section" id="Abs1-section"><h2 class="c-article-section__title js-section-title js-c-reading-companion-sections-item" id="Abs1">Abstract</h2><div class="c-article-section__content" id="Abs1-content"><p>We present the first formal correctness proof of Edmonds’ blossom shrinking algorithm for maximum cardinality matching in general graphs.</p></div></div></section>
+
+
+
+
+<div class="main-content">
+<section data-title="Searching for an Augmenting Path or a Blossom"><div class="c-article-section" id="Sec12-section"><h2 class="c-article-section__title js-section-title js-c-reading-companion-sections-item" id="Sec12"><span class="c-article-section__title-number">6 </span>Searching for an Augmenting Path or a Blossom</h2><div class="c-article-section__content" id="Sec12-content">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<p>Below we describe in some detail our formal total correctness proof of the search algorithm. Although the algorithm has been treated by numerous authors [<a aria-label="Reference 1" data-test="citation-ref" data-track="click" data-track-action="reference anchor" data-track-label="link" href="/article/10.1007/s10817-026-09747-y#ref-CR1" id="ref-link-section-d27908186e20478" title="Edmonds, J.: Paths, trees, and flowers. Can. J. Math. 17, 449–467 (1965). 
+                  https://doi.org/10.4153/CJM-1965-045-4
+                  
+                ">1</a>, <a data-test="citation-ref" data-track="click" data-track-action="reference anchor" data-track-label="link" href="#ref-CR4" id="ref-link-section-d27908186e20481" title="Mehlhorn, K., Näher, S.: LEDA: A Platform for Combinatorial and Geometric Computing, (1999). 
+                  http://www.mpi-sb.mpg.de/%7Emehlhorn/LEDAbook.html
+                  
+                 Accessed 2023-10-09">4</a>,<a data-test="citation-ref" data-track="click" data-track-action="reference anchor" data-track-label="link" href="#ref-CR5" id="ref-link-section-d27908186e20481_1" title="Korte, B., Vygen, J.: Comb. Optim. (2012). 
+                  https://doi.org/10.1007/978-3-642-24488-9
+                  
+                ">5</a>,<a aria-label="Reference 6" data-test="citation-ref" data-track="click" data-track-action="reference anchor" data-track-label="link" href="/article/10.1007/s10817-026-09747-y#ref-CR6" id="ref-link-section-d27908186e20484" title="Schrijver, A.: Combinatorial Optimization: Polyhedra and Efficiency, (2003)">6</a>], we believe that the following proof is more detailed than any previous exposition.</p>
+
+
+
+
+
+
+
+
+
+
+<div class="c-article-equation" id="Equ1"><div class="c-article-equation__content"><span class="mathjax-tex">$$ \text {cap}(s) = {\left\{ \begin{array}{ll} 1 &amp;  {\text { if }} k=0\\ k &amp;  {\text { otherwise}}. \end{array}\right. } $$</span></div></div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div></div></section>
+</div>
+<div id="MagazineFulltextArticleBodySuffix"><section aria-labelledby="Bib1" data-title="References"><div class="c-article-section" id="Bib1-section"><h2 class="c-article-section__title js-section-title js-c-reading-companion-sections-item" id="Bib1">References</h2><div class="c-article-section__content" id="Bib1-content"><div data-container-section="references"><ol class="c-article-references" data-track-component="outbound reference" data-track-context="references section"><li class="c-article-references__item js-c-reading-companion-references-item" data-counter="1."><p class="c-article-references__text" id="ref-CR1">Edmonds, J.: Paths, trees, and flowers. Can. J. Math. <b>17</b>, 449–467 (1965). <a data-track="click_references" data-track-action="external reference" data-track-label="10.4153/CJM-1965-045-4" data-track-value="external reference" href="https://doi.org/10.4153/CJM-1965-045-4">https://doi.org/10.4153/CJM-1965-045-4</a></p><p class="c-article-references__links u-hide-print"><a aria-label="Article reference 1" data-doi="10.4153/CJM-1965-045-4" data-track="click_references" data-track-action="article reference" data-track-item_id="10.4153/CJM-1965-045-4" data-track-label="10.4153/CJM-1965-045-4" data-track-value="article reference" href="https://doi.org/10.4153%2FCJM-1965-045-4" rel="nofollow noopener">Article</a> 
+    <a aria-label="MathSciNet reference 1" data-track="click_references" data-track-action="mathscinet reference" data-track-item_id="link" data-track-label="link" data-track-value="mathscinet reference" href="http://www.ams.org/mathscinet-getitem?mr=177907" rel="nofollow noopener">MathSciNet</a> 
+    <a aria-label="Google Scholar reference 1" data-track="click_references" data-track-action="google scholar reference" data-track-item_id="link" data-track-label="link" data-track-value="google scholar reference" href="http://scholar.google.com/scholar_lookup?&amp;title=Paths%2C%20trees%2C%20and%20flowers&amp;journal=Can.%20J.%20Math.&amp;doi=10.4153%2FCJM-1965-045-4&amp;volume=17&amp;pages=449-467&amp;publication_year=1965&amp;author=Edmonds%2CJ" rel="nofollow noopener">
+                    Google Scholar</a> 
+                </p></li><li class="c-article-references__item js-c-reading-companion-references-item" data-counter="4."><p class="c-article-references__text" id="ref-CR4">Mehlhorn, K., Näher, S.: LEDA: A Platform for Combinatorial and Geometric Computing, (1999). <a data-track="click_references" data-track-action="external reference" data-track-label="http://www.mpi-sb.mpg.de/%7Emehlhorn/LEDAbook.html" data-track-value="external reference" href="http://www.mpi-sb.mpg.de/%7Emehlhorn/LEDAbook.html">http://www.mpi-sb.mpg.de/%7Emehlhorn/LEDAbook.html</a> Accessed 2023-10-09</p></li><li class="c-article-references__item js-c-reading-companion-references-item" data-counter="5."><p class="c-article-references__text" id="ref-CR5">Korte, B., Vygen, J.: Comb. Optim. (2012). <a data-track="click_references" data-track-action="external reference" data-track-label="10.1007/978-3-642-24488-9" data-track-value="external reference" href="https://doi.org/10.1007/978-3-642-24488-9">https://doi.org/10.1007/978-3-642-24488-9</a></p><p class="c-article-references__links u-hide-print"><a aria-label="Article reference 5" data-doi="10.1007/978-3-642-24488-9" data-track="click_references" data-track-action="article reference" data-track-item_id="10.1007/978-3-642-24488-9" data-track-label="10.1007/978-3-642-24488-9" data-track-value="article reference" href="https://link.springer.com/book/10.1007/978-3-642-24488-9" rel="noopener">Article</a> 
+    <a aria-label="Google Scholar reference 5" data-track="click_references" data-track-action="google scholar reference" data-track-item_id="link" data-track-label="link" data-track-value="google scholar reference" href="http://scholar.google.com/scholar_lookup?&amp;title=&amp;journal=Comb.%20Optim.&amp;doi=10.1007%2F978-3-642-24488-9&amp;publication_year=2012&amp;author=Korte%2CB&amp;author=Vygen%2CJ" rel="nofollow noopener">
+                    Google Scholar</a> 
+                </p></li><li class="c-article-references__item js-c-reading-companion-references-item" data-counter="6."><p class="c-article-references__text" id="ref-CR6">Schrijver, A.: Combinatorial Optimization: Polyhedra and Efficiency, (2003)</p></li></ol><p class="c-article-references__download u-hide-print"><a data-track="click" data-track-action="download citation references" data-track-label="link" href="https://citation-needed.springer.com/v2/references/10.1007/s10817-026-09747-y?format=refman&amp;flavour=references" rel="nofollow">Download references<svg aria-hidden="true" class="u-icon" focusable="false" height="16" role="img" width="16"><use xlink:href="#icon-eds-i-download-medium" xmlns:xlink="http://www.w3.org/1999/xlink"></use></svg></a></p></div></div></div></section></div>
+
+</div>
+</main>
+
+</div>
+</article>
+
+</body>
+</html>

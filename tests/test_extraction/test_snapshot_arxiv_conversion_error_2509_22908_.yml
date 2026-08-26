@@ -1,0 +1,44 @@
+language: en
+media_count: 0
+media_extensions: {}
+package:
+  landmarks:
+  - href: content.xhtml#abstract1
+    text: Start
+    type: bodymatter
+  manifest:
+    content.xhtml: application/xhtml+xml mathml
+    fonts/dejavu.ttf: font/ttf
+    fonts/stix.ttf: font/ttf
+    nav.xhtml: application/xhtml+xml nav
+    style.css: text/css
+    toc.ncx: application/x-dtbncx+xml
+  metadata:
+    creator: null
+    identifier: https://arxiv.org/html/2509.22908
+    language: en
+    title: arxiv-conversion-error-2509.22908
+  spine:
+  - content.xhtml
+  toc:
+  - Abstract
+  - 3 Benchmark Construction:
+    - 3.2 Original sources and task generation
+    - 3.3 Spec translations and validation
+parts:
+- epub_type: titlepage
+  text_length: 320
+  toc:
+  - Abstract
+- epub_type: null
+  text_length: 1947
+  toc:
+  - 3 Benchmark Construction:
+    - 3.2 Original sources and task generation
+    - 3.3 Spec translations and validation
+stats:
+  dead_links: 0
+  images: 0
+  math: 9
+  math_fallback: 0
+  math_images: 0

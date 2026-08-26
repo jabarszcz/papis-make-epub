@@ -1,0 +1,244 @@
+abstract: "<jats:p>\n                    We present the first mechanized, succinct,
+  practical, complete, and proven-faithful semantics for a modern regular expression
+  language with backtracking semantics. We ensure its faithfulness by proving it equivalent
+  to a preexisting line-by-line embedding of the official ECMAScript specification
+  of JavaScript regular expressions. We demonstrate its practicality by presenting
+  two real-world applications. First, a new notion of contextual equivalence for modern
+  regular expressions, which we use to prove or disprove rewrites drawn from previous
+  work. Second, the first formal proof of the PikeVM algorithm used in many real-world
+  engines. In contrast with the specification and other formalization work, our semantics
+  captures not only the top-priority match, but a full\n                    <jats:italic
+  toggle=\"yes\">backtracking</jats:italic>\n                    tree recording all
+  possible matches and their respective priority. All our definitions and results
+  have been mechanized in the Rocq proof assistant.\n                  </jats:p>"
+author: Barrière, Aurèle and Deng, Victor and Pit-Claudel, Clément
+author_list:
+- affiliation:
+  - name: EPFL, Lausanne, Switzerland
+  family: Barrière
+  given: Aurèle
+- affiliation:
+  - name: EPFL, Lausanne, Switzerland
+  - name: École Normale Supérieure - PSL - CNRS, Paris, France
+  family: Deng
+  given: Victor
+- affiliation:
+  - name: EPFL, Lausanne, Switzerland
+  family: Pit-Claudel
+  given: Clément
+citations:
+- doi: 10.1007/978-3-642-32347-8_19
+- doi: 10.1007/978-3-319-43144-4_5
+- doi: 10.1145/3656431
+- doi: 10.5281/zenodo.17305393
+  unstructured: 'Auréle Barriére Victor Deng and Clément Pit-Claudel. 2025a. Artifact
+    for "Formal Verification for JavaScript Regular Expressions: a Proven Mechanized
+    Semantics and its Applications" at POPL 2026. doi:10.5281/zenodo.17305393'
+- unstructured: 'Auréle Barriére Victor Deng and Clément Pit-Claudel. 2025b. Formal
+    Verification for JavaScript Regular Expressions: a Proven Semantics and its Applications
+    (Extended Version). arXiv: 2507.13091 [cs.PL] https://arxiv.org/abs/2507.13091'
+- doi: 10.1016/J.TCS.2016.09.006
+- doi: 10.3897/JUCS.66330
+- doi: 10.1145/2535838.2535876
+  unstructured: Martin Bodin Arthur Charguéraud Daniele Filaretti Philippa Gardner
+    Sergio Maffeis Daiva Naudziuniene Alan Schmitt and Gareth Smith. 2014. A Trusted
+    Mechanised JavaScript Specification. In The 41st Annual ACM SIGPLAN-SIGACT Symposium
+    on Principles of Programming Languages POPL '14 San Diego CA USA January 20-21
+    2014 Suresh Jagannathan and Peter Sewell (Eds.). ACM 87-100. doi:10.1145/2535838.2535876
+- doi: 10.1007/978-3-642-14052-5_13
+- doi: 10.1145/3624309.3624317
+  unstructured: Elton Maximo Cardoso Leonardo Vieira dos Santos Reis and Rodrigo Geraldo
+    Ribeiro. 2023. A Verified Operational Semantics for Regular Expression Parsing.
+    In Proceedings of the XXVII Brazilian Symposium on Programming Languages SBLP
+    2023 Campo Grande MS Brazil September 25-29 2023. ACM 82-90. doi:10.1145/3624309.3624317
+- unstructured: Samuel Chassot and Viktor Kunčak. 2024. Verified invertible lexer
+    using regular expressions and DFAs. arXiv:2412.13581 [cs.PL] https://arxiv.org/abs/2412.13581
+- doi: 10.1145/3703595.3705884
+  unstructured: Agnishom Chattopadhyay Wu Angela Li and Konstantinos Mamouras. 2025.
+    Verified and Efficient Matching of Regular Expressions with Lookaround. In Proceedings
+    of the 14th ACM SIGPLAN International Conference on Certified Programs and Proofs
+    CPP 2025 Denver CO USA January 20-21 2025 Kathrin Stark Amin Timany Sandrine Blazy
+    and Nicolas Tabareau (Eds.). ACM 198-213. doi:10.1145/3703595.3705884
+- doi: 10.1145/3498707
+- doi: 10.1145/3591287
+  unstructured: Nariyoshi Chida and Tachio Terauchi. 2023. Repairing Regular Expressions
+    for Extraction. Proceedings of the ACM on Programming Languages 7 PLDI (2023)
+    1633-1656. doi:10.1145/3591287
+- doi: 10.1145/3691620.3695005
+  unstructured: Nariyoshi Chida and Tachio Terauchi. 2024. Repairing Regex-Dependent
+    String Functions. In Proceedings of the 39th IEEE/ACM International Conference
+    on Automated Software Engineering ASE 2024 Sacramento CA USA October 27 November
+    1 2024 Vladimir Filkov Baishakhi Ray and Minghui Zhou (Eds.). ACM 294-305. doi:10.1145/3691620.3695005
+- doi: 10.1007/978-3-642-25379-9_11
+  unstructured: Thierry Coquand and Vincent Siles. 2011. A Decision Procedure for
+    Regular Expression Equivalence in Type Theory. In Certified Programs and Proofs
+    - First International Conference CPP 2011. doi:10.1007/978-3-642-25379-9_11
+- unstructured: 'Russ Cox. 2009. Regular Expression Matching: the Virtual Machine
+    Approach. https://swtch.com/~rsc/regexp/regexp2.html.'
+- doi: 10.1145/3236024.3236027
+  unstructured: 'James C. Davis Christy A. Coghlan Francisco Servant and Dongyoon
+    Lee. 2018. The impact of regular expression denial of service (ReDoS) in practice:
+    an empirical study at the ecosystem scale. In Proceedings of the 2018 ACM Foint
+    Meeting on European Software Engineering Conference and Symposium on the Foundations
+    of Software Engineering ESEC/SIGSOFT FSE 2018. ACM 246-256. doi:10.1145/3236024.3236027'
+- doi: 10.1145/3674666
+  unstructured: Noé De Santo Auréle Barriére and Clément Pit-Claudel. 2024. A Coq
+    Mechanization of JavaScript Regular Expression Semantics. Proc. ACM Program. Lang.
+    8 ICFP (2024) 1003-1031. doi:10.1145/3674666
+- doi: 10.1007/978-3-319-03545-1_6
+- doi: 10.1007/S10817-018-9460-X
+- unstructured: Mark Jason Dominus. 2000. Perl Regular Expression Matching is NP-Hard.
+    https://perl.plover.com/NPC/NPC-3SAT.html.
+- doi: 10.1007/S002360000037
+- unstructured: 'ECMA. 2023. ECMA-262 14th edition: ECMAScript® 2023 Language Specification.
+    https://262.ecma-international.org/14.0/'
+- unstructured: 'ECMA. 2024. ECMA-262 15th edition: ECMAScript® 2024 Language Specification.
+    https://262.ecma-international.org/15.0/'
+- unstructured: 'ECMA. 2025. ECMA-262 16th edition: ECMAScript® 2025 Language Specification.
+    https://262.ecma-international.org/16.0/'
+- doi: 10.1109/SPW53761.2021.00022
+- doi: 10.1145/3497775.3503694
+  unstructured: 'Derek Egolf Sam Lasser and Kathleen Fisher. 2022. Verbatim++: verified
+    optimized and semantically rich lexing with derivatives. In CPP ''22: 11th ACM
+    SIGPLAN International Conference on Certified Programs and Proofs Philadelphia
+    PA USA January 17-18 2022 Andrei Popescu and Steve Zdancewic (Eds.). ACM 27-39.
+    doi:10.1145/3497775.3503694'
+- doi: 10.1145/3576915.3616582
+  unstructured: 'Benjamin Eriksson Amanda Stjerna Riccardo De Masellis Philipp Rümmer
+    and Andrei Sabelfeld. 2023. Black Ostrich: Web Application Scanning with String
+    Solvers. In Proceedings of the 2023 ACM SIGSAC Conference on Computer and Communications
+    Security CCS 2023 Copenhagen Denmark November 26-30 2023 Weizhi Meng Christian
+    Damsgaard Jensen Cas Cremers and Engin Kirda (Eds.). ACM 549-563. doi:10.1145/3576915.3616582'
+- doi: 10.1007/978-3-319-03545-1_7
+- doi: 10.1007/S00224-012-9389-0
+- doi: 10.1007/978-3-540-27836-8_53
+- doi: 10.1007/978-3-031-57267-8_4
+- unstructured: 'Andrew Gallant. 2014. Crate regex: An implementation of regular expressions
+    for Rust. https://docs.rs/regex/latest/regex/.'
+- unstructured: Go. 2025. GO Regexp package. https://pkg.go.dev/regexp.
+- unstructured: 'Google. 2010. RE2: A fast safe thread-friendly alternative to backtracking
+    regular expression engines like those used in PCRE Perl and Python. https://github.com/google/re2.'
+- unstructured: Philip Hazel. 1997. PCRE - Perl Compatible Regular Expressions. https://www.pcre.org/.
+- unstructured: Philip Hazel. 2012. PCRE Library Functions Manual. https://pcre.org/pcre.txt.
+- unstructured: Iain Ireland. 2020. A New RegExp Engine in SpiderMonkey. https://hacks.mozilla.org/2020/06/a-new-regexp-engine-inspidermonkey/.
+- doi: 10.1007/978-3-642-28869-2_20
+- doi: 10.1016/J.JSC.2021.08.003
+- doi: 10.48550/ARXIV.2305.04480
+  unstructured: 'Ohad Kammar and Katarzyna Marek. 2023. Idris TyRE: a dependently
+    typed regex parser. CoRR abs/2305.04480 (2023). doi:10.48550/ARXIV.2305.04480
+    arXiv:2305.04480'
+- unstructured: Alexander Krauss and Tobias Nipkow. 2010. Regular Sets and Expressions.
+    Archive of Formal Proofs (May 2010). https://isa-afp.org/entries/Regular-Sets.html
+    Formal proof development.
+- doi: 10.1007/S10817-011-9223-4
+- doi: 10.1145/3314221.3314645
+  unstructured: Blake Loring Duncan Mitchell and Johannes Kinder. 2019. Sound Regular
+    Expression Semantics for Dynamic Symbolic Execution of JavaScript. In Proceedings
+    of the 40th ACM SIGPLAN Conference on Programming Language Design and Implementation
+    PLDI 2019 Phoenix AZ USA June 22-26 2019 Kathryn S. McKinley and Kathleen Fisher
+    (Eds.). ACM 425-438. doi:10.1145/3314221.3314645
+- doi: 10.1145/3632934
+  unstructured: Konstantinos Mamouras and Agnishom Chattopadhyay. 2024. Efficient
+    Matching of Regular Expressions with Lookaround Assertions. Proc. ACM Program.
+    Lang. 8 POPL (2024) 2761-2791. doi:10.1145/3632934
+- doi: 10.1007/978-3-642-33314-9_7
+- doi: 10.1145/3591262
+  unstructured: Dan Moseley Mario Nishio Jose Perez Rodriguez Olli Saarikivi Stephen
+    Toub Margus Veanes Tiki Wan and Eric Xu. 2023. Derivative Based Nonbacktracking
+    Real-World Regex Matching with Backtracking Semantics. Proc. ACM Program. Lang.
+    7 PLDI (2023) 1026-1049. doi:10.1145/3591262
+- doi: 10.1007/978-3-642-21254-3_32
+- doi: 10.1007/978-3-319-08970-6_29
+  unstructured: Tobias Nipkow and Dmitriy Traytel. 2014. Unified Decision Procedures
+    for Regular Expression Equivalence. In Interactive Theorem Proving - 5th International
+    Conference ITP 2014 Held as Part of the Vienna Summer of Logic VSL 2014 Vienna
+    Austria July 14-17 2014. Proceedings (Lecture Notes in Computer Science Vol. 8558)
+    Gerwin Klein and Ruben Gamboa (Eds.). Springer 450-466. doi:10.1007/978-3-319-08970-6_29
+- doi: 10.4230/LIPICS.MFCS.2023.71
+  unstructured: Taisei Nogami and Tachio Terauchi. 2023. On the Expressive Power of
+    Regular Expressions with Backreferences. In 48th International Symposium on Mathematical
+    Foundations of Computer Science MFCS 2023 August 28 to September 1 2023 Bordeaux
+    France (LIPIcs Vol. 272) Jérôme Leroux Sylvain Lombardy and David Peleg (Eds.).
+    Schloss Dagstuhl -Leibniz-Zentrum für Informatik 71:1-71:15. doi:10.4230/LIPICS.MFCS.2023.71
+- doi: 10.22152/PROGRAMMING-JOURNAL.ORG/2024/8/3
+  unstructured: 'Wendlasida Ouedraogo Gabriel Scherer and Lutz Straßburger. 2024.
+    Coqlex: Generating Formally Verified Lexers. Art Sci. Eng. Program. 8 1 (2024).
+    doi:10.22152/PROGRAMMING-JOURNAL.ORG/2024/8/3'
+- article-title: Regular-expression derivatives re-examined
+  author: Owens Scott
+  doi: 10.1017/S0956796808007090
+  first-page: '173'
+  issue: '2009'
+  journal-title: Journal of Functional Programming 19
+  unstructured: Scott Owens, John Reppy, and Aaron Turon. 2009. Regular-expression
+    derivatives re-examined. Journal of Functional Programming 19, 2 (2009), 173-190.
+  volume: '2'
+  year: '2009'
+- doi: 10.1007/S10990-008-9038-0
+- doi: 10.1145/3324884.3416632
+  unstructured: 'Jihyeok Park Jihee Park Seungmin An and Sukyoung Ryu. 2020. JISET:
+    JavaScript IR-based Semantics Extraction Toolchain. In 35th IEEE/ACM International
+    Conference on Automated Software Engineering ASE 2020 Melbourne Australia September
+    21-25 2020. IEEE 647-658. doi:10.1145/3324884.3416632'
+- doi: 10.1002/SPE.4380171105
+- doi: 10.1145/3294032.3294082
+  unstructured: Gabriel Radanne. 2019. Typed parsing and unparsing for untyped regular
+    expression engines. In Proceedings of the 2019 ACM SIGPLAN Workshop on Partial
+    Evaluation and Program Manipulation PEPM@POPL 2019 Cascais Portugal January 14-15
+    2019 Manuel VHermenegildo. and Atsushi Igarashi (Eds.). ACM 35-46. doi:10.1145/3294032.3294082
+- doi: 10.1145/3125374.3125381
+  unstructured: Rodrigo Geraldo Ribeiro and André Rauber Du Bois. 2017. Certified
+    Bit-Coded Regular Expression Parsing. In Proceedings of the 21st Brazilian Symposium
+    on Programming Languages SBLP 2017 Fortaleza CE Brazil September 21-22 2017 Fabio
+    Mascarenhas (Ed.). ACM 4:1-4:8. doi:10.1145/3125374.3125381
+- unstructured: Dmitry Soshnikov. 2025. regexp-tree. https://github.com/DmitrySoshnikov/regexp-tree.
+- unstructured: 'Cristian-Alexandru Staicu and Michael Pradel. 2018. Freezing the
+    Web: A Study of ReDoS Vulnerabilities in JavaScriptbased Web Servers. In 27th
+    USENIX Security Symposium USENIX Security 2018. USENIX Association 361-376. https://www.usenix.org/conference/usenixsecurity18/presentation/staicu'
+- doi: 10.1007/978-3-319-40946-7_24
+- doi: 10.1145/363347.363387
+- doi: 10.1007/S10817-023-09667-1
+- unstructured: V8. 2021. An Additional Non-backtracking RegExp Engine. https://v8.dev/blog/non-backtracking-regexp.
+- unstructured: V8. 2023. Mismatch between the Experimental engine and the backtracking
+    engine on empty repetitions. https://issues.chromium.org/issues/42204037.
+- unstructured: 'V8. 2025. RegExp: Inconsistent branch priority in look-behind assertions.
+    https://issues.chromium.org/issues/388290816.'
+- doi: 10.48550/ARXIV.2309.14401
+  unstructured: Ian Erik Varatalu Margus Veanes and Juhan-Peep Ernits. 2023. Derivative
+    Based Extended Regular Expression Matching Supporting Intersection Complement
+    and Lookarounds. CoRR abs/2309.14401 (2023). doi:10.48550/ARXIV.2309.14401 arXiv:2309.14401
+- doi: 10.1145/3704837
+  unstructured: 'Ian Erik Varatalu Margus Veanes and Juhan P. Ernits. 2025. RE#: High
+    Performance Derivative-Based Regex Matching with Intersection Complement and Restricted
+    Lookarounds. Proc. ACM Program. Lang. 9 POPL (2025) 1-32. doi:10.1145/3704837'
+- unstructured: 'Xiang Wang Yang Hong Harry Chang KyoungSoo Park Geoff Langdale Jiayu
+    Hu and Heqing Zhu. 2019. Hyperscan: A Fast Multi-pattern Regex Matcher for Modern
+    CPUs. In 16th USENIX Symposium on Networked Systems Design and Implementation
+    NSDI 2019 Boston MA February 26-28 2019 Jay R Lorch. and Minlan Yu (Eds.). USENIX
+    Association 631-648. https://www.usenix.org/conference/nsdi19/presentation/wang-xiang'
+- doi: 10.1145/3636501.3636959
+  unstructured: Ekaterina Zhuchko Margus Veanes and Gabriel Ebner. 2024. Lean Formalization
+    of Extended Regular Expression Matching with Lookarounds. In Proceedings of the
+    13th ACM SIGPLAN International Conference on Certified Programs and Proofs CPP
+    2024 London UK January 15-16 2024 Amin Timany Dmitriy Traytel Brigitte Pientka
+    and Sandrine Blazy (Eds.). ACM 118-131. doi:10.1145/3636501.3636959
+doc_url: https://dl.acm.org/doi/pdf/10.1145/3776710
+doi: 10.1145/3776710
+files:
+- acm.html
+issue: POPL
+journal: Proceedings of the ACM on Programming Languages
+language: en
+license: CC BY 4.0
+month: 1
+pages: 1964--1993
+papis_id: e8bd75b8692a3b88ee5240d62e984cfd
+publisher: Association for Computing Machinery (ACM)
+ref: Formal_Verifica_Barrie_2026
+time-added: 2026-08-27-16:53:37
+title: 'Formal Verification for JavaScript Regular Expressions: A Proven Mechanized
+  Semantics and Its Applications'
+type: article
+url: https://doi.org/10.1145/3776710
+volume: '10'
+year: 2026

@@ -1,0 +1,857 @@
+==== part 0 (titlepage)
+Verified Timing Transformations in Synchronous Circuits with λπ-Ware
+João Paulo Pizani Flor, Wouter Swierstra
+
+==== part 1 (abstract)
+Abstract
+We define a DSL for hardware description, called
+λ
+π
+-Ware, embedded in the dependently-typed language Agda, which makes the DSL well-scoped and well-typed by construction. Other advantages of dependent types are that circuit models can be simulated and verified in the same language, and properties can be proven not only of specific circuits, but of circuit generators describing (infinite) families of circuits. This paper focuses on the relations between circuits computing the same values, but with different levels of statefulness. We define common recursion schemes, in combinational and sequential versions, and express known circuits using these recursion patterns. Finally, we define a notion of convertibility between circuits with different levels of statefulness, and prove the core convertibility property between the combinational and sequential versions of our vector iteration primitive. Circuits defined using the recursion schemes can thus have different architectures with a guarantee of functional equivalence up to timing.
+
+==== part 2 (None)
+1
+Introduction
+Modelling electronic circuits has been a fertile ground for functional programming (Sheeran
+2005
+) and theorem proving (Hanna and Daeche
+1992
+). There have been numerous efforts to describe, simulate, and verify circuits using functional languages such as MuFP (Sheeran
+1984
+) and more recently C
+λ
+aSH (Baaij
+2015
+) and ForSyDe (Sander and Jantsch
+2004
+).
+Functional languages have also been used to
+host
+an Embedded Domain-Specific Language (EDSL) for hardware description. Some of these EDSLs, such as Wired (Axelsson et al.
+2005
+), capture low-level information about the layout of a circuit; others aim to use the host language to provide a higher-level of abstraction to describe the circuit’s intended behaviour. A notable example of the latter approach is Lava (Bjesse et al.
+1999
+) and its several variants (Gill et al.
+2009
+; Singh
+2004
+).
+Also interactive theorem proving and programming with dependent types have been fruitfully used to support hardware verification efforts, with some based on HOL (Melham
+1993
+; Boulton et al.
+1992
+), some on Coq (Braibant
+2011
+; Braibant and Chlipala
+2013
+) and some on Martin-Löf Type Theory (Brady et al.
+2007
+) Following this line of research, we utilize a dependently-typed programming language (Agda) as the
+host
+of our hardware EDSL, for its proving capabilities and convenience of embedding.
+In particular, this paper focuses on verification related to
+timing
+, that is, the behaviour of a circuit in terms of its inputs
+over time
+. When designing hardware, a compromise must be made between the
+area
+occupied by a circuit and the
+number of clock cycles
+it takes to produce its results.
+A
+combinational
+(stateless) architecture better harnesses potential parallelism but might negatively influence other constraints such as frequency and power consumption. A more
+sequential
+circuit (stateful), on the other hand, will occupy less area but might be a bottleneck in computational throughput and impact other parts of the design that depend on its outputs.
+There are many different ways to implement any specific functional behaviour, and it can be difficult to find the right spot in the design space upfront. Timing-related circuit transformations are quite invasive and error-prone – making it difficult to correct bad design decisions
+a posteriori
+. With this paper, we attenuate some of these issues by defining a language for circuit description that facilitates the exploration of different points in the timing design space. More concretely, this paper makes the following contributions:
+We show how to embed a typed hardware DSL,
+λ
+π
+-Ware, in the general purpose dependently typed programming language Agda (Sect.
+3
+), together with an executable semantics based on state transitions (Sect.
+4
+).
+Next, we define common recursion patterns to build circuits in both combinational and sequential architectures (Sect.
+5
+). We show how some well-known circuits can be expressed in terms of these recursion patterns.
+Finally, we define a precise relation between the combinational and sequential versions of circuits that
+exhibit equivalent behaviour
+(Sect.
+5.1
+). By proving that different versions of our recursion schemes are convertible, we allow hardware designers to enable different levels of parallelism while being certain that semantics are being preserved up to timing.
+Altogether, these contributions help to
+separate the concerns
+between the
+values
+a circuit must produce and the
+timing
+with which they are produced. In this way, timing decisions can more easily be modified later in the design process.
+The codebase in which the ideas exposed in this paper are developed is available online.
+Footnote
+1
+For the sake of presentation, code excerpts in this paper may differ slightly from the corresponding ones in the repository.
+
+==== part 3 (None)
+2
+Overview
+We begin by shortly demonstrating the usage of
+λ
+π
+-Ware. Although inspired by our previous work (
+Π
+- Ware (Pizani Flor et al.
+2016
+)),
+λ
+π
+-Ware uses variable binding for sharing and loops, instead of pointfree combinators. Furthermore,
+λ
+π
+-Ware has a universe of (simply-)structured types, whereas the types of
+Π
+-Ware were vectors only. In this section, we illustrate the language by means of two variations on a simple circuit. Later sections cover the syntax and semantics of
+λ
+π
+-Ware in greater detail.
+Example: Horner’s Method.
+We look at two circuits for calculating the value of a polynomial at a given point, one with a combinational architecture and another sequential, both based on Horner’s method.
+For any coefficients
+a
+0
+,
+…
+,
+a
+n
+in
+N
+, we can define a polynomial as follows:
+p
+(
+x
+)
+=
+∑
+i
+=
+0
+n
+a
+i
+x
+i
+=
+a
+0
++
+a
+1
+x
++
+a
+2
+x
+2
++
+a
+3
+x
+3
++
+⋯
++
+a
+n
+x
+n
+,
+In order to compute the value of the polynomial at a specific point
+x
+0
+of its domain, Horner’s method proceeds by using the following sequence of values:
+b
+n
+:=
+a
+n
+b
+n
+−
+1
+:=
+a
+n
+−
+1
++
+b
+n
+x
+0
+⋮
+b
+0
+:=
+a
+0
++
+b
+1
+x
+0
+.
+Then
+b
+0
+is the value of our polynomial at
+x
+0
+, that is,
+p
+(
+x
+0
+)
+. By iteratively expanding definitions for each of the
+b
+i
+in the equations above, one arrives at a factorized form of the polynomial clearly equivalent to the usual series of powers.
+Combinational Version.
+Horner’s method is easily expressed as a
+fold
+, and in
+λ
+π
+-Ware we can build a combinational (stateless) circuit to compute this fold, for any given degree
+n
+. When reading the signature of the
+definition below, one must note that
+only
+the parameters with the type former
+are circuit inputs, and the others are synthesis parameters.
+This circuit computes the value of a polynomial of degree
+at a given point. It has three inputs: the point at which to evaluate the polynomial (
+), the coefficient of highest degree (
+) and the remaining coefficients (
+). Later in Sect.
+4
+we present the detailed semantics of circuits, but for now we can say that
+behaves similarly to
+from Agda’s standard library.
+Fig. 1.
+Block diagram of the
+circuit.
+Figure
+1
+shows the architecture of
+, where we can clearly see that the circuit contains no loops nor memory cells and that the
+body
+of the
+is
+replicated
+times. In the
+model, area is linearly proportional to the degree of the polynomial, and if we want to reduce area occupation, we need to introduce
+state
+into the picture somehow.
+Sequential Version.
+Next, we describe a fully
+sequential
+circuit to do the same calculation, using internal state to produce a
+sequence of outputs
+. With this architecture the area is constant (independent of the degree of the polynomial). The output value of the circuit at clock cycle
+corresponds to the sum of all polynomial terms with degree smaller than or equal to
+, evaluated at point
+.
+The circuit takes two inputs:
+, the point at which we desire to evaluate the polynomial; and
+, a
+single
+input containing the
+-th coefficient at the
+-th clock cycle. The circuit is defined using the
+combinator, that iterates its argument function. This function corresponds to the loop body, mapping the current approximation,
+, and the current value of the input
+to a new approximation. As we shall see, to execute this
+sequential
+circuit, we will need to provide an initial value for the state,
+.
+Fig. 2.
+Block diagram of the
+circuit.
+Figure
+2
+shows the architecture of
+, where we see that the body of the
+is the same as in the combinational version. But now instead of
+instances of the body we have a single instance, with one of its outputs
+tied back
+in a loop with a memory cell (shift register).
+We have seen that the combinational and sequential definitions are syntactically similar, but have very different timing behaviour and generate very different architectures. First of all, the coefficients input of
+is a vector (a
+bus
+in hardware parlance), while the corresponding input of
+is a single number. Also, all the coefficients are consumed by
+in a single clock cycle, while
+consumes the sequence of coefficients over
+clock cycles. It is only after these
+cycles that the results of the two circuits will coincide.
+
+==== part 4 (None)
+3
+λ
+π
+-Ware
+We begin by fixing the universe of types,
+U
+, for the elements that circuits may produce or consume. This type is parameterized by the type of data carried over the circuit’s wires (
+B
+). A typical choice of
+B
+would be bits or booleans, with other choices possible when modelling a higher-level circuit, such as integers or a datatype representing assembly instructions for a microprocessor.
+The collection of type codes consists of a unit (
+) and base (
+ι
+) types, closed under function space (
+), products (
+), coproducts (
+) and homogeneous arrays of fixed size (
+). Each element of
+U
+B
+is mapped to the corresponding Agda type, in particular the code
+ι
+is mapped to
+B
+, the base type in our type universe.
+Core Datatype.
+As mentioned before, our language is a deep-embedding in Agda, and circuits are elements of the
+datatype. Let us start by discussing the most fundamental constructors of
+, shown below. Additional constructors are discussed further ahead.
+We use
+typed De Bruijn
+indices for variable binding, however, there is a convenience layer on top of
+, called
+, as seen in the overview section. Definitions using
+are essentially a shallow embedding of circuits into Agda (using Higher-Order Abstract Syntax (HOAS)), offering a more convenient programming interface by having named variables. The
+unembedding
+technique (Atkey et al.
+2009
+) guarantees that it is always possible to go from a circuit definition using
+to an equivalent one using
+.
+Returning to the
+datatype itself, it is indexed by a context
+representing the arguments to the circuit or any free variables currently in scope. The datatype is also indexed by the circuit’s output type,
+.
+The whole development is parameterized by a type of primitive gates,
+G
+a
+t
+e
+:
+U
+B
+→
+S
+e
+t
+, and the
+constructor creates a circuit from such a fundamental gate. One example of such type of gates is the usual triple (
+N
+O
+T
+,
+A
+N
+D
+,
+O
+R
+) with
+B
+o
+o
+l
+as the chosen base type; circuit designers, however, are free to choose the fundamental gates that best fit their domain.
+Our language does have an eliminator (
+) for arrow types, but no introduction form. Arrow types can only be introduced by using gates, and this is by design, as we target synthesizability and circuits must be first-order to be synthesized. Using arrow types for gates allows for convenient partial application, while for general abstraction we use host language definitions as metaprograms.
+While the constructors shown above form the heart of the
+datatype, there are also constructors for products, coproducts and vectors:
+We give the elimination forms for both products and coproducts uniformly as case constructs, instead of projections that matches on its argument and introduces newly bound variables to the context. For vectors,
+has the two usual introduction forms: one to produce an empty vector of any type (
+) and to extend an existing vector with a new element (
+). Finally, the
+accumulating map
+,
+, performs a combination of
+and
+: The input vector with elements of type
+is pointwise transformed into one with elements of type
+, all the while threading an accumulating parameter of type
+from left to right.
+This eliminator is less general than the usual type theoretic elimination principle for vectors; embedding this more general eliminator would require dependent types and higher-order functions in our circuit language. To keep our object language simple, however, we chose a more simple elimination principle capable of expressing the most common hardware constructs.
+
+==== part 5 (None)
+4
+Semantics and Properties
+Where the previous section defined the
+syntax
+of our circuit language, we now turn our attention to its
+semantics
+. Although there are many different interpretations that we could assign to our circuits, for the purpose of this paper we will focus on describing a circuit’s input/output behaviour.
+State Transition Semantics.
+Circuits defined in
+can be classified in two ways.
+Combinational
+circuits do not have any loops;
+sequential
+circuits may contain loops. To define the semantics of sequential circuits, we will need to define the type of state associated with a particular circuit. To do so, we define the inductive family
+:
+This family has a constructor for each constructor of
+. Most of these constructors either contain no significant information, or simply follow the structure of the circuit, like in the clause for pairs,
+, shown above. The most interesting case is
+, in which the state required to simulate a circuit of the form
+consists of a value of type
+— where
+is the type of the state that the circuit produces — together with any additional state that may arise from the loop body.
+One other constructor of
+deserves special attention:
+. A circuit built with
+mapAccumL-comb
+consists of
+copies
+of a subcircuit
+connected in a row. Hence, the state of such a circuit consists of a
+vector
+of states, one for each of the copies of
+. Correspondingly, we define the state associated with such an accumulating map as follows:
+With this definition of state in place, we turn our attention to the semantics of our circuits. We will sketch the definition of our single step semantics,
+, mapping a circuit, initial state and environment to a new state and the value produced by the circuit.
+The environment
+γ
+assigns values to any free variables in our circuit definition. The base cases for our semantics are as follows:
+In the case for gates, we apply the semantics of our atomic gates, described by the auxiliary function
+; in the case for variables, we lookup the corresponding value from the environment. Both these cases do not refer to the circuit’s state. This state becomes important when simulating loops. In the clauses for application,
+and
+, shown in Listing 1, we do need to consider the circuit’s state.
+In the cases of application and
+, each subcircuit simply “takes a step” independently and the next state of the whole circuit is a combination of the next states of each subcircuit. The case for
+is slightly more interesting: the loop body,
+, takes an additional input, namely the current state given by the
+parameter of
+constructor.
+The further clauses of the transition function handle the introduction and elimination forms of products, coproducts and vectors. They are all defined simply by recursive evaluation of the subcircuits, and are straightforward enough to omit from the presentation here. For example, the clause for coproduct elimination is shown below:
+First the coproduct value (
+) is evaluated, computing a result value and its next state. The result of the evaluation (
+) is then fed to Agda’s coproduct eliminator (
+); the functions that process the left and right injections proceed accordingly. In either case, the value is fed into evaluation of the appropriate body (either
+or
+), and the result is then used as the result of the whole coproduct evaluation.
+Similarly our elimination principle for vectors,
+, is worth highlighting:
+The above clause is key in the relation that we later establish (Sect.
+5.1
+) between combinational and sequential versions of circuits. The three key sub-steps involved in this clause are: evaluation of the left identity element (
+), the evaluation of the row of inputs (
+) and the row of step function copies (
+).
+The first two steps are as expected: both the identity and row of inputs take a step, and we thus obtain the next state and result values of each. The core step is then evaluating the row of copies of
+, and its semantics are given using the auxiliary function
+.
+The
+function is simply a two-input version of an accumulating map, which works by simply zipping the pair of input vectors and calling the
+function from Agda’s standard library.
+In the semantics of
+, we apply
+to the vector with the result of
+(called
+) as well as the vector with states for the copies of
+(called
+). Then, as the result of the application we obtain the final accumulator value and vector of result values,
+together with the vector of next state values
+(
+).
+Multi-step Semantics.
+To describe the behaviour of a circuit
+over time
+, we need to define another semantics. More specifically, in this work we consider only discrete-time synchronous circuits, and thus we will show how to use
+to define a multi-step state-transition semantics.
+When simulating a circuit for
+cycles, we need to take not
+one
+input environment but
+, and instead of producing a single value, the simulation returns a vector of
+values. Just as we saw for
+, we ensure that the newly computed state is threaded from one simulation cycle to the next.
+This is exactly the behaviour of an accumulating map, thus the use of
+here. The use of
+here is the key to the connection between the multi-cycle of circuits using
+and the single-cycle behavior of circuits using
+.
+
+==== part 6 (None)
+5
+Combinational and Sequential Combinators
+With
+λ
+π
+-Ware we intend to give a hardware developer more freedom to explore the trade-offs between area, frequency and number of cycles that a circuit might take to complete a computation. This freedom comes from the proven guarantees of convertibility between combinational and sequential versions of circuits.
+To make it easier to explore this design space, we provide some
+circuit combinators
+for common patterns. Each of these patterns comes in a pair of sequential and combinational versions, with a lemma relating the two. If a circuit is defined using one of these combinators, changing between architectures is as easy as changing the combinator version used. The associated lemma guarantees the relation between the functional behaviour of the versions.
+All combinators in this section are derived from the two primitive constructors
+and
+. By appropriate partial application and the use of “wrappers” to create the loop body, all sequential combinators are derived from
+. Similarly, using the same wrappers but with
+, we derive all combinational combinators.
+Of notice is also the fact that, in this section, we present the combinators in
+De Bruijn
+style, as this is the most useful representation to use when evaluating circuit (generators), which is covered in
+5.1
+.
+The
+Combinators.
+For example, we might want to easily build circuits that
+map
+a certain function over its inputs. We will define both the sequential and combinational
+combinators in terms of a third circuit,
+. The sequential version is given by
+:
+We define
+by applying
+to the
+circuit. In
+, the next state (first projection of the pair) is a copy of its first input (
+), whereas the second projection is made by the
+weakened
+, which discards its first input.
+The combinational version of the same combinator (
+) is defined in terms of
+and
+:
+In the above definition we note that we are free to choose the type of the “initial element” (2nd argument), but we use
+(value
+), as units can always be used regardless of the base type chosen in the development. Furthermore, we use
+to extract only the second element of the pair (the output vector), and discard the “final element” outputted.
+The
+foldl-scanl
+Combinators.
+Perhaps even more useful than mapping is
+scanning
+and
+folding
+over a vector of inputs. To obtain the sequential and combinational versions of such combinators, we again apply the
+and
+primitives to a special body which wraps the binary operation (
+) of the scan/fold.
+The wrapper called
+makes the next state equal to the first input of the binary operator, and the output be the result of applying the binary operator. In the above definition of
+, we get the behaviour of
+and
+combined
+: The circuit outputs from clock cycle
+to
+form the result of the
+operation, and the last one at cycle
+is the value of the
+.
+The combinational version also has such a combined behaviour:
+In
+, we obtain a pair as output, of which the first element is the
+component, and the second element is the
+(vector) component. Thus by simply applying the
+and
+functions we can obtain the usual
+and
+.
+Whereas these combinators capture some common patterns in hardware design, their usefulness also depends on lemmas relating their combinational and sequential versions.
+5.1
+Convertibility of Combinational and Sequential Versions
+In this section we make precise the relation between circuits with different levels of statefulness. For conciseness, only the extreme cases are handled: completely stateless (combinational) versus completely sequential. However, nothing in the following treatment precludes it from being used for
+partial unrolling
+.
+We will show that when two circuits are deemed “convertible up to timing”, they can be substituted for one another with minor interface changes in the surrounding context but no alteration of the values ultimately produced.
+The relation of convertibility relies on the fact that any sequential circuit will have an occurrence of the
+constructor. As such, a less stateful variant of such a circuit can be obtained by substituting the occurrence of
+with one of
+, thereby unrolling the loop. The fundamental relation between
+and
+is what we now establish. First, recall the types of the single- and multi-step semantic functions:
+Now, to establish the desired relation, we apply both the single and multi-cycle semantics. The
+step function
+subcircuit (called
+) is equal in both cases, and the
+case takes 2 extra parameters besides
+.
+The second parameter of
+must be a circuit whose value is the same as the first parameter of
+, and we use here the simplest possible such circuit:
+(
+v
+a
+l
+m
+)
+. The third parameter (
+) is the input vector of size
+, and is used to build the vector of environments used by the multi-cycle semantics
+.
+Finally, the state of the
+case is built by simply replicating one state of
+by
+times. Stating the convertibility property in this way makes it be valid only for a state-independent
+, that is, when the input/output semantics of
+is independent of the state.
+This restriction on
+could be somewhat further loosened (as is discussed in Sect.
+6.2
+), but we work here with
+loop bodies to simplify the presentation.
+As we have seen, the results from applying each semantic function have different types (
+T
+p
+a
+r
+and
+T
+l
+o
+o
+p
+), so the relation comparing these results is more subtle than just equality. We define this relation, called
+, as follows:
+Both sides of
+consist of a pair of next state and circuit outputs. In the
+case, the next state can be ignored in the comparison, but in the
+case, the
+value
+stored in the loop state (obtained by
+) must be equal to the first output of evaluating
+. With the comparison function defined, we can finally completely express the relation we desire:
+Proof of the Basic Relation.
+The proof of the basic convertibility relation between
+and
+proceeds by induction on the input vector
+. Due to the deliberate choice of semantics for both constructors involved, and the choice of the right parameters for the application of each, a considerable part of the proof is achieved by just the built-in reduction behaviour of the proof assistant (Agda).
+The only key lemma involved is shown below. Namely, the state-independence principle is shown to hold for a whole vector, assuming that it holds for the body circuit
+.
+This lemma is useful because both left-hand side and right-hand side of the convertibility relation can be transformed into applications of
+simply by reduction, but with different state vector parameters. Thus the lemma is used to bring the sub-goals to a state where they can be closed by using the induction hypothesis.
+Convertibility of Derived Combinators.
+When building circuits using the derived combinators (
+,
+, etc.), the convertibility between different (more or less stateful) variants of such circuits rely on the convertibility between the different variants of the combinators themselves.
+The basic convertibility principle shown above between
+and
+is the most general one, and can be directly applied to the derived combinators as well, as they are all just a specialized instance of
+or
+. However, for the derived combinators, some more specific properties are useful.
+With regards to the
+combinators, for example, we wish that the vectors produced by the combinational and sequential versions be equal, without any regard for initial or final states. This can be succinctly expressed as:
+Where
+and
+are simply the states (composed of units) that need to be passed to the semantic function but are irrelevant for the computed vectors.
+On the other hand, when comparing
+to
+, the intermediate values produced in the output of
+are disregarded, and only the final state matters.
+Both of these properties (for
+and for
+) can simply be proven by application of the general property shown above for
+and
+. This is because the definition of the derived combinators is just a partial application of
+and
+, along with projections.
+5.2
+Applications of the Combinational and Sequential Combinators
+In this section we describe several variants of circuit families that compute matrix multiplication, as a commonly used application of the aforementioned techniques.
+The first design choice involved in this example application is
+how to represent
+matrices, i.e., the choice of the
+matrix type
+. Traditionally in computing contexts, matrices are mostly represented in two ways:
+row major
+(vector of rows) and
+column major
+(vector of columns). As it turns out,
+both
+representations are useful for our purposes, so we show both here:
+Here,
+R
+M
+a
+t
+r
+c
+and
+C
+M
+a
+t
+r
+c
+both represent matrices with
+rows and
+columns, the difference being only whether they are row- or column-major. Going further with the example, we need to define the basic ingredient of matrix multiplication: the
+dot product
+of two equally-sized vectors.
+The dot product is simply defined as element-wise multiplication of the vectors and summing up the results. We can then use the dot product
+times in order to multiply a vector by a compatibly-sized matrix.
+Here an important detail resides: as the dot product is done for
+each column
+of the matrix, the matrix argument of
+must be in
+column-major
+representation. Also, here we start having choices: we may either have the computation done combinationally as above, or sequentially as below:
+With the multi-step semantics in mind, we know that each of the
+columns of the matrix will be present on the circuit’s second input, one per clock cycle, and that collecting the output values for
+cycles gives the same vector of results as the one from the combinational version.
+For defining the multiplication of two matrices, we simply use
+on each row of the left matrix. If using
+, we obtain a matrix multiplication circuit with area proportional to
+, whereas by using
+the area is proportional to
+.
+In the combinational version (
+), all the rows in the resulting matrix are computed in parallel, with the column-positioned values inside each row computed also in parallel. In the sequential version, at each clock cycle one whole
+column
+is produced, with the row-positioned values inside each column computed in parallel.
+Matrix multiplication as defined here has two nested recursion blocks, and thus four ways in which it could be sequentialized. Above we have shown two possible such choices, and the other two can simply be obtained by swapping
+for
+.
+
+==== part 7 (None)
+6
+Discussion
+6.1
+Related Work
+There is a rich tradition of using functional programming languages to model and verify hardware circuits, Sheeran 
+(
+2005
+) gives a good overview – we restrict ourselves to the most closely related languages here. Languages embedded in Haskell, such as Lava and Wired, typically rely on automated theorem provers and testing using QuickCheck for verification. In
+λ
+π
+-Ware, however, we can perform
+inductive
+verification of our circuits. Existing embeddings in most theorem provers, such as Coquet (Braibant
+2011
+) and
+Π
+- Ware (Pizani Flor et al.
+2016
+), have a more limited treatment of variable scoping and types. More recent work by Choi et al. 
+(
+2017
+) is higher level, but sacrifices the ability to be simulated directly (using denotational semantics) in the theorem prover.
+6.2
+Future Work
+Other Timing Transformations.
+While our language easily lets you explore possible designs, trading time and space, there are several alternative transformations, such as
+pipelining
+that we have not yet tried to describe in this setting.
+While we have a number of combinators for transforming between combinational and sequential circuits, these are mostly aimed at linear, list-like data. Even though these structures are the most prevalent in hardware design, we would like to explore related timing transformations on tree-structured circuits. To this end, it would be interesting to look into the formalization and verification of
+flattening
+transformations, and of the work done in the field of
+nested data parallelism
+.
+Relaxed Unrolling Restriction.
+In Sect.
+5.1
+we mention that the proof of semantics preservation for loop unrolling relies on the premise that the loop body is
+state-independent
+, that is, it has the same input/output behaviour for any given state. This premise can be relaxed somewhat, and proving that loop unrolling still preserves semantics under this relaxed premise is (near-)future work.
+The relaxed restriction on the body
+of a loop to be unrolled is as follows:
+That is, the next state (
+projection) is equal even with evaluation taking different input environments. This condition is necessary because when writing the combinational version of a loop construct we must give each copy of
+its own initial state. As the desired initial state for each such copy must be known at verification time, it cannot depend on input.
+Using the definitions from Sect.
+5.1
+along with the relaxed hypotheses above, we can show that not only total, but also
+partial unrolling
+preserves semantics up to timing.
+
+==== part 8 (None)
+7
+Conclusion
+There are several advantages to be gained by embedding a hardware design DSL in a host language with dependent types, such as Agda. Among these advantages are the easy enforcement of some well-formedness characteristics of circuits, the power given by the host’s type system to express object language types and design constraints. The crucial advantage though, is the ability to have
+modelling, simulation, synthesis and theorem proving
+in the same language.
+By using the host language’s theorem-proving abilities, we are able not only to show properties of individual circuits, but of (infinite) classes of circuits, defined by using
+circuit generators
+. Particularly interesting is the ability to have
+verified transformations
+, preserving some semantics.
+The focus of this paper lies on timing-related transformations, but we also recognize the promise of theorem proving for the formalization of other non-functional aspects of circuit design, such as power consumption, error correction, fault-tolerance and so forth. The formal study of all these aspects of circuit construction and program construction could benefit from mechanized verification.
+
+==== part 9 (None)
+Notes
+1.
+https://gitlab.com/joaopizani/lambda1-hdl/tree/paper-2017-comb-seq
+.
+
+==== part 10 (bibliography)
+References
+Atkey, R., Lindley, S., Yallop, J.: Unembedding domain-specific languages. In: Proceedings of the 2nd ACM SIGPLAN Symposium on Haskell, Haskell 2009, pp. 37–48. ACM, New York (2009).
+https://doi.org/10.1145/1596638.1596644
+. ISBN 978-1-60558-508-6
+Axelsson, E., Claessen, K., Sheeran, M.: Wired: wire-aware circuit design. In: Borrione, D., Paul, W. (eds.) CHARME 2005. LNCS, vol. 3725, pp. 5–19. Springer, Heidelberg (2005).
+https://doi.org/10.1007/11560548_4
+Baaij, C.P.R.: Digital circuits in C
+λ
+λ
+aSH: functional specifications and type-directed synthesis. info:eu-repo/semantics/doctoralThesis. University of Twente, Enschede, January 2015.
+https://doi.org/10.3990/1.9789036538039
+Bjesse, P., Claessen, K., Sheeran, M., Singh, S.: Lava: hardware design in Haskell. ACM SIGPLAN Not.
+34
+(1), 174–184 (1999).
+https://doi.org/10.1145/291251.289440
+. ISSN 03621340
+Boulton, R.J., Gordon, A.D., Gordon, M.J.C., Harrison, J., Herbert, J., Van Tassel, J.: Experience with embedding hardware description languages in HOL. In: TPCD, vol. 10, pp. 129–156 (1992)
+Brady, E., Mckinna, J., Hammond, K.: Constructing correct circuits: verification of functional aspects of hardware specifications with dependent types. In: Trends in Functional Programming 2007 (2007)
+Braibant, T.: Coquet: a Coq library for verifying hardware. In: Jouannaud, J.-P., Shao, Z. (eds.) CPP 2011. LNCS, vol. 7086, pp. 330–345. Springer, Heidelberg (2011).
+https://doi.org/10.1007/978-3-642-25379-9_24
+Braibant, T., Chlipala, A.: Formal verification of hardware synthesis. In: Sharygina, N., Veith, H. (eds.) CAV 2013. LNCS, vol. 8044, pp. 213–228. Springer, Heidelberg (2013).
+https://doi.org/10.1007/978-3-642-39799-8_14
+Choi, J., Vijayaraghavan, M., Sherman, B., Chlipala, A., Arvind: Kami: a platform for high-level parametric hardware specification and its modular verification. Proc. ACM Program. Lang.
+1
+(ICFP), 24:1–24:30 (2017).
+https://doi.org/10.1145/3110268.
+. ISSN 2475-1421
+Gill, A., Bull, T., Kimmell, G., Perrins, E., Komp, E., Werling, B.: Introducing Kansas Lava. In: Morazán, M.T., Scholz, S.-B. (eds.) IFL 2009. LNCS, vol. 6041, pp. 18–35. Springer, Heidelberg (2010).
+https://doi.org/10.1007/978-3-642-16478-1_2
+Hanna, F.K., Daeche, N.: Dependent types and formal synthesis. Philos. Trans. Phys. Sci. Eng.
+339
+(1652), 121–135 (1992).
+http://www.jstor.org/stable/54016
+. ISSN 0962-8428
+Melham, T.: Higher Order Logic and Hardware Verification. Cambridge Tracts in Theoretical Computer Science, vol. 31. Cambridge University Press, Cambridge (1993).
+https://doi.org/10.1017/CBO9780511569845
+.
+http://www.cs.ox.ac.uk/tom.melham/pub/Melham-1993-HOL.html
+. ISBN 0-521-41718-X
+Pizani Flor, J.P., Sijsling, Y., Swierstra, W.:
+π
+-ware: hardware description and verification in Agda. In: Uustalu, T. (ed.) 21th International Conference on Types for Proofs and Programs (TYPES 2015). Leibniz International Proceedings in Informatics (LIPIcs) (2016)
+Sander, I., Jantsch, A.: System modeling and transformational design refinement in ForSyDe [formal system design]. IEEE Trans. Comput. Aided Des. Integr. Circuits Syst.
+23
+(1), 17–32 (2004).
+https://doi.org/10.1109/TCAD.2003.819898
+. ISSN 0278-0070
+Sheeran, M.: Hardware design and functional programming: a perfect match (2005).
+http://www.jucs.org/jucs_11_7/hardware_design_and_functional/jucs_11_7_1135_1158_sheeran.pdf
+Sheeran, M.: muFP, a language for VLSI design. In: Proceedings of the 1984 ACM Symposium on LISP and Functional Programming, pp. 104–112. ACM Press (1984).
+https://doi.org/10.1145/800055.802026
+. ISBN 0897911423
+Singh, S.: Designing reconfigurable systems in lava. In: Proceedings 17th International Conference on VLSI Design 2004, pp. 299–306 (2004).
+https://doi.org/10.1109/ICVD.2004.1260941
+
+==== part 11 (None)
+Acknowledgments
+We would like to thank the very helpful feedback gathered during the visit to Chalmers University of Technology, funded by COST Action EUTypes CA15123. Especially valuable were the meetings and discussions with Mary Sheeran, whose deep knowledge of the field oriented this work in its beginning stage. Also, we are very thankful to the feedback given during our presentation on this topic at the TFP2017 conference in Canterbury.
+This work was supported by the Netherlands Organization for Scientific Research (NWO) project on
+A Dependently Typed Language for Verified Hardware
+.

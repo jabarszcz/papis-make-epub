@@ -1,0 +1,161 @@
+==== part 0 (titlepage)
+A benchmark for vericoding:
+formally verified program synthesis
+Sergiu Bursuc
+Abstract
+We present and test the largest benchmark for vericoding , LLM-generation of formally verified code from formal specifications — in contrast to vibe coding , which generates potentially buggy code from a natural language description.
+
+==== part 1 (None)
+3
+Benchmark Construction
+3.2
+Original sources and task generation
+Formal verification or vericoding benchmarks such as DafnyBench ( Loughridge et al., 2025 ) for Dafny, VerifiedCogen ( JetBrains-Research, 2025 ) for Verus, and Verina ( Ye et al., 2025 ) and Clever ( Thakur et al., 2025 ) for Lean.
+3.3
+Spec translations and validation
+𝖲𝗉𝖾𝖼𝖳𝗋𝖺𝗇𝗌𝗅𝖺𝗍𝗈𝗋
+⁡
+(
+ℒ
+𝗌𝗈𝗎𝗋𝖼𝖾
+,
+ℒ
+𝗍𝖺𝗋𝗀𝖾𝗍
+,
+𝒮
+,
+k
+,
+ℳ
+)
+\mathsf{SpecTranslator}(\mathcal{L}_{\mathsf{source}},\mathcal{L}_{\mathsf{target}},\mathcal{S},k,\mathcal{M})
+// for specification
+𝒮
+\mathcal{S}
+, iterations
+k
+k
+, and LLM
+ℳ
+\mathcal{M}
+H
+←
+∅
+,
+𝒫
+←
+𝖡𝗎𝗂𝗅𝖽𝖯𝗋𝗈𝗆𝗉𝗍
+⁡
+(
+ℒ
+𝗌𝗈𝗎𝗋𝖼𝖾
+,
+ℒ
+𝗍𝖺𝗋𝗀𝖾𝗍
+,
+𝒮
+,
+𝚝𝚛𝚊𝚗𝚜𝚕𝚊𝚝𝚎
+)
+\displaystyle\vphantom{\rule[2.15277pt]{0.0pt}{0.0pt}}\quad H\leftarrow\emptyset,\mathcal{P}\leftarrow\mathsf{BuildPrompt}(\mathcal{L}_{\mathsf{source}},\mathcal{L}_{\mathsf{target}},\mathcal{S},\mathtt{translate})
+𝐟𝐨𝐫
+​
+i
+∈
+{
+1
+,
+…
+,
+k
+}
+​
+𝐝𝐨
+:
+// generate or fix translation, verify file in target language, and update history
+\displaystyle\quad\mathbf{for}\ i\in\{1,\ldots,k\}\ \mathbf{do}\,:\text{\hskip 10.00002pt\hfill{\text{{// generate or fix translation, verify file in target language, and update history}}}}
+𝒮
+′
+←
+ℳ
+⁡
+(
+𝒫
+)
+,
+(
+v
+,
+e
+)
+←
+𝖵𝖾𝗋𝗂𝖿𝗒𝖥𝗂𝗅𝖾
+⁡
+(
+ℒ
+𝗍𝖺𝗋𝗀𝖾𝗍
+,
+𝒮
+′
+)
+,
+H
+←
+H
+∪
+{
+𝒮
+′
+,
+v
+,
+e
+}
+\displaystyle\quad\quad\mathcal{S}^{\prime}\leftarrow\mathcal{M}(\mathcal{P}),(v,e)\leftarrow\mathsf{VerifyFile}(\mathcal{L}_{\mathsf{target}},\mathcal{S}^{\prime}),H\leftarrow H\cup\{\mathcal{S}^{\prime},v,e\}
+𝐢𝐟
+​
+v
+​
+𝐭𝐡𝐞𝐧
+​
+𝐫𝐞𝐭𝐮𝐫𝐧
+​
+(
+𝒮
+′
+,
+𝚜𝚞𝚌𝚌𝚎𝚜𝚜
+)
+​
+𝐞𝐥𝐬𝐞
+​
+𝒫
+←
+𝖡𝗎𝗂𝗅𝖽𝖯𝗋𝗈𝗆𝗉𝗍
+⁡
+(
+ℒ
+𝗌𝗈𝗎𝗋𝖼𝖾
+,
+ℒ
+𝗍𝖺𝗋𝗀𝖾𝗍
+,
+𝒮
+,
+𝚏𝚒𝚡
+,
+𝒮
+′
+,
+H
+)
+\displaystyle\quad\quad\mathbf{if}\ v\ \mathbf{then}\ \mathbf{return}\ (\mathcal{S}^{\prime},\mathtt{success})\,\mathbf{else}\ \mathcal{P}\leftarrow\mathsf{BuildPrompt}(\mathcal{L}_{\mathsf{source}},\mathcal{L}_{\mathsf{target}},\mathcal{S},\mathtt{fix},\mathcal{S}^{\prime},H)
+𝐫𝐞𝐭𝐮𝐫𝐧
+⁡
+(
+𝒮
+′
+,
+𝚏𝚊𝚒𝚕
+)
+\displaystyle\quad\mathbf{return}\ (\mathcal{S}^{\prime},\mathtt{fail})

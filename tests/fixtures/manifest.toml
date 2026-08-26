@@ -1,0 +1,161 @@
+# The fixture corpus, one entry per committed page, with its
+# provenance. The tests parametrize over the entries (conftest.py);
+# refresh.py reads the captures' procedure fields.
+#
+# kind       "capture": a whole page of an open-access CC BY paper
+#            (license verified in the Crossref record's vor entry;
+#            for arXiv, on the abs page), the page beside its
+#            bibliographic record under library/<id>. Each is
+#            redistributed under that license
+#            (https://creativecommons.org/licenses/by/4.0/), the
+#            attribution being the record and the modifications
+#            being refresh.py's scrub.
+#            "reduction": a page cut down to the parts that exercise
+#            a form the captures do not, at reductions/<id>.html,
+#            kept under fair use/dealing with the page's URL.
+# captured   the date the page was captured; for a reduction, the
+#            date of the capture it was reduced from.
+# best_effort  the build option the goldens were pinned with (the
+#            TeX-only sources carry a few formulas texmath cannot
+#            express; best-effort keeps them verbatim).
+#
+# Capture procedure fields (refresh.py): python_fetch (an arXiv id
+# fetched through the package's own path), manual (instructions
+# for a page the scripted browser is not served), headed (the page
+# loads in a visible window only), wait (settle time in ms for
+# hydration, interstitials and the browser script's work),
+# browser_script (a file beside this one,
+# run in the page before it loads, for folds the capture must open),
+# wait_until (when single-file considers the page loaded: load,
+# networkIdle (its default), DOMContentLoaded, ...).
+# refresh.py writes a capture's `captured` date when the capture
+# validates; the field has to follow the entry's id.
+
+[[fixture]]
+id = "acm"
+kind = "capture"
+platform = "acm"
+url = "https://dl.acm.org/doi/full/10.1145/3776710"
+captured = 2026-10-14
+best_effort = false
+# dl.acm.org does not serve the page to the scripted browser
+manual = "save the page from the browser ('Web Page, complete') as tests/fixtures/library/acm/acm.html"
+
+[[fixture]]
+id = "arxiv"
+kind = "capture"
+platform = "arxiv"
+url = "https://arxiv.org/html/2312.00752"
+captured = 2026-10-02
+best_effort = false
+# the route the arxiv source serves in real use
+python_fetch = "2312.00752"
+
+[[fixture]]
+id = "ieee"
+kind = "capture"
+platform = "ieee"
+url = "https://ieeexplore.ieee.org/document/8796365"
+captured = 2026-10-02
+best_effort = true
+# ieeexplore.ieee.org serves the article in a visible window only
+headed = true
+# the References fold is closed until clicked and its list paginated;
+# the folds are one accordion, one open at a time, so Footnotes stays
+# closed (the source has no footnotes part)
+browser_script = "ieee-expand-folds.js"
+# the page's background traffic never goes idle
+wait_until = "load"
+
+[[fixture]]
+id = "sciencedirect"
+kind = "capture"
+platform = "sciencedirect"
+url = "https://www.sciencedirect.com/science/article/pii/S0370269320304469"
+captured = 2026-10-02
+best_effort = false
+# sciencedirect.com does not serve the page to the scripted browser,
+# and its MathJax consumes the math sources when it runs
+manual = "block MathJax so it cannot consume the sources (devtools > Network tab > right-click a mathjax request > 'Block request URL', then reload), scroll through the article, save with the SingleFile browser extension (scripts unblocked) as tests/fixtures/library/sciencedirect/sciencedirect.html"
+
+[[fixture]]
+id = "springer"
+kind = "capture"
+platform = "springer"
+url = "https://www.nature.com/articles/s41586-022-05172-4"
+captured = 2026-10-02
+best_effort = true
+
+[[fixture]]
+id = "springer-chapter"
+kind = "capture"
+platform = "springer"
+url = "https://link.springer.com/chapter/10.1007/978-3-319-94821-8_30"
+# a book chapter on link.springer.com: delimited TeX, figure links
+# carrying the chapter path, and the chapter page's structure, where
+# the other Springer capture is a nature.com article
+captured = 2026-10-03
+best_effort = true
+
+[[fixture]]
+id = "acm-return-links-3776710"
+kind = "reduction"
+platform = "acm"
+url = "https://dl.acm.org/doi/full/10.1145/3776710"
+# the return links the page's script adds to each reference's and
+# footnote's link row ("Go to Citation", "Return to text"), as the
+# SingleFile capture of this page carried them; the 2026-10-14 browser
+# save has them uninstantiated. One body section with a citing
+# paragraph and a footnoted one, the references the script had
+# reached, and the footnote
+captured = 2026-10-02
+best_effort = false
+
+[[fixture]]
+id = "arxiv-conversion-error-2509.22908"
+kind = "reduction"
+platform = "arxiv"
+url = "https://arxiv.org/html/2509.22908"
+# LaTeXML's ltx_ERROR marker for a macro it could not expand, and a
+# numbered list with its injected number spans
+captured = 2026-10-03
+best_effort = false
+
+[[fixture]]
+id = "arxiv-listings-2201.03611"
+kind = "reduction"
+platform = "arxiv"
+url = "https://arxiv.org/html/2201.03611"
+# a code listing with LaTeXML's download icon; the full capture has none
+captured = 2026-10-02
+best_effort = false
+
+[[fixture]]
+id = "arxiv-missing-labels-2602.09464"
+kind = "reduction"
+platform = "arxiv"
+url = "https://arxiv.org/html/2602.09464"
+# LaTeXML's missing-label spans where cross-references could not be
+# resolved, and a list with its injected bullet spans
+captured = 2026-10-03
+best_effort = false
+
+[[fixture]]
+id = "sciencedirect-figure-downloads-S0167642321000502"
+kind = "reduction"
+platform = "sciencedirect"
+url = "https://www.sciencedirect.com/science/article/pii/S0167642321000502"
+# a figure with the platform's download-link list; the full capture's
+# figures have none
+captured = 2026-10-02
+best_effort = false
+
+[[fixture]]
+id = "springer-article-links-s10817-026-09747-y"
+kind = "reduction"
+platform = "springer"
+url = "https://link.springer.com/article/10.1007/s10817-026-09747-y"
+# link.springer.com's journal cross-references carry the article path;
+# the nature.com capture's are fragments. With a display formula.
+captured = 2026-10-03
+best_effort = true

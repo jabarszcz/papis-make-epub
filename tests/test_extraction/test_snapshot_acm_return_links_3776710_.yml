@@ -1,0 +1,48 @@
+language: en
+media_count: 0
+media_extensions: {}
+package:
+  landmarks:
+  - href: content.xhtml#toc
+    text: Start
+    type: bodymatter
+  - href: content.xhtml#part-bibliography
+    text: References
+    type: bibliography
+  manifest:
+    content.xhtml: application/xhtml+xml
+    fonts/stix.ttf: font/ttf
+    nav.xhtml: application/xhtml+xml nav
+    style.css: text/css
+    toc.ncx: application/x-dtbncx+xml
+  metadata:
+    creator: null
+    identifier: https://dl.acm.org/doi/full/10.1145/3776710
+    language: en
+    title: acm-return-links-3776710
+  spine:
+  - content.xhtml
+  toc:
+  - 6 Formal Verification of the PikeVM Matching Algorithm
+  - References
+parts:
+- epub_type: titlepage
+  text_length: 24
+  toc: []
+- epub_type: null
+  text_length: 1533
+  toc:
+  - 6 Formal Verification of the PikeVM Matching Algorithm
+- epub_type: bibliography
+  text_length: 1060
+  toc:
+  - References
+- epub_type: null
+  text_length: 62
+  toc: []
+stats:
+  dead_links: 6
+  images: 0
+  math: 0
+  math_fallback: 0
+  math_images: 0

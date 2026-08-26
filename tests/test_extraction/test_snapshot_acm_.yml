@@ -1,0 +1,146 @@
+language: en
+media_count: 18
+media_extensions:
+  svg: 18
+package:
+  landmarks:
+  - href: content.xhtml#part-abstract
+    text: Start
+    type: bodymatter
+  - href: content.xhtml#part-bibliography
+    text: References
+    type: bibliography
+  manifest:
+    content.xhtml: application/xhtml+xml mathml svg
+    fonts/dejavu.ttf: font/ttf
+    fonts/stix.ttf: font/ttf
+    images/3776710_fig01.svg: image/svg+xml
+    images/3776710_fig02.svg: image/svg+xml
+    images/3776710_fig03.svg: image/svg+xml
+    images/3776710_fig04.svg: image/svg+xml
+    images/3776710_fig05.svg: image/svg+xml
+    images/3776710_fig06.svg: image/svg+xml
+    images/3776710_fig07.svg: image/svg+xml
+    images/3776710_fig08.svg: image/svg+xml
+    images/3776710_fig09.svg: image/svg+xml
+    images/3776710_fig10.svg: image/svg+xml
+    images/3776710_fig11.svg: image/svg+xml
+    images/3776710_fig12.svg: image/svg+xml
+    images/3776710_fig13.svg: image/svg+xml
+    images/3776710_fig14.svg: image/svg+xml
+    images/3776710_fig15.svg: image/svg+xml
+    images/3776710_fig16.svg: image/svg+xml
+    images/3776710_fig17.svg: image/svg+xml
+    images/3776710_fig18.svg: image/svg+xml
+    nav.xhtml: application/xhtml+xml nav
+    style.css: text/css
+    toc.ncx: application/x-dtbncx+xml
+  metadata:
+    creator:
+    - Aurèle Barrière
+    - Victor Deng
+    - Clément Pit-Claudel
+    identifier: 10.1145/3776710
+    language: en
+    title: 'Formal Verification for JavaScript Regular Expressions: A Proven Mechanized
+      Semantics and Its Applications'
+  spine:
+  - content.xhtml
+  toc:
+  - Abstract
+  - 1 Introduction
+  - 2 Background on JavaScript Regexes:
+    - 2.1 Syntax
+    - 2.2 Informal Semantics
+  - 3 Tree Semantics:
+    - 3.1 An Inductive Relation for a Backtracking Execution Trace
+    - 3.2 Semantics Properties
+  - '4 Semantics Faithfulness: Equivalence to Warblre'
+  - 5 Formally Verified Regex Equivalence:
+    - 5.1 A New Definition of Regex Equivalence
+    - 5.2 Formally Verified and Invalid Equivalences
+  - 6 Formal Verification of the PikeVM Matching Algorithm:
+    - 6.1 The PikeVM Algorithm
+    - 6.2 Correctness of Encoding Progress
+    - 6.3 Correctness of the PikeVM Exploration Scheme
+    - 6.4 Correctness of the PikeVM Compiler
+  - 7 Discussion and Related Work:
+    - 7.1 Related Work
+    - 7.2 Future Work
+  - 8 Conclusion
+  - Acknowledgments
+  - Artifact Availability
+  - References
+parts:
+- epub_type: titlepage
+  text_length: 156
+  toc: []
+- epub_type: abstract
+  text_length: 944
+  toc:
+  - Abstract
+- epub_type: null
+  text_length: 5923
+  toc:
+  - 1 Introduction
+- epub_type: null
+  text_length: 8232
+  toc:
+  - 2 Background on JavaScript Regexes:
+    - 2.1 Syntax
+    - 2.2 Informal Semantics
+- epub_type: null
+  text_length: 13282
+  toc:
+  - 3 Tree Semantics:
+    - 3.1 An Inductive Relation for a Backtracking Execution Trace
+    - 3.2 Semantics Properties
+- epub_type: null
+  text_length: 4559
+  toc:
+  - '4 Semantics Faithfulness: Equivalence to Warblre'
+- epub_type: null
+  text_length: 12608
+  toc:
+  - 5 Formally Verified Regex Equivalence:
+    - 5.1 A New Definition of Regex Equivalence
+    - 5.2 Formally Verified and Invalid Equivalences
+- epub_type: null
+  text_length: 28797
+  toc:
+  - 6 Formal Verification of the PikeVM Matching Algorithm:
+    - 6.1 The PikeVM Algorithm
+    - 6.2 Correctness of Encoding Progress
+    - 6.3 Correctness of the PikeVM Exploration Scheme
+    - 6.4 Correctness of the PikeVM Compiler
+- epub_type: null
+  text_length: 10158
+  toc:
+  - 7 Discussion and Related Work:
+    - 7.1 Related Work
+    - 7.2 Future Work
+- epub_type: null
+  text_length: 991
+  toc:
+  - 8 Conclusion
+- epub_type: null
+  text_length: 294
+  toc:
+  - Acknowledgments
+- epub_type: null
+  text_length: 379
+  toc:
+  - Artifact Availability
+- epub_type: bibliography
+  text_length: 16286
+  toc:
+  - References
+- epub_type: null
+  text_length: 442
+  toc: []
+stats:
+  dead_links: 0
+  images: 18
+  math: 264
+  math_fallback: 0
+  math_images: 0

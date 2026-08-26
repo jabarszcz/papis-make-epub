@@ -1,0 +1,28 @@
+/* The build appends to this sheet (book.py, _embed_symbol_font):
+   @font-face rules for the fallback fonts covering the document's
+   uncommon characters, and a body font-family chain naming them
+   after serif; a --css stylesheet comes after that. */
+body { font-family: serif; line-height: 1.35; } img { max-width: 100%; }
+.ltx_tabular { display: table; border-collapse: collapse; }
+.ltx_td, .ltx_th { border: 1px solid #999; padding: 0.2em 0.4em; }
+/* LaTeXML's font weights and variants are classes (its stylesheet's
+   rules); italics are em elements */
+.ltx_font_bold { font-weight: bold; }
+.ltx_font_smallcaps { font-variant: small-caps; font-style: normal; }
+.ltx_font_upright { font-style: normal; font-variant: normal; }
+/* TODO: LaTeXML's other classes render unstyled: ltx_font_typewriter,
+   the ltx_border_* table rules, ltx_align_*, and the span rendition's
+   table and paragraph display. Its stylesheet cannot be shipped
+   whole: it hides
+   .ltx_note_content, which the arXiv footnotes carry, and it uses
+   calc(), var() and :has(), which old engines handle unevenly (a
+   Kobo's EPUB engine skipped a :not() rule, 2026-10-14). */
+/* LaTeXML's listing lines are spans in some renditions */
+.ltx_listing { font-family: monospace; }
+.ltx_listingline { display: block; white-space: pre-wrap; }
+figure { margin: 1em 0; } figcaption { font-size: 0.85em; }
+/* a figure's image fills the text width, so a figure served at the
+   platform's web size stays readable on a small screen; a math image
+   in a caption keeps the width its own style sets */
+figure img { width: 100%; height: auto; }
+img.math-display { display: block; margin: 0.6em auto; }

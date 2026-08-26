@@ -1,0 +1,249 @@
+author: Basar, Ertugrul and Di Renzo, Marco and De Rosny, Julien and Debbah, Merouane
+  and Alouini, Mohamed-Slim and Zhang, Rui
+author_list:
+- affiliation: []
+  family: Basar
+  given: Ertugrul
+- affiliation: []
+  family: Di Renzo
+  given: Marco
+- affiliation: []
+  family: De Rosny
+  given: Julien
+- affiliation: []
+  family: Debbah
+  given: Merouane
+- affiliation: []
+  family: Alouini
+  given: Mohamed-Slim
+- affiliation: []
+  family: Zhang
+  given: Rui
+citations:
+- doi: 10.1109/VETEC.1992.245274
+- doi: 10.1109/8.486303
+- doi: 10.1051/epjam/2015016
+- doi: 10.1109/TWC.2019.2922609
+- doi: 10.1126/sciadv.1602714
+- doi: 10.1103/PhysRevB.94.075142
+- doi: 10.1109/MAP.2009.5162013
+- doi: 10.1002/9780470740071
+- doi: 10.1103/PhysRevApplied.11.044024
+- doi: 10.1515/nanoph-2017-0119
+- doi: 10.1126/science.1210713
+- doi: 10.1017/CBO9781139644181
+- doi: 10.1017/CBO9780511841224
+- doi: 10.1109/TAP.2018.2793958
+- doi: 10.1109/MCOM.2018.1700659
+- doi: 10.1109/ISCAS.2018.8351817
+- journal-title: 5GPPP Vision on Software Networks and 5G SN WG
+  year: '2017'
+- doi: 10.1186/s13638-019-1438-9
+- doi: 10.1186/s13638-019-1403-7
+- article-title: 'Towards smart and reconfigurable environment: Intelligent reflecting
+    surface aided wireless network'
+  author: wu
+  journal-title: IEEE Commun Mag
+  year: '0'
+- article-title: Feedback-aware design of reconfigurable intelligent surfaces in smart
+    radio environments
+  author: zappone
+  year: '2019'
+- doi: 10.1109/TCOMM.2019.2924010
+- author: simon
+  journal-title: Digital Communications over Fading Channels
+  year: '2005'
+- article-title: 'Symbiotic radio: A new communication paradigm for passive Internet-of-Things'
+  author: long
+  journal-title: arXiv 1810 13068
+  year: '2018'
+- doi: 10.1145/3137133.3137148
+- doi: 10.1109/ACCESS.2018.2850808
+- doi: 10.1049/iet-com.2010.0544
+- doi: 10.1002/9781119375692
+- article-title: Passive beamforming and information transfer via large intelligent
+    surface
+  author: yan
+  journal-title: arXiv 1905 01491
+  year: '2019'
+- doi: 10.1002/admt.201900044
+- doi: 10.1049/el.2019.0400
+- doi: 10.1109/TVT.2015.2442754
+- article-title: 3D channel modeling and characterization for Hypersurface empowered
+    indoor environment at 60 GHz millimeter-wave band
+  author: mehrotra
+  journal-title: arXiv 1907 00037
+  year: '2019'
+- doi: 10.1109/TVT.2007.912136
+- author: gatherer
+  journal-title: What Will Be
+  year: '2018'
+- article-title: 'Spatial modulation for generalized MIMO: Challenges, opportunities,
+    and implementation'
+  author: di renzo
+  doi: 10.1109/JPROC.2013.2287851
+  first-page: '56'
+  journal-title: Proc IEEE
+  volume: '102'
+  year: '2014'
+- doi: 10.1109/MCOM.2011.6094024
+- doi: 10.1109/MCOM.2016.7509396
+- author: proakis
+  journal-title: Digital Communications
+  year: '2008'
+- doi: 10.1109/COMST.2014.2327066
+- doi: 10.1109/ACCESS.2017.2737528
+- doi: 10.1109/ICC.2016.7510962
+- doi: 10.1109/TAP.2013.2287296
+- doi: 10.1109/APUSNCURSINRSM.2017.8073077
+- doi: 10.1109/INFOCOM.2018.8485924
+- article-title: Shaping complex microwave fields in reverberating media with binary
+    tunable metasurfaces
+  author: kaina
+  doi: 10.1038/srep06693
+  journal-title: Sci Rep
+  volume: '4'
+  year: '2014'
+- doi: 10.1109/EuCAP.2012.6206517
+- doi: 10.1038/s41928-018-0190-1
+- doi: 10.1103/PhysRevLett.115.017701
+- article-title: Modeling, simulating and configuring programmable wireless environments
+    for multi-user multi-objective networking
+  author: liaskos
+  journal-title: arXiv 1812 11429
+  year: '2018'
+- doi: 10.1016/j.adhoc.2018.11.001
+- journal-title: World&#x2019;s First 5G NR Radio
+  year: '2018'
+- doi: 10.1109/GLOCOMW.2018.8644519
+- article-title: Intelligent reflecting surface enhanced wireless network via joint
+    active and passive beamforming
+  author: wu
+  journal-title: arXiv 1810 03961
+  year: '2018'
+- doi: 10.1109/ICASSP.2019.8683145
+- doi: 10.1109/ICASSP.2018.8461496
+- doi: 10.1109/GLOCOM.2018.8647620
+- article-title: Communication through a large reflecting surface with phase errors
+  author: badiu
+  journal-title: arXiv 1906 10751
+  year: '2019'
+- article-title: 'Reconfigurable intelligent surface-based index modulation: A new
+    beyond MIMO paradigm for 6G'
+  author: basar
+  journal-title: arXiv 1904 06704
+  year: '2019'
+- doi: 10.1038/lsa.2014.99
+- doi: 10.1038/srep35692
+- doi: 10.1038/s41467-018-06802-0
+- doi: 10.1109/VTCSpring.2017.8108330
+- doi: 10.1109/TSP.2018.2816577
+- doi: 10.1109/TSP.2018.2795547
+- article-title: Asymptotic analysis of large intelligent surface assisted MIMO communication
+  author: nadeem
+  journal-title: arXiv 1903 08127
+  year: '2019'
+- article-title: Cascaded channel estimation for large intelligent metasurface assisted
+    massive MIMO
+  author: he
+  journal-title: arXiv 1905 07948
+  year: '2019'
+- article-title: Large intelligent surface-assisted wireless communication exploiting
+    statistical CSI
+  author: han
+  journal-title: arXiv 1812 05429
+  year: '2018'
+- journal-title: Cisco Visual Networking Index Global Mobile Data Traffic Forecast
+    Update
+  year: '2019'
+- article-title: Enabling large intelligent surfaces with compressive sensing and
+    deep learning
+  author: taha
+  journal-title: arXiv 1904 10136
+  year: '2019'
+- doi: 10.1109/EuCNC.2019.8801961
+- doi: 10.1145/3152434.3152456
+- article-title: 'IRS-enhanced OFDM: Power allocation and passive array optimization'
+  author: yang
+  journal-title: arXiv 1905 00604
+  year: '2019'
+- article-title: Intelligent reflecting surfaces for free space optical communications
+  author: najafi
+  journal-title: arXiv 1905 01094
+  year: '2019'
+- article-title: Metasurface-enabled interference suppression at visible-light communications
+  author: valagiannopoulos
+  journal-title: arXiv 1904 08858
+  year: '2019'
+- doi: 10.1109/ICASSP.2019.8683394
+- article-title: 'Performance analysis of large intelligent surfaces (LISs): Uplink
+    spectral efficiency and pilot training'
+  author: jung
+  journal-title: arXiv 1904 00453
+  year: '2019'
+- doi: 10.1109/INFOCOM.2018.8485965
+- doi: 10.1109/GLOCOM.2017.8254903
+- journal-title: NTT DOCOMO and Metawave Announce Successful Demonstration of 28 GHz-band
+    5G Using World&#x2019;s First Meta-Structure Technology
+  year: '2018'
+- doi: 10.1109/TAP.2015.2423700
+- article-title: Towards programming the radio environment with large arrays of inexpensive
+    antennas
+  author: li
+  first-page: '285'
+  journal-title: Proc USENIX/ACM Symp Netw Syst Design Implement
+  year: '2019'
+- article-title: 'RFocus: Practical beamforming for small devices'
+  author: arun
+  journal-title: arXiv 1905 05130
+  year: '2019'
+- doi: 10.1007/978-3-319-51355-3
+- doi: 10.1109/LCOMM.2017.2684126
+- doi: 10.1109/TVT.2018.2819728
+- doi: 10.1109/ICC.2016.7511273
+- doi: 10.1109/TVT.2016.2620989
+- doi: 10.1109/MWC.2019.1800568
+- doi: 10.1109/MILCOM.2017.8170856
+- article-title: Over-the-air computation via intelligent reflecting surfaces
+  author: jiang
+  journal-title: arXiv 1904 12475
+  year: '2019'
+- doi: 10.1186/s13638-019-1427-z
+- doi: 10.1109/ICASSP.2019.8683663
+- doi: 10.1109/ACCESS.2019.2895754
+- doi: 10.1109/ACCESS.2019.2924034
+- doi: 10.1109/WoWMoM.2018.8449754
+- article-title: Enabling secure wireless communications via intelligent reflecting
+    surfaces
+  author: yu
+  journal-title: Proc IEEE Global Commun Conf (GLOBECOM)
+  year: '2019'
+- article-title: MISO wireless communication systems via intelligent reflecting surfaces
+  author: yu
+  journal-title: arXiv 1904 12199
+  year: '2019'
+- article-title: 'Performance analysis of large intelligent surfaces (LISs): Asymptotic
+    data rate and channel hardening effects'
+  author: jung
+  journal-title: arXiv 1810 05667
+  year: '2019'
+- doi: 10.1109/LWC.2019.2919685
+- doi: 10.1109/DCOSS.2019.00072
+- doi: 10.1109/SPAWC.2019.8815428
+- doi: 10.1109/LWC.2019.2935190
+doc_url: http://xplorestaging.ieee.org/ielx7/6287639/8600701/08796365.pdf?arnumber=8796365
+doi: 10.1109/access.2019.2935192
+files:
+- ieee.html
+journal: IEEE Access
+license: CC BY 4.0
+pages: 116753--116773
+papis_id: 47639924f4068a0afa591de0521e113d
+publisher: Institute of Electrical and Electronics Engineers (IEEE)
+ref: Wireless_Commun_Basar_2019
+time-added: 2026-08-27-16:53:39
+title: Wireless Communications Through Reconfigurable Intelligent Surfaces
+type: article
+url: https://doi.org/10.1109/access.2019.2935192
+volume: '7'
+year: 2019

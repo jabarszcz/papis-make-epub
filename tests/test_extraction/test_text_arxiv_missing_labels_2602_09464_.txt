@@ -1,0 +1,26 @@
+==== part 0 (titlepage)
+AlgoVeri
+: An Aligned Benchmark for Verified Code Generation on Classical Algorithms
+Haoyu Zhao
+Abstract
+Vericoding refers to the generation of formally verified code from rigorous specifications.
+
+==== part 1 (appendix)
+Appendix A
+Background on Program Verification
+A.1
+The Anatomy of a Verified Program
+Unlike standard code generation benchmarks (e.g., HumanEval, MBPP), where the goal is to produce an implementation
+C
+C
+that passes a finite set of input-output tests, verified code generation requires the model to synthesize a triple
+(
+C
+,
+S
+,
+P
+)
+(C,S,P)
+: the implementation, the specification, and the formal proof artifacts. We illustrate these components using the Linear Search examples in Code  (Dafny), Code  (Verus), and Code  (Lean).
+The Specification ( S S ): The formal “contract” that defines the program’s correctness.

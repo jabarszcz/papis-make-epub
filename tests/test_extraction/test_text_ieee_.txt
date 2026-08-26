@@ -1,0 +1,2856 @@
+==== part 0 (titlepage)
+Wireless Communications Through Reconfigurable Intelligent Surfaces
+Ertugrul Basar, Marco Di Renzo, Julien De Rosny, Merouane Debbah, Mohamed-Slim Alouini, Rui Zhang
+
+==== part 1 (abstract)
+Abstract:
+The future of mobile communications looks exciting with the potential new use cases and challenging requirements of future 6th generation (6G) and beyond wireless networks. Since the beginning of the modern era of wireless communications, the propagation medium has been perceived as a randomly behaving entity between the transmitter and the receiver, which degrades the quality of the received signal due to the uncontrollable interactions of the transmitted radio waves with the surrounding objects. The recent advent of reconfigurable intelligent surfaces in wireless communications enables, on the other hand, network operators to control the scattering, reflection, and refraction characteristics of the radio waves, by overcoming the negative effects of natural wireless propagation. Recent results have revealed that reconfigurable intelligent surfaces can effectively control the wavefront, e.g., the phase, amplitude, frequency, and even polarization, of the impinging signals without the need of complex decoding, encoding, and radio frequency processing operations. Motivated by the potential of this emerging technology, the present article is aimed to provide the readers with a detailed overview and historical perspective on state-of-the-art solutions, and to elaborate on the fundamental differences with other technologies, the most important open research issues to tackle, and the reasons why the use of reconfigurable intelligent surfaces necessitates to rethink the communication-theoretic models currently employed in wireless networks. This article also explores theoretical performance limits of reconfigurable intelligent surface-assisted communication systems using mathematical techniques and elaborates on the potential use cases of intelligent surfaces in 6G and beyond wireless networks.
+
+==== part 2 (None)
+SECTION I.
+Introduction
+According to the February 2019 report of Cisco
+[2]
+, by the year of 2022, the number of networked devices and connections will reach up to 28.5 billions, and 12.3 billions of them will consist of mobile-ready devices and connections. Furthermore, the overall mobile data traffic is expected to grow to 77 exabytes per month by 2022 with a seven-fold increase over 2017. Meanwhile, after years of research and development, the first commercial 5th generation (5G) mobile communication standard (3GPP Release 15) has been completed in June 2018. As of mid-2019, 5G wireless networks have been already deployed in certain countries, while the first 5G compatible mobile devices are being introduced to the market. The advent of 5G has led to a new vision of mobile communications, which encompasses three use cases with different requirements: enhanced mobile broadband, ultra-reliable and low-latency communications, and massive machine type communications. However, one thing has become certain during the standardization process of 5G wireless networks: there is no single enabling technology that can support all 5G application requirements. From this perspective, researchers have already started research on beyond 5G, or even 6th generation (6G), technologies by escaping from the comfort-zone of 5G-oriented solutions. Even though future 6G technologies seem to be an extension of their 5G counterparts at present
+[3]
+, as 5G technologies were viewed 10 years ago, new user requirements, new applications and use cases, and new networking trends will bring more challenging communication engineering problems, which necessitate radically new communication paradigms, especially at the physical layer.
+During the past few years, there has been a growing interest in novel communication paradigms in which the implicit randomness of the propagation environment is exploited to either simplify the transceiver architecture and/or to increase the quality of service (QoS). A notable example is spatial modulation (SM)
+[4]
+–​
+[7]
+, which is by far the most popular member of the index modulation (IM) family
+[8]
+–​
+[10]
+. SM maps information bits onto transmit antenna indices by exploiting different fading realizations of multiple-input multiple-output (MIMO) antennas. Taking SM one step further, spatial scattering modulation
+[11]
+and beam IM
+[12]
+exploit the indices of the scatterers available in the environment to convey information. Finally, media-based modulation (MBM) utilizes reconfigurable antennas
+[13]
+–​
+[15]
+by encoding the information bits onto multiple distinguishable radiation patterns
+[16]
+–​
+[18]
+. In the aforementioned schemes, different signatures of the received signals, which originate from the interaction of the transmitted signals with the environment, are used to transmit information bits at a low implementation complexity.
+In the recent period, a brand-new technology was brought to the attention of the wireless research community:
+reconfigurable intelligent surfaces (RISs)
+. The RISs are man-made surfaces of electromagnetic (EM) material that are electronically controlled with integrated electronics and have unique wireless communication capabilities. Current implementations include conventional reflect-arrays, liquid crystal surfaces, and software-defined meta-surfaces
+[19]
+–​
+[21]
+. In contrast to any other technology currently being used in wireless networks and current design principles of wireless communications, the distinctive characteristic of RISs lies in making the environment controllable by the telecommunication operators, and by giving them the possibility of shaping and fully controlling the EM response of the environmental objects that are distributed throughout the network
+[22]
+. The RISs share similarities but have major differences compared with SM-based systems: the RISs are, in fact, aimed to intentionally and deterministically control the propagation environment in order to boost the signal quality at the receiver
+[1]
+,
+[22]
+,
+[23]
+.
+The RISs have given rise to the emerging concept of “smart radio environments”
+[23]
+. In contrast to current wireless networks where the environment is out of control of the telecommunication operators, a smart radio environment is a wireless network where the environment is turned into a smart reconfigurable space that plays an active role in transferring and processing information. Smart radio environments largely extend the notion of software networks. Future wireless networks, in particular, are rapidly evolving towards a software-based and reconfigurable platform, where every part of the network will be capable of adapting itself to the changes in the environment
+[24]
+. In this optimization process, however, the environment itself remains an uncontrollable factor, i.e., it is unaware of the communication process undergoing within it. Apart from being uncontrollable, the environment has usually a negative effect on the communication efficiency and the QoS. The signal attenuation limits the radio connectivity, multipath propagation results in fading phenomena, and reflections and refractions from large objects are the main sources of uncontrollable interference. In smart radio environments, on the other hand, the wireless environment itself is turned into a software-reconfigurable entity
+[25]
+, whose operation is optimized to enable uninterrupted connectivity, high QoS guarantee, and where the information is transmitted without necessarily generating new signals but recycling the existing ones whenever possible
+[23]
+.
+RIS-empowered smart radio environments are a brand-new technology that has the potential of fundamentally changing how wireless networks are designed and optimized today. Controlling the propagation of radio waves opens the possibility of overcoming the negative effects of natural EM propagation, which is highly probabilistic in nature, by shaping how the radio waves interact with the surrounding objects that are coated with reconfigurable thin layers of EM material. In simple terms, the RISs allow network planners to counteract the destructive effect of multipath fading by coherently combining the radio waves reflected, refracted, and scattered from large surfaces
+[1]
+. The core technology behind this promising concept is the meta-surfaces, which is the 2D equivalent of meta-materials
+[22]
+,
+[23]
+.
+It is worth noting that the RISs are different compared with other, and at the first sight, related technologies currently employed in wireless networks, such as relaying, MIMO beamforming, and backscatter communications. Details will be provided in the sequel, but it suffices to say that the RISs have the following distinguishable features:
+They are nearly passive, and, ideally, they do not need any dedicated energy source.
+They are viewed as a contiguous surface, and, ideally, any point can shape the wave impinging upon it (soft programming).
+They are not affected by receiver noise, since, ideally, they do not need analog-to-digital/digital-to-analog converters (ADCs and DACs), and power amplifiers. As a result, they do not amplify nor introduce noise when reflecting the signals and provide an inherently full-duplex transmission.
+They have full-band response, since, ideally, they can work at any operating frequency.
+They can be easily deployed, e.g., on the facades of buildings, ceilings of factories and indoor spaces, human clothing, etc.
+These distinctive characteristics make RIS-assisted communication a unique technology, but introduce important design challenges, which will be discussed and elaborated in the sequel.
+Although traditional meta-surfaces with fixed EM functionalities have been used in various applications, including radar and satellite communications, their application in mobile communications is relatively limited
+[26]
+. Passive surfaces that do not have the ability to alter (or reconfigure) their EM characteristics to control the propagation environment, in fact have a very limited impact in highly dynamic wireless communication environments. For application to wireless networks, it is fundamental that the meta-surfaces are reconfigurable in order to adapt themselves according to the changes of the wireless environment
+[19]
+. The modeling, analysis, and design of RISs for application to wireless networks is a highly multidisciplinary research endeavor at the intersection of wireless communications, communication theory, computer science, physics, electromagnetism, and mathematics. Within this context, we may need to revisit meta-materials from the perspective of communication engineering by combining physical and digital domains.
+The aim of the present article is to summarize the latest research activities on RIS-empowered wireless networks, to elaborate on the fundamental differences with other technologies, to discuss the most important open research issues to tackle, and to highlight why the use of RISs necessitates to rethink the communication-theoretic models currently employed in wireless networks. We will describe, in particular, the potential use of RISs either for sharping the radio waves or for realizing low-complexity MIMO transmitters. Simple analytical models to convey the distinguishable features of RISs will be used, with focus on link budget (path-loss) and error performance.
+The rest of the article is summarized as follows. We revisit the popular two-ray model in wireless communications to illustrate the concept of controllable wireless propagation in Section II. In Section III, we shed light on the basic operation mechanisms of RISs. In Section IV, we provide a mathematical framework for the calculation of the error performance of RIS-assisted systems. RISs employed as low-complexity transmitters are introduced in Section V. A detailed historical perspective and an overview of state-of-the-art solutions on RISs are presented in Section VI. Potential use cases and open research issues are discussed in Sections VII and VIII, respectively. Finally, Section IX concludes the paper.
+
+==== part 3 (None)
+SECTION II.
+Controllable Wireless Propagation Through Reconfigurable Intelligent Surfaces – An Illustrative Example
+In a typical wireless communication environment, a transmitted radio signal encounters multiple objects on its way, which produce reflected, diffracted, and scattered replicas of the transmit signal. These copies are called multipath components, and arrive at the receiver with different (most probably random and unpredictable) magnitudes, phases, and delays that produce significant distortions on the received signal because of their constructive and destructive summation. This effect is known as fading in wireless communications and is a major limiting factor in modern and future wireless communication systems. The main motivation of using RISs is to realize a controllable radio environment, in which the highly probabilistic wireless channel is turned into a deterministic space by carefully re-engineering the propagation of the EM waves in a software-controlled fashion. In this section, we illustrate the basic working mechanism of RISs by focusing on their use to modify the signals reflected by large planar surfaces. We consider a simple example that is based on revisiting the well-known two-ray channel model in a free-space environment, but in the presence of an RIS deployed on the ground plane.
+A. The Conventional Two-Ray System Model
+In particular, we consider the two-ray channel model depicted in
+Fig. 1
+. In this model, the received signal consists of two components: the line-of-sight (LOS) ray and the ray reflected from the ground. Our system model and analysis are based on a geometrical optics (or ray optics) model for the propagation of radio waves
+[27]
+. Geometrical optics, or ray optics, is a model of optics that describes the propagation of radio waves in terms of rays, and assumes that the geometric size of the objects is much larger than the wavelength of the radio wave. For ease of illustration, we assume that the ground plane is sufficiently large compared with the transmission wavelength and that it produces only specular reflections. Further information on the geometric size of the RISs to behave as reflectors is given in further text. Under these assumptions, the energy is regarded as being transported along certain curves, i.e., the radio waves (the rays) are assumed to propagate in straight-line paths if they travel in homogeneous media, and to bend and split in reflected and refracted signals at the interface between two dissimilar media. In more general terms, the propagation of radio waves modeled as rays adhere to the Fermat’s principle, which states that the path taken by a ray between two points is the path that is traversed in the least time.
+FIGURE 1.
+Two-ray propagation model with a LOS ray and a ground-reflected ray.
+In
+Fig. 1
+, the distance between the transmit and receive antennas is denoted by
+l
+, and the distance between the point of reflection, G, on the ground and the transmit and receive antennas are denoted by
+r
+1
+and
+r
+2
+, respectively. According to the geometrical optics and Fermat’s principle, the point of reflection G corresponds to the trajectory that allows the transmitted signal to reach the receiver in the least time. This is the well-known Snell’s law of reflection. Accordingly, G is the point in which the angle between the incident ray and the perpendicular line to the ground is the same as the angle between the reflected ray and the perpendicular line to the ground
+[28]
+.
+We denote the ground reflection coefficient by
+R
+, which typically depends on the properties of the material of the ground, the polarization of the radio wave, and the angle of incidence
+[29]
+. Without loss of generality, we assume unit gain transmit/receive antennas and a narrow-band transmission signal, i.e.,
+x
+(
+t
+)
+≈
+x
+(
+t
+−
+τ
+)
+, where
+x
+(
+t
+)
+is the complex baseband transmitted signal and
+τ
+is the relative time delay between the ray reflected from the ground and the LOS path, which is given by
+τ
+=
+(
+r
+1
++
+r
+2
+−
+l
+)
+/
+c
+with
+c
+being the speed of light. Then, the received (noise-free) baseband signal can be expressed as follows:
+r
+(
+t
+)
+=
+λ
+4
+π
+(
+e
+−
+j
+2
+π
+l
+λ
+l
++
+R
+×
+e
+−
+j
+2
+π
+(
+r
+1
++
+r
+2
+)
+λ
+r
+1
++
+r
+2
+)
+x
+(
+t
+)
+where
+λ
+is the wavelength. In simple terms, the received signal is the sum of the LOS and ground-reflected signals with phase delays
+2
+π
+l
+/
+λ
+and
+2
+π
+(
+r
+1
++
+r
+2
+)
+/
+λ
+, respectively, which are proportional to the propagation distances.
+Assuming that the transmit power of
+x
+(
+t
+)
+is
+P
+t
+, the received power
+P
+r
+can be expressed, from
+(1)
+, in terms of
+P
+t
+as follows:
+P
+r
+=
+P
+t
+(
+λ
+4
+π
+)
+2
+|
+1
+l
++
+R
+×
+e
+−
+j
+Δ
+ϕ
+r
+1
++
+r
+2
+|
+2
+where
+Δ
+ϕ
+=
+2
+π
+(
+r
+1
++
+r
+2
+−
+l
+)
+λ
+is the phase difference between the two paths.
+Assuming that the distance
+d
+is large enough, i.e.,
+d
+≫
+h
+t
++
+h
+r
+, then we obtain
+d
+≈
+l
+≈
+r
+1
++
+r
+2
+and
+R
+≈
+−
+1
+for a specular reflection from the ground
+[29, Eq. (2.15)]
+. Therefore,
+(2)
+simplifies as follows:
+P
+r
+∝
+P
+t
+(
+1
+d
+2
+)
+2
+which decays with the fourth power of the distance
+d
+.
+If the ground reflection is not present, i.e., the second term in
+(1)
+is equal to zero, the LOS free-space propagation model yields a received signal power that decays with the second power of the distance:
+P
+r
+=
+P
+t
+(
+λ
+4
+π
+d
+)
+2
+.
+Comparing
+(3)
+and
+(4)
+, one can easily observe the destructive effect, on the power of the received signal, that the uncontrollable reflection from the ground generates because of the misaligned phases of the two paths shown in
+Fig 1
+. In other words, just a single uncontrollable reflection from the ground may cause major degradations on the received signal strength, even in the very optimistic transmission scenario with no user mobility and no random effects induced by the environment.
+B. The Two-Ray System Model With a Single Reconfigurable Meta-Surface
+Let us consider the same system model with the only exception that a reconfigurable meta-surface is laid on the ground to assist the communications between the transmitter and receiver. In particular, we assume the simple case study where the meta-surface acts as a reflecting surface, which is capable of modifying the direction of the reflected ray (i.e., the angle of reflection) according to the generalized Snell’s law
+[28]
+, as well as the phase of the reflected ray as described in
+[30]
+and
+[31]
+. Further details on the operation of reconfigurable meta-surfaces are provided in the next section. It suffices to say that the angle and phase of the reflected ray can be modified by engineering the phase gradient of the meta-surface
+[28]
+,
+[30]
+,
+[31]
+. Similar to the reflection from the ground, the reflection coefficient usually depends on the characteristics of the incident wave, e.g., the polarization of the incident EM field, the material that the meta-surface is made of, and the angles of incidence and reflection
+[30]
+.
+In the considered example, we focus our attention on the possibility of optimizing the phase of the reflected ray and assume that no anomalous reflection is needed, i.e., the Snell’s law applies. Also, we assume that the entire ground is coated with a reconfigurable meta-surface. Conceptually, the reconfigurable meta-surface can be viewed as an ideal phase shifter that is capable of adjusting the phase of the reflected wave so that the LOS and reflected rays sum up coherently, and the signal strength of their sum is maximized. If we assume that the reconfigurable meta-surface is capable of optimizing the phase of the reflected ray in an optimal fashion, i.e., by coherently aligning the phases of the direct and the reflected rays for any angles of incidence and reflection, we would obtain the following:
+P
+r
+=
+P
+t
+(
+λ
+4
+π
+)
+2
+|
+1
+l
++
+1
+r
+1
++
+r
+2
+|
+2
+≈
+4
+P
+t
+(
+λ
+4
+π
+d
+)
+2
+which corresponds to setting
+R
+=
+e
+j
+Δ
+ϕ
+, and by considering
+d
+≈
+l
+≈
+r
+1
++
+r
+2
+.
+By comparing
+(3)
+with
+(5)
+, we evince that the use of reconfigurable meta-surfaces has the potential of changing the scaling law that governs the received power as a function of the distance: the received power does not decay anymore with the fourth power of the distance but only with the second power of the distance, which is the same as the LOS ray. In further text, we will show that this simple result is one of the main distinctive differences of RISs with respect to relaying and backscatter communications.
+C. The Two-Ray System Model With an RIS Made of Many Reconfigurable Meta-Surfaces
+Let us now go one step further, and assume that the ground floor is not coated with a single reconfigurable meta-surface but with an RIS that is made of
+N
+reconfigurable meta-surfaces each of which capable of tuning the angle of reflection according to the Snell’s law and the phase of the reflected ray independently of the other meta-surfaces. A conceptual diagram of the considered system model is sketched in
+Fig. 2
+. In the sequel, we will keep using the following terminology: i) a reconfigurable (reflecting) meta-surface is a surface that allows the angle and the phase of the reflected ray to be arbitrarily controlled, and ii) an RIS is the collection of several reconfigurable (reflecting) meta-surfaces that are capable of steering the reflected ray towards the same angle and of adjusting the phase of the reflected ray independently of the other reconfigurable meta-surfaces. Under these assumptions, the received signal power can be written as follows:
+P
+r
+=
+P
+t
+(
+λ
+4
+π
+)
+2
+|
+1
+l
++
+∑
+i
+=
+1
+N
+R
+i
+×
+e
+−
+j
+Δ
+ϕ
+i
+r
+1
+,
+i
++
+r
+2
+,
+i
+|
+2
+where the symbols have the same meaning as in
+(2)
+, and the index
+i
+is referred to the
+i
+th reconfigurable meta-surface of the RIS.
+FIGURE 2.
+Conceptual illustration of an RIS made of 20 reconfigurable meta-surfaces whose phases (
+Φ
+i
+) can be tuned independently and whose reflected rays are steered toward the same reflection angle. For ease of representation, multiple incident rays are depicted, but only one incident ray is present in practice.
+From
+(6)
+, we evince that the power of the received signal may fluctuate significantly if the reflection coefficients of the
+N
+reconfigurable meta-surfaces are not optimized. Let us assume that each
+R
+i
+is optimized so that the phase of the received signal from the
+N
+reflecting meta-surfaces is aligned with the phase of the LOS path, i.e.,
+R
+i
+=
+e
+j
+Δ
+ϕ
+i
+and
+r
+1
+,
+i
++
+r
+2
+,
+i
+≈
+l
+≈
+d
+for all
+i
+. Then, the received power can be formulated as follows:
+P
+r
+≈
+(
+N
++
+1
+)
+2
+P
+t
+(
+λ
+4
+π
+d
+)
+2
+.
+By direct inspection of
+(7)
+, two major conclusions can be drawn: 1) the received power is proportional to
+N
+2
+, which is the number of phases of the RIS that can be controlled independently, and 2) the received power decays with the inverse of the square of the distance between the transmitter and the receiver. In other words, as a function of the distance, the received power decays as for the LOS path, while a power gain that is proportional to the square of the number of controllable phases is obtained. This shows the potential of using the RISs in wireless networks. It is worth mentioning that this illustrative example is relatively simple and relies on a number of assumptions, e.g., the possibility of optimizing the reflection phases without any discretization error and for any angles of incidence and reflection, the absence of reflection losses, and the perfect knowledge of the phases at the RIS. In addition, the optimization of the phases is usually not a straightforward task for more practical system models, e.g.,
+[32]
+.
+D. On the Geometric Size of an RIS to be a Specular Reflector
+From
+(7)
+, it is worth investigating the size that an RIS is expected to have as a function of the number of reflecting meta-surfaces that it is made of, i.e.,
+N
+. As a reference for this study, we can consider the samples of meta-surfaces available in
+[20]
+,
+[33]
+–​
+[35]
+. Based on, e.g.,
+[33]
+, we can assume that a meta-surface that is capable of shaping the angle and the phase of the reflected signal has a size of the order of
+10
+λ
+×
+10
+λ
+. This size allows, in general, a meta-surface to be viewed as a specular reflector according to geometrical optics. If we assume that an RIS is made of
+N
+=
+100
+reconfigurable meta-surfaces whose reflection phase can be controlled independently of the others, then the size of the RIS would be of the order of
+100
+λ
+×
+100
+λ
+. If the operating frequency is of the order of 30 GHz, e.g., for application in the millimeter-wave frequency band where the RISs may have promising applications for enhancing the coverage in cellular networks as discussed in the sequel, then we have
+λ
+≈
+1
+cm, which results in an RIS of 1 m
+2
+. A structure of this type can be readily deployed either in indoors or outdoors, and yields, according to
+(7)
+, the same power decay as a function of the distance as the LOS path, but a
+∼
+N
+2
+=
+100
+2
+=
+10
+4
+=
+40
+dB increase of the received power. Even though, as just mentioned, these results are obtained under a number of “comfortable” assumptions, the potential gain is sufficiently large to motivate further research on the potential and limitations of using the RISs in wireless networks.
+E. Intelligent Reflection Vs. Relaying and Backscattering: Reflectors Vs. Diffusers
+We close this section, by elaborating on the main difference that renders the concept of RISs a unique and peculiar technology when compared to, at the first sight, similar technologies. The two technologies that are often deemed to be equivalent to the RISs are relay-aided transmission
+[36]
+and backscatter communications
+[37]
+. As far as the relays are concerned, in particular, the most similar approach is the amplify-and-forward (AF) or transparent relaying scheme
+[36, Sec. 2.4]
+. From
+[36, Eq. (2.118)]
+and
+[37, Eqs. (2)-(4)]
+, we evince that the received power decays with the fourth power of the distance for transparent relaying and backscatter communications. By ignoring the LOS path, in particular, the received power can be formulated as follows:
+P
+r
+∝
+P
+t
+(
+1
+r
+1
+)
+2
+(
+1
+r
+2
+)
+2
+where
+r
+1
+and
+r
+2
+stand for the distances between the relay and the terminals. By assuming
+r
+1
+≈
+r
+2
+≈
+d
+/
+2
+, i.e., the relay is placed mid-way between the transmitter and the receiver, we obtain
+P
+r
+∝
+P
+t
+/
+d
+4
+as reported in
+[36, Eq. (2.118)]
+and
+[37, Eqs. (2)-(4)]
+. This is the well-known “product channel” or radar-like equation that is usually used for analyzing relaying and backscatter communications. Based on the above product channel model, a comprehensive overview of RIS-assisted wireless networks can be found in
+[26]
+.
+By direct inspection of
+(7)
+, we note that the scaling law of the received power as a function of the distance of the RISs is in sharp contrast with the scaling law that dictates the path-loss of relay-aided and backscatter communications. This is a simple but net evidence of the difference between the RISs and the two most similar approaches currently available in the literature. The motivation of the different scaling law lies in the geometric size of the RISs, the geometric size of the antennas that constitute the relays (even if arrays of antennas are employed), and the geometric size of the tags used for backscattering. The geometric size of the RISs is large enough, i.e., much larger than the wavelength, to be modeled as specular reflectors. The geometric size of the antennas of relays and backscattering tags is, on the other hand, smaller than or comparable with the wavelength, which render AF relaying and backscatter tags diffusers rather than specular reflectors. The different path-loss function of the RISs is due, in addition, to their passive nature, i.e., they are supposed not to store and process the impinging signals. The geometric size of the RISs, if appropriately optimized, may yield remarkable link budget gains in comparison with relaying and backscatter communications. It is worth mentioning, in addition, that a perfect RIS, i.e., with infinite size and no reflection losses, in the presence of transmitters and receivers with omni-directional antennas is capable of focusing towards the receiver half of the transmit power regardless of the distance.
+Finally, we emphasize that the path-loss model in
+(1)
+is widely used in ray tracing in order to model specular reflections, e.g.,
+[38]
+. The difference between the specular reflections in
+(1)
+and the diffusely scattered field in
+(8)
+is briefly discussed in
+[39]
+. The path-loss model in
+(1)
+was recently employed in
+[40]
+to analyze the performance of RISs for application to millimeter-wave communications.
+
+==== part 4 (None)
+SECTION III.
+Reconfigurable Intelligent Surfaces: How Do They Work?
+The RISs are reconfigurable sheets of EM material that intentionally control the propagation in the environment in order to enhance the signal quality at the receiver. The RISs are made of a large number of low-cost and passive elements that are capable of modifying the radio waves impinging upon them in ways that naturally occurring materials are not capable of. A simple example where the RIS is made of meta-surfaces that act as programmable reflectors is depicted in
+Fig. 2
+. Unlike other similar technologies, e.g., relays and MIMO beamforming, the RISs do not require any power source and complex processing, encoding, and decoding algorithms. It is worth mentioning that the RISs are often referred to as software-defined surfaces (SDSs) in analogy with the concept of software-defined radio (SDR), i.e., “a radio in which some or all of physical layer functions are software defined”. According to this terminology, an RIS can be viewed as an SDS whose response of the radio waves is programmed in software. In this section, we describe the operating principle of the RISs in simple but general terms.
+In
+[41]
+, the authors introduced intelligent walls that are equipped with frequency-selective surfaces. These surfaces have a planar structure and PIN diodes are embedded on the metal connection parts of each surface element. These PIN diodes are switched on and off by an external bias and provide two different states for the intelligent wall. In the first state (when the PIN diodes are off), an almost transparent surface, which allows the incoming energy to pass through, is obtained. When the PIN diodes are switched to the second state, on the other hand, the majority of the incident energy is reflected. In other words, two important EM functionalities (the waves either pass through or are reflected from the surface) are realized by an intelligent wall. In
+Fig. 3
+, the structure of this intelligent wall is illustrated.
+FIGURE 3.
+The structure of an RIS (intelligent wall) that is made of an active frequency-selective surface.
+In
+[42]
+, the authors fabricated a 0.4 m
+2
+spatial microwave modulator that consists of 102 controllable EM reflectors, and operates at a working frequency of 2.47 GHz. These 102 reflectors are controlled by using two Arduino 54-channel digital controllers. The authors demonstrated that spatial microwave modulators can efficiently shape, in a passive way, complex existing microwave fields in reverberating environments with a non-coherent energy feedback. In particular, the authors showed that binary-only phase state tunable meta-surfaces allow one to obtain a good control of the waves, owing to the random nature of the EM fields in complex media. Subsequent research works from the same group of researchers can be found in
+[43]
+,
+[44]
+.
+Another approach for obtaining reconfigurable and smart reflect-arrays is to use varactor-tuned resonators
+[45]
+, as shown in
+Fig. 4
+. The idea of this implementation is to change the resonant frequency of the available patches by electronic tuning instead of changing the resonator dimensions as done in non-reconfigurable reflect-arrays. In this setup, a tunable capacitor (varactor) is used in each reflector unit and a tunable phase shift is obtained by adjusting the bias voltage applied to the varactor in order to change its capacity. Using this approach, a smart reflector with 48 patch elements is constructed in
+[46]
+. In particular, the EM response of the patch elements can be altered by using micro-controllers, which generate input signals to tune the varactors and to change the phase of the reflected signal. A more advanced reflect-array with 224 reconfigurable patches is designed in
+[47]
+for application to 60 GHz WiFi signals, which is made of electronically-controlled relay switches. In this implementation, each reflector can be turned on and off according to the status of its switch. A beam searching-based reflect-array control algorithm is introduced as well, where the access point (AP) and the reflect-array perform beam searching to ensure a maximized signal quality at the intended user. Due to hardware limitations, however, a binary phase control (two possible phases) is considered, which causes a degradation of the received signal-to-noise ratio (SNR).
+FIGURE 4.
+Reconfigurable reflect-arrays with tunable resonators.
+The concept of HyperSurfaces is based on coating objects, such as walls or furniture, with thin sheets of EM material that enable one to control the EM behavior of a wireless environment through software
+[22]
+. The HyperSurfaces belong to the family of software-controlled meta-surfaces. Depending on the states of electronic switches that are embedded throughout the meta-surface, the distribution of the current can be controlled, which enables the meta-surface to adapt its response depending on the impinging radio wave and on the desired response. From this perspective, one can easily notice the conceptual similarity between this implementation of a meta-surface and reconfigurable antennas, in which the resulting radiation pattern is altered by changing the current distribution. In
+[22]
+, the constituent meta-surfaces depicted in
+Fig. 2
+are referred to as “tiles”, which are rectangular structures that can realize functions such as wave steering, wave polarization, and wave absorption, in a software-defined fashion. In simple terms, a HyperSurface tile supports various software-defined EM functions, which can be programmed in software by setting the direction of the incident wave, the direction of the intended reflection, and the frequency band of interest, etc.
+Liquid-crystal reconfigurable meta-surface-based reflectors are proposed in
+[48]
+by exploiting electronically tunable liquid crystals to enable the real-time reconfigurability of the meta-surfaces for beam steering. By varying DC voltages on microstrip patches of liquid crystal loaded unit cells, the effective dielectric constant of each unit can be adjusted. Consequently, the phase shifts at various locations of a meta-surface can be controlled in real-time and the reflected wave can be manipulated.
+
+==== part 5 (None)
+SECTION IV.
+Controlling the Multipath Through Reconfigurable Intelligent Surfaces
+In this section, we present the system model of a generic RIS-based single-input single-output (SISO) scheme and introduce a unified framework for the calculation of the symbol error probability (SEP) through the derivation of the received SNR distribution. The block diagram of the considered RIS-based transmission scheme is shown in
+Fig. 5
+, where
+h
+i
+and
+g
+i
+are the fading channels between the single-antenna source (S) and the RIS, and between the RIS and the single-antenna destination (D) for the
+i
+th reflecting meta-surface
+(
+i
+=
+1
+,
+2
+,
+…
+,
+N
+)
+, and
+N
+is the number of reflecting meta-surfaces of the RIS. Under the assumption of Rayleigh fading channels, we have
+h
+i
+,
+g
+i
+∼
+𝒞
+𝒩
+(
+0
+,
+1
+)
+, where
+𝒞
+𝒩
+(
+0
+,
+σ
+2
+)
+stands for complex Gaussian distribution with zero mean and
+σ
+2
+variance. For clarity, we emphasize that, as usual practice, the path-loss is not considered in the fading coefficients
+h
+i
+and
+g
+i
+, since it is implicitly taken into account in the (receiver) SNR that is defined in further text. Therefore the structure of the RIS is similar to that depicted in
+Fig. 2
+, and we assume that it provides adjustable phase shifts that are controlled by and programmed through a communication-oriented software. In our analysis, we assume perfect knowledge of the channel phases of
+h
+i
+and
+g
+i
+for
+i
+=
+1
+,
+2
+,
+…
+,
+N
+at the RIS, which corresponds to the best scenario in terms of system operation and yields a performance benchmark for practical applications.
+FIGURE 5.
+Reflection from an RIS in a dual-hop communication scenario without a line-of-sight path between S and D.
+Let us assume a slowly varying and flat fading channel model. The received signal reflected by an RIS that is made of
+N
+reflecting meta-surfaces can be expressed as follows:
+r
+=
+[
+∑
+i
+=
+1
+N
+h
+i
+e
+j
+ϕ
+i
+g
+i
+]
+x
++
+n
+where
+ϕ
+i
+is the adjustable phase induced by the
+i
+th reflecting meta-surface of the RIS,
+x
+stands for the data symbol selected from an
+M
+-ary phase shift keying/quadrature amplitude modulation (PSK/QAM) constellation and
+n
+∼
+𝒞
+𝒩
+(
+0
+,
+N
+0
+)
+is the additive white Gaussian noise (AWGN) sample. As far as the channels are concerned, we have
+h
+i
+=
+α
+i
+e
+−
+j
+θ
+i
+and
+g
+i
+=
+β
+i
+e
+−
+j
+ψ
+i
+. In matrix form,
+(9)
+can be also re-written as follows:
+r
+=
+𝐠
+T
+Φ
+𝐡
+x
++
+n
+where
+𝐡
+=
+[
+h
+1
+h
+2
+…
+h
+N
+]
+T
+and
+𝐠
+=
+[
+g
+1
+g
+2
+…
+g
+N
+]
+T
+represent the vectors of channel coefficients between the two terminals and the RIS, and
+Φ
+=
+d
+i
+a
+g
+(
+[
+e
+j
+ϕ
+1
+e
+j
+ϕ
+2
+…
+e
+j
+ϕ
+N
+]
+)
+is a diagonal matrix that contains the phase shifts applied by the reflecting meta-surfaces of the RIS. By direct inspection of
+(10)
+, the obtained model resembles that of a precoding/beamforming system in conventional MIMO systems. However, the precoding/beamforming operation is realized over the transmission medium (the environment) rather than at the transmitter or at the receiver. As far as the fast fading is concerned, we note, in particular, that the channel model for the RISs and the relays are similar, while their path-loss models are different if the RISs are sufficiently large to behave as reflectors.
+From
+(9)
+, the instantaneous SNR at D can be formulated as follows:
+γ
+=
+|
+∑
+i
+=
+1
+N
+α
+i
+β
+i
+e
+j
+(
+ϕ
+i
+−
+θ
+i
+−
+ψ
+i
+)
+|
+2
+E
+s
+N
+0
+where
+E
+s
+is the average transmitted energy per symbol. It is not difficult to infer that
+γ
+is maximized by eliminating the channel phases (similar to co-phasing in classical maximum ratio combining schemes), i.e., the optimal choice of
+ϕ
+i
+that maximizes the instantaneous SNR is
+ϕ
+i
+=
+θ
+i
++
+ψ
+i
+for
+i
+=
+1
+,
+…
+,
+N
+. This solution, notably, requires that the channel phases are known to the RIS. How to perform channel estimation in RIS-empowered wireless networks along with the challenges that this entails if the RISs are assumed to be passive, as opposed to, e.g., the relays, is discussed in the sequel. In detail, the optimal choice of the phases,
+ϕ
+i
+=
+θ
+i
++
+ψ
+i
+for
+i
+=
+1
+,
+…
+,
+N
+, is obtained from the identity:
+|
+∑
+i
+=
+1
+N
+z
+i
+e
+j
+ξ
+i
+|
+2
+=
+∑
+i
+=
+1
+N
+z
+i
+2
++
+2
+∑
+i
+=
+1
+N
+∑
+k
+=
+i
++
+1
+N
+z
+i
+z
+k
+cos
+⁡
+(
+ξ
+i
+−
+ξ
+k
+)
+which is maximized if
+ξ
+i
+=
+ξ
+for all
+i
+.
+Therefore, the maximized SNR can be formulated as follows:
+γ
+=
+(
+∑
+i
+=
+1
+N
+α
+i
+β
+i
+)
+2
+E
+s
+N
+0
+=
+A
+2
+E
+s
+N
+0
+.
+Since
+α
+i
+and
+β
+i
+are independently Rayleigh distributed random variables (RVs), the mean value and the variance of their product are
+E
+[
+α
+i
+β
+i
+]
+=
+π
+4
+and
+V
+A
+R
+[
+α
+i
+β
+i
+]
+=
+1
+−
+π
+2
+16
+, respectively. For a sufficiently large number of reflecting meta-surfaces, i.e.,
+N
+≫
+1
+, according to the central limit theorem (CLT),
+A
+converges to a Gaussian distributed random variable with parameters
+E
+[
+A
+]
+=
+N
+π
+4
+and
+V
+A
+R
+[
+A
+]
+=
+N
+(
+1
+−
+π
+2
+16
+)
+. Therefore,
+γ
+is a non-central chi-square random variable with one degree of freedom and has the following moment generating function (MGF)
+[49]
+:
+M
+γ
+(
+s
+)
+=
+(
+1
+1
+−
+s
+N
+(
+16
+−
+π
+2
+)
+E
+s
+8
+N
+0
+)
+1
+2
+exp
+⁡
+(
+s
+N
+2
+π
+2
+E
+s
+16
+N
+0
+1
+−
+s
+N
+(
+16
+−
+π
+2
+)
+E
+s
+8
+N
+0
+)
+.
+Furthermore, the average received SNR can be written as follows:
+E
+[
+γ
+]
+=
+(
+N
+2
+π
+2
++
+N
+(
+16
+−
+π
+2
+)
+)
+E
+s
+16
+N
+0
+which is proportional to
+N
+2
+, i.e.,
+E
+[
+γ
+]
+∝
+N
+2
+E
+s
+N
+0
+, if
+N
+≫
+1
+. This result is in agreement with the received signal power in
+(7)
+.
+From
+(14)
+, we can compute the average SEP of
+M
+-ary phase shift keying (PSK) signaling as follows
+[50]
+:
+P
+e
+=
+1
+π
+∫
+0
+(
+M
+−
+1
+)
+π
+/
+M
+M
+γ
+(
+−
+sin
+⁡
+2
+(
+π
+/
+M
+)
+sin
+⁡
+2
+η
+)
+d
+η
+which for binary PSK (BPSK) simplifies to
+\begin{align*}&\hspace{-1.2pc}P_{e}= \frac {1}{\pi } \! \int _{0}^{\pi /2} \left ({\dfrac {1}{1+\frac {N(16-\pi ^{2})E_{s}}{8 \sin ^{2} \! \eta N_{0}}}}\right) ^{\!\frac {1}{2}} \\&\qquad \qquad \qquad \qquad \times \exp \left ({\dfrac { -\frac {N^{2} \pi ^{2} E_{s}}{16 \sin ^{2} \! \eta N_{0} }}{1+\frac {N(16-\pi ^{2})E_{s}}{8 \sin ^{2} \! \eta N_{0}}} }\right) d\eta.\tag{17}\end{align*}
+In order to gain further insights,
+(17)
+can be upper bounded by setting
+η
+=
+π
+/
+2
+, which yields:
+P
+e
+≤
+1
+2
+(
+1
+1
++
+N
+(
+16
+−
+π
+2
+)
+E
+s
+8
+N
+0
+)
+1
+2
+exp
+⁡
+(
+−
+N
+2
+π
+2
+E
+s
+16
+N
+0
+1
++
+N
+(
+16
+−
+π
+2
+)
+E
+s
+8
+N
+0
+)
+.
+In
+Fig. 6
+, we plot the average SEP of the considered RIS-based scheme by using
+(17)
+and
+(18)
+for
+N
+=
+16
+and
+N
+=
+32
+. From
+Fig. 6
+, we observe that an RIS-based scheme achieves significantly better SEP performance compared with the classical BPSK scheme operating in an AWGN channel. In other words, an RIS is capable of converting a hostile wireless environment into a reliable communication channel that provides one with a low SEP for low values of the SNR, which outperforms AWGN channels. Let us analyze this behavior in detail.
+FIGURE 6.
+Theoretical average SEP of RIS-based scheme for
+N
+=
+16
+and
+N
+=
+32
+with BPSK.
+By observing
+Fig. 6
+, we note that the average SEP has a waterfall region and a slowly-decaying region. For
+N
+E
+s
+N
+0
+≪
+10
+, in particular,
+(18)
+unveils that
+P
+e
+is proportional to
+1
+:
+P
+e
+∝
+exp
+⁡
+(
+−
+N
+2
+π
+2
+E
+s
+16
+N
+0
+)
+.
+This explains the superior performance of an RIS-based scheme. In this range, notably, even though the SNR
+E
+s
+/
+N
+0
+is relatively low, the average SEP is quite low. This is due to the
+N
+2
+term inside the exponential function.
+If
+N
+E
+s
+N
+0
+≫
+1
+, on the other hand,
+(18)
+can be approximated as follows
+1
+:
+P
+e
+∝
+(
+N
+(
+16
+−
+π
+2
+)
+E
+s
+8
+N
+0
+)
+−
+1
+2
+exp
+⁡
+(
+−
+N
+π
+2
+2
+(
+16
+−
+π
+2
+)
+)
+which explains the slowly-decaying behavior of the SEP for high values of the SNR. In particular this slowly-decaying region is caused by the scaling factor in front of the exponential function, which decays with the negative square root of the SNR. However, the SEP still decays exponentially as a function of
+N
+, and, therefore,
+P
+e
+can be reduced by appropriately increasing
+N
+.
+In
+Fig. 7
+, we depict the average SEP of an RIS-based scheme for different numbers of reflecting meta-surfaces
+N
+and by assuming BPSK signaling.
+Fig. 7
+confirms that our theoretical approximation in
+(17)
+that is based on the CLT is sufficiently accurate for large values of
+N
+. In the considered setup, our proposed approximation is accurate for
+N
+≥
+32
+. In particular, we note that doubling
+N
+yields approximately 6 dB improvement (four-fold decrease) of the required SNR in the waterfall region. This can be readily verified from
+(19)
+.
+FIGURE 7.
+Simulated average SER performance (BPSK) of an RIS-based scheme with a varying number of reflecting meta-surfaces - Comparison with the theoretical formula in
+(17)
+.
+With the aid of the MGF of the received SNR,
+M
+γ
+(
+s
+)
+, we can obtain the average SEP for square
+M
+-QAM constellations as well
+[50]
+:
+\begin{align*}&\hspace{-1.2pc}P_{e} \\=&\frac {4}{\pi } \left ({1-\frac {1}{\sqrt {M}} }\right) \int _{0}^{\pi /2} M_{\gamma } \left ({\frac {-3}{2(M-1) \sin ^{2} \! \eta }}\right) d\eta \\&\qquad -\, \frac {4}{\pi } \left ({\!1-\frac {1}{\sqrt {M}} \!}\right)^{2} \int _{0}^{\pi /4} M_{\gamma } \left ({\! \frac {-3}{2(M-1) \sin ^{2} \! \eta }\!}\right) d \eta.\tag{21}\end{align*}
+ This integral can be upper bounded by letting
+η
+=
+π
+/
+2
+and
+η
+=
+π
+/
+4
+in its first and second terms, respectively. By assuming
+N
+E
+s
+N
+0
+≪
+10
+, which is the SNR region of interest, the average SEP can be expressed as follows:
+P
+e
+∝
+exp
+⁡
+(
+−
+3
+N
+2
+π
+2
+E
+s
+32
+(
+M
+−
+1
+)
+N
+0
+)
+where the second exponential term coming from
+(21)
+is ignored since its contribution is negligible. Since
+M
+appears in the exponent of
+(22)
+, an RIS-based scheme experiences a degradation of the error performance if the modulation order is increased, as in conventional modulation schemes. However, RISs can take advantage of large values of
+N
+2
+to counteract the detrimental effect of increasing the modulation order. This can be a remedy for increasing the energy efficiency of future extreme mobile broadband applications of 6G and beyond, which will rely on high-order constellations to support extremely high data rates.
+
+==== part 6 (None)
+SECTION V.
+Reconfigurable Intelligent Surface as a Low-Complexity Energy-Efficient Transmitter
+In this section, we discuss the potential of using RISs as a technology that enables low-complexity and energy-efficient implementations of MIMO transmitters. The basic idea consists of illuminating an RIS with a feeder (antenna), and of encoding the data to transmit onto the phases of the signals reflected from the different reconfigurable meta-surfaces that realize the RIS. If the RIS is made of
+N
+reconfigurable meta-surfaces whose reflection phase can be optimized independently of the others, then a
+N
+-stream virtual MIMO system can be realized by using a single RF active chain
+[1]
+. A similar solution (even though not based on reconfigurable meta-surfaces) is the concept of symbiotic radio, where a backscatter device modulates its own information over an incident signal from a transmitter by varying its reflection coefficient
+[51]
+. This solution is similar to distributed SM applied to relay-aided systems
+[52]
+.
+Recently, the idea of using an RIS as a transmitter was validated with the aid of a testbed platform. In
+[53]
+, in particular, the authors have realized a 8-PSK transmitter that utilizes a programmable surface with 256 reconfigurable elements. By changing the bias voltage of varactor diodes, a high phase modulation resolution is obtained. The authors showed that an unmodulated carrier can be modulated by the reconfigurable meta-surface through a series of DACs that control bias voltages. In
+[54]
+, the same authors have realized a virtual quadrature phase shift keying (QPSK) constellation based on the same principle and by using a smaller reconfigurable meta-surface that is made of 128 reconfigurable elements. In
+[55]
+, the idea of joint passive beamforming and data transmission is considered in the context of an RIS-assisted uplink transmission scheme. In this scenario, the authors considered the communication of a multi-antenna base station (BS) with a single-antenna user, where the on/off states of the RIS elements convey additional data. These results substantiate the potential of RISs for realizing low-complexity MIMO transmitters with a large number of equivalent radiating elements, but a few, even a single, RF chain.
+In this section, we analyze the error performance of RISs when utilized as transmitters. For simplicity, as single-stream transmitter is considered. The block diagram of the considered RIS-based concept is shown in
+Fig. 8
+. The RIS is illuminated by a nearby RF signal generator or contains an attachment that transmits an unmodulated carrier signal
+cos
+⁡
+(
+2
+π
+f
+c
+t
+)
+at a certain carrier frequency
+f
+c
+towards the RIS. The unmodulated carrier can be generated by an RF DAC with an internal memory and a power amplifier
+[56]
+, and information bits are conveyed only through the reflection-induced phases of the RIS. We assume that the RF source is close enough to the RIS that its transmission is not affected by fading. On the other hand, the channel between the
+i
+th reflector of the RIS and D is modeled as
+g
+i
+=
+β
+i
+e
+−
+j
+ψ
+i
+.
+FIGURE 8.
+Using an RIS as a transmitter.
+In the considered communication scenario, RIS-induced phases carry information in addition to perform intelligent reflections that improve the received SNR. In other words, the RIS adjusts the phases of its reflecting elements with the aim of optimizing the reflected phases that maximize the received SNR, and, at the same time, that properly align the reflected signals so as to create a virtual bi-dimensional
+M
+-ary signal constellation diagram. For this system model, the received signal is expressed as follows:
+r
+=
+E
+s
+[
+∑
+i
+=
+1
+N
+g
+i
+e
+j
+ϕ
+i
+]
++
+n
+where
+E
+s
+is the average transmitted signal energy of the unmodulated carrier and
+ϕ
+i
+is the reconfigurable phase induced by the
+i
+th reflecting element of the RIS.
+We assume that
+log
+⁡
+2
+(
+M
+)
+bits are transmitted in each signaling interval by adjusting the reflection phases so that the equality
+ϕ
+i
+=
+ψ
+i
++
+w
+m
+is fulfilled, where
+w
+m
+,
+m
+∈
+{
+1
+,
+2
+,
+…
+,
+M
+}
+, is the message-dependent phase term introduced by the RIS that carries the information of the
+m
+th message. In light of this, the received signal can be expressed as follows:
+r
+=
+E
+s
+[
+∑
+i
+=
+1
+N
+β
+i
+]
+e
+j
+w
+m
++
+n
+=
+E
+s
+B
+e
+j
+w
+m
++
+n
+.
+It is worth noting that the equivalent received signal resembles a PSK-modulated signal that is transmitted through a channel whose gain is
+B
+. Consequently, to minimize the average SEP, the information phases
+w
+1
+,
+w
+2
+,
+…
+,
+w
+M
+of this
+M
+-ary signaling scheme can be selected as in the classical
+M
+-PSK scheme, i.e.,
+w
+m
+=
+2
+π
+(
+m
+−
+1
+)
+/
+M
+for
+m
+=
+1
+,
+2
+,
+…
+,
+M
+.
+Therefore, the instantaneous received SNR can be written as follows:
+γ
+=
+E
+s
+B
+2
+N
+0
+.
+By using again the CLT for large values of
+N
+and by assuming that
+β
+i
+is a Rayleigh-distributed random variable with mean
+π
+/
+2
+and variance
+(
+4
+−
+π
+)
+/
+4
+, we obtain
+B
+∼
+𝒩
+(
+m
+B
+,
+σ
+B
+2
+)
+, where
+m
+B
+=
+N
+π
+/
+2
+and
+σ
+B
+2
+=
+N
+(
+4
+−
+π
+)
+/
+4
+. Consequently, the MGF of
+γ
+, which is a non-central chi-square random variable, is the following:
+M
+γ
+(
+s
+)
+=
+(
+1
+1
+−
+s
+N
+(
+4
+−
+π
+)
+E
+s
+2
+N
+0
+)
+1
+2
+exp
+⁡
+(
+s
+N
+2
+π
+E
+s
+4
+N
+0
+1
+−
+s
+N
+(
+4
+−
+π
+)
+E
+s
+2
+N
+0
+)
+.
+The average SEP of the proposed scheme can be calculated by substituting the obtained MGF in the SEP formula of
+M
+-PSK signaling given in
+(16)
+. In particular, for binary signaling
+(
+w
+1
+=
+0
+and
+w
+2
+=
+π
+), we obtain the following:
+P
+e
+=
+1
+π
+∫
+0
+π
+/
+2
+(
+1
+1
++
+N
+(
+4
+−
+π
+)
+E
+s
+2
+sin
+⁡
+2
+η
+N
+0
+)
+1
+2
+exp
+⁡
+(
+−
+N
+2
+π
+E
+s
+4
+sin
+⁡
+2
+η
+N
+0
+1
++
+N
+(
+4
+−
+π
+)
+E
+s
+2
+sin
+⁡
+2
+η
+N
+0
+)
+d
+η
+.
+By letting
+η
+=
+π
+/
+2
+and considering the SNR range of interest
+N
+E
+s
+N
+0
+≪
+10
+,
+P
+e
+becomes proportional to:
+P
+e
+∝
+exp
+⁡
+(
+−
+N
+2
+π
+E
+s
+4
+N
+0
+)
+.
+Two main conclusions can be drawn from
+(28)
+. If the RIS is used as a transmitter, it can convey information with high reliability, similar to using the RIS as a reflector (see
+Fig. 5
+). In addition, by comparing
+(19)
+and
+(28)
+, 1 dB gain in the SNR is obtained by an RIS used as a transmitter with respect to using it as a reflector.
+If
+M
+-ary signaling is considered, we can plug
+(26)
+in
+(16)
+and obtain the average SEP in the form of the definite integral as follows:
+\begin{align*}&\hspace{-0.8pc}P_{e}= \frac {1}{\pi } \int _{0}^{(M-1)\pi /M} \left ({\dfrac {1}{1+\frac {N(4-\pi) \sin ^{2}(\pi /M)E_{s}}{2 \sin ^{2} \eta N_{0}}}}\right) ^{\frac {1}{2}} \\&\qquad \qquad \qquad \times \,\exp \left ({\dfrac { -\frac {N^{2} \pi \sin ^{2}(\pi /M) E_{s}}{4 \sin ^{2} \eta N_{0} }}{1+\frac {N(4-\pi) \sin ^{2}(\pi /M) E_{s}}{2 \sin ^{2} \eta N_{0}}} }\right) d\eta.\tag{29}\end{align*}
+By letting
+η
+=
+π
+/
+2
+, an upper-bound can be obtained. By considering the SNR range of interest, we obtain:
+P
+e
+∝
+exp
+⁡
+(
+−
+sin
+⁡
+2
+(
+π
+/
+M
+)
+N
+2
+π
+E
+s
+4
+N
+0
+)
+.
+Comparing the obtained result with
+(22)
+, we conclude that an SNR loss is expected for higher order signaling
+M
+≥
+16
+. However, this loss may not be significant by taking into account that, in the relatively low SNR range of interest, the SEP can be reduced by increasing
+N
+.
+
+==== part 7 (None)
+SECTION VI.
+Historical Perspective and State-of-the-Art Solutions
+Within the context of unconventional wireless communication paradigms, there has been a growing interest in controlling the propagation environment in order to increase the QoS and/or spectral efficiency. IM-based emerging schemes such as MBM
+[13]
+–​
+[15]
+, spatial scattering modulation
+[11]
+, and beam IM
+[12]
+, use the variations in the signatures of received signals by exploiting reconfigurable antennas or scatterers to transmit additional information bits in rich scattering environments
+[9]
+. Similarly, SM schemes
+[4]
+–​
+[6]
+,
+[8]
+,
+[9]
+create a new and extended signal constellation by exploiting the indices of the available transmit antennas of MIMO systems, still benefiting from the distinguishable propagation characteristics of different transmit antennas in rich scattering environments. On the other hand, the RISs are smart devices that intentionally control the propagation environment to boost the signal quality at the receiver. In this section, we present a comprehensive survey of state-of-the-art solutions based on intelligent surfaces.
+A. Origins
+In this subsection, we briefly review the first concepts and ideas on reconfigurable wireless systems and intelligent surfaces that focus on the manipulation of EM waves in a deliberate manner to improve specified key performance indicators.
+Transmission through intelligent walls is reported in
+[41]
+and is based on active frequency-selective surfaces that control the signal strength. In particular, the authors focused their attention on controlling the propagation environment by influencing radio channel parameters in order to enhance the overall system performance, including signal coverage and interference. The main motivation of the authors is to change the EM properties of the material of the walls deploying frequency-selective surfaces in an indoor environment. It is shown that an active frequency-selective surface can be realized by changing the on/off states of PIN diodes, where a fully transparent or a highly reflective surface is obtained. It is shown by computer simulations that an active wall can be an efficient instrument for controlling the signal coverage and QoS.
+In
+[57]
+, the same authors of
+[41]
+extended their intelligent walls concept by considering an artificial neural network (ANN) to learn the best configuration for the intelligent walls. According to sensory data and relative system performance measures, two binary outputs are obtained (walls with on and off states) by the ANN. In other words, a cognitive engine equipped with machine learning algorithms is deployed to make decisions and control the intelligent walls. In
+[58]
+, an active frequency-selective surface-based antenna is considered to enable switched beamforming by adjusting the on/off states of the PIN diodes mounted on surface panels. By exploiting the on and off combinations of the diodes on each surface panel, beam steering is achieved in various directions.
+In
+[42]
+, the authors demonstrated that spatial microwave modulators are capable of shaping, in a passive way, complex microwave fields in complex wireless environments, by using only binary phase state tunable metasurfaces.
+In an attempt to control the indoor wireless coverage, 3-D reflectors were realized by the authors of
+[59]
+in order to be mounted around wireless APs. Optimized but non-reconfigurable (static-shaped) reflector designs are introduced to extend the wireless coverage in indoor environments.
+The concept of coding meta-materials is proposed in
+[60]
+for manipulating EM waves by changing the phase response of the surface elements. A meta-surface composed of binary elements (with 0 or
+π
+phase differences) is considered. By changing the coding bit sequences, the authors demonstrated the feasibility of changing the scattering patterns. Particularly, the authors determined the optimal coding sequences (the pattern of binary phases) to minimize the radar cross section of surfaces by redirecting the incoming EM energy into all directions. Similar to
+[41]
+, the authors used the on/off status of PIN diodes to change the phase responses of meta-material elements. Finally, the authors constructed an FPGA hardware to control programmable meta-surfaces through PIN diodes. It is argued by the authors that these programmable meta-materials can be used to reduce the scattering features of targets and to manipulate radiation beams of antennas. The same authors introduced the concept of space-time coding digital metasurfaces in
+[61]
+by exploiting the time dimension, which enables the control of EM waves in both space and frequency domains. In particular, the authors aimed to control not only the propagation direction but also the harmonic power distribution.
+Another programmable meta-surface design that is based on PIN diodes, is proposed in
+[62]
+. It is shown by the authors that besides a reconfigurable phase, polarization control, scattering, and beam focusing are possible through adjusting the on/off status of PIN diodes.
+With the aid of reconfigurable reflect-arrays realized through tunable (varactor-tuned) resonators
+[45]
+, the concept of communications that employ smart reflect-arrays with passive reflector elements is proposed in
+[46]
+. The authors use smart reflect-arrays as an alternative to beamforming techniques that require large number of antennas to focus the transmitted or received signals, which is relatively difficult to implement for portable, wearable, or even smaller devices. It is demonstrated that reflect-arrays can be used in an effective way to change the phase of incoming signals via smart reflections without buffering or processing them, and that the received signal quality can be enhanced by optimizing the phase shift of each reflecting element of the reflect-array. Through experiments and simulations, the authors showed that higher spectral efficiencies can be obtained by using smart reflect-arrays without any major modification in the hardware and software of user equipment. The authors introduced a phase optimization algorithm to maximize the transport capacity as well. In their later study, the authors investigated the feasibility of using reconfigurable reflect-arrays to support millimeter-wave communications in the context of the IEEE 802.11ad standard
+[47]
+. In this work, the authors considered electronically-controlled relay switches with on/off states in order to control reflector units instead of PIN diodes. A relatively large reflect-array was built and a beam-searching protocol was designed for application to 802.11ad networks and to overcome the LOS blockage problem of millimeter-wave networks.
+As a beyond massive MIMO solution, the large intelligent surface (LIS) concept is proposed in
+[63]
+–​
+[65]
+.
+2
+In particular, a system with a massive number of radiating and sensing elements, which create a contiguous and electromagnetically active surface, is considered. A major difference between traditional massive MIMO
+[71]
+and the LIS is the employment of the whole contiguous surface for transmission and reception. The authors also introduced a signal model by considering a procedure called match filtering (through 2-D integration of the received signals on the surface) and investigated the capacity of the system.
+Finally, the concept of software-controlled HyperSurfaces is proposed in
+[19]
+,
+[22]
+,
+[72]
+,
+[73]
+with the aim of enabling full EM manipulation of the radio waves. Equipped with a lightweight Internet-of-Things (IoT) gateway, intelligent surfaces consisting of ultra-thin meta atoms receive commands from a centralized controller and adjust their EM behavior by absorbing, focusing, and steering the impinging EM waves in any direction. The functional and physical architecture of HyperSurfaces, equipped with controllable switch elements (with on/off states) and square patches, is defined. By computer simulations, it is demonstrated that the signal coverage and signal strength can be improved in indoor environments for communication at 60 GHz, which is usually affected by high propagation losses in non-LOS transmission.
+The same authors generalized their programmable wireless environment concept considering a general multi-user scenario and proposed solutions for interference minimization, eavesdropping, and multipath mitigation
+[72]
+. A general optimization problem was formulated to maximize the received signal power and to minimize the maximum delay spread for arbitrarily distributed users.
+In
+Table 1
+, we summarize the main studies on intelligent surfaces reviewed in this subsection by highlighting their architectures and functionalities.
+TABLE 1
+Initial Examples of Communications Through Intelligent Surfaces
+B. State-of-the-Art Solutions
+In the last few months, several studies and innovative solutions related to RISs have been conducted by many authors. In particular, different authors have used different terms to denote the RISs, which include:
+reconfigurable intelligent surfaces, large intelligent surfaces, smart reflect-arrays, intelligent reflecting surfaces, passive intelligent mirrors, artificial radio space, and so on
+. Specifically, researchers focused on theoretical SNR and SEP derivations, channel estimation, signal-to-interference-ratio (SINR) maximization, and joint active and passive beamforming optimization problems, investigated the application of machine learning tools, explored physical layer security solutions, and evaluated the potential of intelligent surfaces for application to millimeter-wave/terahertz, free space optical, and visible light communication systems. Furthermore, the first attempts on combining RISs with orthogonal frequency division multiplexing (OFDM) and SM/space shift keying (SSK) schemes have been reported.
+In this section, we briefly describe research works on intelligent surfaces, which appeared in the literature during the past 1-2 years by following a historical order.
+An RIS-assisted downlink transmission scenario is considered in
+[74]
+to support multiple users. More specifically, the authors considered the system model shown in
+Fig. 9
+, where a multi-antenna BS supports
+K
+single-antenna users through intelligent reflections without a clear LOS path between the users and the BS. The RIS elements only reflect phase shifted versions of the incoming signals as in the model of
+Fig. 5
+. As a result, denoting the number of BS antennas and RIS elements (reflecting meta-surfaces) by
+M
+and
+N
+, respectively, the received signal at user
+k
+can be expressed as
+r
+k
+=
+𝐠
+k
+T
+Φ
+𝐇
+𝐱
++
+n
+k
+where
+𝐱
+∈
+ℂ
+M
+×
+1
+is the precoded data vector,
+𝐇
+∈
+ℂ
+N
+×
+M
+is the matrix of channel coefficients of the BS-RIS link,
+𝐠
+k
+∈
+ℂ
+N
+×
+1
+is the vector of channel coefficients between the RIS and user
+k
+, and
+n
+k
+is the AWGN sample at this user. Similar to
+(10)
+,
+Φ
+=
+d
+i
+a
+g
+(
+[
+e
+j
+ϕ
+1
+e
+j
+ϕ
+2
+⋯
+e
+j
+ϕ
+N
+]
+)
+is a diagonal matrix that yields the phase shifts applied by the reflecting elements of the RIS. The authors focused their attention on the maximization of the system sum-rate by optimizing the phases of the RIS and user powers. The resulting non-convex optimization problem is solved by combining alternating maximization and majorization-minimization algorithms, and improvements in the overall system throughput are reported.
+FIGURE 9.
+Multi-user downlink transmission through an RIS (the LOS path is optional).
+In
+[70]
+, the same authors studied the maximization of the energy efficiency by considering RIS reflectors with finite resolution phases. It is shown by computer simulations that even 1-bit phase (0 and
+π
+) resolution reflecting elements increase the energy efficiency of the system compared to conventional AF relaying systems. In
+[32]
+, the authors reported more comprehensive simulation results on energy efficiency and system sum-rate for a more practical system setup and system parameters. It is worth noting that the implementation of this scheme requires full channel state information (CSI) and the knowledge of RIS phase terms at the BS for transmit beamforming.
+Th problem of joint active and passive beamformer design is investigated in
+[75]
+and
+[76]
+. The authors, in particular, analyzed the minimization of the total transmit power at the BS by jointly optimizing the transmit beamforming vectors of the BS and the phase shifts of the RIS by imposing SINR constraints for the users considering a multi-user downlink communication system. The obtained non-convex optimization problem is tackled by employing semidefinite relaxation and alternating optimization techniques. The authors showed that the transmit power of the BS scales by
+1
+/
+N
+2
+as the number of reflector units
+N
+goes to infinity. In their follow-up study
+[77]
+, the authors considered the same power minimization problem by assuming discrete (finite resolution) RIS phase shifts. It is shown that, compared to the ideal case with continuous phase shifts, an RIS with discrete phase shifts achieves the same power scaling law as a function of
+N
+as for infinite-resolution phase shifts but a constant performance loss is observed. The effect of erroneous reflector phases on the error performance is investigated recently as well
+[78]
+.
+In
+[1]
+, the author introduced a mathematical framework for the calculation of the average SEP of RIS-assisted systems. Furthermore, the possibility of using an RIS as an AP (transmitter) by utilizing an unmodulated carrier for intelligent reflection is studied. With the aid of computer simulations, it is shown that doubling the number of reflecting elements provides one with a 6 dB reduction of the SNR to obtain the same SEP. In other words, the average received SNR of RIS-based systems is shown to be proportional to the square of the total number of reflecting elements of the RIS
+(
+N
+)
+. In the follow-up study
+[79]
+, the author considered the concept of intelligent surfaces-assisted IM by proposing RIS-SM and RIS-SSK schemes. In these schemes, the optimization of the phases of intelligent surfaces and the concept of IM are jointly exploited for improving the signal quality and the spectral efficiency. Maximum energy-based suboptimal (greedy) and exhaustive search-based optimal (maximum likelihood) detectors are formulated, and a unified framework to calculate the theoretical average bit error probability is proposed. It is shown by computer simulations that the resulting bit error probability is significantly better than conventional fully-digital precoding-based receive SSK schemes. A trade-off between the receiver cost and the BER performance is investigated as well.
+The authors of
+[66]
+investigated the maximization of the minimum SINR for an RIS-assisted multi-user MISO scheme in rank-one or full-rank LOS channels between the BS and the RIS. Furthermore, correlated Rayleigh channels are considered between RIS elements and users, and an algorithm to optimize the RIS phases in the presence of large-scale fading is proposed. For the same system, the authors of
+[80]
+focused their attention on optimizing the transmit beamformer and RIS phases, and proposed two algorithms to jointly optimize the beamformer at the AP and the phase shifts at the RIS by considering the maximum achievable spectral efficiency. It is shown that, unlike
+[75]
+and
+[66]
+, the proposed algorithms guarantee locally optimal solutions with the perfect knowledge of channels at the AP and the RIS.
+In
+[68]
+, the authors considered an RIS-assisted large-scale antenna system in which a BS communicates with a single-antenna user. Similar to previous works, assuming the knowledge of CSI and RIS phases at the BS, precoding can be performed, and the ergodic capacity of the system is maximized through the optimization of the RIS phases. The authors also investigated the effect of different Rician
+K
+factors and discrete phase shifts. It is shown by computer simulations that the use of 2-bit phase shifts can ensure a high capacity.
+The authors of
+[81]
+proposed a new channel estimation protocol for an RIS-assisted single-user MISO system with energy harvesting. In particular, the authors take into account that RISs do not have active components. To enable efficient power transfer, both active and passive near-optimal beamforming designs are formulated. In
+[69]
+, with the motivation of reducing the training overhead in the presence of passive RIS elements, the authors considered two separate methods for the RIS design in the presence of unknown channel knowledge: one is based on compressive sensing and the other is based on deep learning. In this work, a novel RIS architecture based on sparse channel sensors, in which some of the RIS units are active (have a connection to a baseband processor), is proposed. In other words, a number of active elements are used at the RIS to simplify the channel estimation process. The authors considered a deep learning-based solution, in which the RIS learns how to interact with the incoming signals in an optimal way by exploiting the estimated channels at the active elements. On the other hand, the authors of
+[67]
+considered the problem of cascaded channel estimation with fully passive RIS elements for the communication of multi-antenna terminals through an RIS. A general concept is proposed for the estimation of the S-RIS-D cascaded MIMO channel.
+For the scenario of multi-user uplink transmission, the performance of the over-the-air computation scheme, in which the AP computes a target function of the aggregated data from all users, is investigated in
+[82]
+by exploiting RISs.
+The physical layer security of RIS-based systems is investigated in
+[83]
+and
+[84]
+. Specifically, the authors of
+[83]
+considered an RIS-assisted secure communication system that consists of a legitimate receiver and an eavesdropper. Both the beamformer at the BS and the RIS phase shifts are jointly optimized to enhance the secrecy rate. Furthermore, the secrecy rate of massive MIMO and RIS-aided systems is compared and it is revealed that increasing the number of RIS reflecting elements is more beneficial than increasing the number of antenna elements at the BS. A downlink MISO broadcast system with multiple legitimate receivers and eavesdroppers is considered in
+[84]
+. The authors formulated a minimum-secrecy-rate maximization problem by jointly optimizing the beamformer at the BS and reflecting coefficients (both discrete and continuous) at the RIS. Globally optimal and low-complexity suboptimal algorithms are proposed. Recently, the authors of
+[85]
+focused on the problem of stronger eavesdropping channel and maximized the secrecy rate of the legitimate user by jointly designing the AP’s transmit beamformer and the RIS phases.
+Recent research contributions on the design of HyperSurfaces include the following. A sensing system to estimate the radio waves impinging upon the HyperSurfaces that can operate without additional external or internal hardware such as field nano-sensors, is proposed in
+[86]
+. It is shown that HyperSurfaces can be programmed for wave sensing and wave manipulation simultaneously. Finally, an approach based on machine learning (neural networks) to adaptively configure HyperSurfaces-aided programmable environments is proposed in
+[87]
+.
+As for using RISs for transmission and reception, researchers focused their attention on outage probability
+[88]
+, asymptotic data rate
+[89]
+, and uplink spectral efficiency
+[90]
+.
+More recently, researchers considered RIS-assisted millimeter-wave/terahertz communications
+[91]
+, visible light communications
+[92]
+, free space optical communications
+[93]
+, and OFDM systems
+[94]
+.
+The emerging concept of programmable radio environments is receiving considerable attention from the research community of computer scientists as well. In the last couple of years, in particular, a few large scale-scale testbeds have been realized, and promising results have been obtained. Notable examples include
+[95]
+–​
+[97]
+. The underlying idea of these research activities is to prove the feasibility of moving beamforming functions from the radio end-points to the environment. In
+[97]
+, in particular, the author realized a testbed that is today considered to be the largest RIS currently available in the world: The prototype has 3,720 inexpensive antennas that are deployed on a 6 square-meter surface. Experimental results in an indoor environment have shown an improvement of the median of the signal strength of
+10.5
+×
+, and an improvement of the median of the data rate of
+2.1
+×
+[97, Fig. 11]
+.
+In
+Table 2
+, we present a summary of the major contributions of the recent studies reviewed in this subsection.
+TABLE 2
+State-of-the-Art Schemes With Intelligent Surfaces
+
+==== part 8 (None)
+SECTION VII.
+Potential Use Cases
+In this section, we briefly discuss a few use cases in which the RISs may play a fundamental role either for enhancing the coverage probability, spectral efficiency, and energy efficiency or for reducing the implementation complexity and power consumption of wireless networks. Five potential use cases are briefly discussed.
+Overcoming non-LOS Scenarios
+– One of the most promising use cases to leverage the RISs in wireless networks consists of employing them as reconfigurable reflectors in scenarios in which the LOS path is either blocked or is not strong enough to support cell-edge users. For example, RISs can be easily attached to walls or ceilings in indoors, and can be integrated into the facades of buildings in outdoors. This application scenario seems to be relevant in the high frequency transmission range, e.g., in the millimeter-wave spectrum, in the D-band spectrum (>100 GHz), and in the visible light spectrum. In these cases, in fact, the LOS path is often obstructed, and the possibility of realizing strong and reconfigurable non-LOS links is a promising use case, especially because of the promising scaling laws as a function of the distance and of the number of reflecting meta-surfaces that are obtained in Section II. Field trials that substantiate the applicability and potential gains of this case study were recently reported for application to vehicular networks by research scientists of NTT Docomo and Metawave Corporation
+[98]
+.
+Overcoming Localized Coverage Holes
+– Another promising case study consists of using the RISs to counteract localized coverage holes in urban scenarios, and indoor harsh propagation environments. In many urban and densely populated cities worldwide, in fact, there exist localized dead zones where the signal quality is not sufficiently good. Similar issues occur in indoor environments, like industrial factories and underground metro stations. In these scenarios, conventional solutions to overcome coverage holes are to deploy more BSs or relays/repeaters. Unfortunately, these solutions are expensive and increase the carbon footprint of wireless communications. The deployment of RISs is, on the other hand, a cost-effective and environmental-friendly solution to solve the problems of localized coverage holes.
+Reducing the EM Pollution
+– In contrast to other communication technologies, one of the main features of RISs is recycling the radio waves in a constructive and energy-efficient manner. Multipath propagation is, in fact, often perceived as incontrollable and is usually counteracted by increasing the complexity of the transmitters and the receivers. This usually entails an increase of the number of radio waves emitted, e.g., by deploying more BSs or relays, which produce additional signals in the environment. This results in increasing the emission of EM radiations. The use of RISs, on the other hand, does not foresee the generation of new signals, but their intelligent utilization. So, the concept of RISs is a promising solution to lower the levels of EM radiations, with major applications in scenarios like, hospitals and airplanes.
+Energy-Free Internet of Things
+– The IoT is regarded as a fundamental component of 5G and 6G wireless networks. The possibility of collecting data from large numbers of sensors deployed throughout the network has a myriad of applications. These devices, however, are expected to communicate the sensed data to fusion centers, which are then in charge of the subsequent processing and analysis. The total amount of energy that these devices need in order to report the sensed data cannot be underestimated, and is one of the bottlenecks to make the IoT a pervasive technology. The concept of RISs in combination with backscatter communications is a promising alternative to allow IoT devices to report the sensed data in a energy free manner. Imagine to realize clothings and IoT devices with reconfigurable meta-surfaces that are capable of modifying the reflected waveforms according to the sensed data. By using the backscatter communications principle, the sensed data may be piggybacked into the shape of the reflected signals at no overhead and at a zero energy cost
+[23]
+.
+Low-Complexity and Energy-Efficient Massive Transmitters
+– The advantages of using MIMO, and, more recently, massive MIMO are undeniable. However, these gains are not obtained for free. In particular, the benefits of MIMO come at the cost of using a number of RF chains that is usually the same as the number of radiating elements. As a result, the complexity and power consumptions associated with using large numbers of antennas cannot be under estimated. The use of RISs as transmitters offers a unique opportunity to realize very large antenna arrays with a few, possibly one, RF chain
+[1]
+. The testbed recently implemented in
+[53]
+and
+[54]
+is a tangible example that realizing low-complexity massive MIMO is possible, by leveraging the principles of SM, MBM, and, more in general, IM.
+
+==== part 9 (None)
+SECTION VIII.
+Open Research Issues
+In this section, we briefly discuss the major open research issues that need to be tacked in order to leverage the potential of RISs in wireless networks. We discuss, in particular, how the use of RISs necessitates to rethink how wireless networks are analyzed and designed today.
+Physics- and EM-Compliant Models
+– A major limitation of current research on RISs in wireless networks is the lack of accurate and tractable models that describe the reconfigurable meta-surfaces as a function of their EM properties. The vast majority of research works available to date rely, e.g., on the assumption that the meta-surfaces act as perfect reflectors. However, the meta-surfaces are meant to apply functions other than reflection, and, more importantly, their response to the radio waves depends on several factors, among which the angle of incidence, the angle of reflection, the angle of refraction, the polarization of the incident wave, and the specific materials that the meta-surface is made of. Also, the size of the meta-surface plays an important role on its properties. Physics- and EM-compliant models are, therefore, needed in order to avoid studying too simplistic system models and to obtain too optimistic performance predictions. The zero-thickness sheet model of the meta-surfaces is a good starting point to build such models
+[99]
+.
+Experimentally-Validated Channel Models
+– To date, there exist no experimentally-validated channel models that provide wireless researchers with accurate and realistic information on the path-loss, shadowing, and fast-fading statistics for RISs. In Section II, we have predicted that the path-loss function of an RIS that acts as a perfect reflector scales with the sum of the distances between the RIS and the transmitter and receiver. This theoretical model is based on geometrical optics approximations (and the application of Fermat’s principle), whose accuracy depends on the geometry and the materials that the meta-surface is made of. In addition, the signals reflected from the elementary meta-surfaces or even by each of their individual scattering particles may not necessarily be uncorrelated. Some level of spatial correlations are likely to be expected, which may affect the ultimate performance limits and achievable scaling laws.
+Information- and Communication-Theoretic Models
+– The use of RISs renders the information- and communication-theoretic models employed in wireless communications obsolete
+[23, Fig. 6]
+. The conventional formulation of the Shannon capacity, in particular, needs to be revisited, since the system itself can be programmed, and the distribution of the input needs to be adapted to the possible states that the system itself can assume. The possible states of the system are dictated by the functions that are applied by the meta-surfaces, and by their statistical distribution. The achievable limits of the RISs and their interpretation in small-scale and large-scale wireless networks need to be determined. In the presence of RISs, in fact, not only the input is an optimization variable, but the system itself becomes an optimization variable, and they need to be jointly optimized.
+Communication-Theoretic Performance Limits
+– With the exception of
+[1]
+,
+[79]
+,
+[100]
+, the optimization of, e.g., the phases of the RISs that act as intelligent reflecting surfaces are obtained by solving complicated, and often non-convex, optimization problems. The optimal reflecting phases, which are channel-dependent, are, therefore, only available numerically. This prevents communication theorists from developing tractable analytical frameworks for analyzing the performance of RIS-empowered wireless networks, and to shed light on the corresponding performance trends. In the present paper, we have proposed simple analytical frameworks under simple system models, where the optimal phases can be easily determined. By slightly modifying the system model as in
+[100]
+, we readily note that the analytical complexity of the resulting optimal phases to employ increases significantly. Due to the insights for system design that we gained in the previous sections based on simple system models, it is considered to be important to develop tractable and insightful communication-theoretic frameworks for unveiling the achievable performance of RISs in future wireless networks, as a function of their many constituent parameters.
+Spatial Models for System-Level Analysis and Optimization
+– As just mentioned, the analysis and optimization of point-to-point wireless networks in the presence of RISs is an open and not an easy task. More difficult is, therefore, the analysis and optimization of large-scale networks where multiple RISs are spatially distributed according to some complex spatial patterns. A simple framework was recently introduced in
+[101]
+by using the theory of line processes, and under the assumption that the RISs can reflect signals coming from any direction and can direct them towards any direction. In contrast with typical approaches that are used in the literature for system-level analysis, which are primarily based on stochastic geometry models, the use of RISs necessitates new models and methods of analysis. It is known, in fact, that signals’ reflections are usually ignored when analyzing large-scale networks due to the inherent analytical complexity
+[102]
+. Furthermore, the spatial correlation that originates from the spatial positions of objects, transmitters, and receivers is not easy to be modeled in a tractable manner
+[103]
+. In RIS-empowered wireless networks, reflections, refractions, and blockages due to the objects are exploited and optimized for increasing the network performance, since the RISs aim to take advantage of them. Major open issues on the modeling and analysis of large-scale networks need, therefore, to be solved.
+Channel Estimation and Feedback Overhead
+– One of the fundamental assumptions that make RIS-assisted communications a competitive low-complexity and energy-efficient technology lies in its almost passive implementation. This implies that, ideally, the RISs are expected not to rely on power amplifiers, channel estimators, ADCs, DACs, etc. Therefore, the fundamental issue lies in how the RISs can estimate the channels that are needed for optimizing, e.g., the reflection phases, and how they can report them to the transmitter, the receiver, or any network controller in charge of computing the optimal phases as a function of the channels themselves. A possible solution may be to embed low-power sensors throughout the RISs, possibly powered by energy harvested modules, which are in charge of sensing the channels, and then reporting them to a gateway that is located on the RISs, which, in turn, sends them to the network controller. This solution relies on the availability of at least one power amplifier and one ADC, but has the advantage that no computation is made on the RISs
+[23]
+. Another promising solution relies on estimating the optimal phases without assuming the knowledge of the individual channels between the RIS and the transmitter and the receiver, but by considering only the combined (or product) channel between them. This solution was recently reported in
+[67]
+. The optimality of this approach compared with knowing the individual channels, and the associated complexity vs. performance vs. estimation overhead trade-offs are an important open issue. More in general, the design of efficient channel estimation and feedback protocols that make the RISs as passive as possible, and the associated performance vs. complexity trade-offs are not known yet.
+Implementation, Testbeds, and Field Trials
+– In the last few years, a few promising testbeds and experimental activities to substantiate the potential gains offered by RISs have been reported
+[42]
+,
+[47]
+,
+[72]
+,
+[97]
+,
+[98]
+. These research activities are promising, and have initially confirmed that the use of RISs in wireless networks is a practically viable solution. However, the details of these experimental tests are often difficult to find, and are not sufficient to judge the actual potential of RISs in realistic operating conditions.
+Data-Driven Optimization
+– RIS-empowered wireless networks are much more complex systems to model, analyze, and design than current and next-generation wireless networks. Due to their inherent system complexity, the use of data-driven methods based on deep learning, reinforcement learning, and transfer learning are promising tools to leverage
+[25]
+. Machine learning, in particular, is a promising solution to simplify the implementation of RIS-based communication systems, and to increase the efficiency of the communication system
+[69]
+,
+[87]
+.
+Integration of RISs with Emerging Technologies
+– The concept of RIS-empowered wireless networks has at its core the fundamental idea of moving the functions that are usually implemented at the radio end-points of a communication network, i.e., the base stations, the APs, and the mobile terminals, to the environment. In that regard, the synergistic integration of RISs with state-of-the-art and emerging technologies, such as small cells, massive MIMO, millimeter-wave communications, visible light communications, terahertz communication, free space optics, IoT, drones-aided communications, energy harvesting, physical layer security, beamforming, etc., is a promising and unexplored research direction. For example: i) RISs can be used for sculpting and exploiting non-LOS reflections at very high transmission frequencies, e.g., above 100 GHz, where it is very difficult to have reliable LOS links in mobile environments
+[98]
+, ii) RISs can be leveraged to introduce a new concept of beamforming that is not realized at the transmitter anymore, but is moved to the environment, thus enabling low-complexity and tiny single-antenna devices to benefit from high-precision beamforming
+[97]
+, and iii) RISs may be a fundamental enabler to realize advanced security schemes at the physical layer, thanks to their potential of sculpting the wireless environment
+[83]
+–​
+[85]
+.
+
+==== part 10 (None)
+SECTION IX.
+Conclusion
+In this paper, we have summarized the latest research activities on the emerging field of RIS-empowered wireless networks. We have illustrated the main differences that render RISs a new technology compared with, at the first sight, similar technologies, such as relaying and backscatter communications. We have described two possible uses to leverage the potential of RISs in wireless networks: to shape the radio waves in order to control, in a deterministic fashion, the multipath propagation, e.g., the signals reflected from walls are steered toward specified directions, and to realize low-complexity and energy efficient transmitters that require only a limited, ideally one, active RF chain. The error probability of both implementations has been studied by capitalizing on the CLT, and it has been shown that the error probability exhibits a water-fall behavior as a function of the number of reconfigurable elements of the RISs and of the SNR. As far as the link budget analysis is concerned, we have highlighted that the concept of RISs is different from relaying and backscatter communications, since, if their geometric size is sufficiently larger than the wavelength, they can be treated as specular reflectors, and the received power as a function of the distance is determined, at the first-order, by the Fermat’s principle. Finally, we have illustrated possible use cases where the RIS may play a significant role, and have discussed fundamental research issues to tackle in order to fully exploit the potential of RISs in wireless networks.
+
+==== part 11 (bibliography)
+References
+1.
+E. Basar, “Transmission through large intelligent surfaces: A new frontier in wireless communications,” in
+Proc. Eur. Conf. Netw. Commun. (EuCNC)
+, Valencia, Spain, Jun. 2019, pp. 1–6. [Online]. Available: https://arxiv.org/pdf/1902.08463.pdf
+2.
+( Feb. 2019 ).
+Cisco Visual Networking Index: Global Mobile Data Traffic Forecast Update, 2017–2022
+. [Online]. Available: https://www.cisco.com/c/en/us/solutions/collateral/service-provider/visual-networking-index-vni/white-paper-c11-738429.pdf
+3.
+A. Gatherer. ( Jun. 2018 ).
+What Will 6G be?
+[Online]. Available: https://www.comsoc.org/publications/ctn/what-will-6g-be
+4.
+R. Y. Mesleh, H. Haas, S. Sinanovic, C. W. Ahn, and S. Yun, “Spatial modulation,”
+IEEE Trans. Veh. Technol.
+, vol. 57, no., pp. 2228–2241, Jul. 2008.
+5.
+M. Di Renzo, H. Haas, and P. M. Grant, “Spatial modulation for multiple-antenna wireless systems: A survey,”
+IEEE Commun. Mag.
+, vol. 49, no. 12, pp. 182–191, Dec. 2011.
+6.
+M. Di Renzo, H. Haas, A. Ghrayeb, S. Sugiura, and L. Hanzo, “Spatial modulation for generalized MIMO: Challenges, opportunities, and implementation,”
+Proc. IEEE
+, vol. 102, no. 1, pp. 56–103, Jan. 2014.
+7.
+P. Yang, M. Di Renzo, Y. Xiao, S. Li, and L. Hanzo, “Design guidelines for spatial modulation,”
+IEEE Commun. Surveys Tuts.
+, vol. 17, no. 1, pp. 6–26, 1st Quart., 2015.
+8.
+E. Başar, “Index modulation techniques for 5G wireless networks,”
+IEEE Commun. Mag.
+, vol. 54, no. 7, pp. 168–175, Jul. 2016.
+9.
+E. Basar, M. Wen, R. Mesleh, M. Di Renzo, Y. Xiao, and H. Haas, “Index modulation techniques for next-generation wireless networks,”
+IEEE Access
+, vol. 5, pp. 16693–16746, 2017.
+10.
+M. Wen, X. Cheng, and L. Yang,
+Index Modulation for 5G Wireless Communications
+. Berlin, Germany : Springer, 2017.
+11.
+Y. Ding, K. J. Kim, T. Koike-Akino, M. Pajovic, P. Wang, and P. Orlik, “Spatial scattering modulation for uplink millimeter-wave systems,”
+IEEE Commun. Lett.
+, vol. 21, no. 7, pp. 1493–1496, Jul. 2017.
+12.
+Y. Ding, V. Fusco, A. Shitvov, Y. Xiao, and H. Li, “Beam index modulation wireless communication with analog beamforming,”
+IEEE Trans. Veh. Technol.
+, vol. 67, no. 7, pp. 6340–6354, Jul. 2018.
+13.
+E. Seifi, M. Atamanesh, and A. K. Khandani, “Media-based MIMO: Outperforming known limits in wireless,” in
+Proc. IEEE Int. Conf. Commun. (ICC)
+, Kuala Lumpur, Malaysia, May 2016, pp. 1–7.
+14.
+Y. Naresh and A. Chockalingam, “On media-based modulation using RF mirrors,”
+IEEE Trans. Veh. Technol.
+, vol. 66, no. 6, pp. 4967–4983, Jun. 2017.
+15.
+E. Basar, “Media-based modulation for future wireless systems: A tutorial,”
+IEEE Wireless Commun.
+, to be published. [Online]. Available: https://arxiv.org/abs/1811.08730
+16.
+M. Di Renzo, “Spatial modulation based on reconfigurable antennas—A new air interface for the IoT,” in
+Proc. IEEE Mil. Commun. Conf. (MILCOM)
+, Baltimore, MD, USA, Oct. 2017, pp. 495–500.
+17.
+D. N. Viet, M. Di Renzo, V. Basavarajappa, B. B. Exposito, J. Basterrechea, and D.-T. Phan-Huy, “Spatial modulation based on reconfigurable antennas: Performance evaluation by using the prototype of a reconfigurable antenna,”
+EURASIP J. Wireless Commun. Netw.
+, vol. 2019, no. 1, p. 149, Jun. 2019.
+18.
+D.-T. Phan-Huy, Y. Kokar, K. Rachedi, P. Pajusco, A. Mokh, T. Magounaki, R. Masood, C. Buey, P. Ratajczak, N. Malhouroux-Gaffet, J.-M. Conrat, J.-C. Prévotet, A. Ourir, J. De Rosny, M. Crussière, M. Hélard, A. Gati, T. Sarrebourse, and M. Di Renzo, “Single-carrier spatial modulation for the Internet of Things: Design and performance evaluation by using real compact and reconfigurable antennas,”
+IEEE Access
+, vol. 7, pp. 18978–18993, 2019.
+19.
+C. Liaskos, S. Nie, A. Tsioliaridou, A. Pitsillides, S. Ioannidis, and I. Akyildiz, “Realizing wireless communication through software-defined hypersurface environments,” in
+Proc. IEEE 19th Int. Symp. ‘World Wireless, Mobile Multimedia Netw.’ (WoWMoM)
+, Chania, Greece, Jun. 2018, pp. 14–15.
+20.
+G. Lavigne, K. Achouri, V. S. Asadchy, S. A. Tretyakov, and C. Caloz, “Susceptibility derivation and experimental demonstration of refracting metasurfaces without spurious diffraction,”
+IEEE Trans. Antennas Propag.
+, vol. 66, no. 3, pp. 1321–1330, Mar. 2018.
+21.
+F. Liu, A. Pitilakis, M. S. Mirmoosa, O. Tsilipakos, X. Wang, A. C. Tasolamprou, S. Abadal, A. Cabellos-Aparicio, E. Alarcón, C. Liaskos, N. V. Kantartzis, M. Kafesaki, E. N. Economou, C. M. Soukoulis, and S. Tretyakov, “Programmable metasurfaces: State of the art and prospects,” in
+Proc. IEEE Int. Symp. Circuits Syst. (ISCAS)
+, Florence, Italy, May 2018, pp. 1–5.
+22.
+C. Liaskos, S. Nie, A. Tsioliaridou, A. Pitsillides, S. Ioannidis, and I. Akyildiz, “A new wireless communication paradigm through software-controlled metasurfaces,”
+IEEE Commun. Mag.
+, vol. 56, no. 9, pp. 162–169, Sep. 2018.
+23.
+M. Di Renzo, M. Debbah, D.-T. Phan-Huy, A. Zappone, M.-S. Alouini, C. Yuen, V. Sciancalepore, G. C. Alexandropoulos, J. Hoydis, H. Gacanin, J. de Rosny, A. Bounceur, G. Lerosey, and M. Fink, “Smart radio environments empowered by reconfigurable AI meta-surfaces: An idea whose time has come,”
+EURASIP J. Wireless Commun. Netw.
+, vol. 2019, p. 129, May 2019.
+24.
+( 2017 ).
+5GPPP Vision on Software Networks and 5G SN WG
+. [Online]. Available: https://5g-ppp.eu/wp-content/uploads/2014/02/5G-PPPSoftNets WG_whitepaper_v20.pdf
+25.
+A. Zappone, M. Di Renzo, and M. Debbah, “Wireless networks design in the era of deep learning: Model-based, AI-based, or both? ” Feb. 2019,
+arXiv:1902.02647
+. [Online]. Available: https://arxiv.org/abs/1902.02647
+26.
+Q. Wu and R. Zhang, “Towards smart and reconfigurable environment: Intelligent reflecting surface aided wireless network,”
+IEEE Commun. Mag.
+, to be published. [Online]. Available: https://arxiv.org/abs/1905.00152
+27.
+M. Born and E. Wolf,
+Principles of Optics: Electromagnetic Theory of Propagation, Interference and Diffraction of Light
+. Cambridge, U.K. : Cambridge Univ. Press, 1999.
+28.
+N. Yu, P. Genevet, M. A. Kats, F. Aieta, J.-P. Tetienne, F. Capasso, and Z. Gaburro, “Light propagation with phase discontinuities: Generalized laws of reflection and refraction,”
+Science
+, vol. 334, no. 6054, pp. 333–337, Oct. 2011.
+29.
+A. Goldsmith,
+Wireless Communications
+. Cambridge, U.K. : Cambridge Univ. Press, 2005.
+30.
+V. S. Asadchy, M. Albooyeh, S. N. Tcvetkova, A. Díaz-Rubio, Y. Ra’di, and S. A. Tretyakov, “Perfect control of reflection and refraction using spatially dispersive metasurfaces,”
+Phys. Rev. B, Condens. Matter
+, vol. 94, Aug. 2016, Art. no. 075142.
+31.
+A. Díaz-Rubio, V. S. Asadchy, A. Elsakka, and S. A. Tretyakov, “From the generalized reflection law to the realization of perfect anomalous reflectors,”
+Sci. Adv.
+, vol. 3, no. 8, Aug. 2017, Art. no. e1602714.
+32.
+C. Huang, A. Zappone, G. C. Alexandropoulos, M. Debbah, and C. Yuen, “Reconfigurable intelligent surfaces for energy efficiency in wireless communication,”
+IEEE Trans. Wireless Commun.
+, to be published. [Online]. Available: https://arxiv.org/abs/1810.06934
+33.
+K. Achouri, B. A. Khan, S. Gupta, G. Lavigne, M. A. Salem, and C. Caloz, “Synthesis of electromagnetic metasurfaces: Principles and illustrations,”
+EPJ Appl. Metamater.
+, vol. 2, p. 12, Jan. 2016.
+34.
+K. Achouri and C. Caloz, “Design, concepts, and applications of electromagnetic metasurfaces,”
+Nanophotonics
+, vol. 7, no. 6, pp. 1095–1116, Jun. 2018.
+35.
+F. Liu, O. Tsilipakos, A. Pitilakis, A. C. Tasolamprou, M. S. Mirmoosa, N. V. Kantartzis, D.-H. Kwon, J. Georgiou, K. Kossifos, M. A. Antoniades, M. Kafesaki, C. M. Soukoulis, and S. A. Tretyakov, “Intelligent metasurfaces with continuously tunable local surface impedance for multiple reconfigurable functions,”
+Phys. Rev. Appl.
+, vol. 11, Apr. 2019, Art. no. 044024.
+36.
+M. Dohler and Y. Li,
+Cooperative Communications: Hardware, Channel and PHY
+. Chichester, U.K. : Wiley, 2010.
+37.
+J. D. Griffin and G. D. Durgin, “Complete link budgets for backscatter-radio and RFID systems,”
+IEEE Antennas Propag. Mag.
+, vol. 51, no. 2, pp. 11–25, Apr. 2009.
+38.
+O. Landron, M. J. Feuerstein, and T. S. Rappaport, “A comparison of theoretical and empirical reflection coefficients for typical exterior wall surfaces in a mobile radio environment,”
+IEEE Trans. Antennas Propag.
+, vol. 44, no. 3, pp. 341–351, Mar. 1996.
+39.
+K. R. Schaubach, N. J. Davis, and T. S. Rappaport, “A ray tracing method for predicting path loss and delay spread in microcellular environments,” in
+Proc. Veh. Technol. Soc. 42nd VTS Conf.-Frontiers Technol.
+, vol. 2, May 1992, pp. 932–935.
+40.
+R. Mehrotra, R. I. Ansari, A. Pitilakis, S. Nie, C. Liaskos, N. V. Kantartzis, and A. Pitsillides, “3D channel modeling and characterization for Hypersurface empowered indoor environment at 60 GHz millimeter-wave band,” 2019,
+arXiv:1907.00037
+. [Online]. Available: https://arxiv.org/abs/1907.00037
+41.
+L. Subrt and P. Pechac, “Controlling propagation environments using intelligent walls,” in
+Proc. 2012 6th Eur. Conf. Antennas Propag. (EUCAP)
+, Prague, Czech Republic, Mar. 2012, pp. 1–5.
+42.
+N. Kaina, M. Dupré, G. Lerosey, and M. Fink, “Shaping complex microwave fields in reverberating media with binary tunable metasurfaces,”
+Sci. Rep.
+, vol. 4, no. 1, Oct. 2014, Art. no. 6693.
+43.
+M. Dupré, P. del Hougne, M. Fink, F. Lemoult, and G. Lerosey, “Wave-field shaping in cavities: Waves trapped in a box with controllable boundaries,”
+Phys. Rev. Lett.
+, vol. 115, Jul. 2015, Art. no. 017701.
+44.
+P. del Hougne, M. Fink, and G. Lerosey, “Optimally diverse communication channels in disordered environments with tuned randomness,”
+Nature Electron.
+, vol. 2, no. 1, pp. 36–41, 2019.
+45.
+S. V. Hum and J. Perruisseau-Carrier, “Reconfigurable reflectarrays and array lenses for dynamic antenna beam control: A review,”
+IEEE Trans. Antennas Propag.
+, vol. 62, no. 1, pp. 183–198, Jan. 2014.
+46.
+X. Tan, Z. Sun, J. M. Jornet, and D. Pados, “Increasing indoor spectrum sharing capacity using smart reflect-array,” in
+Proc. IEEE Int. Conf. Commun. (ICC)
+, Kuala Lumpur, Malaysia, May 2016, pp. 1–6.
+47.
+X. Tan, Z. Sun, D. Koutsonikolas, and J. M. Jornet, “Enabling indoor mobile millimeter-wave networks based on smart reflect-arrays,” in
+Proc. IEEE Conf. Comput. Commun. (INFOCOM)
+, Honolulu, HI, USA, Apr. 2018, pp. 270–278.
+48.
+S. Foo, “Liquid-crystal reconfigurable metasurface reflectors,” in
+Proc. IEEE Int. Symp. Antennas Propag. USNC/URSI Nat. Radio Sci. Meeting
+, San Diego, CA, USA, Jul. 2017, pp. 2069–2070.
+49.
+J. G. Proakis,
+Digital Communications
+, 5th ed. New York, NY, USA : McGraw-Hill, 2008.
+50.
+M. Simon and M. S. Alouini,
+Digital Communications Over Fading Channels
+, 2nd ed. Hoboken, NJ, USA : Wiley, 2005.
+51.
+R. Long, H. Guo, G. Yang, Y.-C. Liang, and R. Zhang, “Symbiotic radio: A new communication paradigm for passive Internet-of-Things,” Oct. 2018,
+arXiv:1810.13068
+. [Online]. Available: https://arxiv.org/abs/1810.13068
+52.
+S. Narayanan, M. Di Renzo, F. Graziosi, and H. Haas, “Distributed spatial modulation: A cooperative diversity protocol for half-duplex relay-aided wireless networks,”
+IEEE Trans. Veh. Technol.
+, vol. 65, no. 5, pp. 2947–2964, May 2016.
+53.
+W. Tang, J. Y. Dai, M. Chen, X. Li, Q. Cheng, S. Jin, K.-K. Wong, and T. J. Cui, “Programmable metasurface-based RF chain-free 8PSK wireless transmitter,”
+Electron. Lett.
+, vol. 55, no. 7, pp. 417–420, Apr. 2019.
+54.
+J. Y. Dai, W. K. Tang, J. Zhao, X. Li, Q. Cheng, J. C. Ke, M. Z. Chen, S. Jin, and T. J. Cui, “Wireless communications through a simplified architecture based on time-domain digital coding metasurface,”
+Adv. Mater. Technol.
+, vol. 4, Feb. 2019, Art. no. 1900044.
+55.
+W. Yan, X. Kuai, and X. Yuan, “Passive beamforming and information transfer via large intelligent surface,” May 2019,
+arXiv:1905.01491
+. [Online]. Available: https://arxiv.org/abs/1905.01491
+56.
+R. Mesleh and A. Alhassi,
+Space Modulation Techniques
+. Hoboken, NJ, USA : Wiley, 2018.
+57.
+L. Subrt and P. Pechac, “Intelligent walls as autonomous parts of smart indoor environments,”
+IET Commun.
+, vol. 6, no. 8, pp. 1004–1010, May 2012.
+58.
+G. H. Elzwawi, H. H. Elzwawi, M. M. Tahseen, and T. A. Denidni, “Frequency selective surface-based switched-beamforming antenna,”
+IEEE Access
+, vol. 6, pp. 48042–48050, 2018.
+59.
+X. Xiong, J. Chan, E. Yu, N. Kumari, A. A. Sani, C. Zheng, and X. Zhou, “Customizing indoor wireless coverage via 3D-fabricated reflectors,” in
+Proc. 4th ACM Int. Conf. Syst. for Energy-Efficient Built Environ.
+, Delft, The Netherlands, 2017, Art. no. 8.
+60.
+T. J. Cui, M. Q. Qi, X. Wan, J. Zhao, and Q. Cheng, “Coding metamaterials, digital metamaterials and programmable metamaterials,”
+Light, Sci. Appl.
+, vol. 3, p. e218, Oct. 2014.
+61.
+L. Zhang, X. Q. Chen, S. Liu, Q. Zhang, J. Zhao, J. Y. Dai, G. D. Bai, X. Wan, Q. Cheng, G. Castaldi, V. Galdi, and T. J. Cui, “Space-time-coding digital metasurfaces,”
+Nature Commun.
+, vol. 9, no. 1, Oct. 2018, Art. no. 4334.
+62.
+H. Yang, X. Cao, F. Yang, J. Gao, S. Xu, M. Li, X. Chen, Y. Zhao, Y. Zheng, and S. Li, “A programmable metasurface with dynamic polarization, scattering and focusing control,”
+Sci. Rep.
+, vol. 6, Oct. 2016, Art. no. 35692.
+63.
+S. Hu, F. Rusek, and O. Edfors, “The potential of using large antenna arrays on intelligent surfaces,” in
+Proc. IEEE 85th Veh. Technol. Conf. (VTC Spring)
+, Sydney, NSW, Australia, Jun. 2017, pp. 1–6.
+64.
+S. Hu, F. Rusek, and O. Edfors, “Beyond massive MIMO: The potential of data transmission with large intelligent surfaces,”
+IEEE Trans. Signal Process.
+, vol. 66, no. 10, pp. 2746–2758, May 2018.
+65.
+S. Hu, F. Rusek, and O. Edfors, “Beyond massive MIMO: The potential of positioning with large intelligent surfaces,”
+IEEE Trans. Signal Process.
+, vol. 66, no. 7, pp. 1761–1774, Apr. 2018.
+66.
+Q.-U.-A. Nadeem, A. Kammoun, A. Chaaban, M. Debbah, and M.-S. Alouini, “Asymptotic analysis of large intelligent surface assisted MIMO communication,” Mar. 2019,
+arXiv:1903.08127
+. [Online]. Available: https://arxiv.org/abs/1903.08127
+67.
+Z.-Q. He and X. Yuan, “Cascaded channel estimation for large intelligent metasurface assisted massive MIMO,” May 2019,
+arXiv:1905.07948
+. [Online]. Available: https://arxiv.org/abs/1905.07948
+68.
+Y. Han, W. Tang, S. Jin, C.-K. Wen, and X. Ma, “Large intelligent surface-assisted wireless communication exploiting statistical CSI,” Dec. 2018,
+arXiv:1812.05429
+. [Online]. Available: https://arxiv.org/abs/1812.05429
+69.
+A. Taha, M. Alrabeiah, and A. Alkhateeb, “Enabling large intelligent surfaces with compressive sensing and deep learning,” Apr. 2019,
+arXiv:1904.10136
+. [Online]. Available: https://arxiv.org/abs/1904.10136
+70.
+C. Huang, G. C. Alexandropoulos, A. Zappone, M. Debbah, and C. Yuen, “Energy efficient multi-user MISO communication using low resolution large intelligent surfaces,” in
+Proc. IEEE Global Commun. Conf.
+, Abu Dhabi, UAE, Dec. 2018, pp. 1–6.
+71.
+( 2018 ).
+World’s First 5G NR Radio
+. [Online]. Available: https://www.ericsson.com/en/networks/offerings/5g/5g-nr-radio
+72.
+C. Liaskos, S. Nie, A. Tsioliaridou, A. Pitsillides, S. Ioannidis, and I. Akyildiz, “A novel communication paradigm for high capacity and security via programmable indoor wireless environments in next generation wireless systems,”
+Ad Hoc Netw.
+, vol. 87, pp. 1–16, May 2019.
+73.
+C. Liaskos, A. Tsioliaridou, S. Nie, A. Pitsillides, S. Ioannidis, and I. Akyildiz, “Modeling, simulating and configuring programmable wireless environments for multi-user multi-objective networking,” Dec. 2018,
+arXiv:1812.11429
+. [Online]. Available: https://arxiv.org/abs/1812.11429
+74.
+C. Huang, A. Zappone, M. Debbah, and C. Yuen, “Achievable rate maximization by passive intelligent mirrors,” in
+Proc. IEEE Int. Conf. Acoust., Speech Signal Process. (ICASSP)
+, Calgary, AB, Canada, Apr. 2018, pp. 3714–3718.
+75.
+Q. Wu and R. Zhang, “Intelligent reflecting surface enhanced wireless network: Joint active and passive beamforming design,” in
+Proc. IEEE Global Commun. Conf.
+, Abu Dhabi, UAE, Dec. 2018, pp. 1–6.
+76.
+Q. Wu and R. Zhang, “Intelligent reflecting surface enhanced wireless network via joint active and passive beamforming,” Oct. 2018,
+arXiv:1810.03961
+. [Online]. Available: https://arxiv.org/abs/1810.03961
+77.
+Q. Wu and R. Zhang, “Beamforming optimization for intelligent reflecting surface with discrete phase shifts,” in
+Proc. IEEE Int. Conf. Acoust., Speech Signal Process. (ICASSP)
+, Brighton, U.K., May 2019, pp. 7830–7833. [Online]. Available: https://arxiv.org/abs/1810.10718
+78.
+M.-A. Badiu and J. P. Coon, “Communication through a large reflecting surface with phase errors,” Jun. 2019,
+arXiv:1906.10751
+. [Online]. Available: https://arxiv.org/abs/1906.10751
+79.
+E. Basar, “Reconfigurable intelligent surface-based index modulation: A new beyond MIMO paradigm for 6G,” Apr. 2019,
+arXiv:1904.06704
+. [Online]. Available: https://arxiv.org/abs/1904.06704
+80.
+X. Yu, D. Xu, and R. Schober, “MISO wireless communication systems via intelligent reflecting surfaces,” Apr. 2019,
+arXiv:1904.12199
+. [Online]. Available: https://arxiv.org/abs/1904.12199
+81.
+D. Mishra and H. Johansson, “Channel estimation and low-complexity beamforming design for passive intelligent surface assisted MISO wireless energy transfer,” in
+Proc. IEEE Int. Conf. Acoust., Speech Signal Process. (ICASSP)
+, Brighton, U.K., May 2019, pp. 4659–4663.
+82.
+T. Jiang and Y. Shi, “Over-the-air computation via intelligent reflecting surfaces,” Apr. 2019,
+arXiv:1904.12475
+. [Online]. Available: https://arxiv.org/abs/1904.12475
+83.
+X. Yu, D. Xu, and R. Schober, “Enabling secure wireless communications via intelligent reflecting surfaces,” in
+Proc. IEEE Global Commun. Conf. (GLOBECOM)
+, Waikoloa, HI, USA, Apr. 2019. [Online]. Available: https://arxiv.org/abs/1904.09573
+84.
+J. Chen, Y.-C. Liang, Y. Pei, and H. Guo, “Intelligent reflecting surface: A programmable wireless environment for physical layer security,” May 2019,
+arXiv:1905.03689
+. [Online]. Available: https://arxiv.org/abs/1905.03689
+85.
+M. Cui, G. Zhang, and R. Zhang, “Secure wireless communication via intelligent reflecting surface,” May 2019,
+arXiv:1905.10770
+. [Online]. Available: https://arxiv.org/abs/1905.10770
+86.
+C. Liaskos, A. Tsioliaridou, A. Pitilakis, G. Pirialakos, O. Tsilipakos, A. Tasolamprou, N. Kantartzis, S. Ioannidis, M. Kafesaki, A. Pitsillides, and I. Akyildiz, “Joint compressed sensing and manipulation of wireless emissions with intelligent surfaces,” Apr. 2019,
+arXiv:1904.10670
+. [Online]. Available: https://arxiv.org/abs/1904.10670
+87.
+C. Liaskos, A. Tsioliaridou, S. Nie, A. Pitsillides, S. Ioannidis, and I. Akyildiz, “An interpretable neural network for configuring programmable wireless environments,” May 2019,
+arXiv:1905.02495
+. [Online]. Available: https://arxiv.org/abs/1905.02495
+88.
+M. Jung, W. Saad, Y. Jang, G. Kong, and S. Choi, “Reliability analysis of large intelligent surfaces (LISs): Rate distribution and outage probability,” Mar. 2019,
+arXiv:1903.11456
+. [Online]. Available: https://arxiv.org/abs/1903.11456
+89.
+M. Jung, W. Saad, Y. Jang, G. Kong, and S. Choi, “Performance analysis of large intelligent surfaces (LISs): Asymptotic data rate and channel hardening effects,” Feb. 2019,
+arXiv:1810.05667
+. [Online]. Available: https://arxiv.org/abs/1810.05667
+90.
+M. Jung, W. Saad, and G. Kong, “Performance analysis of large intelligent surfaces (LISs): Uplink spectral efficiency and pilot training,” Mar. 2019,
+arXiv:1904.00453
+. [Online]. Available: https://arxiv.org/abs/1904.00453
+91.
+S. Nie, J. M. Jornet, and I. F. Akyildiz, “Intelligent environments based on ultra-massive MIMO platforms for wireless communication in millimeter wave and terahertz bands,” Apr. 2019.
+arXiv:1904.07958
+. [Online]. Available: https://arxiv.org/abs/1904.07958
+92.
+C. Valagiannopoulos, T. A. Tsiftsis, and V. Kovanis, “Metasurface-enabled interference suppression at visible-light communications,” Apr. 2019,
+arXiv:1904.08858
+. [Online]. Available: https://arxiv.org/abs/1904.08858
+93.
+M. Najafi and R. Schober, “Intelligent reflecting surfaces for free space optical communications,” May 2019,
+arXiv:1905.01094
+. [Online]. Available: https://arxiv.org/abs/1905.01094
+94.
+Y. Yang, S. Zhang, and R. Zhang, “IRS-enhanced OFDM: Power allocation and passive array optimization,” May 2019,
+arXiv:1905.00604
+. [Online]. Available: https://arxiv.org/abs/1905.00604
+95.
+A. Welkie, L. Shangguan, J. Gummeson, W. Hu, and K. Jamieson, “Programmable radio environments for smart spaces,” in
+Proc. 16th ACM Workshop Hot Topics Netw.
+, 2017, pp. 36–42.
+96.
+Z. Li, Y. Xie, L. Shangguan, R. I. Zelaya, J. Gummeson, W. Hu, and K. Jamieson, “Towards programming the radio environment with large arrays of inexpensive antennas,” in
+Proc. 16th USENIX Symp. Netw. Syst. Design Implement.
+, Boston, MA, USA, Feb. 2019, pp. 285–299.
+97.
+V. Arun and H. Balakrishnan, “RFocus: Practical beamforming for small devices,” May 2019,
+arXiv:1905.05130
+. [Online]. Available: https://arxiv.org/abs/1905.05130
+98.
+( 2018 ).
+NTT DOCOMO and Metawave Announce Successful Demonstration of 28 GHz-band 5G Using World’s First Meta-Structure Technology
+. [Online]. Available: https://bit.ly/2I7yApd
+99.
+K. Achouri, M. A. Salem, and C. Caloz, “General metasurface synthesis based on susceptibility tensors,”
+IEEE Trans. Antennas Propag.
+, vol. 63, no. 7, pp. 2977–2991, Jul. 2015.
+100.
+A. Zappone and M. Di Renzo, “Feedback-aware design of reconfigurable intelligent surfaces in smart radio environments,” Tech. Rep., Jun. 2019.
+101.
+M. Di Renzo and J. Song, “Reflection probability in wireless networks with metasurface-coated environmental objects: An approach based on random spatial processes,”
+EURASIP J. Wireless Commun. Netw.
+, vol. 2019, no. 1, p. 99, Apr. 2019.
+102.
+A. Narayanan, T. V. Sreejith, and R. K. Ganti, “Coverage analysis in millimeter wave cellular networks with reflections,” in
+Proc. IEEE Global Commun. Conf.
+, Singapore, Dec. 2017, pp. 1–6.
+103.
+J. Lee and F. Baccelli, “On the effect of shadowing correlation on wireless network performance,” in
+Proc. IEEE Conf. Comput. Commun.
+, Honolulu, HI, USA, Apr. 2018, pp. 1601–1609.

@@ -1,0 +1,176 @@
+author: Barrow, John D.
+author_list:
+- affiliation: []
+  family: Barrow
+  given: John D.
+citations:
+- author: van Koch
+  first-page: '681'
+  journal-title: Ark. Mat.
+  volume: '1'
+  year: '1904'
+- author: Sierpinski
+  first-page: '302'
+  journal-title: C. R. Acad. Sci. Paris.
+  volume: '160'
+  year: '1915'
+- article-title: Allgemeine Räume und Cartesische Räume I
+  author: Menger
+  year: '1926'
+- author: Bekenstein
+  doi: 10.1007/BF02757029
+  first-page: '737'
+  journal-title: Lett. Nuovo Cimento
+  volume: '4'
+  year: '1972'
+- author: Bekenstein
+  doi: 10.1103/PhysRevB.7.2333
+  first-page: '2333'
+  journal-title: Phys. Rev.
+  volume: '7'
+  year: '1973'
+- author: Hawking
+  doi: 10.1103/PhysRevLett.26.1344
+  first-page: '1344'
+  journal-title: Phys. Rev. Lett.
+  volume: '26'
+  year: '1971'
+- author: Hawking
+  doi: 10.1007/BF01877517
+  first-page: '152'
+  journal-title: Commun. Math. Phys.
+  volume: '25'
+  year: '1972'
+- author: Hawking
+  doi: 10.1038/248030a0
+  first-page: '30'
+  journal-title: Nature
+  volume: '248'
+  year: '1974'
+- author: Wheeler
+  doi: 10.1103/PhysRev.97.511
+  first-page: '511'
+  journal-title: Phys. Rev.
+  volume: '97'
+  year: '1955'
+- author: Misner
+  series-title: Gravitation
+  year: '1973'
+- author: Hawking
+  doi: 10.1016/0550-3213(78)90375-9
+  first-page: '349'
+  journal-title: Nucl. Phys. B
+  volume: '144'
+  year: '1978'
+- author: t'Hooft
+  doi: 10.1016/0550-3213(85)90418-3
+  first-page: '727'
+  journal-title: Nucl. Phys. B
+  volume: '256'
+  year: '1985'
+- author: Cooke
+- author: Perlman
+  doi: 10.1088/0004-637X/805/1/10
+  first-page: '10'
+  journal-title: Astrophys. J.
+  volume: '805'
+  year: '2015'
+- author: Baez
+  doi: 10.1007/3-540-46552-9_2
+  first-page: '25'
+  journal-title: Lect. Notes Phys.
+  volume: '543'
+  year: '2000'
+- author: Perez
+  doi: 10.12942/lrr-2013-3
+  journal-title: Living Rev. Relativ.
+  volume: '16'
+  year: '2013'
+- author: Snyder
+  doi: 10.1103/PhysRev.71.38
+  first-page: '38'
+  journal-title: Phys. Rev.
+  volume: '71'
+  year: '1947'
+- author: Casadio
+- author: Feynman
+  series-title: Quantum Mechanics and Path Integrals
+  year: '1965'
+- article-title: Quantum fluctuations
+  author: Nelson
+  doi: 10.1103/PhysRev.150.1079
+  first-page: '1079'
+  journal-title: Phys. Rev.
+  volume: '150'
+  year: '1966'
+- author: Nelson
+  series-title: Quantum Fluctuations
+  year: '1966'
+- author: Kraemmer
+  doi: 10.1016/0550-3213(74)90011-X
+  first-page: '145'
+  journal-title: Nucl. Phys.
+  volume: '81'
+  year: '1974'
+- author: Mandelbrot
+  series-title: 'Fractals: Form, Chance and Dimension'
+  year: '1977'
+- author: Abbott
+  doi: 10.1119/1.12657
+  first-page: '37'
+  journal-title: Am. J. Phys.
+  volume: '49'
+  year: '1981'
+- author: Barrow
+  first-page: '608'
+  journal-title: Mon. Not. R. Astron. Soc.
+  volume: '243'
+  year: '1990'
+- article-title: Singularities and time asymmetry
+  author: Penrose
+  first-page: '581'
+  series-title: 'General Relativity: an Einstein Centenary Volume'
+  year: '1979'
+- author: Barrow
+  series-title: The Anthropic Cosmological Principle
+  year: '1986'
+- author: Barrow
+  doi: 10.1016/S1384-1076(99)00026-3
+  first-page: '333'
+  journal-title: New Astron.
+  volume: '4'
+  year: '1999'
+- author: Barceló
+  doi: 10.1038/s41567-018-0367-6
+  first-page: '210'
+  journal-title: Nat. Phys.
+  volume: '15'
+  year: '2019'
+- author: Unruh
+  first-page: '2905'
+  journal-title: Proc. R. Soc. A
+  volume: '366'
+  year: '2008'
+- author: Anagnostopoulos
+- author: Saridakis
+- author: Saridakis
+- author: Abreu
+- author: Saridakis
+- author: McInnes
+doi: 10.1016/j.physletb.2020.135643
+files:
+- sciencedirect.html
+journal: Physics Letters B
+language: en
+license: CC BY 4.0
+month: 9
+pages: '135643'
+papis_id: 9d3ee2569db3d11d67f12b383ee487e0
+publisher: Elsevier BV
+ref: The_area_of_a_r_Barrow_2020
+time-added: 2026-08-27-16:53:41
+title: The area of a rough black hole
+type: article
+url: https://doi.org/10.1016/j.physletb.2020.135643
+volume: '808'
+year: 2020

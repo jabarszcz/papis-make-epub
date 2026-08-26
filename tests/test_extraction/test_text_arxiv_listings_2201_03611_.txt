@@ -1,0 +1,101 @@
+==== part 0 (titlepage)
+RI
+SE
+& Shine:
+Language-Oriented Compiler Design
+Abstract
+The trend towards specialization of software and hardware — fueled by the end of Moore’s law and the still accelerating interest in domain-specific computing, such as machine learning — forces us to radically rethink our compiler designs.
+
+==== part 1 (None)
+I
+Introduction
+II
+Background in IR and Compiler Design
+III
+Shine
+: A Language-Oriented Compiler
+IV
+Clearly Separating Optimizing from Code Generation
+def
+mv
+=
+depFun
+((
+n
+:
+Nat
+,
+m
+:
+Nat
+)
+=>
+fun
+(
+M
+:
+Array
+[
+n
+,
+Array
+[
+m
+,
+f32
+]]
+=>
+fun
+(
+x
+:
+Array
+[
+m
+,
+f32
+]
+=>
+M
+|>
+map
+(
+fun
+(
+row
+=>
+zip
+(
+row
+)(
+x
+)
+|>
+map
+(
+fun
+(
+ax
+=>
+fst
+(
+ax
+)
+*
+snd
+(
+ax
+)))
+|>
+reduce
+(
+add
+)(0.0
+f
+)
+))
+))
+)
+Fig. 2:
+Matrix-Vector-Multiplication expressed as a high-level program in RISE.
+No optimization or implementation choices have been made yet, there are many ways to compile this program to high-performance code.

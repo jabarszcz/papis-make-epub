@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><title>A benchmark for vericoding: formally verified program synthesis</title></head>
+<body>
+
+
+<div class="ltx_page_main">
+<div class="ltx_page_content">
+<article class="ltx_document ltx_authors_1line">
+<h1 class="ltx_title ltx_title_document">A benchmark for vericoding: 
+<br class="ltx_break"/>formally verified program synthesis</h1>
+<div class="ltx_authors">
+<span class="ltx_creator ltx_role_author">
+<span class="ltx_personname">Sergiu Bursuc
+</span></span>
+
+
+
+
+
+
+
+
+
+
+
+</div>
+<div class="ltx_abstract" id="abstract1"><h6 class="ltx_title ltx_title_abstract">Abstract</h6>
+<p class="ltx_p" id="abstract1.1">We present and test the largest benchmark for vericoding , LLM-generation of formally verified code from formal specifications — in contrast to vibe coding , which generates potentially buggy code from a natural language description.</p>
+</div>
+
+
+
+<section class="ltx_section" id="S3">
+<h2 class="ltx_title ltx_title_section"><span class="ltx_tag ltx_tag_section"><span class="ltx_text" id="S3.5" style="--ltx-fg-color:#2626FF;">3</span> </span>Benchmark Construction</h2>
+
+
+
+<section class="ltx_subsection" id="S3.SS2">
+<h3 class="ltx_title ltx_title_subsection"><span class="ltx_tag ltx_tag_subsection"><span class="ltx_text" id="S3.SS2.5" style="--ltx-fg-color:#2626FF;">3.2</span> </span>Original sources and task generation</h3>
+<div class="ltx_para ltx_noindent" id="S3.SS2.p1">
+
+<ol class="ltx_enumerate" id="S3.I2">
+<li class="ltx_item" id="S3.I2.i1" style="list-style-type:none;"><span class="ltx_tag ltx_tag_item">1.</span>
+<div class="ltx_para ltx_noindent" id="S3.I2.i1.p1">
+<p class="ltx_p" id="S3.I2.i1.p1.1">Formal verification or vericoding benchmarks such as DafnyBench ( Loughridge et al., 2025 ) for Dafny, VerifiedCogen ( JetBrains-Research, 2025 ) for Verus, and Verina ( Ye et al., 2025 ) and Clever ( Thakur et al., 2025 ) for Lean.</p>
+</div></li>
+
+
+</ol>
+</div>
+
+</section>
+<section class="ltx_subsection" id="S3.SS3">
+<h3 class="ltx_title ltx_title_subsection"><span class="ltx_tag ltx_tag_subsection"><span class="ltx_text" id="S3.SS3.5" style="--ltx-fg-color:#2626FF;">3.3</span> </span>Spec translations and validation</h3>
+<figure class="ltx_figure" id="S3.F2">
+<p class="ltx_p ltx_align_center" id="S3.F2.5"><span class="ltx_text ltx_framed ltx_framed_rectangle" id="S3.F2.5.1" style="--ltx-border-color:#000000;padding:3.0pt;">
+<span class="ltx_ERROR undefined" id="S3.F2.5.1.1">\got@maxcolwd</span><span class="ltx_text" id="S3.F2.5.1.2" style="position:relative; bottom:0.0pt;">
+<span class="ltx_inline-block ltx_minipage ltx_align_top" id="S3.F2.5.1.2.1" style="width:379.5pt;">
+<span class="ltx_p" id="S3.F2.5.1.2.1.1"><math alttext="\mathsf{SpecTranslator}(\mathcal{L}_{\mathsf{source}},\mathcal{L}_{\mathsf{target}},\mathcal{S},k,\mathcal{M})" class="ltx_Math" display="inline" id="S3.F2.m1" intent=":literal"><semantics><mrow><mi>𝖲𝗉𝖾𝖼𝖳𝗋𝖺𝗇𝗌𝗅𝖺𝗍𝗈𝗋</mi><mo>⁡</mo><mrow><mo stretchy="false">(</mo><msub><mi class="ltx_font_mathcaligraphic">ℒ</mi><mi>𝗌𝗈𝗎𝗋𝖼𝖾</mi></msub><mo>,</mo><msub><mi class="ltx_font_mathcaligraphic">ℒ</mi><mi>𝗍𝖺𝗋𝗀𝖾𝗍</mi></msub><mo>,</mo><mi class="ltx_font_mathcaligraphic">𝒮</mi><mo>,</mo><mi>k</mi><mo>,</mo><mi class="ltx_font_mathcaligraphic">ℳ</mi><mo stretchy="false">)</mo></mrow></mrow><annotation encoding="application/x-tex">\mathsf{SpecTranslator}(\mathcal{L}_{\mathsf{source}},\mathcal{L}_{\mathsf{target}},\mathcal{S},k,\mathcal{M})</annotation></semantics></math>   <span class="ltx_text ltx_font_italic" id="S3.F2.5.1.2.1.1.1">// for specification <math alttext="\mathcal{S}" class="ltx_Math" display="inline" id="S3.F2.m2" intent=":literal"><semantics><mi class="ltx_font_mathcaligraphic">𝒮</mi><annotation encoding="application/x-tex">\mathcal{S}</annotation></semantics></math>, iterations <math alttext="k" class="ltx_Math" display="inline" id="S3.F2.m3" intent=":literal"><semantics><mi>k</mi><annotation encoding="application/x-tex">k</annotation></semantics></math>, and LLM <math alttext="\mathcal{M}" class="ltx_Math" display="inline" id="S3.F2.m4" intent=":literal"><semantics><mi class="ltx_font_mathcaligraphic">ℳ</mi><annotation encoding="application/x-tex">\mathcal{M}</annotation></semantics></math></span><span class="ltx_text ltx_phantom" id="S3.F2.5.1.2.1.1.2"><span style="visibility:hidden"><span class="ltx_rule" style="width:0.0pt;height:14.0pt;position:relative; bottom:2.2pt;--ltx-bg-color:black;display:inline-block;"></span></span></span></span><span class="ltx_rule" style="width:100%;height:1px;--ltx-bg-color:black;display:inline-block;"> </span>
+<span class="ltx_equationgroup ltx_eqn_align ltx_eqn_table" id="S3.EGx2">
+<span id="S3.Ex6"><span class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<span class="ltx_eqn_cell ltx_eqn_center_padleft"></span>
+<span class="ltx_td ltx_eqn_cell"></span>
+<span class="ltx_td ltx_align_left ltx_eqn_cell"><math alttext="\displaystyle\vphantom{\rule[2.15277pt]{0.0pt}{0.0pt}}\quad H\leftarrow\emptyset,\mathcal{P}\leftarrow\mathsf{BuildPrompt}(\mathcal{L}_{\mathsf{source}},\mathcal{L}_{\mathsf{target}},\mathcal{S},\mathtt{translate})" class="ltx_Math" display="inline" id="S3.Ex6.m1" intent=":literal"><semantics><mrow><mrow><mi>H</mi><mo stretchy="false">←</mo><mi mathvariant="normal">∅</mi></mrow><mo>,</mo><mrow><mi class="ltx_font_mathcaligraphic">𝒫</mi><mo stretchy="false">←</mo><mrow><mi>𝖡𝗎𝗂𝗅𝖽𝖯𝗋𝗈𝗆𝗉𝗍</mi><mo>⁡</mo><mrow><mo stretchy="false">(</mo><msub><mi class="ltx_font_mathcaligraphic">ℒ</mi><mi>𝗌𝗈𝗎𝗋𝖼𝖾</mi></msub><mo>,</mo><msub><mi class="ltx_font_mathcaligraphic">ℒ</mi><mi>𝗍𝖺𝗋𝗀𝖾𝗍</mi></msub><mo>,</mo><mi class="ltx_font_mathcaligraphic">𝒮</mi><mo>,</mo><mi>𝚝𝚛𝚊𝚗𝚜𝚕𝚊𝚝𝚎</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></mrow><annotation encoding="application/x-tex">\displaystyle\vphantom{\rule[2.15277pt]{0.0pt}{0.0pt}}\quad H\leftarrow\emptyset,\mathcal{P}\leftarrow\mathsf{BuildPrompt}(\mathcal{L}_{\mathsf{source}},\mathcal{L}_{\mathsf{target}},\mathcal{S},\mathtt{translate})</annotation></semantics></math></span>
+<span class="ltx_eqn_cell ltx_eqn_center_padright"></span></span></span>
+<span id="S3.Ex7"><span class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<span class="ltx_eqn_cell ltx_eqn_center_padleft"></span>
+<span class="ltx_td ltx_align_right ltx_eqn_cell"><math alttext="\displaystyle\quad\mathbf{for}\ i\in\{1,\ldots,k\}\ \mathbf{do}\,:\text{\hskip 10.00002pt\hfill{\text{{// generate or fix translation, verify file in target language, and update history}}}}" class="ltx_Math" display="inline" id="S3.Ex7.m1" intent=":literal"><semantics><mrow><mrow><mi>𝐟𝐨𝐫</mi><mo lspace="0.500em" rspace="0em">​</mo><mi>i</mi></mrow><mo>∈</mo><mrow><mrow><mo stretchy="false">{</mo><mn>1</mn><mo>,</mo><mi mathvariant="normal">…</mi><mo>,</mo><mi>k</mi><mo stretchy="false">}</mo></mrow><mo lspace="0.500em" rspace="0em">​</mo><mi>𝐝𝐨</mi></mrow><mo lspace="0.448em" rspace="0.278em">:</mo><mrow><mtext> </mtext><mtext class="ltx_mathvariant_italic">// generate or fix translation, verify file in target language, and update history</mtext></mrow></mrow><annotation encoding="application/x-tex">\displaystyle\quad\mathbf{for}\ i\in\{1,\ldots,k\}\ \mathbf{do}\,:\text{\hskip 10.00002pt\hfill{\text{{// generate or fix translation, verify file in target language, and update history}}}}</annotation></semantics></math></span>
+<span class="ltx_eqn_cell ltx_eqn_center_padright" colspan="2"></span></span></span>
+<span id="S3.Ex8"><span class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<span class="ltx_eqn_cell ltx_eqn_center_padleft"></span>
+<span class="ltx_td ltx_align_right ltx_eqn_cell"><math alttext="\displaystyle\quad\quad\mathcal{S}^{\prime}\leftarrow\mathcal{M}(\mathcal{P}),(v,e)\leftarrow\mathsf{VerifyFile}(\mathcal{L}_{\mathsf{target}},\mathcal{S}^{\prime}),H\leftarrow H\cup\{\mathcal{S}^{\prime},v,e\}" class="ltx_Math" display="inline" id="S3.Ex8.m1" intent=":literal"><semantics><mrow><mrow><msup><mi class="ltx_font_mathcaligraphic">𝒮</mi><mo>′</mo></msup><mo stretchy="false">←</mo><mrow><mi class="ltx_font_mathcaligraphic">ℳ</mi><mo>⁡</mo><mrow><mo stretchy="false">(</mo><mi class="ltx_font_mathcaligraphic">𝒫</mi><mo stretchy="false">)</mo></mrow></mrow></mrow><mo>,</mo><mrow><mrow><mo stretchy="false">(</mo><mi>v</mi><mo>,</mo><mi>e</mi><mo stretchy="false">)</mo></mrow><mo stretchy="false">←</mo><mrow><mi>𝖵𝖾𝗋𝗂𝖿𝗒𝖥𝗂𝗅𝖾</mi><mo>⁡</mo><mrow><mo stretchy="false">(</mo><msub><mi class="ltx_font_mathcaligraphic">ℒ</mi><mi>𝗍𝖺𝗋𝗀𝖾𝗍</mi></msub><mo>,</mo><msup><mi class="ltx_font_mathcaligraphic">𝒮</mi><mo>′</mo></msup><mo stretchy="false">)</mo></mrow></mrow></mrow><mo>,</mo><mrow><mi>H</mi><mo stretchy="false">←</mo><mrow><mi>H</mi><mo>∪</mo><mrow><mo stretchy="false">{</mo><msup><mi class="ltx_font_mathcaligraphic">𝒮</mi><mo>′</mo></msup><mo>,</mo><mi>v</mi><mo>,</mo><mi>e</mi><mo stretchy="false">}</mo></mrow></mrow></mrow></mrow><annotation encoding="application/x-tex">\displaystyle\quad\quad\mathcal{S}^{\prime}\leftarrow\mathcal{M}(\mathcal{P}),(v,e)\leftarrow\mathsf{VerifyFile}(\mathcal{L}_{\mathsf{target}},\mathcal{S}^{\prime}),H\leftarrow H\cup\{\mathcal{S}^{\prime},v,e\}</annotation></semantics></math></span>
+<span class="ltx_eqn_cell ltx_eqn_center_padright" colspan="2"></span></span></span>
+<span id="S3.Ex9"><span class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<span class="ltx_eqn_cell ltx_eqn_center_padleft"></span>
+<span class="ltx_td ltx_align_right ltx_eqn_cell"><math alttext="\displaystyle\quad\quad\mathbf{if}\ v\ \mathbf{then}\ \mathbf{return}\ (\mathcal{S}^{\prime},\mathtt{success})\,\mathbf{else}\ \mathcal{P}\leftarrow\mathsf{BuildPrompt}(\mathcal{L}_{\mathsf{source}},\mathcal{L}_{\mathsf{target}},\mathcal{S},\mathtt{fix},\mathcal{S}^{\prime},H)" class="ltx_Math" display="inline" id="S3.Ex9.m1" intent=":literal"><semantics><mrow><mrow><mi>𝐢𝐟</mi><mo lspace="0.500em" rspace="0em">​</mo><mi>v</mi><mo lspace="0.500em" rspace="0em">​</mo><mi>𝐭𝐡𝐞𝐧</mi><mo lspace="0.500em" rspace="0em">​</mo><mi>𝐫𝐞𝐭𝐮𝐫𝐧</mi><mo lspace="0.500em" rspace="0em">​</mo><mrow><mo stretchy="false">(</mo><msup><mi class="ltx_font_mathcaligraphic">𝒮</mi><mo>′</mo></msup><mo>,</mo><mi>𝚜𝚞𝚌𝚌𝚎𝚜𝚜</mi><mo stretchy="false">)</mo></mrow><mo lspace="0.170em" rspace="0em">​</mo><mi>𝐞𝐥𝐬𝐞</mi><mo lspace="0.500em" rspace="0em">​</mo><mi class="ltx_font_mathcaligraphic">𝒫</mi></mrow><mo stretchy="false">←</mo><mrow><mi>𝖡𝗎𝗂𝗅𝖽𝖯𝗋𝗈𝗆𝗉𝗍</mi><mo>⁡</mo><mrow><mo stretchy="false">(</mo><msub><mi class="ltx_font_mathcaligraphic">ℒ</mi><mi>𝗌𝗈𝗎𝗋𝖼𝖾</mi></msub><mo>,</mo><msub><mi class="ltx_font_mathcaligraphic">ℒ</mi><mi>𝗍𝖺𝗋𝗀𝖾𝗍</mi></msub><mo>,</mo><mi class="ltx_font_mathcaligraphic">𝒮</mi><mo>,</mo><mi>𝚏𝚒𝚡</mi><mo>,</mo><msup><mi class="ltx_font_mathcaligraphic">𝒮</mi><mo>′</mo></msup><mo>,</mo><mi>H</mi><mo stretchy="false">)</mo></mrow></mrow></mrow><annotation encoding="application/x-tex">\displaystyle\quad\quad\mathbf{if}\ v\ \mathbf{then}\ \mathbf{return}\ (\mathcal{S}^{\prime},\mathtt{success})\,\mathbf{else}\ \mathcal{P}\leftarrow\mathsf{BuildPrompt}(\mathcal{L}_{\mathsf{source}},\mathcal{L}_{\mathsf{target}},\mathcal{S},\mathtt{fix},\mathcal{S}^{\prime},H)</annotation></semantics></math></span>
+<span class="ltx_eqn_cell ltx_eqn_center_padright" colspan="2"></span></span></span>
+<span id="S3.Ex10"><span class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<span class="ltx_eqn_cell ltx_eqn_center_padleft"></span>
+<span class="ltx_td ltx_align_right ltx_eqn_cell"><math alttext="\displaystyle\quad\mathbf{return}\ (\mathcal{S}^{\prime},\mathtt{fail})" class="ltx_Math" display="inline" id="S3.Ex10.m1" intent=":literal"><semantics><mrow><mi>𝐫𝐞𝐭𝐮𝐫𝐧</mi><mo lspace="0.500em">⁡</mo><mrow><mo stretchy="false">(</mo><msup><mi class="ltx_font_mathcaligraphic">𝒮</mi><mo>′</mo></msup><mo>,</mo><mi>𝚏𝚊𝚒𝚕</mi><mo stretchy="false">)</mo></mrow></mrow><annotation encoding="application/x-tex">\displaystyle\quad\mathbf{return}\ (\mathcal{S}^{\prime},\mathtt{fail})</annotation></semantics></math></span>
+<span class="ltx_td ltx_eqn_cell"></span>
+<span class="ltx_eqn_cell ltx_eqn_center_padright"></span></span></span>
+</span>
+</span></span></span></p>
+
+</figure>
+
+
+
+
+</section>
+</section>
+
+
+
+
+
+</article>
+</div>
+</div>
+</body>
+</html>

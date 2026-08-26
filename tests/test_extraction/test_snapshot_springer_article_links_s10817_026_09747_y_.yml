@@ -1,0 +1,50 @@
+language: en
+media_count: 0
+media_extensions: {}
+package:
+  landmarks:
+  - href: content.xhtml#part-abstract
+    text: Start
+    type: bodymatter
+  - href: content.xhtml#part-bibliography
+    text: References
+    type: bibliography
+  manifest:
+    content.xhtml: application/xhtml+xml mathml
+    fonts/stix.ttf: font/ttf
+    nav.xhtml: application/xhtml+xml nav
+    style.css: text/css
+    toc.ncx: application/x-dtbncx+xml
+  metadata:
+    creator: null
+    identifier: https://link.springer.com/article/10.1007/s10817-026-09747-y
+    language: en
+    title: springer-article-links-s10817-026-09747-y
+  spine:
+  - content.xhtml
+  toc:
+  - Abstract
+  - 6 Searching for an Augmenting Path or a Blossom
+  - References
+parts:
+- epub_type: titlepage
+  text_length: 41
+  toc: []
+- epub_type: abstract
+  text_length: 146
+  toc:
+  - Abstract
+- epub_type: null
+  text_length: 341
+  toc:
+  - 6 Searching for an Augmenting Path or a Blossom
+- epub_type: bibliography
+  text_length: 449
+  toc:
+  - References
+stats:
+  dead_links: 0
+  images: 0
+  math: 1
+  math_fallback: 0
+  math_images: 0
