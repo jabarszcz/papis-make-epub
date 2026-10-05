@@ -6,6 +6,7 @@ content document with its navigation, character normalization, the
 stylesheet, and symbol-font coverage.
 """
 
+import html
 import importlib.resources
 import io
 import logging
@@ -135,18 +136,44 @@ def _assemble_document(css: epub.EpubItem, language: str | None,
     inner = "".join(pieces)
     if normalize_chars:
         inner = inner.translate(CHAR_NORMALIZE)
-    doc = epub.EpubHtml(file_name="content.xhtml", title=title,
-                        lang=language)
+    # ebooklib's own default for a book without a language
+    lang = language or "en"
+    doc = _ContentDocument(file_name="content.xhtml", title=title, lang=lang)
+    doc.body = f"<body>{inner}</body>"
     doc.content = (
-        '<html xmlns:epub="http://www.idpf.org/2007/ops">'
-        "<head><link rel='stylesheet' href='style.css'/></head>"
-        f"<body>{inner}</body></html>")
+        '<?xml version="1.0" encoding="utf-8"?>\n<!DOCTYPE html>\n'
+        '<html xmlns="http://www.w3.org/1999/xhtml" '
+        'xmlns:epub="http://www.idpf.org/2007/ops" '
+        f'lang="{lang}" xml:lang="{lang}">'
+        f'<head><meta charset="utf-8"/><title>{html.escape(title)}</title>'
+        f'<link href="{css.file_name}" rel="stylesheet" type="text/css"/>'
+        f"</head>{doc.body}</html>")
     if "<math" in inner:  # EPUB3 manifest property for MathML content
         doc.properties.append("mathml")
-    if ".svg" in inner:
+    if ".svg" in inner or "<svg" in inner:
         doc.properties.append("svg")
     doc.add_item(css)
     return doc
+
+
+class _ContentDocument(epub.EpubHtml):  # type: ignore[misc]  # untyped base
+    """The content document, written as assembled.
+
+    ``EpubHtml`` re-parses its content with an HTML parser when the
+    book is written, and that parser lowercases the names SVG spells
+    in camelCase (``viewBox``, ``foreignObject``) that the extraction
+    restored. ``content`` here is already the complete XHTML
+    document, so it goes into the book byte for byte; ``body`` is its
+    body element, which the navigation builder scans for page breaks.
+    """
+
+    body: str = "<body></body>"
+
+    def get_content(self, default: Any = None) -> bytes:
+        return str(self.content).encode("utf-8")
+
+    def get_body_content(self) -> bytes:
+        return self.body.encode("utf-8")
 
 
 def _build_toc(book: epub.EpubBook, doc: epub.EpubHtml,

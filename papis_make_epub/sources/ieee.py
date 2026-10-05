@@ -152,11 +152,6 @@ class IeeeSource(Source):
         extraction.embed_figures(parts)
 
         if abstract is not None:
-            # the abstract is bare text in its div; a paragraph gives
-            # it a block of its own
-            paragraph = soup.new_tag("p")
-            paragraph.extend(list(abstract.children))
-            abstract.append(paragraph)
             extraction.add_abstract(abstract)
         extraction.add_sections(sections)
         if references is not None:

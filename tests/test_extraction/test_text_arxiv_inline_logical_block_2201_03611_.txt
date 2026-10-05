@@ -1,0 +1,140 @@
+==== part 0 (titlepage)
+RI
+SE
+& Shine:
+Language-Oriented Compiler Design
+Michel Steuwer
+1
+Thomas Kœhler
+2
+Bastian Köpcke
+3
+Federico Pizzuti
+1
+Affiliation:
+1
+University of Edinburgh, Scotland, UK
+2
+University of Glasgow, Scotland, UK
+3
+University of Münster, Germany
+Email:
+michel.steuwer@ed.ac.uk
+,
+thomas.koehler@thok.eu
+,
+bastian.koepcke@wwu.de
+,
+federico.pizzuti@ed.ac.uk
+Abstract
+The trend towards specialization of software and hardware — fueled by the end of Moore’s law and the still accelerating interest in domain-specific computing, such as machine learning — forces us to radically rethink our compiler designs.
+
+==== part 1 (None)
+I
+Introduction
+II
+Background in IR and Compiler Design
+III
+Shine
+: A Language-Oriented Compiler
+IV
+Clearly Separating Optimizing from Code Generation
+One main principle observed in the Shine compiler is the clear separation of IRs for optimizing and code generation.
+IV-A
+RISE
+expressions, types, and primitives
+E
+E
+:=
+x
+|
+0.0
+f
+|
+variables and literals
+fun
+(
+x
+=>
+E
+E
+)
+|
+function abstraction
+E
+E
+|>
+E
+E
+|
+E
+E
+(
+E
+E
+)
+|
+function application
+depFun
+(
+x
+:
+K
+K
+=>
+E
+E
+)
+|
+dependent fun. abstraction
+E
+E
+(
+N
+N
+)
+|
+E
+E
+(
+D
+​
+T
+DT
+)
+|
+E
+E
+(
+A
+A
+)
+|
+dependent fun. application
+map
+|
+reduce
+|
+reduceSeq
+|
+zip
+|
+…
+primitives
+Expr
+t: Type
+Primitive
+DepApply¡K,T¿
+kind: K; f: Expr; x: T
+DepLambda¡K,I¿
+kind: K; x: I; e: Expr
+Apply
+f: Expr; e: Expr
+Lambda
+x: Identifier; e: Expr
+Literal
+value: String
+Identifier
+name: String
+Fig. 3:
+Grammar of RISE expressions (above) and corresponding diagram of classes (below) representing them.

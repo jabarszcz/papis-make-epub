@@ -199,6 +199,45 @@ ARIA_ID_REFERENCES = ("aria-activedescendant", "aria-describedby",
                       "aria-details", "aria-errormessage", "aria-flowto",
                       "aria-labelledby", "aria-owns")
 
+# Inline svg in XHTML needs its namespace declared, and its camelCase
+# names spelled as SVG defines them; the HTML parser lowercases every
+# name. The HTML standard's parser restores them on insertion ("adjust
+# SVG attributes" and the SVG element name table of the "in foreign
+# content" insertion mode, https://html.spec.whatwg.org/multipage/
+# parsing.html, read 2026-10-05); the same tables restore them here,
+# after the fact.
+SVG_NS = "http://www.w3.org/2000/svg"
+XHTML_NS = "http://www.w3.org/1999/xhtml"
+SVG_ELEMENT_NAMES = {n.lower(): n for n in (
+    "altGlyph", "altGlyphDef", "altGlyphItem", "animateColor",
+    "animateMotion", "animateTransform", "clipPath", "feBlend",
+    "feColorMatrix", "feComponentTransfer", "feComposite",
+    "feConvolveMatrix", "feDiffuseLighting", "feDisplacementMap",
+    "feDistantLight", "feDropShadow", "feFlood", "feFuncA", "feFuncB",
+    "feFuncG", "feFuncR", "feGaussianBlur", "feImage", "feMerge",
+    "feMergeNode", "feMorphology", "feOffset", "fePointLight",
+    "feSpecularLighting", "feSpotLight", "feTile", "feTurbulence",
+    "foreignObject", "glyphRef", "linearGradient", "radialGradient",
+    "textPath",
+)}
+SVG_ATTRIBUTE_NAMES = {n.lower(): n for n in (
+    "attributeName", "attributeType", "baseFrequency", "baseProfile",
+    "calcMode", "clipPathUnits", "diffuseConstant", "edgeMode",
+    "filterUnits", "glyphRef", "gradientTransform", "gradientUnits",
+    "kernelMatrix", "kernelUnitLength", "keyPoints", "keySplines",
+    "keyTimes", "lengthAdjust", "limitingConeAngle", "markerHeight",
+    "markerUnits", "markerWidth", "maskContentUnits", "maskUnits",
+    "numOctaves", "pathLength", "patternContentUnits",
+    "patternTransform", "patternUnits", "pointsAtX", "pointsAtY",
+    "pointsAtZ", "preserveAlpha", "preserveAspectRatio",
+    "primitiveUnits", "refX", "refY", "repeatCount", "repeatDur",
+    "requiredExtensions", "requiredFeatures", "specularConstant",
+    "specularExponent", "spreadMethod", "startOffset", "stdDeviation",
+    "stitchTiles", "surfaceScale", "systemLanguage", "tableValues",
+    "targetX", "targetY", "textLength", "viewBox", "viewTarget",
+    "xChannelSelector", "yChannelSelector", "zoomAndPan",
+)}
+
 
 def fragment_targets(a: Tag) -> list[str]:
     """The id a fragment link names; nothing for any other link.
@@ -221,9 +260,9 @@ class Extraction:
     :meth:`embed_figures` over every node that becomes a part, then
     the ``add_*`` methods in reading order, and :meth:`content` to
     close. The stages rewrite the soup in place; the parts are
-    recorded as nodes, and :meth:`content` drops from them what is
-    never article content (:data:`NON_CONTENT`), unwraps javascript
-    links, and serializes them.
+    recorded as nodes, and :meth:`content` runs the generic rules on
+    them (what is never article content, widget markup, inline svg,
+    ARIA references) and serializes them.
     """
 
     def __init__(self, page: SavedPage,
@@ -435,14 +474,16 @@ class Extraction:
                           else epub_type, entries)
 
     def content(self) -> Content:
-        """The content: the recorded parts, serialized once three
+        """The content: the recorded parts, serialized once four
         generic rules have run on them (:func:`drop_non_content`,
-        :func:`drop_widget_markup`, :func:`resolve_aria_references`).
-        The extraction's work on the soup ends here."""
+        :func:`drop_widget_markup`, :func:`conform_svg`,
+        :func:`resolve_aria_references`). The extraction's work on
+        the soup ends here."""
         nodes = [node for node, _, _ in self._parts]
         for node in nodes:
             drop_non_content(node)
             drop_widget_markup(node)
+            conform_svg(node)
         ids = ids_under(nodes)
         for node in nodes:
             resolve_aria_references(node, ids)
@@ -483,6 +524,31 @@ def drop_widget_markup(node: Tag) -> None:
         for attr in WIDGET_ATTRIBUTES:
             if el.has_attr(attr):
                 del el[attr]
+
+
+def conform_svg(node: Tag) -> None:
+    """Make the inline svg under *node* valid in XHTML: declare the
+    SVG namespace on each svg root, restore the camelCase element and
+    attribute names the
+    HTML parser lowercased (:data:`SVG_ELEMENT_NAMES`,
+    :data:`SVG_ATTRIBUTE_NAMES`), and put the content of each
+    ``foreignObject`` back in the XHTML namespace."""
+    for svg in node.find_all("svg"):
+        if svg.find_parent("svg"):
+            continue
+        svg["xmlns"] = SVG_NS
+        for el in (svg, *svg.find_all(True)):
+            el.name = SVG_ELEMENT_NAMES.get(el.name, el.name)
+        for el in (svg, *svg.find_all(True)):
+            if el.find_parent("foreignObject"):
+                continue
+            for attr in list(el.attrs):
+                proper = SVG_ATTRIBUTE_NAMES.get(attr, attr)
+                if proper != attr:
+                    el.attrs[proper] = el.attrs.pop(attr)
+        for fo in svg.find_all("foreignObject"):
+            for child in fo.find_all(True, recursive=False):
+                child["xmlns"] = XHTML_NS
 
 
 def resolve_aria_references(node: Tag, ids: AbstractSet[str]) -> None:

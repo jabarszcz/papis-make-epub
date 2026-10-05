@@ -122,12 +122,15 @@ captured = 2026-10-03
 best_effort = false
 
 [[fixture]]
-id = "arxiv-listings-2201.03611"
+id = "arxiv-inline-logical-block-2201.03611"
 kind = "reduction"
 platform = "arxiv"
 url = "https://arxiv.org/html/2201.03611"
-# a code listing with LaTeXML's download icon; the full capture has none
-captured = 2026-10-02
+# LaTeXML nested this document in an inline framed block: the title
+# block, the paragraphs and the figures are spans, and each section
+# nests in the previous one; one figure is a TikZ picture, inline svg
+# with foreignObject text
+captured = 2026-10-03
 best_effort = false
 
 [[fixture]]

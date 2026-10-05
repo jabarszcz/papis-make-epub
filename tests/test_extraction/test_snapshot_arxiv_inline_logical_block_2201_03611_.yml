@@ -7,7 +7,7 @@ package:
     text: Start
     type: bodymatter
   manifest:
-    content.xhtml: application/xhtml+xml
+    content.xhtml: application/xhtml+xml mathml svg
     fonts/dejavu.ttf: font/ttf
     fonts/stix.ttf: font/ttf
     nav.xhtml: application/xhtml+xml nav
@@ -17,7 +17,7 @@ package:
     creator: null
     identifier: https://arxiv.org/html/2201.03611
     language: en
-    title: arxiv-listings-2201.03611
+    title: arxiv-inline-logical-block-2201.03611
   spine:
   - content.xhtml
   toc:
@@ -25,22 +25,24 @@ package:
   - I Introduction
   - II Background in IR and Compiler Design
   - 'III Shine : A Language-Oriented Compiler'
-  - IV Clearly Separating Optimizing from Code Generation
+  - IV Clearly Separating Optimizing from Code Generation:
+    - IV-A RISE expressions, types, and primitives
 parts:
 - epub_type: titlepage
-  text_length: 296
+  text_length: 598
   toc:
   - Abstract
 - epub_type: null
-  text_length: 600
+  text_length: 921
   toc:
   - I Introduction
   - II Background in IR and Compiler Design
   - 'III Shine : A Language-Oriented Compiler'
-  - IV Clearly Separating Optimizing from Code Generation
+  - IV Clearly Separating Optimizing from Code Generation:
+    - IV-A RISE expressions, types, and primitives
 stats:
   dead_links: 0
   images: 0
-  math: 0
+  math: 14
   math_fallback: 0
   math_images: 0
