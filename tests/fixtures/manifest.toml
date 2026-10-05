@@ -144,6 +144,15 @@ captured = 2026-10-03
 best_effort = false
 
 [[fixture]]
+id = "arxiv-mtext-html-2206.01398"
+kind = "reduction"
+platform = "arxiv"
+url = "https://arxiv.org/html/2206.01398"
+# LaTeXML renders \rule inside a formula as a span in mtext
+captured = 2026-10-03
+best_effort = false
+
+[[fixture]]
 id = "sciencedirect-figure-downloads-S0167642321000502"
 kind = "reduction"
 platform = "sciencedirect"

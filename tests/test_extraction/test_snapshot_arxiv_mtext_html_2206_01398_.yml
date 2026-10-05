@@ -1,0 +1,40 @@
+language: en
+media_count: 0
+media_extensions: {}
+package:
+  landmarks:
+  - href: content.xhtml#abstract1
+    text: Start
+    type: bodymatter
+  manifest:
+    content.xhtml: application/xhtml+xml mathml
+    fonts/dejavu.ttf: font/ttf
+    fonts/stix.ttf: font/ttf
+    nav.xhtml: application/xhtml+xml nav
+    style.css: text/css
+    toc.ncx: application/x-dtbncx+xml
+  metadata:
+    creator: null
+    identifier: https://arxiv.org/html/2206.01398
+    language: en
+    title: arxiv-mtext-html-2206.01398
+  spine:
+  - content.xhtml
+  toc:
+  - Abstract
+  - 1 TNFA
+parts:
+- epub_type: titlepage
+  text_length: 172
+  toc:
+  - Abstract
+- epub_type: null
+  text_length: 177
+  toc:
+  - 1 TNFA
+stats:
+  dead_links: 0
+  images: 0
+  math: 1
+  math_fallback: 0
+  math_images: 0

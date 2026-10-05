@@ -1,0 +1,55 @@
+==== part 0 (titlepage)
+A closer look at TDFA
+Angelo Borsotti
+Abstract
+We present an algorithm for regular expression parsing and submatch extraction
+based on tagged deterministic finite automata.
+
+==== part 1 (None)
+1
+TNFA
+3
+C
+=
+e
+​
+p
+​
+s
+​
+i
+​
+l
+​
+o
+​
+n
+​
+​
+c
+​
+l
+​
+o
+​
+s
+​
+u
+​
+r
+​
+e
+​
+(
+C
+,
+Δ
+,
+q
+f
+,
+k
+)
+C=epsilon\rule{4.62497pt}{0.5pt}closure(C,\Delta,q_{f},k)
+Algorithm 1
+TNFA simulation.

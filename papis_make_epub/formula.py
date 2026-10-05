@@ -24,6 +24,11 @@ ALL_FORMATS = frozenset({MATHML, TEX})
 
 MATHML_NS = "http://www.w3.org/1998/Math/MathML"
 
+# the token elements hold text alone in MathML 3 (the EPUB schema) and
+# for MathJax's MathML input; LaTeXML puts HTML in an mtext for \rule
+# (a span sized by CSS) and \framebox (a styled span)
+TOKEN_ELEMENTS = ("mi", "mn", "mo", "ms", "mtext")
+
 
 def _declare_namespace(math: Tag) -> Tag:
     """*math* with the MathML namespace declared on it (texmath
@@ -35,7 +40,12 @@ def _declare_namespace(math: Tag) -> Tag:
 
 @dataclass
 class Formula:
-    """A formula's DOM node, position, and source formats."""
+    """A formula's DOM node, position, and source formats.
+
+    The source MathML's token elements (:data:`TOKEN_ELEMENTS`) are
+    reduced to their text on construction, so every consumer of the
+    MathML, the pass-through included, reads them so.
+    """
 
     # the element apply_math replaces with the rendered output
     node: Tag
@@ -44,6 +54,13 @@ class Formula:
     mathml: Tag | None = None
     # TeX source, when the source carries it
     tex: str | None = None
+
+    def __post_init__(self) -> None:
+        if self.mathml is None:
+            return
+        for token in self.mathml.find_all(TOKEN_ELEMENTS):
+            for el in token.find_all(True):
+                el.replace_with(el.get_text())
 
     @cached_property
     def as_tex(self) -> str | None:
