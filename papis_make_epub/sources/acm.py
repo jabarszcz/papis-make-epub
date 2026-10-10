@@ -53,8 +53,8 @@ class AcmSource(Source):
         body = root.first("section#bodymatter")
         back = root.first("#backmatter section#bibliography", "#backmatter")
         # the footnotes sit in a sibling container of the bibliography,
-        # so the bibliography selection above misses them
-        footnotes = root.first("#backmatter #footnotes")
+        # one doc-footnote wrapper per footnote
+        footnotes_section = root.first("#backmatter #footnotes")
         if body is None:
             raise SourceNotAvailableError(
                 "no #bodymatter: not ACM full-text HTML")
@@ -66,11 +66,15 @@ class AcmSource(Source):
                 "placeholder); only PDF/eReader renditions exist for "
                 "this paper")
 
-        parts = [p for p in (abstract, body, back, footnotes)
+        parts = [p for p in (abstract, body, back, footnotes_section)
                  if p is not None]
-        # div.external-links is the per-reference link row (Google
-        # Scholar, Digital Library, Crossref): reader chrome
-        extraction.drop(parts, "div.external-links")
+        # div.external-links is the per-reference and per-footnote link
+        # row; its return link (Go to Citation, Return to text) goes,
+        # replaced by the made back links, and a footnote's row is then
+        # empty
+        backmatter = [p for p in (back, footnotes_section) if p is not None]
+        extraction.drop(backmatter, "div.to-citation__wrapper")
+        extraction.drop(backmatter, "div.external-links:not(:has(a))")
         for part in parts:
             part.strip_attributes(r"data-.*")
             # role="paragraph" is WAI-ARIA 1.2, which EPUB 3.3
@@ -97,11 +101,10 @@ class AcmSource(Source):
                 "no sec-N sections under #bodymatter")
         extraction.add_sections(sections)
         if back is not None:
-            extraction.add_sections([back], "bibliography")
-
-        # the footnote content the markers link to, kept after the
-        # bibliography so the #fn targets resolve
-        if footnotes is not None:
-            extraction.add_part(footnotes)
+            extraction.add_bibliography(back, back.select("div.biblioentry"))
+        if footnotes_section is not None:
+            extraction.add_footnotes(
+                footnotes_section,
+                footnotes_section.select("[role='doc-footnote']"))
 
         return extraction.content()

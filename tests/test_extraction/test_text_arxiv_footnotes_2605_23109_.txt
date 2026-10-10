@@ -1,0 +1,154 @@
+==== part 0 (titlepage)
+Inductive Deductive Synthesis: Enabling AI to Generate Formally Verified Systems
+Shubham Agarwal
+∗,1
+, Alexander Krentsel
+∗,1
+, Shu Liu
+∗,1
+, Mert Cemri
+∗,1
+,
+Audrey Cheng
+1
+,
+Rui Meng
+2
+, Tomas Pfister
+2
+, Chun-Liang Li
+2
+, Sylvia Ratnasamy
+1
+,
+Aditya Parameswaran
+1
+,
+Matei Zaharia
+1
+, Ion Stoica
+1
+, Mohsen Lesani
+3
+1
+UC Berkeley
+2
+Google
+3
+UC Santa Cruz
+Abstract
+AI agents increasingly excel at generating, testing, and refining code.
+However, they fall short on tasks requiring formal guarantees of full coverage that testing alone cannot provide.
+Distributed systems are a prime example: properties such as consistency between reads and writes must hold under every possible interleaving of events.
+Mechanized formal verification can guarantee such correctness, but typically demands months to years of expert effort.
+As evidence, even SOTA coding agents (Codex with GPT-5.4 and Claude Code with Opus 4.6) succeed on only 2/7 distributed key-value-store specifications.
+In this paper, we present the first effective approach to addressing this gap, Inductive Deductive Synthesis (IDS), which jointly and incrementally synthesizes implementation and proof, and learns from failed attempts to systematically try promising strategies.
+Built as an agentic LLM system, IDS achieves 7/7 in about
+6.8
+6.8
+hours and $
+106
+106
+per spec on average, roughly
+200
+×
+200\times
+faster than expert effort and
+17
+%
+17\%
+cheaper than SOTA agents.
+IDS further incorporates performance feedback into the same loop, yielding implementations up to
+3
+×
+3\times
+faster than published verified systems.
+1
+
+==== part 1 (None)
+1
+Introduction
+Naturally, one may ask, can we simply provide a coding agent with a specification and formal verification tooling, and ask it to build complex systems that provably satisfy that specification? Our experiments demonstrate that the answer is no.
+We show in
+section
+˜
+5
+that Codex (GPT-5.4)
+Chen
+et al.
+(2021)
+and Claude Code (Opus 4.6)
+Anthropic (2025)
+fail to generate correct systems for
+5
+5
+of
+7
+7
+widely studied distributed key-value-store consistency specifications (e.g., causal consistency, read-your-writes). The failure mode we observe is a structural one: following typical human patterns, agents treat verification as a downstream check on code they have already written. This approach (a) requires writing the whole proof at once, which is exceptionally difficult even for humans
+2
+, and (b) defers all correctness feedback to the end of an implementation, depriving the agent of valuable guiding signals.
+
+==== part 2 (bibliography)
+References
+[26]
+M. Lesani, C. J. Bell, and A. Chlipala
+(2016)
+Chapar: certified causally consistent distributed key-value stores
+.
+In
+Proceedings of the 43rd Annual ACM SIGPLAN-SIGACT Symposium on Principles of Programming Languages, POPL 2016, St. Petersburg, FL, USA, January 20 - 22, 2016
+,
+R. Bodík and R. Majumdar (Eds.)
+,
+pp. 357–370
+.
+External Links:
+Link
+,
+Document
+Cited by:
+Appendix A
+,
+§I.6
+,
+Table 8
+,
+Appendix I
+,
+§1
+,
+§1
+,
+§2
+,
+§5.1
+,
+§5.1
+,
+§5.2
+,
+§5
+,
+footnote 2
+.
+↩
+
+==== part 3 (footnotes)
+Footnotes
+1
+Code available at
+https://github.com/skydiscover-ai/skydiscover
+.
+↩
+$\ast$
+Equal contribution.
+2
+Past work
+Lesani
+et al.
+(
+2016
+)
+reports 9–12 months of expert effort to write a proof for a key-value (KV) store.
+↩

@@ -143,13 +143,61 @@ def _restore_list_markers(extraction: Extraction, article: Node) -> None:
             li.delete("style")
 
 
-def _part_role(section: Node) -> str | None:
-    """The ``epub:type`` of a top-level LaTeXML section, if typed."""
-    if section.matches(".ltx_bibliography"):
-        return "bibliography"
-    if section.matches(".ltx_appendix"):
-        return "appendix"
-    return None
+# the LaTeXML note roles read as footnotes: \footnote, and the title
+# block's \thanks and \footnotetext
+FOOTNOTE_ROLES = ("ltx_role_footnote", "ltx_role_thanks",
+                  "ltx_role_footnotetext")
+
+
+def _collect_footnotes(extraction: Extraction,
+                       article: Node) -> tuple[Node, list[Node]]:
+    """Move the article's footnotes into a footnotes section after it;
+    the section and the footnotes.
+
+    LaTeXML leaves each note inline at its mark, one span holding the
+    mark and, beside it, the note text, which repeats the mark; no
+    link joins them. The mark stays, as a link to the footnote; the
+    note text moves, under LaTeXML's number label (or the repeated
+    mark, for the title-block notes, which have no number) and
+    without the ``thanks:``/``footnotetext:`` type label. A footnote
+    without an id gets one. A ``\\footnotetext`` stands apart from any
+    mark, so its place is left empty; an empty ``\\footnotemark`` (a
+    repeat of another note's mark) stays as its plain mark.
+    """
+    section = extraction.new("section")
+    section.append(extraction.new("h2", text="Footnotes"))
+    footnotes = []
+    for span in article.select(", ".join(f"span.ltx_note.{r}"
+                                         for r in FOOTNOTE_ROLES)):
+        marks = span.children("sup.ltx_note_mark")
+        content = span.first(".ltx_note_content")
+        if content is None:
+            continue
+        for el in content.select(".ltx_note_type"):
+            el.remove()
+        if content.has(".ltx_tag_note"):
+            for el in content.select("sup.ltx_note_mark"):
+                el.remove()
+        footnote_id = span.attr("id") or extraction.mint_id("footnote")
+        footnote = extraction.new("div", {"class": "ltx_note_content",
+                                          "id": footnote_id})
+        footnote.adopt_children(content)
+        footnotes.append(footnote)
+        section.append(footnote)
+        if span.matches(".ltx_role_footnotetext") or not marks:
+            span.remove()
+            continue
+        link = extraction.new("a", {"href": "#" + footnote_id})
+        link.append(marks[0])
+        span.replace_with(link)
+    for span in article.select("span.ltx_note.ltx_role_footnotemark"):
+        marks = span.children("sup.ltx_note_mark")
+        if marks:
+            span.replace_with(marks[0])
+        else:
+            span.remove()
+    extraction.place(section)
+    return section, footnotes
 
 
 def _front_matter(article: Node) -> tuple[Node, list[TocEntry]]:
@@ -206,15 +254,23 @@ class ArxivSource(Source):
 
         extraction.render_math(formula(m) for m in article.select("math"))
         _drop_conversion_errors(extraction, article)
-        extraction.resolve_links([article])
+        footnotes_section, footnotes = _collect_footnotes(extraction, article)
+        extraction.resolve_links([article, footnotes_section])
         _restore_list_markers(extraction, article)
-        extraction.embed_figures([article])
+        extraction.embed_figures([article, footnotes_section])
 
         nodes = outermost(article.select(PARTS))
 
         front, front_entries = _front_matter(article)
         extraction.add_part(front, "titlepage", front_entries)
         for node in nodes:
-            extraction.add_sections([node], _part_role(node))
+            if node.matches(".ltx_bibliography"):
+                extraction.add_bibliography(node, node.select("li.ltx_bibitem"))
+            elif node.matches(".ltx_appendix"):
+                extraction.add_sections([node], "appendix")
+            else:
+                extraction.add_sections([node])
+        if footnotes:
+            extraction.add_footnotes(footnotes_section, footnotes)
 
         return extraction.content()

@@ -122,6 +122,16 @@ captured = 2026-10-03
 best_effort = false
 
 [[fixture]]
+id = "arxiv-footnotes-2605.23109"
+kind = "reduction"
+platform = "arxiv"
+url = "https://arxiv.org/html/2605.23109v1"
+# LaTeXML's inline notes: a footnote without an id in the abstract, one
+# citing a bibliography entry, and a title-block footnotetext
+captured = 2026-08-03
+best_effort = false
+
+[[fixture]]
 id = "arxiv-inline-logical-block-2201.03611"
 kind = "reduction"
 platform = "arxiv"
@@ -150,6 +160,19 @@ platform = "arxiv"
 url = "https://arxiv.org/html/2206.01398"
 # LaTeXML renders \rule inside a formula as a span in mtext
 captured = 2026-10-03
+best_effort = false
+
+[[fixture]]
+id = "ieee-footnotes-8796365"
+kind = "reduction"
+platform = "ieee"
+url = "https://ieeexplore.ieee.org/document/8796365"
+# the Footnotes fold open (a capture holds one fold, and the ieee
+# capture's is References): the two marked paragraphs, and the panel,
+# caught before MathJax typeset it, its TeX \$-delimited text in
+# tex-math elements; the page script is cut to the global the
+# detector reads
+captured = 2026-10-11
 best_effort = false
 
 [[fixture]]

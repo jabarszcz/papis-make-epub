@@ -1,0 +1,56 @@
+==== part 0 (titlepage)
+ieee-footnotes-8796365
+
+==== part 1 (None)
+SECTION IV.
+Controlling the Multipath Through Reconfigurable Intelligent Surfaces
+where  is the adjustable phase induced by the th reflecting meta-surface of the RIS,  stands for the data symbol selected from an -ary phase shift keying/quadrature amplitude modulation (PSK/QAM) constellation and  is the additive white Gaussian noise (AWGN) sample. As far as the channels are concerned, we have  and . In matrix form,  can be also re-written as follows:  where  and  represent the vectors of channel coefficients between the two terminals and the RIS, and  is a diagonal matrix that contains the phase shifts applied by the reflecting meta-surfaces of the RIS. By direct inspection of , the obtained model resembles that of a precoding/beamforming system in conventional MIMO systems. However, the precoding/beamforming operation is realized over the transmission medium (the environment) rather than at the transmitter or at the receiver. As far as the fast fading is concerned, we note, in particular, that the channel model for the RISs and the relays are similar, while their path-loss models are different if the RISs are sufficiently large to behave as reflectors.
+ where  is the average transmitted energy per symbol. It is not difficult to infer that  is maximized by eliminating the channel phases (similar to co-phasing in classical maximum ratio combining schemes), i.e., the optimal choice of  that maximizes the instantaneous SNR is  for . This solution, notably, requires that the channel phases are known to the RIS. How to perform channel estimation in RIS-empowered wireless networks along with the challenges that this entails if the RISs are assumed to be passive, as opposed to, e.g., the relays, is discussed in the sequel. In detail, the optimal choice of the phases,  for , is obtained from the identity:  which is maximized if  for all .
+
+
+ which is proportional to , i.e., , if . This result is in agreement with the received signal power in .
+ which for binary PSK (BPSK) simplifies to
+By observing Fig. 6, we note that the average SEP has a waterfall region and a slowly-decaying region. For
+N
+E
+s
+N
+0
+≪
+10
+, in particular, (18) unveils that
+P
+e
+is proportional to
+1
+:
+This explains the superior performance of an RIS-based scheme. In this range, notably, even though the SNR  is relatively low, the average SEP is quite low. This is due to the  term inside the exponential function.
+ which explains the slowly-decaying behavior of the SEP for high values of the SNR. In particular this slowly-decaying region is caused by the scaling factor in front of the exponential function, which decays with the negative square root of the SNR. However, the SEP still decays exponentially as a function of , and, therefore,  can be reduced by appropriately increasing .
+ This integral can be upper bounded by letting  and  in its first and second terms, respectively. By assuming , which is the SNR region of interest, the average SEP can be expressed as follows:  where the second exponential term coming from  is ignored since its contribution is negligible. Since  appears in the exponent of , an RIS-based scheme experiences a degradation of the error performance if the modulation order is increased, as in conventional modulation schemes. However, RISs can take advantage of large values of  to counteract the detrimental effect of increasing the modulation order. This can be a remedy for increasing the energy efficiency of future extreme mobile broadband applications of 6G and beyond, which will rely on high-order constellations to support extremely high data rates.
+
+==== part 2 (None)
+SECTION VI.
+Historical Perspective and State-of-the-Art Solutions
+As a beyond massive MIMO solution, the large intelligent surface (LIS) concept is proposed in [63]–​[65].
+2
+In particular, a system with a massive number of radiating and sensing elements, which create a contiguous and electromagnetically active surface, is considered. A major difference between traditional massive MIMO [71] and the LIS is the employment of the whole contiguous surface for transmission and reception. The authors also introduced a signal model by considering a procedure called match filtering (through 2-D integration of the received signals on the surface) and investigated the capacity of the system.
+
+==== part 3 (footnotes)
+Footnotes
+1
+.
+It is worth noting that
+N
+E
+s
+/
+N
+0
+is measured in linear scale and the given two critical points have been determined based on several calculations for the considered values of
+N
+.
+↩
+2
+.
+It is worth noting that the term of LIS is also used by other researchers [1,66–70] in lieu of smart reflect-arrays and RISs.
+↩

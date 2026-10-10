@@ -787,67 +787,85 @@ verified transformations
 , preserving some semantics.
 The focus of this paper lies on timing-related transformations, but we also recognize the promise of theorem proving for the formalization of other non-functional aspects of circuit design, such as power consumption, error correction, fault-tolerance and so forth. The formal study of all these aspects of circuit construction and program construction could benefit from mechanized verification.
 
-==== part 9 (None)
+==== part 9 (footnotes)
 Notes
 1.
 https://gitlab.com/joaopizani/lambda1-hdl/tree/paper-2017-comb-seq
 .
+↩
 
 ==== part 10 (bibliography)
 References
 Atkey, R., Lindley, S., Yallop, J.: Unembedding domain-specific languages. In: Proceedings of the 2nd ACM SIGPLAN Symposium on Haskell, Haskell 2009, pp. 37–48. ACM, New York (2009).
 https://doi.org/10.1145/1596638.1596644
 . ISBN 978-1-60558-508-6
+↩
 Axelsson, E., Claessen, K., Sheeran, M.: Wired: wire-aware circuit design. In: Borrione, D., Paul, W. (eds.) CHARME 2005. LNCS, vol. 3725, pp. 5–19. Springer, Heidelberg (2005).
 https://doi.org/10.1007/11560548_4
+↩
 Baaij, C.P.R.: Digital circuits in C
 λ
 λ
 aSH: functional specifications and type-directed synthesis. info:eu-repo/semantics/doctoralThesis. University of Twente, Enschede, January 2015.
 https://doi.org/10.3990/1.9789036538039
+↩
 Bjesse, P., Claessen, K., Sheeran, M., Singh, S.: Lava: hardware design in Haskell. ACM SIGPLAN Not.
 34
 (1), 174–184 (1999).
 https://doi.org/10.1145/291251.289440
 . ISSN 03621340
+↩
 Boulton, R.J., Gordon, A.D., Gordon, M.J.C., Harrison, J., Herbert, J., Van Tassel, J.: Experience with embedding hardware description languages in HOL. In: TPCD, vol. 10, pp. 129–156 (1992)
+↩
 Brady, E., Mckinna, J., Hammond, K.: Constructing correct circuits: verification of functional aspects of hardware specifications with dependent types. In: Trends in Functional Programming 2007 (2007)
+↩
 Braibant, T.: Coquet: a Coq library for verifying hardware. In: Jouannaud, J.-P., Shao, Z. (eds.) CPP 2011. LNCS, vol. 7086, pp. 330–345. Springer, Heidelberg (2011).
 https://doi.org/10.1007/978-3-642-25379-9_24
+↩
 Braibant, T., Chlipala, A.: Formal verification of hardware synthesis. In: Sharygina, N., Veith, H. (eds.) CAV 2013. LNCS, vol. 8044, pp. 213–228. Springer, Heidelberg (2013).
 https://doi.org/10.1007/978-3-642-39799-8_14
+↩
 Choi, J., Vijayaraghavan, M., Sherman, B., Chlipala, A., Arvind: Kami: a platform for high-level parametric hardware specification and its modular verification. Proc. ACM Program. Lang.
 1
 (ICFP), 24:1–24:30 (2017).
 https://doi.org/10.1145/3110268.
 . ISSN 2475-1421
+↩
 Gill, A., Bull, T., Kimmell, G., Perrins, E., Komp, E., Werling, B.: Introducing Kansas Lava. In: Morazán, M.T., Scholz, S.-B. (eds.) IFL 2009. LNCS, vol. 6041, pp. 18–35. Springer, Heidelberg (2010).
 https://doi.org/10.1007/978-3-642-16478-1_2
+↩
 Hanna, F.K., Daeche, N.: Dependent types and formal synthesis. Philos. Trans. Phys. Sci. Eng.
 339
 (1652), 121–135 (1992).
 http://www.jstor.org/stable/54016
 . ISSN 0962-8428
+↩
 Melham, T.: Higher Order Logic and Hardware Verification. Cambridge Tracts in Theoretical Computer Science, vol. 31. Cambridge University Press, Cambridge (1993).
 https://doi.org/10.1017/CBO9780511569845
 .
 http://www.cs.ox.ac.uk/tom.melham/pub/Melham-1993-HOL.html
 . ISBN 0-521-41718-X
+↩
 Pizani Flor, J.P., Sijsling, Y., Swierstra, W.:
 π
 -ware: hardware description and verification in Agda. In: Uustalu, T. (ed.) 21th International Conference on Types for Proofs and Programs (TYPES 2015). Leibniz International Proceedings in Informatics (LIPIcs) (2016)
+↩
 Sander, I., Jantsch, A.: System modeling and transformational design refinement in ForSyDe [formal system design]. IEEE Trans. Comput. Aided Des. Integr. Circuits Syst.
 23
 (1), 17–32 (2004).
 https://doi.org/10.1109/TCAD.2003.819898
 . ISSN 0278-0070
+↩
 Sheeran, M.: Hardware design and functional programming: a perfect match (2005).
 http://www.jucs.org/jucs_11_7/hardware_design_and_functional/jucs_11_7_1135_1158_sheeran.pdf
+↩
 Sheeran, M.: muFP, a language for VLSI design. In: Proceedings of the 1984 ACM Symposium on LISP and Functional Programming, pp. 104–112. ACM Press (1984).
 https://doi.org/10.1145/800055.802026
 . ISBN 0897911423
+↩
 Singh, S.: Designing reconfigurable systems in lava. In: Proceedings 17th International Conference on VLSI Design 2004, pp. 299–306 (2004).
 https://doi.org/10.1109/ICVD.2004.1260941
+↩
 
 ==== part 11 (None)
 Acknowledgments

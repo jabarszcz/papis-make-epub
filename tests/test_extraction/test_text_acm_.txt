@@ -4155,302 +4155,496 @@ References
 Andrea Asperti. 2012. A Compact Proof of Decidability for Regular Expression Equivalence.
 In Interactive Theorem Proving Third International Conference, ITP 2012, Princeton, NJ, USA, August 13-15, 2012. Proceedings (Lecture Notes in Computer Science, Vol. 7406)
 , Lennart Beringer and Amy P Felty.(Eds.) Springer, 283-298.
+Crossref
+Google Scholar
+↩
 [2]
 Fahad Ausaf, Roy Dyckhoff, and Christian Urban. 2016. POSIX Lexing with Derivatives of Regular Expressions (Proof Pearl).
 In Interactive Theorem Proving - 7th International Conference, ITP 2016, Nancy, France, August 22-25, 2016, Proceedings (Lecture Notes in Computer Science, Vol. 9807)
 , Jasmin Christian Blanchette and Stephan Merz (Eds.). Springer, 69-86.
+Crossref
+Google Scholar
+↩
 [3]
 Auréle Barriére and Clément Pit-Claudel. 2024. Linear Matching of JavaScript Regular Expressions.
 Proc. ACM Program. Lang. 8
 , PLDI (2024), 1336-1360.
+Digital Library
+Google Scholar
+↩
 [4]
 Auréle Barriére, Victor Deng, and Clément Pit-Claudel. 2025a.
 Artifact for "Formal Verification for JavaScript Regular Expressions: a Proven Mechanized Semantics and its Applications", at POPL
 2026.
+Digital Library
+Google Scholar
+↩
 [5]
 Auréle Barriére, Victor Deng, and Clément Pit-Claudel. 2025b. Formal Verification for JavaScript Regular Expressions: a Proven Semantics and its Applications (Extended Version). arXiv:
 2507.13091
 [cs.PL]
 https://arxiv.org/abs/2507.13091
+Google Scholar
+↩
 [6]
 Martin Berglund and Brink van der Merwe. 2017. On the semantics of regular expression parsing in the wild.
 Theor. Comput. Sci
 . 679 (2017), 69-82.
+Crossref
+Google Scholar
 [7]
 Martin Berglund, Brink van der Merwe, and Steyn vaan Litsenborgh. 2021. Regular Expressions with Lookahead.
 J. Univers. Comput. Sci
 . 27, 4 (2021), 324-340.
+Crossref
+Google Scholar
+↩
 [8]
 Martin Bodin, Arthur Charguéraud, Daniele Filaretti, Philippa Gardner, Sergio Maffeis, Daiva Naudziuniene, Alan Schmitt, and Gareth Smith. 2014. A Trusted Mechanised JavaScript Specification.
 In The 41st Annual ACM SIGPLAN-SIGACT Symposium on Principles of Programming Languages, POPL '14, San Diego, CA, USA, January 20-21, 2014
 , Suresh Jagannathan and Peter Sewell (Eds.). ACM, 87-100.
+Digital Library
+Google Scholar
+↩
 [9]
 Thomas Braibant and Damien Pous. 2010. An Efficient Coq Tactic for Deciding Kleene Algebras.
 In Interactive Theorem Proving, First International Conference, ITP 2010, Edinburgh, UK, July 11-14, 2010. Proceedings (Lecture Notes in Computer Science, Vol. 6172)
 , Matt Kaufmann and Lawrence C. Paulson (Eds.). Springer, 163-178.
+Digital Library
+Google Scholar
+↩
 [10]
 Elton Maximo Cardoso, Leonardo Vieira dos Santos Reis, and Rodrigo Geraldo Ribeiro.2023. A Verified Operational Semantics for Regular Expression Parsing.
 In Proceedings of the XXVII Brazilian Symposium on Programming Languages, SBLP 2023, Campo Grande, MS, Brazil, September 25-29, 2023
 . ACM, 82-90.
+Digital Library
+Google Scholar
 [11]
 Samuel Chassot and Viktor Kunčak. 2024. Verified invertible lexer using regular expressions and DFAs. arXiv:
 2412.13581
 [cs.PL]
 https://arxiv.org/abs/2412.13581
+Google Scholar
+↩
 [12]
 Agnishom Chattopadhyay, Wu Angela Li, and Konstantinos Mamouras. 2025. Verified and Efficient Matching of Regular Expressions with Lookaround.
 In Proceedings of the 14th ACM SIGPLAN International Conference on Certified Programs and Proofs, CPP 2025, Denver, CO, USA, January 20-21, 2025
 , Kathrin Stark, Amin Timany, Sandrine Blazy, and Nicolas Tabareau (Eds.). ACM, 198-213.
+Digital Library
+Google Scholar
+↩
 [13]
 Taolue Chen, Alejandro Flores-Lamas, Matthew Hague, Zhilei Han, Denghang Hu, Shuanglong Kan, Anthony W. Lin, Philipp Rümmer, and Zhilin Wu. 2022. Solving string constraints with Regex-dependent functions through transducers with priorities and variables.
 Proceedings of the ACM on Programming Languages 6
 , POPL (2022), 1-31.
+Digital Library
+Google Scholar
+↩
 [14]
 Nariyoshi Chida and Tachio Terauchi. 2023. Repairing Regular Expressions for Extraction.
 Proceedings of the ACM on Programming Languages 7
 , PLDI (2023), 1633-1656.
+Digital Library
+Google Scholar
+↩
 [15]
 Nariyoshi Chida and Tachio Terauchi. 2024. Repairing Regex-Dependent String Functions.
 In Proceedings of the 39th IEEE/ACM International Conference on Automated Software Engineering, ASE 2024, Sacramento, CA, USA, October 27 November 1, 2024
 , Vladimir Filkov, Baishakhi Ray, and Minghui Zhou (Eds.). ACM, 294-305.
+Digital Library
+Google Scholar
+↩
 [16]
 Thierry Coquand and Vincent Siles. 2011. A Decision Procedure for Regular Expression Equivalence in Type Theory.
 In Certified Programs and Proofs - First International Conference, CPP 2011
 .
+Digital Library
+Google Scholar
+↩
 [17]
 Russ Cox. 2009. Regular Expression Matching: the Virtual Machine Approach.
 https://swtch.com/~rsc/regexp/regexp2.html
 .
+Google Scholar
+↩
 [18]
 James C. Davis, Christy A. Coghlan, Francisco Servant, and Dongyoon Lee. 2018. The impact of regular expression denial of service (ReDoS) in practice: an empirical study at the ecosystem scale.
 In Proceedings of the 2018 ACM Foint Meeting on European Software Engineering Conference and Symposium on the Foundations of Software Engineering, ESEC/SIGSOFT FSE 2018
 . ACM, 246-256.
+Digital Library
+Google Scholar
+↩
 [19]
 Noé De Santo, Auréle Barriére, and Clément Pit-Claudel. 2024. A Coq Mechanization of JavaScript Regular Expression Semantics.
 Proc. ACM Program. Lang. 8, ICFP (2024)
 , 1003-1031.
+Digital Library
+Google Scholar
+↩
 [20]
 Christian Doczkal, Jan-Oliver Kaiser, and Gert Smolka. 2013. A Constructive Theory of Regular Languages in Coq.
 In Certified Programs and Proofs - Third International Conference, CPP 2013, Melbourne, VIC, Australia, December 11-13, 2013, Proceedings (Lecture Notes in Computer Science, Vol. 8307)
 , Georges Gonthier and Michael Norrish (Eds.). Springer, 82-97.
+Digital Library
+Google Scholar
+↩
 [21]
 Christian Doczkal and Gert Smolka. 2018. Regular Language Representations in the Constructive Type Theory of Coq.
 J. Autom. Reason
 . 61, 1-4 (2018), 521-553.
+Digital Library
+Google Scholar
+↩
 [22]
 Mark Jason Dominus. 2000. Perl Regular Expression Matching is NP-Hard.
 https://perl.plover.com/NPC/NPC-3SAT.html
 .
+Google Scholar
+↩
 [23]
 Danny Dubé and Marc Feeley. 2000. Efficiently building a parse tree from a regular expression.
 Acta Informatica 37
 , 2 (2000), 121-144.
+Digital Library
+Google Scholar
+↩
 [24]
 ECMA. 2023. ECMA-262, 14th edition: ECMAScript® 2023 Language Specification.
 https://262.ecma-international.org/14.0/
+Google Scholar
+↩
 [25]
 ECMA. 2024. ECMA-262, 15th edition: ECMAScript® 2024 Language Specification.
 https://262.ecma-international.org/15.0/
+Google Scholar
+↩
 [26]
 ECMA. 2025. ECMA-262, 16th edition: ECMAScript® 2025 Language Specification.
 https://262.ecma-international.org/16.0/
+Google Scholar
+↩
 [27]
 Derek Egolf, Sam Lasser, and Kathleen Fisher. 2021. Verbatim: A Verified Lexer Generator.
 In IEEE Security and Privacy Workshops, SP Workshops 2021, San Francisco, CA, USA, May 27
 , 2021. IEEE, 92-100.
+Crossref
+Google Scholar
+↩
 [28]
 Derek Egolf, Sam Lasser, and Kathleen Fisher.2022. Verbatim++: verified, optimized, and semantically rich lexing with derivatives.
 In CPP '22: 11th ACM SIGPLAN International Conference on Certified Programs and Proofs, Philadelphia, PA, USA, January 17-18, 2022
 , Andrei Popescu and Steve Zdancewic (Eds.). ACM, 27-39.
+Digital Library
+Google Scholar
+↩
 [29]
 Benjamin Eriksson, Amanda Stjerna, Riccardo De Masellis, Philipp Rümmer, and Andrei Sabelfeld. 2023. Black Ostrich: Web Application Scanning with String Solvers.
 In Proceedings of the 2023 ACM SIGSAC Conference on Computer and Communications Security, CCS 2023, Copenhagen, Denmark, November 26-30, 2023
 , Weizhi Meng, Christian Damsgaard Jensen, Cas Cremers, and Engin Kirda (Eds.). ACM, 549-563.
+Digital Library
+Google Scholar
+↩
 [30]
 Denis Firsov and Tarmo Uustalu. 2013. Certified Parsing of Regular Languages.
 In Certified Programs and Proofs - Third International Conference, CPP 2013, Melbourne, VIC, Australia, December 11-13, 2013, Proceedings (Lecture Notes in Computer Science, Vol. 8307)
 , Georges Gonthier and Michael Norrish (Eds.). Springer, 98-113.
+Digital Library
+Google Scholar
+↩
 [31]
 Dominik D.Freydenberger. 2013. Extended Regular Expressions: Succinctness and Decidability.
 Theory Comput. Syst. 53
 , 2 (2013), 159-193.
+Crossref
+Google Scholar
+↩
 [32]
 Alain Frisch and Luca Cardelli. 2004. Greedy Regular Expression Matching.
 In Automata, Languages and Programming: 31st International Colloquium, ICALP 2004, Turku, Finland, July 12-16, 2004. Proceedings (Lecture Notes in Computer Science, Vol. 3142)
 , Josep Díaz, Juhani Karhumäki, Arto Lepistö, and Donald Sannella (Eds.). Springer, 618-629.
+Crossref
+Google Scholar
+↩
 [33]
 Hiroya Fujinami and Ichiro Hasuo. 2024. Efficient Matching with Memoization for Regexes with Look-around and Atomic Grouping.
 In Programming Languages and Systems - 33rd European Symposium on Programming, ESOP 2024, Held as Part of the European Joint Conferences on Theory and Practice of Software, ETAPS 2024, Luxembourg City, Luxembourg, April 6-11, 2024, Proceedings, Part II (Lecture Notes in Computer Science, Vol. 14577)
 , Stephanie Weirich (Ed.). Springer0, 90-118.
+Digital Library
+Google Scholar
+↩
 [34]
 Andrew Gallant. 2014. Crate regex: An implementation of regular expressions for Rust.
 https://docs.rs/regex/latest/regex/
 .
+Google Scholar
+↩
 [35]
 Go. 2025. GO Regexp package.
 https://pkg.go.dev/regexp
 .
+Google Scholar
+↩
 [36]
 Google. 2010. RE2: A fast, safe, thread-friendly alternative to backtracking regular expression engines like those used in PCRE, Perl, and Python.
 https://github.com/google/re2
 .
+Google Scholar
+↩
 [37]
 Philip Hazel. 1997. PCRE - Perl Compatible Regular Expressions.
 https://www.pcre.org/
 .
+Google Scholar
+↩
 [38]
 Philip Hazel. 2012. PCRE Library Functions Manual.
 https://pcre.org/pcre.txt
 .
+Google Scholar
+↩
 [39]
 Iain Ireland. 2020. A New RegExp Engine in SpiderMonkey.
 https://hacks.mozilla.org/2020/06/a-new-regexp-engine-inspidermonkey/
 .
+Google Scholar
+↩
 [40]
 Jacques-Henri Jourdan, François Pottier, and Xavier Leroy. 2012. Validating LR(1) Parsers.
 In Programming Languages and Systems - 21st European Symposium on Programming, ESOP 2012, Held as Part of the European Joint Conferences on Theory and Practice of Software, ETAPS 2012, Tallinn, Estonia, March 24 - April 1, 2012. Proceedings (Lecture Notes in Computer Science, Vol. 7211)
 , Helmut Seidl (Ed.). Springer, 397-416.
+Digital Library
+Google Scholar
+↩
 [41]
 Stefan Kahrs and Colin Runciman. 2022. Simplifying regular expressions further.
 7. Symb. Comput
 . 109 (2022), 124-143.
+Digital Library
+Google Scholar
+↩
 [42]
 Ohad Kammar and Katarzyna Marek. 2023. Idris TyRE: a dependently typed regex parser. CoRR abs/2305.04480 (2023). arXiv:2305.04480
+Crossref
+Google Scholar
+↩
 [43]
 Alexander Krauss and Tobias Nipkow. 2010. Regular Sets and Expressions.
 Archive of Formal Proofs (May 2010)
 .
 https://isa-afp.org/entries/Regular-Sets.html
 , Formal proof development.
+Google Scholar
+↩
 [44]
 Alexander Krauss and Tobias Nipkow. 2012. Proof Pearl: Regular Expression Equivalence and Relation Algebra.
 7. Autom. Reason. 49
 , 1 (2012), 95-106.
+Digital Library
+Google Scholar
+↩
 [45]
 Blake Loring, Duncan Mitchell, and Johannes Kinder. 2019. Sound Regular Expression Semantics for Dynamic Symbolic Execution of JavaScript.
 In Proceedings of the 40th ACM SIGPLAN Conference on Programming Language Design and Implementation, PLDI 2019, Phoenix, AZ, USA, June 22-26, 2019
 , Kathryn S. McKinley and Kathleen Fisher (Eds.). ACM, 425-438.
+Digital Library
+Google Scholar
+↩
 [46]
 Konstantinos Mamouras and Agnishom Chattopadhyay. 2024. Efficient Matching of Regular Expressions with Lookaround Assertions.
 Proc. ACM Program. Lang. 8, POPL
 (2024), 2761-2791.
+Digital Library
+Google Scholar
+↩
 [47]
 Nelma Moreira, David Pereira, and Simão Melo de Sousa. 2012. Deciding Regular Expressions (In-)Equivalence in Coq.
 In Relational and Algebraic Methods in Computer Science - 13th International Conference, RAMiCS 2012, Cambridge, UK, September 17-20, 2012. Proceedings (Lecture Notes in Computer Science, Vol. 7560)
 , Wolfram Kahl and Timothy G. Griffin (Eds.). Springer, 98-113.
+Digital Library
+Google Scholar
+↩
 [48]
 Dan Moseley, Mario Nishio, Jose Perez Rodriguez, Olli Saarikivi, Stephen Toub, Margus Veanes, Tiki Wan, and Eric Xu. 2023. Derivative Based Nonbacktracking Real-World Regex Matching with Backtracking Semantics.
 Proc. ACM Program. Lang. 7, PLDI
 (2023), 1026-1049.
+Digital Library
+Google Scholar
+↩
 [49]
 Lasse Nielsen and Fritz Henglein. 2011. Bit-coded Regular Expression Parsing.
 In Language and Automata Theory and Applications - 5th International Conference, LATA 2011, Tarragona, Spain, May 26-31, 2011. Proceedings (Lecture Notes in Computer Science, Vol. 6638)
 , Adrian-Horia Dediu, Shunsuke Inenaga, and Carlos Martín-Vide (Eds.). Springer, 402-413.
+Crossref
+Google Scholar
+↩
 [50]
 Tobias Nipkow and Dmitriy Traytel. 2014. Unified Decision Procedures for Regular Expression Equivalence.
 In Interactive Theorem Proving - 5th International Conference, ITP 2014, Held as Part of the Vienna Summer of Logic, VSL 2014, Vienna, Austria, July 14-17, 2014. Proceedings (Lecture Notes in Computer Science, Vol. 8558)
 , Gerwin Klein and Ruben Gamboa (Eds.). Springer, 450-466.
+Crossref
+Google Scholar
+↩
 [51]
 Taisei Nogami and Tachio Terauchi. 2023. On the Expressive Power of Regular Expressions with Backreferences.
 In 48th International Symposium on Mathematical Foundations of Computer Science, MFCS 2023, August 28 to September 1, 2023, Bordeaux, France (LIPIcs, Vol. 272)
 , Jérôme Leroux, Sylvain Lombardy, and David Peleg (Eds.). Schloss Dagstuhl -Leibniz-Zentrum für Informatik, 71:1-71:15.
+Crossref
+Google Scholar
+↩
 [52]
 Wendlasida Ouedraogo, Gabriel Scherer, and Lutz Straßburger. 2024. Coqlex: Generating Formally Verified Lexers.
 Art Sci. Eng. Program. 8
 , 1 (2024).
+Crossref
+Google Scholar
+↩
 [53]
 Scott Owens, John Reppy, and Aaron Turon. 2009. Regular-expression derivatives re-examined.
 Journal of Functional Programming 19
 , 2 (2009), 173-190.
+Digital Library
+Google Scholar
+↩
 [54]
 Scott Owens and Konrad Slind. 2008. Adapting functional programs to higher order logic.
 High. Order Symb. Comput. 21
 , 4 (2008), 377-409.
+Digital Library
+Google Scholar
+↩
 [55]
 Jihyeok Park, Jihee Park, Seungmin An, and Sukyoung Ryu. 2020. JISET: JavaScript IR-based Semantics Extraction Toolchain.
 In 35th IEEE/ACM International Conference on Automated Software Engineering, ASE 2020, Melbourne, Australia, September 21-25
 , 2020. IEEE, 647-658.
+Digital Library
+Google Scholar
+↩
 [56]
 Rob Pike. 1987. The Text Editor sam.
 Softw. Pract. Exp
 . 17, 11 (1987), 813-845.
+Digital Library
+Google Scholar
+↩
 [57]
 Gabriel Radanne. 2019. Typed parsing and unparsing for untyped regular expression engines.
 In Proceedings of the 2019 ACM SIGPLAN Workshop on Partial Evaluation and Program Manipulation, PEPM@POPL 2019, Cascais, Portugal, January 14-15, 2019
 , Manuel VHermenegildo. and Atsushi Igarashi (Eds.). ACM, 35-46.
+Digital Library
+Google Scholar
+↩
 [58]
 Rodrigo Geraldo Ribeiro and André Rauber Du Bois. 2017. Certified Bit-Coded Regular Expression Parsing.
 In Proceedings of the 21st Brazilian Symposium on Programming Languages, SBLP 2017, Fortaleza, CE, Brazil, September 21-22, 2017
 , Fabio Mascarenhas (Ed.). ACM, 4:1-4:8.
+Digital Library
+Google Scholar
+↩
 [59]
 Dmitry Soshnikov. 2025.
 regexp-tree
 .
 https://github.com/DmitrySoshnikov/regexp-tree
 .
+Google Scholar
+↩
 [60]
 Cristian-Alexandru Staicu and Michael Pradel. 2018. Freezing the Web: A Study of ReDoS Vulnerabilities in JavaScriptbased Web Servers.
 In 27th USENIX Security Symposium, USENIX Security
 2018. USENIX Association, 361-376.
 https://www.usenix.org/conference/usenixsecurity18/presentation/staicu
+Google Scholar
+↩
 [61]
 Peter Thiemann. 2016. Derivatives for Enhanced Regular Expressions.
 In Implementation and Application of Automata - 21st International Conference, CIAA 2016, Seoul, South Korea, July 19-22, 2016, Proceedings (Lecture Notes in Computer Science, Vol. 9705)
 , Yo-Sub Han and Kai Salomaa (Eds.). Springer, 285-297.
+Crossref
+Google Scholar
+↩
 [62]
 Ken Thompson. 1968. Regular Expression Search Algorithm.
 Commun. ACM 11
 , 6 (1968), 419-422.
+Digital Library
+Google Scholar
+↩
 [63]
 Christian Urban. 2023. POSIX Lexing with Derivatives of Regular Expressions.
 7. Autom. Reason. 67, 3
 (2023), 24.
+Digital Library
+Google Scholar
+↩
 [64]
 V8. 2021. An Additional Non-backtracking RegExp Engine.
 https://v8.dev/blog/non-backtracking-regexp
 .
+Google Scholar
+↩
 [65]
 V8. 2023. Mismatch between the Experimental engine and the backtracking engine on empty repetitions.
 https://issues.chromium.org/issues/42204037
 .
+Google Scholar
+↩
 [66]
 V8. 2025. RegExp: Inconsistent branch priority in look-behind assertions.
 https://issues.chromium.org/issues/388290816
 .
+Google Scholar
+↩
 [67]
 Ian Erik Varatalu, Margus Veanes, and Juhan-Peep Ernits. 2023. Derivative Based Extended Regular Expression Matching Supporting Intersection, Complement and Lookarounds.
 CoRR abs/2309.14401
 (2023). arXiv:
 2309.14401
+Crossref
+Google Scholar
+↩
 [68]
 Ian Erik Varatalu, Margus Veanes, and Juhan P. Ernits. 2025. RE#: High Performance Derivative-Based Regex Matching with Intersection, Complement, and Restricted Lookarounds.
 Proc. ACM Program. Lang. 9, POPL (2025)
 , 1-32.
+Digital Library
+Google Scholar
+↩
 [69]
 Xiang Wang, Yang Hong, Harry Chang, KyoungSoo Park, Geoff Langdale, Jiayu Hu, and Heqing Zhu. 2019. Hyperscan: A Fast Multi-pattern Regex Matcher for Modern CPUs.
 In 16th USENIX Symposium on Networked Systems Design and Implementation, NSDI 2019, Boston, MA, February 26-28, 2019
 , Jay R Lorch. and Minlan Yu (Eds.). USENIX Association, 631-648.
 https://www.usenix.org/conference/nsdi19/presentation/wang-xiang
+Google Scholar
+↩
 [70]
 Ekaterina Zhuchko, Margus Veanes, and Gabriel Ebner. 2024. Lean Formalization of Extended Regular Expression Matching with Lookarounds.
 In Proceedings of the 13th ACM SIGPLAN International Conference on Certified Programs and Proofs, CPP 2024, London, UK, January 15-16, 2024
 , Amin Timany, Dmitriy Traytel, Brigitte Pientka, and Sandrine Blazy (Eds.). ACM, 118-131.
+Digital Library
+Google Scholar
+↩
 
-==== part 13 (None)
+==== part 13 (footnotes)
 Footnotes
 1
 https://github.com/DmitrySoshnikov/regexp-tree/issues/267
+↩
 2
 https://github.com/google/re2/blob/main/re2/nfa.cc
+↩
 3
 https://github.com/rust-lang/regex/blob/master/regex-automata/src/nfa/thompson/pikevm.rs
+↩
 4
 https://cs.opensource.google/go/go/+/master:src/regexp/exec.go
+↩
 5
 https://github.com/v8/v8/tree/main/src/regexp/experimental
+↩
 6
 For a more traditional imperative description of the algorithm, we refer the reader to
 Cox
 [
 2009
 ].
+↩

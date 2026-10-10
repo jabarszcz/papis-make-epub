@@ -293,6 +293,10 @@ class Extraction:
         self.stats: BuildStats = BuildStats()
         # the parts in reading order, as nodes until content()
         self._parts: list[tuple[Tag, str | None, list[TocEntry]]] = []
+        # what _type_references types at content(), as recorded by
+        # _refer: (referenced elements, the type and role of a link
+        # into one)
+        self._referenced: list[tuple[list[Tag], str, str]] = []
         self._inline, self._display = renderers
         self._best_effort = best_effort
         self._math_media: list[tuple[str, bytes]] = []
@@ -511,12 +515,72 @@ class Extraction:
             result.append(entries)
         return result
 
+    def add_footnotes(self, section: Node, footnotes: Sequence[Node]) -> None:
+        """Record *section* as the footnotes part (its headings
+        indexed, as :meth:`add_sections` does), *footnotes* being the
+        footnotes it holds, each wrapped in place in an ``aside``
+        typed ``footnote`` (with the DPUB-ARIA role). The links into
+        a footnote become note references (``noteref``) and each
+        footnote gets its back link, by :meth:`_type_references` at
+        :meth:`content`. A reading system that implements pop-up
+        notes shows each footnote at its mark, and may hide the back
+        link there; one that shows the footnotes in place has the
+        back link.
+
+        A footnote is the element to show for its mark: it holds the
+        id the mark's link targets. The links are the page's own,
+        repaired by :meth:`resolve_links`; a platform whose marks are
+        no links makes them before this.
+        """
+        asides = []
+        for footnote in (tag_of(f) for f in footnotes):
+            aside = self._soup.new_tag("aside")
+            aside["epub:type"] = "footnote"
+            aside["role"] = "doc-footnote"
+            # the role sits on the wrapper now
+            if footnote.get("role") == "doc-footnote":
+                del footnote["role"]
+            if footnote.name == "li":
+                # a list holds list items alone: the aside goes inside
+                # the item, around its content, and takes the item's
+                # id, the one the marks target
+                aside.extend(list(footnote.children))
+                if footnote.get("id"):
+                    aside["id"] = footnote["id"]
+                    del footnote["id"]
+                footnote.append(aside)
+            else:
+                footnote.wrap(aside)
+            asides.append(aside)
+        self._refer(asides, "noteref", "doc-noteref")
+        self.add_sections([section], "footnotes")
+
+    def add_bibliography(self, section: Node, entries: Sequence[Node]) -> None:
+        """Record *section* as the bibliography part (its headings
+        indexed, as :meth:`add_sections` does), *entries* being the
+        reference entries it holds. Every link from the parts into an entry
+        becomes a bibliographic reference (``biblioref``, with the
+        DPUB-ARIA role), and each cited entry gets a back link
+        (``backlink``) to its first citation, by
+        :meth:`_type_references` at :meth:`content`. The entries
+        themselves carry no type: the vocabularies deprecated the
+        entry-level term.
+        """
+        self._refer([tag_of(e) for e in entries], "biblioref", "doc-biblioref")
+        self.add_sections([section], "bibliography")
+
+    def _refer(self, elements: Sequence[Tag], ref_type: str,
+               ref_role: str) -> None:
+        """Record *elements* for :meth:`_type_references`: the links
+        into them get *ref_type* and *ref_role*."""
+        self._referenced.append((list(elements), ref_type, ref_role))
+
     def content(self) -> Content:
         """The content: the recorded parts, serialized once four
         generic rules have run on them (:func:`drop_non_content`,
         :func:`drop_widget_markup`, :func:`conform_svg`,
-        :func:`resolve_aria_references`). The extraction's work on
-        the soup ends here."""
+        :func:`resolve_aria_references`) and the references are
+        typed. The extraction's work on the soup ends here."""
         nodes = [node for node, _, _ in self._parts]
         for node in nodes:
             drop_non_content(node)
@@ -525,6 +589,7 @@ class Extraction:
         ids = ids_under(nodes)
         for node in nodes:
             resolve_aria_references(node, ids)
+        self._type_references(nodes, ids)
         parts = [Part(str(node), epub_type, entries)
                  for node, epub_type, entries in self._parts]
         self.stats.math_images = len(self._math_media)
@@ -533,6 +598,48 @@ class Extraction:
                        stats=self.stats,
                        language=page_language(self.page.text),
                        rules=dict(self._rules.matches))
+
+    def _type_references(self, nodes: Sequence[Tag], ids: set[str]) -> None:
+        """Type the links into the elements recorded by :meth:`_refer`
+        (from :meth:`add_footnotes`, :meth:`add_bibliography`), and
+        append to each referenced element a back link to its first
+        referrer. A referrer with no id gets one, recorded in *ids*.
+
+        It runs at :meth:`content`, over every part at once: a
+        reference can come from any part, a part added later included
+        (a footnote citing an entry), and the first referrer and a
+        new id's uniqueness are defined over the whole document."""
+        for elements, ref_type, ref_role in self._referenced:
+            # the element each id belongs to
+            owner = {i: el for el in elements
+                     for i in ({str(el["id"])} if el.get("id") else set())
+                     | ids_under([el])}
+            # each element's referrers, in document order
+            referrers: dict[int, list[str]] = {}
+            for node in nodes:
+                for a in node.find_all("a", href=True):
+                    target = _fragment(a)
+                    # a back link made by an earlier pass is no referrer
+                    if (not target or target[0] not in owner
+                            or a.get("epub:type") == "backlink"):
+                        continue
+                    el = owner[target[0]]
+                    if a in el.descendants:
+                        continue
+                    a["epub:type"] = ref_type
+                    a["role"] = ref_role
+                    if not a.get("id"):
+                        a["id"] = unique_name(f"{ref_type}-{target[0]}", ids)
+                    referrers.setdefault(id(el), []).append(str(a["id"]))
+            for el in elements:
+                if id(el) not in referrers:
+                    continue
+                back = self._soup.new_tag("a", href="#" + referrers[id(el)][0])
+                back["epub:type"] = "backlink"
+                back["role"] = "doc-backlink"
+                back["aria-label"] = "Return to text"
+                back.string = "↩"
+                el.append(back)
 
 
 def drop_non_content(node: Tag) -> None:

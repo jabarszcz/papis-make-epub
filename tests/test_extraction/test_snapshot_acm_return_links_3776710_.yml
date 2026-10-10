@@ -25,6 +25,7 @@ package:
   toc:
   - 6 Formal Verification of the PikeVM Matching Algorithm
   - References
+  - Footnotes
 parts:
 - epub_type: titlepage
   text_length: 24
@@ -34,12 +35,13 @@ parts:
   toc:
   - 6 Formal Verification of the PikeVM Matching Algorithm
 - epub_type: bibliography
-  text_length: 1060
+  text_length: 1172
   toc:
   - References
-- epub_type: null
-  text_length: 62
-  toc: []
+- epub_type: footnotes
+  text_length: 64
+  toc:
+  - Footnotes
 stats:
   dead_links: 6
   images: 0

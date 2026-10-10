@@ -791,69 +791,85 @@ References
 [1]
 H. van Koch
 Ark. Mat., 1 (1904), p. 681
+↩
 [2]
 W. Sierpinski
 C. R. Acad. Sci. Paris., 160 (1915), p. 302
 see
 https://gallica.bnf.fr/
+↩
 [3]
 K. Menger
 Allgemeine Räume und Cartesische Räume I
 Comm. Amsterdam Acad. Sci. (1926)
 English transl.
 G.A. Edgar (Ed.), Classics on Fractals, Studies in Nonlinearity, Westview Press, Advanced Book Program, Boulder, CO (2004)
+↩
 [4]
 J.D. Bekenstein
 Lett. Nuovo Cimento, 4 (1972), p. 737
 J.D. Bekenstein
 Phys. Rev., 7 (1973), p. 2333
+↩
 [5]
 S.W. Hawking
 Phys. Rev. Lett., 26 (1971), p. 1344
 S.W. Hawking
 Commun. Math. Phys., 25 (1972), p. 152
+↩
 [6]
 S.W. Hawking
 Nature, 248 (1974), p. 30
+↩
 [7]
 See
 https://www.youtube.com/watch?v=pPb5NKEYCD8
+↩
 [8]
 J.A. Wheeler
 Phys. Rev., 97 (1955), p. 511
 C. Misner, K. Thorne, J.A. Wheeler
 Gravitation
 W.H. Freeman, San Francisco (1973)
+↩
 [9]
 S.W. Hawking
 Nucl. Phys. B, 144 (1978), p. 349
+↩
 [10]
 G. t'Hooft
 Nucl. Phys. B, 256 (1985), p. 727
+↩
 [11]
 R. Cooke, L. Welch, M. Fumagalli, M. Pettini
 arXiv:2001.06016
+↩
 [12]
 E.S. Perlman,
 et al.
 Astrophys. J., 805 (2015), p. 10
+↩
 [13]
 J.C. Baez
 Lect. Notes Phys., 543 (2000), p. 25
 A. Perez
 Living Rev. Relativ., 16 (2013)
 arXiv:1205.2019
+↩
 [14]
 H.S. Snyder
 Phys. Rev., 71 (1947), p. 38
+↩
 [15]
 R. Casadio, F. Scardigli
 arXiv:1305.3195
+↩
 [16]
 R. Feynman, A.R. Hibbs
 Quantum Mechanics and Path Integrals
 McGraw Hill, New York (1965)
 D.F. Styer (ed.), 2005 edn. See figure 7.1 and caption showing erratic non-differential path characteristics on arbitrary small scales – what would later be called a ‘fractal’ path by B. Mandelbrot, who drew attention to these remarks
+↩
 [17]
 E. Nelson
 Quantum fluctuations
@@ -861,57 +877,79 @@ Phys. Rev., 150 (1966), p. 1079
 E. Nelson
 Quantum Fluctuations
 Princeton Univ. Press, Princeton (1966)
+↩
 [18]
 A.B. Kraemmer, H.B. Nielsen, H.C. Tze
 Nucl. Phys., 81 (1974), p. 145
+↩
 [19]
 B. Mandelbrot
 Fractals: Form, Chance and Dimension
 W.H. Freeman, San Francisco (1977)
+↩
 [20]
 L.F. Abbott, M. Wise
 Am. J. Phys., 49 (1981), p. 37
+↩
 [21]
 J.D. Barrow, W.S. Hawthorne
 Mon. Not. R. Astron. Soc., 243 (1990), p. 608
+↩
 [22]
 R. Penrose
 Singularities and time asymmetry
 S.W. Hawking, W. Israel (Eds.), General Relativity: an Einstein Centenary Volume, Cambridge U.P., Cambridge, UK (1979), pp. 581-638
+↩
 [23]
 J.D. Barrow, F.J. Tipler
 The Anthropic Cosmological Principle
 Oxford U.P., Oxford (1986)
+↩
 [24]
 J.D. Barrow
 New Astron., 4 (1999), p. 333
+↩
 [25]
 C. Barceló
 Nat. Phys., 15 (2019), p. 210
+↩
 [26]
 W.G. Unruh
 Proc. R. Soc. A, 366 (2008), p. 2905
+↩
 [27]
 F.K. Anagnostopoulos, S. Basilakos, E.N. Saridakis
 Observational constraints on Barrow holographic dark energy
 arXiv:2005.10302
+↩
 [28]
 E.N. Saridakis
 Barrow holographic dark energy
 arXiv:2005.04115
+↩
 [29]
 E.N. Saridakis
 Modified cosmology through spacetime thermodynamics and Barrow horizon entropy
 arXiv:2006.01105
+↩
 [30]
 E.M.C. Abreu, J.A. Neto, E.M. Barboza Jr.
 Barrow's black hole entropy and the equipartition theorem
 arXiv:2005.11609
+↩
 [31]
 E.N. Saridakis, S. Basilakos
 The generalized second law of thermodynamics with Barrow entropy
 arXiv:2005.08258
+↩
 [32]
 B. McInnes, Y.C. Ong
 Event horizon wrinklification
 arXiv:2006.09385
+↩
+
+==== part 9 (footnotes)
+Footnotes
+1
+This way of increasing effective area is widespread in the natural world, for example, if you feel the crinkled surface of an elephant's skin it must scale faster than the square of any measure of its size span (as the elementary biology texts wrongly assume) to allow for more efficient cooling than occurs if it is simply proportional to the standard geometric area.
+↩

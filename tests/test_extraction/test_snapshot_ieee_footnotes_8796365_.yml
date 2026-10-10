@@ -1,0 +1,48 @@
+language: en
+media_count: 0
+media_extensions: {}
+package:
+  landmarks:
+  - href: content.xhtml#toc
+    text: Start
+    type: bodymatter
+  manifest:
+    content.xhtml: application/xhtml+xml mathml
+    fonts/dejavu.ttf: font/ttf
+    fonts/stix.ttf: font/ttf
+    nav.xhtml: application/xhtml+xml nav
+    style.css: text/css
+    toc.ncx: application/x-dtbncx+xml
+  metadata:
+    creator: null
+    identifier: https://ieeexplore.ieee.org/document/8796365
+    language: en
+    title: ieee-footnotes-8796365
+  spine:
+  - content.xhtml
+  toc:
+  - Controlling the Multipath Through Reconfigurable Intelligent Surfaces
+  - Historical Perspective and State-of-the-Art Solutions
+  - Footnotes
+parts:
+- epub_type: titlepage
+  text_length: 22
+  toc: []
+- epub_type: null
+  text_length: 3594
+  toc:
+  - Controlling the Multipath Through Reconfigurable Intelligent Surfaces
+- epub_type: null
+  text_length: 689
+  toc:
+  - Historical Perspective and State-of-the-Art Solutions
+- epub_type: footnotes
+  text_length: 329
+  toc:
+  - Footnotes
+stats:
+  dead_links: 5
+  images: 0
+  math: 4
+  math_fallback: 0
+  math_images: 0

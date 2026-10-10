@@ -71,6 +71,7 @@ package:
   - Acknowledgments
   - Artifact Availability
   - References
+  - Footnotes
 parts:
 - epub_type: titlepage
   text_length: 156
@@ -132,12 +133,13 @@ parts:
   toc:
   - Artifact Availability
 - epub_type: bibliography
-  text_length: 16286
+  text_length: 18174
   toc:
   - References
-- epub_type: null
-  text_length: 442
-  toc: []
+- epub_type: footnotes
+  text_length: 454
+  toc:
+  - Footnotes
 stats:
   dead_links: 0
   images: 18

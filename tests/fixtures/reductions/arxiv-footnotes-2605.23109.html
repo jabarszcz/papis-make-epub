@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en"><head><title>Inductive Deductive Synthesis: Enabling AI to Generate Formally Verified Systems</title></head><body><div class="ltx_page_main"><div class="ltx_page_content"><article class="ltx_document ltx_authors_1line"><h1 class="ltx_title ltx_title_document">Inductive Deductive Synthesis: Enabling AI to Generate Formally Verified Systems</h1><div class="ltx_authors">
+<span class="ltx_creator ltx_role_author">
+<span class="ltx_personname">Shubham Agarwal<sup class="ltx_sup" id="id17.17.id1"><span class="ltx_text ltx_font_italic" id="id17.17.id1.1">∗,1</span></sup>, Alexander Krentsel<sup class="ltx_sup" id="id18.18.id2"><span class="ltx_text ltx_font_italic" id="id18.18.id2.1">∗,1</span></sup>, Shu Liu<sup class="ltx_sup" id="id19.19.id3"><span class="ltx_text ltx_font_italic" id="id19.19.id3.1">∗,1</span></sup>, Mert Cemri<sup class="ltx_sup" id="id20.20.id4"><span class="ltx_text ltx_font_italic" id="id20.20.id4.1">∗,1</span></sup>,
+<br class="ltx_break"/>Audrey Cheng<sup class="ltx_sup" id="id21.21.id5"><span class="ltx_text ltx_font_italic" id="id21.21.id5.1">1</span></sup>,
+Rui Meng<sup class="ltx_sup" id="id22.22.id6"><span class="ltx_text ltx_font_italic" id="id22.22.id6.1">2</span></sup>, Tomas Pfister<sup class="ltx_sup" id="id23.23.id7"><span class="ltx_text ltx_font_italic" id="id23.23.id7.1">2</span></sup>, Chun-Liang Li<sup class="ltx_sup" id="id24.24.id8"><span class="ltx_text ltx_font_italic" id="id24.24.id8.1">2</span></sup>, Sylvia Ratnasamy<sup class="ltx_sup" id="id25.25.id9"><span class="ltx_text ltx_font_italic" id="id25.25.id9.1">1</span></sup>, 
+<br class="ltx_break"/>Aditya Parameswaran<sup class="ltx_sup" id="id26.26.id10"><span class="ltx_text ltx_font_italic" id="id26.26.id10.1">1</span></sup>,
+Matei Zaharia<sup class="ltx_sup" id="id27.27.id11"><span class="ltx_text ltx_font_italic" id="id27.27.id11.1">1</span></sup>, Ion Stoica<sup class="ltx_sup" id="id28.28.id12"><span class="ltx_text ltx_font_italic" id="id28.28.id12.1">1</span></sup>, Mohsen Lesani<sup class="ltx_sup" id="id29.29.id13"><span class="ltx_text ltx_font_italic" id="id29.29.id13.1">3</span></sup>
+<br class="ltx_break"/>
+<sup class="ltx_sup" id="id30.30.id14"><span class="ltx_text ltx_font_italic" id="id30.30.id14.1">1</span></sup>UC Berkeley  <sup class="ltx_sup" id="id31.31.id15"><span class="ltx_text ltx_font_italic" id="id31.31.id15.1">2</span></sup>Google  <sup class="ltx_sup" id="id32.32.id16"><span class="ltx_text ltx_font_italic" id="id32.32.id16.1">3</span></sup>UC Santa Cruz
+</span></span>
+</div><div class="ltx_abstract" id="abstract1">
+<h6 class="ltx_title ltx_title_abstract">Abstract</h6>
+<p class="ltx_p">AI agents increasingly excel at generating, testing, and refining code.
+However, they fall short on tasks requiring formal guarantees of full coverage that testing alone cannot provide.
+Distributed systems are a prime example: properties such as consistency between reads and writes must hold under every possible interleaving of events.
+Mechanized formal verification can guarantee such correctness, but typically demands months to years of expert effort.
+As evidence, even SOTA coding agents (Codex with GPT-5.4 and Claude Code with Opus 4.6) succeed on only 2/7 distributed key-value-store specifications.
+In this paper, we present the first effective approach to addressing this gap, Inductive Deductive Synthesis (IDS), which jointly and incrementally synthesizes implementation and proof, and learns from failed attempts to systematically try promising strategies.
+Built as an agentic LLM system, IDS achieves 7/7 in about <math alttext="6.8" class="ltx_Math" display="inline" intent=":literal"><semantics><mn>6.8</mn><annotation encoding="application/x-tex">6.8</annotation></semantics></math> hours and $<math alttext="106" class="ltx_Math" display="inline" intent=":literal"><semantics><mn>106</mn><annotation encoding="application/x-tex">106</annotation></semantics></math> per spec on average, roughly <math alttext="200\times" class="ltx_math_unparsed" display="inline" intent=":literal"><semantics><mrow><mn>200</mn><mo lspace="0.222em">×</mo></mrow><annotation encoding="application/x-tex">200\times</annotation></semantics></math> faster than expert effort and <math alttext="17\%" class="ltx_Math" display="inline" intent=":literal"><semantics><mrow><mn>17</mn><mo>%</mo></mrow><annotation encoding="application/x-tex">17\%</annotation></semantics></math> cheaper than SOTA agents.
+IDS further incorporates performance feedback into the same loop, yielding implementations up to <math alttext="3\times" class="ltx_math_unparsed" display="inline" intent=":literal"><semantics><mrow><mn>3</mn><mo lspace="0.222em">×</mo></mrow><annotation encoding="application/x-tex">3\times</annotation></semantics></math> faster than published verified systems.<span class="ltx_note ltx_role_footnote"><sup class="ltx_note_mark">1</sup><span class="ltx_note_outer"><span class="ltx_note_content"><sup class="ltx_note_mark">1</sup><span class="ltx_tag ltx_tag_note">1</span>Code available at <a class="ltx_ref ltx_url ltx_font_typewriter" href="https://github.com/skydiscover-ai/skydiscover" title="">https://github.com/skydiscover-ai/skydiscover</a>.</span></span></span></p>
+</div><span class="ltx_note ltx_role_footnotetext" id="footnotex1"><sup class="ltx_note_mark">$\ast$</sup><span class="ltx_note_outer"><span class="ltx_note_content"><sup class="ltx_note_mark">$\ast$</sup><span class="ltx_note_type">footnotetext: </span>Equal contribution.</span></span></span><section class="ltx_section" id="S1">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">1 </span>Introduction</h2>
+
+
+<div class="ltx_para" id="S1.p3">
+<p class="ltx_p" id="S1.p3.2">Naturally, one may ask, can we simply provide a coding agent with a specification and formal verification tooling, and ask it to build complex systems that provably satisfy that specification? Our experiments demonstrate that the answer is no.
+We show in <a class="ltx_ref" href="#S5" title="5 Evaluation ‣ Inductive Deductive Synthesis: Enabling AI to Generate Formally Verified Systems"><span class="ltx_text ltx_ref_tag">section</span>˜<span class="ltx_text ltx_ref_tag">5</span></a> that Codex (GPT-5.4) <cite class="ltx_cite ltx_citemacro_cite">Chen<span class="ltx_text ltx_bib_etal"> et al.</span> (<a class="ltx_ref" href="#bib.bib101" title="Evaluating large language models trained on code">2021</a>)</cite> and Claude Code (Opus 4.6) <cite class="ltx_cite ltx_citemacro_cite">Anthropic (<a class="ltx_ref" href="#bib.bib100" title="Claude Code: anthropic’s agentic coding system">2025</a>)</cite> fail to generate correct systems for <math alttext="5" class="ltx_Math" display="inline" id="S1.p3.1.m1" intent=":literal"><semantics><mn>5</mn><annotation encoding="application/x-tex">5</annotation></semantics></math> of <math alttext="7" class="ltx_Math" display="inline" id="S1.p3.2.m2" intent=":literal"><semantics><mn>7</mn><annotation encoding="application/x-tex">7</annotation></semantics></math> widely studied distributed key-value-store consistency specifications (e.g., causal consistency, read-your-writes). The failure mode we observe is a structural one: following typical human patterns, agents treat verification as a downstream check on code they have already written. This approach (a) requires writing the whole proof at once, which is exceptionally difficult even for humans<span class="ltx_note ltx_role_footnote" id="footnote2"><sup class="ltx_note_mark">2</sup><span class="ltx_note_outer"><span class="ltx_note_content"><sup class="ltx_note_mark">2</sup><span class="ltx_tag ltx_tag_note">2</span>Past work <cite class="ltx_cite ltx_citemacro_cite">Lesani<span class="ltx_text ltx_bib_etal"> et al.</span> (<a class="ltx_ref" href="#bib.bib6" title="Chapar: certified causally consistent distributed key-value stores">2016</a>)</cite> reports 9–12 months of expert effort to write a proof for a key-value (KV) store.</span></span></span>, and (b) defers all correctness feedback to the end of an implementation, depriving the agent of valuable guiding signals.</p>
+</div>
+
+
+
+
+
+
+
+</section><section class="ltx_bibliography" id="bib">
+<h2 class="ltx_title ltx_title_bibliography" style="font-size:90%;">References</h2>
+<ul class="ltx_biblist" id="bib.L1">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li class="ltx_bibitem ltx_bib_inproceedings" id="bib.bib6">
+<span class="ltx_tag ltx_bib_key ltx_role_refnum ltx_tag_bibitem">[26]</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_author">M. Lesani, C. J. Bell, and A. Chlipala</span><span class="ltx_text ltx_bib_year"> (2016)</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">Chapar: certified causally consistent distributed key-value stores</span>.
+</span>
+<span class="ltx_bibblock">In <span class="ltx_text ltx_bib_inbook">Proceedings of the 43rd Annual ACM SIGPLAN-SIGACT Symposium on Principles of Programming Languages, POPL 2016, St. Petersburg, FL, USA, January 20 - 22, 2016</span>,  <span class="ltx_text ltx_bib_editor">R. Bodík and R. Majumdar (Eds.)</span>,
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_pages"> pp. 357–370</span>.
+</span>
+<span class="ltx_bibblock">External Links: <span class="ltx_text ltx_bib_links"><a class="ltx_ref ltx_bib_external" href="https://doi.org/10.1145/2837614.2837622" title="">Link</a>,
+<a class="ltx_ref doi ltx_bib_external" href="https://dx.doi.org/10.1145/2837614.2837622" title="">Document</a></span>
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a class="ltx_ref" href="#A1.p1.1" title="Appendix A Specifications and the IDS Suite Dataset ‣ Inductive Deductive Synthesis: Enabling AI to Generate Formally Verified Systems"><span class="ltx_text ltx_ref_tag">Appendix A</span></a>,
+<a class="ltx_ref" href="#A9.SS6.p1.1" title="I.6 Chapar Causal Consistency ‣ Appendix I IDS Suite ‣ Inductive Deductive Synthesis: Enabling AI to Generate Formally Verified Systems"><span class="ltx_text ltx_ref_tag">§I.6</span></a>,
+<a class="ltx_ref" href="#A9.T8.1.8.6.3.1.1" title="In Summary. ‣ Appendix I IDS Suite ‣ Inductive Deductive Synthesis: Enabling AI to Generate Formally Verified Systems"><span class="ltx_text ltx_ref_tag">Table 8</span></a>,
+<a class="ltx_ref" href="#A9.p1.1" title="Appendix I IDS Suite ‣ Inductive Deductive Synthesis: Enabling AI to Generate Formally Verified Systems"><span class="ltx_text ltx_ref_tag">Appendix I</span></a>,
+<a class="ltx_ref" href="#S1.p2.1" title="1 Introduction ‣ Inductive Deductive Synthesis: Enabling AI to Generate Formally Verified Systems"><span class="ltx_text ltx_ref_tag">§1</span></a>,
+<a class="ltx_ref" href="#S1.p7.5" title="1 Introduction ‣ Inductive Deductive Synthesis: Enabling AI to Generate Formally Verified Systems"><span class="ltx_text ltx_ref_tag">§1</span></a>,
+<a class="ltx_ref" href="#S2.p5.1" title="2 Related Work ‣ Inductive Deductive Synthesis: Enabling AI to Generate Formally Verified Systems"><span class="ltx_text ltx_ref_tag">§2</span></a>,
+<a class="ltx_ref" href="#S5.SS1.p2.1" title="5.1 Experimental Setup ‣ 5 Evaluation ‣ Inductive Deductive Synthesis: Enabling AI to Generate Formally Verified Systems"><span class="ltx_text ltx_ref_tag">§5.1</span></a>,
+<a class="ltx_ref" href="#S5.SS1.p4.1" title="5.1 Experimental Setup ‣ 5 Evaluation ‣ Inductive Deductive Synthesis: Enabling AI to Generate Formally Verified Systems"><span class="ltx_text ltx_ref_tag">§5.1</span></a>,
+<a class="ltx_ref" href="#S5.SS2.p2.3" title="5.2 Synthesis correctness ‣ 5 Evaluation ‣ Inductive Deductive Synthesis: Enabling AI to Generate Formally Verified Systems"><span class="ltx_text ltx_ref_tag">§5.2</span></a>,
+<a class="ltx_ref" href="#S5.p1.1" title="5 Evaluation ‣ Inductive Deductive Synthesis: Enabling AI to Generate Formally Verified Systems"><span class="ltx_text ltx_ref_tag">§5</span></a>,
+<a class="ltx_ref" href="#footnote2" title="In 1 Introduction ‣ Inductive Deductive Synthesis: Enabling AI to Generate Formally Verified Systems"><span class="ltx_text ltx_ref_tag">footnote 2</span></a>.
+</span>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</ul>
+</section></article></div></div></body></html>

@@ -31,6 +31,7 @@ package:
   - Declaration of Competing Interest
   - Acknowledgement
   - References
+  - Footnotes
 parts:
 - epub_type: titlepage
   text_length: 45
@@ -64,11 +65,15 @@ parts:
   toc:
   - Acknowledgement
 - epub_type: bibliography
-  text_length: 3052
+  text_length: 3116
   toc:
   - References
+- epub_type: footnotes
+  text_length: 382
+  toc:
+  - Footnotes
 stats:
-  dead_links: 1
+  dead_links: 0
   images: 0
   math: 63
   math_fallback: 0

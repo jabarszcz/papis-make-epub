@@ -220,12 +220,12 @@ parts:
   text_length: 1167
   toc:
   - 7 Conclusion
-- epub_type: null
-  text_length: 77
+- epub_type: footnotes
+  text_length: 79
   toc:
   - Notes
 - epub_type: bibliography
-  text_length: 3755
+  text_length: 3789
   toc:
   - References
 - epub_type: null

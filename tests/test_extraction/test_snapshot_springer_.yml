@@ -137,7 +137,7 @@ parts:
   toc:
   - Code availability
 - epub_type: bibliography
-  text_length: 9139
+  text_length: 9267
   toc:
   - References
 - epub_type: null

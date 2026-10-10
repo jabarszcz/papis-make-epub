@@ -38,9 +38,13 @@ Edmonds, J.: Paths, trees, and flowers. Can. J. Math.
 17
 , 449–467 (1965).
 https://doi.org/10.4153/CJM-1965-045-4
+↩
 Mehlhorn, K., Näher, S.: LEDA: A Platform for Combinatorial and Geometric Computing, (1999).
 http://www.mpi-sb.mpg.de/%7Emehlhorn/LEDAbook.html
 Accessed 2023-10-09
+↩
 Korte, B., Vygen, J.: Comb. Optim. (2012).
 https://doi.org/10.1007/978-3-642-24488-9
+↩
 Schrijver, A.: Combinatorial Optimization: Polyhedra and Efficiency, (2003)
+↩

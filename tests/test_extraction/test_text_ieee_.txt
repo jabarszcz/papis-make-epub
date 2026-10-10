@@ -2448,18 +2448,22 @@ References
 E. Basar, “Transmission through large intelligent surfaces: A new frontier in wireless communications,” in
 Proc. Eur. Conf. Netw. Commun. (EuCNC)
 , Valencia, Spain, Jun. 2019, pp. 1–6. [Online]. Available: https://arxiv.org/pdf/1902.08463.pdf
+↩
 2.
 ( Feb. 2019 ).
 Cisco Visual Networking Index: Global Mobile Data Traffic Forecast Update, 2017–2022
 . [Online]. Available: https://www.cisco.com/c/en/us/solutions/collateral/service-provider/visual-networking-index-vni/white-paper-c11-738429.pdf
+↩
 3.
 A. Gatherer. ( Jun. 2018 ).
 What Will 6G be?
 [Online]. Available: https://www.comsoc.org/publications/ctn/what-will-6g-be
+↩
 4.
 R. Y. Mesleh, H. Haas, S. Sinanovic, C. W. Ahn, and S. Yun, “Spatial modulation,”
 IEEE Trans. Veh. Technol.
 , vol. 57, no., pp. 2228–2241, Jul. 2008.
+↩
 5.
 M. Di Renzo, H. Haas, and P. M. Grant, “Spatial modulation for multiple-antenna wireless systems: A survey,”
 IEEE Commun. Mag.
@@ -2468,34 +2472,42 @@ IEEE Commun. Mag.
 M. Di Renzo, H. Haas, A. Ghrayeb, S. Sugiura, and L. Hanzo, “Spatial modulation for generalized MIMO: Challenges, opportunities, and implementation,”
 Proc. IEEE
 , vol. 102, no. 1, pp. 56–103, Jan. 2014.
+↩
 7.
 P. Yang, M. Di Renzo, Y. Xiao, S. Li, and L. Hanzo, “Design guidelines for spatial modulation,”
 IEEE Commun. Surveys Tuts.
 , vol. 17, no. 1, pp. 6–26, 1st Quart., 2015.
+↩
 8.
 E. Başar, “Index modulation techniques for 5G wireless networks,”
 IEEE Commun. Mag.
 , vol. 54, no. 7, pp. 168–175, Jul. 2016.
+↩
 9.
 E. Basar, M. Wen, R. Mesleh, M. Di Renzo, Y. Xiao, and H. Haas, “Index modulation techniques for next-generation wireless networks,”
 IEEE Access
 , vol. 5, pp. 16693–16746, 2017.
+↩
 10.
 M. Wen, X. Cheng, and L. Yang,
 Index Modulation for 5G Wireless Communications
 . Berlin, Germany : Springer, 2017.
+↩
 11.
 Y. Ding, K. J. Kim, T. Koike-Akino, M. Pajovic, P. Wang, and P. Orlik, “Spatial scattering modulation for uplink millimeter-wave systems,”
 IEEE Commun. Lett.
 , vol. 21, no. 7, pp. 1493–1496, Jul. 2017.
+↩
 12.
 Y. Ding, V. Fusco, A. Shitvov, Y. Xiao, and H. Li, “Beam index modulation wireless communication with analog beamforming,”
 IEEE Trans. Veh. Technol.
 , vol. 67, no. 7, pp. 6340–6354, Jul. 2018.
+↩
 13.
 E. Seifi, M. Atamanesh, and A. K. Khandani, “Media-based MIMO: Outperforming known limits in wireless,” in
 Proc. IEEE Int. Conf. Commun. (ICC)
 , Kuala Lumpur, Malaysia, May 2016, pp. 1–7.
+↩
 14.
 Y. Naresh and A. Chockalingam, “On media-based modulation using RF mirrors,”
 IEEE Trans. Veh. Technol.
@@ -2504,10 +2516,12 @@ IEEE Trans. Veh. Technol.
 E. Basar, “Media-based modulation for future wireless systems: A tutorial,”
 IEEE Wireless Commun.
 , to be published. [Online]. Available: https://arxiv.org/abs/1811.08730
+↩
 16.
 M. Di Renzo, “Spatial modulation based on reconfigurable antennas—A new air interface for the IoT,” in
 Proc. IEEE Mil. Commun. Conf. (MILCOM)
 , Baltimore, MD, USA, Oct. 2017, pp. 495–500.
+↩
 17.
 D. N. Viet, M. Di Renzo, V. Basavarajappa, B. B. Exposito, J. Basterrechea, and D.-T. Phan-Huy, “Spatial modulation based on reconfigurable antennas: Performance evaluation by using the prototype of a reconfigurable antenna,”
 EURASIP J. Wireless Commun. Netw.
@@ -2516,66 +2530,82 @@ EURASIP J. Wireless Commun. Netw.
 D.-T. Phan-Huy, Y. Kokar, K. Rachedi, P. Pajusco, A. Mokh, T. Magounaki, R. Masood, C. Buey, P. Ratajczak, N. Malhouroux-Gaffet, J.-M. Conrat, J.-C. Prévotet, A. Ourir, J. De Rosny, M. Crussière, M. Hélard, A. Gati, T. Sarrebourse, and M. Di Renzo, “Single-carrier spatial modulation for the Internet of Things: Design and performance evaluation by using real compact and reconfigurable antennas,”
 IEEE Access
 , vol. 7, pp. 18978–18993, 2019.
+↩
 19.
 C. Liaskos, S. Nie, A. Tsioliaridou, A. Pitsillides, S. Ioannidis, and I. Akyildiz, “Realizing wireless communication through software-defined hypersurface environments,” in
 Proc. IEEE 19th Int. Symp. ‘World Wireless, Mobile Multimedia Netw.’ (WoWMoM)
 , Chania, Greece, Jun. 2018, pp. 14–15.
+↩
 20.
 G. Lavigne, K. Achouri, V. S. Asadchy, S. A. Tretyakov, and C. Caloz, “Susceptibility derivation and experimental demonstration of refracting metasurfaces without spurious diffraction,”
 IEEE Trans. Antennas Propag.
 , vol. 66, no. 3, pp. 1321–1330, Mar. 2018.
+↩
 21.
 F. Liu, A. Pitilakis, M. S. Mirmoosa, O. Tsilipakos, X. Wang, A. C. Tasolamprou, S. Abadal, A. Cabellos-Aparicio, E. Alarcón, C. Liaskos, N. V. Kantartzis, M. Kafesaki, E. N. Economou, C. M. Soukoulis, and S. Tretyakov, “Programmable metasurfaces: State of the art and prospects,” in
 Proc. IEEE Int. Symp. Circuits Syst. (ISCAS)
 , Florence, Italy, May 2018, pp. 1–5.
+↩
 22.
 C. Liaskos, S. Nie, A. Tsioliaridou, A. Pitsillides, S. Ioannidis, and I. Akyildiz, “A new wireless communication paradigm through software-controlled metasurfaces,”
 IEEE Commun. Mag.
 , vol. 56, no. 9, pp. 162–169, Sep. 2018.
+↩
 23.
 M. Di Renzo, M. Debbah, D.-T. Phan-Huy, A. Zappone, M.-S. Alouini, C. Yuen, V. Sciancalepore, G. C. Alexandropoulos, J. Hoydis, H. Gacanin, J. de Rosny, A. Bounceur, G. Lerosey, and M. Fink, “Smart radio environments empowered by reconfigurable AI meta-surfaces: An idea whose time has come,”
 EURASIP J. Wireless Commun. Netw.
 , vol. 2019, p. 129, May 2019.
+↩
 24.
 ( 2017 ).
 5GPPP Vision on Software Networks and 5G SN WG
 . [Online]. Available: https://5g-ppp.eu/wp-content/uploads/2014/02/5G-PPPSoftNets WG_whitepaper_v20.pdf
+↩
 25.
 A. Zappone, M. Di Renzo, and M. Debbah, “Wireless networks design in the era of deep learning: Model-based, AI-based, or both? ” Feb. 2019,
 arXiv:1902.02647
 . [Online]. Available: https://arxiv.org/abs/1902.02647
+↩
 26.
 Q. Wu and R. Zhang, “Towards smart and reconfigurable environment: Intelligent reflecting surface aided wireless network,”
 IEEE Commun. Mag.
 , to be published. [Online]. Available: https://arxiv.org/abs/1905.00152
+↩
 27.
 M. Born and E. Wolf,
 Principles of Optics: Electromagnetic Theory of Propagation, Interference and Diffraction of Light
 . Cambridge, U.K. : Cambridge Univ. Press, 1999.
+↩
 28.
 N. Yu, P. Genevet, M. A. Kats, F. Aieta, J.-P. Tetienne, F. Capasso, and Z. Gaburro, “Light propagation with phase discontinuities: Generalized laws of reflection and refraction,”
 Science
 , vol. 334, no. 6054, pp. 333–337, Oct. 2011.
+↩
 29.
 A. Goldsmith,
 Wireless Communications
 . Cambridge, U.K. : Cambridge Univ. Press, 2005.
+↩
 30.
 V. S. Asadchy, M. Albooyeh, S. N. Tcvetkova, A. Díaz-Rubio, Y. Ra’di, and S. A. Tretyakov, “Perfect control of reflection and refraction using spatially dispersive metasurfaces,”
 Phys. Rev. B, Condens. Matter
 , vol. 94, Aug. 2016, Art. no. 075142.
+↩
 31.
 A. Díaz-Rubio, V. S. Asadchy, A. Elsakka, and S. A. Tretyakov, “From the generalized reflection law to the realization of perfect anomalous reflectors,”
 Sci. Adv.
 , vol. 3, no. 8, Aug. 2017, Art. no. e1602714.
+↩
 32.
 C. Huang, A. Zappone, G. C. Alexandropoulos, M. Debbah, and C. Yuen, “Reconfigurable intelligent surfaces for energy efficiency in wireless communication,”
 IEEE Trans. Wireless Commun.
 , to be published. [Online]. Available: https://arxiv.org/abs/1810.06934
+↩
 33.
 K. Achouri, B. A. Khan, S. Gupta, G. Lavigne, M. A. Salem, and C. Caloz, “Synthesis of electromagnetic metasurfaces: Principles and illustrations,”
 EPJ Appl. Metamater.
 , vol. 2, p. 12, Jan. 2016.
+↩
 34.
 K. Achouri and C. Caloz, “Design, concepts, and applications of electromagnetic metasurfaces,”
 Nanophotonics
@@ -2584,118 +2614,147 @@ Nanophotonics
 F. Liu, O. Tsilipakos, A. Pitilakis, A. C. Tasolamprou, M. S. Mirmoosa, N. V. Kantartzis, D.-H. Kwon, J. Georgiou, K. Kossifos, M. A. Antoniades, M. Kafesaki, C. M. Soukoulis, and S. A. Tretyakov, “Intelligent metasurfaces with continuously tunable local surface impedance for multiple reconfigurable functions,”
 Phys. Rev. Appl.
 , vol. 11, Apr. 2019, Art. no. 044024.
+↩
 36.
 M. Dohler and Y. Li,
 Cooperative Communications: Hardware, Channel and PHY
 . Chichester, U.K. : Wiley, 2010.
+↩
 37.
 J. D. Griffin and G. D. Durgin, “Complete link budgets for backscatter-radio and RFID systems,”
 IEEE Antennas Propag. Mag.
 , vol. 51, no. 2, pp. 11–25, Apr. 2009.
+↩
 38.
 O. Landron, M. J. Feuerstein, and T. S. Rappaport, “A comparison of theoretical and empirical reflection coefficients for typical exterior wall surfaces in a mobile radio environment,”
 IEEE Trans. Antennas Propag.
 , vol. 44, no. 3, pp. 341–351, Mar. 1996.
+↩
 39.
 K. R. Schaubach, N. J. Davis, and T. S. Rappaport, “A ray tracing method for predicting path loss and delay spread in microcellular environments,” in
 Proc. Veh. Technol. Soc. 42nd VTS Conf.-Frontiers Technol.
 , vol. 2, May 1992, pp. 932–935.
+↩
 40.
 R. Mehrotra, R. I. Ansari, A. Pitilakis, S. Nie, C. Liaskos, N. V. Kantartzis, and A. Pitsillides, “3D channel modeling and characterization for Hypersurface empowered indoor environment at 60 GHz millimeter-wave band,” 2019,
 arXiv:1907.00037
 . [Online]. Available: https://arxiv.org/abs/1907.00037
+↩
 41.
 L. Subrt and P. Pechac, “Controlling propagation environments using intelligent walls,” in
 Proc. 2012 6th Eur. Conf. Antennas Propag. (EUCAP)
 , Prague, Czech Republic, Mar. 2012, pp. 1–5.
+↩
 42.
 N. Kaina, M. Dupré, G. Lerosey, and M. Fink, “Shaping complex microwave fields in reverberating media with binary tunable metasurfaces,”
 Sci. Rep.
 , vol. 4, no. 1, Oct. 2014, Art. no. 6693.
+↩
 43.
 M. Dupré, P. del Hougne, M. Fink, F. Lemoult, and G. Lerosey, “Wave-field shaping in cavities: Waves trapped in a box with controllable boundaries,”
 Phys. Rev. Lett.
 , vol. 115, Jul. 2015, Art. no. 017701.
+↩
 44.
 P. del Hougne, M. Fink, and G. Lerosey, “Optimally diverse communication channels in disordered environments with tuned randomness,”
 Nature Electron.
 , vol. 2, no. 1, pp. 36–41, 2019.
+↩
 45.
 S. V. Hum and J. Perruisseau-Carrier, “Reconfigurable reflectarrays and array lenses for dynamic antenna beam control: A review,”
 IEEE Trans. Antennas Propag.
 , vol. 62, no. 1, pp. 183–198, Jan. 2014.
+↩
 46.
 X. Tan, Z. Sun, J. M. Jornet, and D. Pados, “Increasing indoor spectrum sharing capacity using smart reflect-array,” in
 Proc. IEEE Int. Conf. Commun. (ICC)
 , Kuala Lumpur, Malaysia, May 2016, pp. 1–6.
+↩
 47.
 X. Tan, Z. Sun, D. Koutsonikolas, and J. M. Jornet, “Enabling indoor mobile millimeter-wave networks based on smart reflect-arrays,” in
 Proc. IEEE Conf. Comput. Commun. (INFOCOM)
 , Honolulu, HI, USA, Apr. 2018, pp. 270–278.
+↩
 48.
 S. Foo, “Liquid-crystal reconfigurable metasurface reflectors,” in
 Proc. IEEE Int. Symp. Antennas Propag. USNC/URSI Nat. Radio Sci. Meeting
 , San Diego, CA, USA, Jul. 2017, pp. 2069–2070.
+↩
 49.
 J. G. Proakis,
 Digital Communications
 , 5th ed. New York, NY, USA : McGraw-Hill, 2008.
+↩
 50.
 M. Simon and M. S. Alouini,
 Digital Communications Over Fading Channels
 , 2nd ed. Hoboken, NJ, USA : Wiley, 2005.
+↩
 51.
 R. Long, H. Guo, G. Yang, Y.-C. Liang, and R. Zhang, “Symbiotic radio: A new communication paradigm for passive Internet-of-Things,” Oct. 2018,
 arXiv:1810.13068
 . [Online]. Available: https://arxiv.org/abs/1810.13068
+↩
 52.
 S. Narayanan, M. Di Renzo, F. Graziosi, and H. Haas, “Distributed spatial modulation: A cooperative diversity protocol for half-duplex relay-aided wireless networks,”
 IEEE Trans. Veh. Technol.
 , vol. 65, no. 5, pp. 2947–2964, May 2016.
+↩
 53.
 W. Tang, J. Y. Dai, M. Chen, X. Li, Q. Cheng, S. Jin, K.-K. Wong, and T. J. Cui, “Programmable metasurface-based RF chain-free 8PSK wireless transmitter,”
 Electron. Lett.
 , vol. 55, no. 7, pp. 417–420, Apr. 2019.
+↩
 54.
 J. Y. Dai, W. K. Tang, J. Zhao, X. Li, Q. Cheng, J. C. Ke, M. Z. Chen, S. Jin, and T. J. Cui, “Wireless communications through a simplified architecture based on time-domain digital coding metasurface,”
 Adv. Mater. Technol.
 , vol. 4, Feb. 2019, Art. no. 1900044.
+↩
 55.
 W. Yan, X. Kuai, and X. Yuan, “Passive beamforming and information transfer via large intelligent surface,” May 2019,
 arXiv:1905.01491
 . [Online]. Available: https://arxiv.org/abs/1905.01491
+↩
 56.
 R. Mesleh and A. Alhassi,
 Space Modulation Techniques
 . Hoboken, NJ, USA : Wiley, 2018.
+↩
 57.
 L. Subrt and P. Pechac, “Intelligent walls as autonomous parts of smart indoor environments,”
 IET Commun.
 , vol. 6, no. 8, pp. 1004–1010, May 2012.
+↩
 58.
 G. H. Elzwawi, H. H. Elzwawi, M. M. Tahseen, and T. A. Denidni, “Frequency selective surface-based switched-beamforming antenna,”
 IEEE Access
 , vol. 6, pp. 48042–48050, 2018.
+↩
 59.
 X. Xiong, J. Chan, E. Yu, N. Kumari, A. A. Sani, C. Zheng, and X. Zhou, “Customizing indoor wireless coverage via 3D-fabricated reflectors,” in
 Proc. 4th ACM Int. Conf. Syst. for Energy-Efficient Built Environ.
 , Delft, The Netherlands, 2017, Art. no. 8.
+↩
 60.
 T. J. Cui, M. Q. Qi, X. Wan, J. Zhao, and Q. Cheng, “Coding metamaterials, digital metamaterials and programmable metamaterials,”
 Light, Sci. Appl.
 , vol. 3, p. e218, Oct. 2014.
+↩
 61.
 L. Zhang, X. Q. Chen, S. Liu, Q. Zhang, J. Zhao, J. Y. Dai, G. D. Bai, X. Wan, Q. Cheng, G. Castaldi, V. Galdi, and T. J. Cui, “Space-time-coding digital metasurfaces,”
 Nature Commun.
 , vol. 9, no. 1, Oct. 2018, Art. no. 4334.
+↩
 62.
 H. Yang, X. Cao, F. Yang, J. Gao, S. Xu, M. Li, X. Chen, Y. Zhao, Y. Zheng, and S. Li, “A programmable metasurface with dynamic polarization, scattering and focusing control,”
 Sci. Rep.
 , vol. 6, Oct. 2016, Art. no. 35692.
+↩
 63.
 S. Hu, F. Rusek, and O. Edfors, “The potential of using large antenna arrays on intelligent surfaces,” in
 Proc. IEEE 85th Veh. Technol. Conf. (VTC Spring)
 , Sydney, NSW, Australia, Jun. 2017, pp. 1–6.
+↩
 64.
 S. Hu, F. Rusek, and O. Edfors, “Beyond massive MIMO: The potential of data transmission with large intelligent surfaces,”
 IEEE Trans. Signal Process.
@@ -2704,126 +2763,157 @@ IEEE Trans. Signal Process.
 S. Hu, F. Rusek, and O. Edfors, “Beyond massive MIMO: The potential of positioning with large intelligent surfaces,”
 IEEE Trans. Signal Process.
 , vol. 66, no. 7, pp. 1761–1774, Apr. 2018.
+↩
 66.
 Q.-U.-A. Nadeem, A. Kammoun, A. Chaaban, M. Debbah, and M.-S. Alouini, “Asymptotic analysis of large intelligent surface assisted MIMO communication,” Mar. 2019,
 arXiv:1903.08127
 . [Online]. Available: https://arxiv.org/abs/1903.08127
+↩
 67.
 Z.-Q. He and X. Yuan, “Cascaded channel estimation for large intelligent metasurface assisted massive MIMO,” May 2019,
 arXiv:1905.07948
 . [Online]. Available: https://arxiv.org/abs/1905.07948
+↩
 68.
 Y. Han, W. Tang, S. Jin, C.-K. Wen, and X. Ma, “Large intelligent surface-assisted wireless communication exploiting statistical CSI,” Dec. 2018,
 arXiv:1812.05429
 . [Online]. Available: https://arxiv.org/abs/1812.05429
+↩
 69.
 A. Taha, M. Alrabeiah, and A. Alkhateeb, “Enabling large intelligent surfaces with compressive sensing and deep learning,” Apr. 2019,
 arXiv:1904.10136
 . [Online]. Available: https://arxiv.org/abs/1904.10136
+↩
 70.
 C. Huang, G. C. Alexandropoulos, A. Zappone, M. Debbah, and C. Yuen, “Energy efficient multi-user MISO communication using low resolution large intelligent surfaces,” in
 Proc. IEEE Global Commun. Conf.
 , Abu Dhabi, UAE, Dec. 2018, pp. 1–6.
+↩
 71.
 ( 2018 ).
 World’s First 5G NR Radio
 . [Online]. Available: https://www.ericsson.com/en/networks/offerings/5g/5g-nr-radio
+↩
 72.
 C. Liaskos, S. Nie, A. Tsioliaridou, A. Pitsillides, S. Ioannidis, and I. Akyildiz, “A novel communication paradigm for high capacity and security via programmable indoor wireless environments in next generation wireless systems,”
 Ad Hoc Netw.
 , vol. 87, pp. 1–16, May 2019.
+↩
 73.
 C. Liaskos, A. Tsioliaridou, S. Nie, A. Pitsillides, S. Ioannidis, and I. Akyildiz, “Modeling, simulating and configuring programmable wireless environments for multi-user multi-objective networking,” Dec. 2018,
 arXiv:1812.11429
 . [Online]. Available: https://arxiv.org/abs/1812.11429
+↩
 74.
 C. Huang, A. Zappone, M. Debbah, and C. Yuen, “Achievable rate maximization by passive intelligent mirrors,” in
 Proc. IEEE Int. Conf. Acoust., Speech Signal Process. (ICASSP)
 , Calgary, AB, Canada, Apr. 2018, pp. 3714–3718.
+↩
 75.
 Q. Wu and R. Zhang, “Intelligent reflecting surface enhanced wireless network: Joint active and passive beamforming design,” in
 Proc. IEEE Global Commun. Conf.
 , Abu Dhabi, UAE, Dec. 2018, pp. 1–6.
+↩
 76.
 Q. Wu and R. Zhang, “Intelligent reflecting surface enhanced wireless network via joint active and passive beamforming,” Oct. 2018,
 arXiv:1810.03961
 . [Online]. Available: https://arxiv.org/abs/1810.03961
+↩
 77.
 Q. Wu and R. Zhang, “Beamforming optimization for intelligent reflecting surface with discrete phase shifts,” in
 Proc. IEEE Int. Conf. Acoust., Speech Signal Process. (ICASSP)
 , Brighton, U.K., May 2019, pp. 7830–7833. [Online]. Available: https://arxiv.org/abs/1810.10718
+↩
 78.
 M.-A. Badiu and J. P. Coon, “Communication through a large reflecting surface with phase errors,” Jun. 2019,
 arXiv:1906.10751
 . [Online]. Available: https://arxiv.org/abs/1906.10751
+↩
 79.
 E. Basar, “Reconfigurable intelligent surface-based index modulation: A new beyond MIMO paradigm for 6G,” Apr. 2019,
 arXiv:1904.06704
 . [Online]. Available: https://arxiv.org/abs/1904.06704
+↩
 80.
 X. Yu, D. Xu, and R. Schober, “MISO wireless communication systems via intelligent reflecting surfaces,” Apr. 2019,
 arXiv:1904.12199
 . [Online]. Available: https://arxiv.org/abs/1904.12199
+↩
 81.
 D. Mishra and H. Johansson, “Channel estimation and low-complexity beamforming design for passive intelligent surface assisted MISO wireless energy transfer,” in
 Proc. IEEE Int. Conf. Acoust., Speech Signal Process. (ICASSP)
 , Brighton, U.K., May 2019, pp. 4659–4663.
+↩
 82.
 T. Jiang and Y. Shi, “Over-the-air computation via intelligent reflecting surfaces,” Apr. 2019,
 arXiv:1904.12475
 . [Online]. Available: https://arxiv.org/abs/1904.12475
+↩
 83.
 X. Yu, D. Xu, and R. Schober, “Enabling secure wireless communications via intelligent reflecting surfaces,” in
 Proc. IEEE Global Commun. Conf. (GLOBECOM)
 , Waikoloa, HI, USA, Apr. 2019. [Online]. Available: https://arxiv.org/abs/1904.09573
+↩
 84.
 J. Chen, Y.-C. Liang, Y. Pei, and H. Guo, “Intelligent reflecting surface: A programmable wireless environment for physical layer security,” May 2019,
 arXiv:1905.03689
 . [Online]. Available: https://arxiv.org/abs/1905.03689
+↩
 85.
 M. Cui, G. Zhang, and R. Zhang, “Secure wireless communication via intelligent reflecting surface,” May 2019,
 arXiv:1905.10770
 . [Online]. Available: https://arxiv.org/abs/1905.10770
+↩
 86.
 C. Liaskos, A. Tsioliaridou, A. Pitilakis, G. Pirialakos, O. Tsilipakos, A. Tasolamprou, N. Kantartzis, S. Ioannidis, M. Kafesaki, A. Pitsillides, and I. Akyildiz, “Joint compressed sensing and manipulation of wireless emissions with intelligent surfaces,” Apr. 2019,
 arXiv:1904.10670
 . [Online]. Available: https://arxiv.org/abs/1904.10670
+↩
 87.
 C. Liaskos, A. Tsioliaridou, S. Nie, A. Pitsillides, S. Ioannidis, and I. Akyildiz, “An interpretable neural network for configuring programmable wireless environments,” May 2019,
 arXiv:1905.02495
 . [Online]. Available: https://arxiv.org/abs/1905.02495
+↩
 88.
 M. Jung, W. Saad, Y. Jang, G. Kong, and S. Choi, “Reliability analysis of large intelligent surfaces (LISs): Rate distribution and outage probability,” Mar. 2019,
 arXiv:1903.11456
 . [Online]. Available: https://arxiv.org/abs/1903.11456
+↩
 89.
 M. Jung, W. Saad, Y. Jang, G. Kong, and S. Choi, “Performance analysis of large intelligent surfaces (LISs): Asymptotic data rate and channel hardening effects,” Feb. 2019,
 arXiv:1810.05667
 . [Online]. Available: https://arxiv.org/abs/1810.05667
+↩
 90.
 M. Jung, W. Saad, and G. Kong, “Performance analysis of large intelligent surfaces (LISs): Uplink spectral efficiency and pilot training,” Mar. 2019,
 arXiv:1904.00453
 . [Online]. Available: https://arxiv.org/abs/1904.00453
+↩
 91.
 S. Nie, J. M. Jornet, and I. F. Akyildiz, “Intelligent environments based on ultra-massive MIMO platforms for wireless communication in millimeter wave and terahertz bands,” Apr. 2019.
 arXiv:1904.07958
 . [Online]. Available: https://arxiv.org/abs/1904.07958
+↩
 92.
 C. Valagiannopoulos, T. A. Tsiftsis, and V. Kovanis, “Metasurface-enabled interference suppression at visible-light communications,” Apr. 2019,
 arXiv:1904.08858
 . [Online]. Available: https://arxiv.org/abs/1904.08858
+↩
 93.
 M. Najafi and R. Schober, “Intelligent reflecting surfaces for free space optical communications,” May 2019,
 arXiv:1905.01094
 . [Online]. Available: https://arxiv.org/abs/1905.01094
+↩
 94.
 Y. Yang, S. Zhang, and R. Zhang, “IRS-enhanced OFDM: Power allocation and passive array optimization,” May 2019,
 arXiv:1905.00604
 . [Online]. Available: https://arxiv.org/abs/1905.00604
+↩
 95.
 A. Welkie, L. Shangguan, J. Gummeson, W. Hu, and K. Jamieson, “Programmable radio environments for smart spaces,” in
 Proc. 16th ACM Workshop Hot Topics Netw.
 , 2017, pp. 36–42.
+↩
 96.
 Z. Li, Y. Xie, L. Shangguan, R. I. Zelaya, J. Gummeson, W. Hu, and K. Jamieson, “Towards programming the radio environment with large arrays of inexpensive antennas,” in
 Proc. 16th USENIX Symp. Netw. Syst. Design Implement.
@@ -2832,25 +2922,32 @@ Proc. 16th USENIX Symp. Netw. Syst. Design Implement.
 V. Arun and H. Balakrishnan, “RFocus: Practical beamforming for small devices,” May 2019,
 arXiv:1905.05130
 . [Online]. Available: https://arxiv.org/abs/1905.05130
+↩
 98.
 ( 2018 ).
 NTT DOCOMO and Metawave Announce Successful Demonstration of 28 GHz-band 5G Using World’s First Meta-Structure Technology
 . [Online]. Available: https://bit.ly/2I7yApd
+↩
 99.
 K. Achouri, M. A. Salem, and C. Caloz, “General metasurface synthesis based on susceptibility tensors,”
 IEEE Trans. Antennas Propag.
 , vol. 63, no. 7, pp. 2977–2991, Jul. 2015.
+↩
 100.
 A. Zappone and M. Di Renzo, “Feedback-aware design of reconfigurable intelligent surfaces in smart radio environments,” Tech. Rep., Jun. 2019.
+↩
 101.
 M. Di Renzo and J. Song, “Reflection probability in wireless networks with metasurface-coated environmental objects: An approach based on random spatial processes,”
 EURASIP J. Wireless Commun. Netw.
 , vol. 2019, no. 1, p. 99, Apr. 2019.
+↩
 102.
 A. Narayanan, T. V. Sreejith, and R. K. Ganti, “Coverage analysis in millimeter wave cellular networks with reflections,” in
 Proc. IEEE Global Commun. Conf.
 , Singapore, Dec. 2017, pp. 1–6.
+↩
 103.
 J. Lee and F. Baccelli, “On the effect of shadowing correlation on wireless network performance,” in
 Proc. IEEE Conf. Comput. Commun.
 , Honolulu, HI, USA, Apr. 2018, pp. 1601–1609.
+↩

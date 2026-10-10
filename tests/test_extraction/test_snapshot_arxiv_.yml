@@ -78,9 +78,10 @@ package:
     - E.3 DNA Modeling
     - E.4 Audio Details
     - E.5 Efficiency Benchmark
+  - Footnotes
 parts:
 - epub_type: titlepage
-  text_length: 2003
+  text_length: 1949
   toc:
   - Abstract
 - epub_type: null
@@ -120,7 +121,7 @@ parts:
   toc:
   - 6 Conclusion
 - epub_type: bibliography
-  text_length: 26687
+  text_length: 26919
   toc:
   - References
 - epub_type: appendix
@@ -153,6 +154,10 @@ parts:
     - E.3 DNA Modeling
     - E.4 Audio Details
     - E.5 Efficiency Benchmark
+- epub_type: footnotes
+  text_length: 41
+  toc:
+  - Footnotes
 stats:
   dead_links: 0
   images: 16

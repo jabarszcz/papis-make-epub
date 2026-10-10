@@ -1,0 +1,53 @@
+language: en
+media_count: 0
+media_extensions: {}
+package:
+  landmarks:
+  - href: content.xhtml#abstract1
+    text: Start
+    type: bodymatter
+  - href: content.xhtml#part-bibliography
+    text: References
+    type: bibliography
+  manifest:
+    content.xhtml: application/xhtml+xml mathml
+    fonts/dejavu.ttf: font/ttf
+    fonts/stix.ttf: font/ttf
+    nav.xhtml: application/xhtml+xml nav
+    style.css: text/css
+    toc.ncx: application/x-dtbncx+xml
+  metadata:
+    creator: null
+    identifier: https://arxiv.org/html/2605.23109v1
+    language: en
+    title: arxiv-footnotes-2605.23109
+  spine:
+  - content.xhtml
+  toc:
+  - Abstract
+  - 1 Introduction
+  - References
+  - Footnotes
+parts:
+- epub_type: titlepage
+  text_length: 1585
+  toc:
+  - Abstract
+- epub_type: null
+  text_length: 930
+  toc:
+  - 1 Introduction
+- epub_type: bibliography
+  text_length: 482
+  toc:
+  - References
+- epub_type: footnotes
+  text_length: 225
+  toc:
+  - Footnotes
+stats:
+  dead_links: 14
+  images: 0
+  math: 7
+  math_fallback: 0
+  math_images: 0

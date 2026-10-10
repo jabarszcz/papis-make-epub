@@ -1,16 +1,18 @@
 """Build an EPUB from a saved IEEE Xplore article page.
 
-Xplore keeps the References in a fold: a save holds the bibliography
-only if the fold was open. The TeX of the formulas lives in script
-elements (MathJax v2's; the page carries no MathML), which a save
-must keep.
+Xplore keeps the References and the Footnotes in folds of one
+accordion, at most one open at a time: a save holds the bibliography
+or the footnotes only if its fold was open. The TeX of the formulas
+lives in script elements, which a save must keep (see
+:func:`_formulas`).
 """
 
+import re
 from collections.abc import Sequence
 from logging import Logger
 from typing import ClassVar
 
-from papis_make_epub.formula import TEX
+from papis_make_epub.formula import TEX, Formula
 from papis_make_epub.logging import get_logger
 from papis_make_epub.math_renderers import MathRenderer
 from papis_make_epub.saved_page import SavedPage
@@ -31,15 +33,47 @@ logger: Logger = get_logger(__name__)
 MIN_ARTICLE_WORDS = 500
 
 
+def _formulas(extraction: Extraction, parts: Sequence[Node]) -> list[Formula]:
+    """The formulas under *parts*, each with its TeX, whether MathJax
+    (v2) had typeset it when the page was captured or not; the page
+    carries no MathML."""
+    formulas = []
+    for part in parts:
+        # typeset: the TeX sits in a MathJax script, inside the
+        # tex-math wrapper for an inline formula and beside it for a
+        # display one (the wrapper then holds MathJax output alone)
+        for script in part.select('script[type^="math/tex"]'):
+            wrapper = script.parent("tex-math")
+            formulas.append(extraction.formula(
+                wrapper if wrapper is not None else script,
+                tex=script.text().strip(),
+                display=script.matches("[type*='mode=display']")))
+        # untypeset: the tex-math holds the TeX as its only content,
+        # delimited by \$ (the ieee-footnotes reduction's panel, caught
+        # before MathJax typeset it)
+        for tex_math in part.select("tex-math:not(:has(*)):not(:empty)"):
+            tex = tex_math.text().strip()
+            if not tex:
+                continue
+            if m := re.fullmatch(r"\\?\$(.*?)\\?\$", tex, re.S):
+                tex = m.group(1).strip()
+            formulas.append(extraction.formula(
+                tex_math, tex=tex,
+                display=tex_math.parent("disp-formula") is not None))
+    return formulas
+
+
 def _link_targets(a: Node) -> list[Target]:
-    """Xplore's cross-references (citations, equation, figure and
-    section refs) are ``javascript:void`` links naming their target
-    in ``anchor``; a reference entry's id carries an ``-all-ref``
-    suffix the citation's anchor lacks."""
+    """Xplore's cross-references (citations, footnote marks, equation,
+    figure and section refs) are ``javascript:void`` links naming
+    their target in ``anchor``; a reference entry's id carries an
+    ``-all-ref`` suffix the citation's anchor lacks, and a footnote's
+    a ``footnotes-desktop-`` prefix the mark's anchor lacks."""
     anchor = a.attr("anchor")
     if not anchor:
         return fragment_targets(a)
-    return [target(anchor), target(f"{anchor}-all-ref")]
+    return [target(anchor), target(f"{anchor}-all-ref"),
+            target(f"footnotes-desktop-{anchor}")]
 
 
 def _strip_cruft(part: Node) -> None:
@@ -50,11 +84,12 @@ def _strip_cruft(part: Node) -> None:
     plus an id keyed by reference-and-section that repeats when a
     reference is cited twice in a section; nothing targets those
     ids, so the attributes go. ``_ngcontent`` marks Angular
-    components, ``xplmathjax`` flags math containers, and ``<fig>``
-    is Xplore's caption wrapper.
+    components, ``xplmathjax``, ``xplfulltextdomhandler`` and
+    ``context-events`` are Angular directives (the last two on the
+    footnotes panel), and ``<fig>`` is Xplore's caption wrapper.
     """
     part.strip_attributes("ref-type", "anchor", "data-range", "xplmathjax",
-                          r"_ng.*")
+                          "xplfulltextdomhandler", "context-events", r"_ng.*")
     for el in part.select("[id^='context_ref']"):
         el.delete("id")
     for fig in part.select("fig"):
@@ -99,20 +134,29 @@ class IeeeSource(Source):
                 "its script elements (see the README)")
 
         abstract = root.first(".abstract-text")
-        # the References fold: its toggle button and, once opened, its
-        # panel share the id; a capture made with the fold closed
-        # carries the button alone
+        # the References and Footnotes folds: a fold's toggle button
+        # and, once opened, its panel share the id; a capture made with
+        # the fold closed carries the button alone. The folds are one
+        # accordion, so a capture holds one of them open.
         references = root.first("div#references")
         if references is None and root.has("button#references"):
             logger.warning(
                 "the References fold was closed when the page was "
                 "captured: the book gets no bibliography and its citations "
                 "stay as text; open it before capturing")
+        footnotes_section = root.first("div#footnotes")
+        if (footnotes_section is None and root.has("button#footnotes")
+                and article.has("a.footnote-link")):
+            logger.warning(
+                "the Footnotes fold was closed when the page was "
+                "captured: the book gets no footnotes and their marks stay "
+                "as text")
         sections = outermost(article.select("div.section"))
         if not sections:
             raise SourceNotAvailableError("no div.section under #article")
 
         parts = ([abstract] if abstract is not None else []) + sections
+        parts += [footnotes_section] if footnotes_section is not None else []
         # span.formula is Xplore's per-equation helper UI (a View
         # Source link, a support icon, a hidden TeX duplicate),
         # preserved by fuller captures
@@ -127,15 +171,7 @@ class IeeeSource(Source):
                             ".reference-header-container, "
                             ".ref-links-container, xpl-citation-map-button, "
                             ".hide-mobile")
-        formulas = []
-        for scr in (s for part in parts
-                    for s in part.select('script[type^="math/tex"]')):
-            wrapper = scr.parent("tex-math")
-            formulas.append(extraction.formula(
-                wrapper if wrapper is not None else scr,
-                tex=scr.text().strip(),
-                display=scr.matches("[type*='mode=display']")))
-        extraction.render_math(formulas)
+        extraction.render_math(_formulas(extraction, parts))
 
         # the references sit outside #article; a collapsed accordion
         # leaves them empty, and the citations then become text
@@ -154,6 +190,13 @@ class IeeeSource(Source):
             # the fold's heading is its toggle button, outside the panel;
             # the part gets one of its own for the TOC
             references.insert(0, extraction.new("h2", text="References"))
-            extraction.add_sections([references], "bibliography")
+            extraction.add_bibliography(
+                references, references.select("div.reference-container"))
+        if footnotes_section is not None:
+            # the same for the Footnotes fold
+            footnotes_section.insert(0, extraction.new("h2", text="Footnotes"))
+            extraction.add_footnotes(
+                footnotes_section,
+                footnotes_section.select("div[id^='footnotes-desktop-fn']"))
 
         return extraction.content()

@@ -136,10 +136,16 @@ class SpringerSource(Source):
 
         if abstract is not None:
             extraction.add_abstract(abstract)
-        # the bibliography is one of the platform's sections
+        # the bibliography and the footnotes are among the platform's
+        # sections
         for s in sections:
-            extraction.add_sections(
-                [s], "bibliography" if s.matches("[data-title='References']")
-                else None)
+            if s.matches("[data-title='References']"):
+                extraction.add_bibliography(
+                    s, s.select("li.c-article-references__item"))
+            elif s.matches("[data-title='Notes']"):
+                extraction.add_footnotes(
+                    s, s.select("li.c-article-footnote--listed__item"))
+            else:
+                extraction.add_sections([s])
 
         return extraction.content()

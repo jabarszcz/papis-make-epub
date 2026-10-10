@@ -40,21 +40,28 @@ def _formula(extraction: Extraction, mml: Node) -> Formula:
 
 
 def _unlink_back_references(parts: Iterable[Node]) -> None:
-    """Take the href off the reference entries' back-links.
+    """Take the href off the reference entries' and the footnotes'
+    back-links.
 
     They target a citation ``name`` rather than an id and never
     resolve; the elements stay, being the citations' targets.
     """
     for part in parts:
-        for a in part.select('a[href^="#bbr"]'):
+        for a in part.select('a[href^="#bbr"], a[href^="#bfn"]'):
             a.delete("href")
 
 
 def _link_targets(a: Node) -> list[Target]:
     """Body citations point at ``#brNNNN``, but the reference entries
-    are id'd ``ref-id-brNNNN``: the link is a side-panel opener in the
-    app."""
-    return [t for f in fragment_targets(a) for t in (f, target(f"ref-id-{f}"))]
+    are id'd ``ref-id-brNNNN``; footnote markers point at ``#fnNNNN``,
+    but the note text is id'd ``npNNNN``: both links are side-panel
+    openers in the app."""
+    targets = []
+    for f in fragment_targets(a):
+        targets += [f, target(f"ref-id-{f}")]
+        if f.startswith("fn"):
+            targets.append(target("np" + f[2:]))
+    return targets
 
 
 class ScienceDirectSource(Source):
@@ -85,11 +92,13 @@ class ScienceDirectSource(Source):
 
         abstract = root.first("#abstracts")
         bibliography = root.first("section.bibliography")
+        footnotes_section = root.first("#footnotes")
         sections = outermost(body.select("section"))
         if not sections:
             raise SourceNotAvailableError("no sections under #body")
 
-        parts = [p for p in (abstract, body, bibliography) if p is not None]
+        parts = [p for p in (abstract, body, bibliography, footnotes_section)
+                 if p is not None]
         # reader chrome: per-figure download-link pairs, per-reference
         # Scopus/Google Scholar/View PDF rows, and the inline "opens in
         # new window" link icons (svg.icon)
@@ -107,6 +116,12 @@ class ScienceDirectSource(Source):
             extraction.add_abstract(abstract)
         extraction.add_sections(sections)
         if bibliography is not None:
-            extraction.add_sections([bibliography], "bibliography")
+            extraction.add_bibliography(
+                bibliography, bibliography.select("ol.references > li"))
+        if footnotes_section is not None:
+            # the container has no heading; the part gets one for the TOC
+            footnotes_section.insert(0, extraction.new("h2", text="Footnotes"))
+            extraction.add_footnotes(footnotes_section,
+                                     footnotes_section.select("dl.footnote"))
 
         return extraction.content()

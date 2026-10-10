@@ -2189,224 +2189,288 @@ Silver, D. et al. A general reinforcement learning algorithm that masters chess,
 Science
 362
 , 1140–1144 (2018).
+↩
 Strassen, V. Gaussian elimination is not optimal.
 Numer. Math.
 13
 , 354–356 (1969).
+↩
 Bürgisser, P., Clausen, M. & Shokrollahi, A.
 Algebraic Complexity Theory
 Vol. 315 (Springer Science & Business Media, 2013).
+↩
 Bläser, M. Fast matrix multiplication.
 Theory Comput.
 5
 , 1–60 (2013).
+↩
 Landsberg, J. M.
 Geometry and Complexity Theory
 169 (Cambridge Univ. Press, 2017).
+↩
 Pan, V. Y. Fast feasible and unfeasible matrix multiplication. Preprint at
 https://arxiv.org/abs/1804.04102
 (2018).
+↩
 Lim, L.-H. Tensors in computations.
 Acta Numer.
 30
 , 555–764 (2021).
+↩
 Schönhage, A. Partial and total matrix multiplication.
 SIAM J. Comput.
 10
 , 434–455 (1981).
+↩
 Coppersmith, D. & Winograd, S. Matrix multiplication via arithmetic progressions. In
 ACM Symposium on Theory of Computing
 1–6 (ACM, 1987).
+↩
 Strassen, V. The asymptotic spectrum of tensors and the exponent of matrix multiplication. In
 27th Annual Symposium on Foundations of Computer Science
 49–54 (IEEE, 1986).
+↩
 Le Gall, F. Powers of tensors and fast matrix multiplication. In
 International Symposium on Symbolic and Algebraic Computation
 296–303 (ACM, 2014).
+↩
 Alman, J. & Williams, V. V. A refined laser method and faster matrix multiplication. In
 ACM-SIAM Symposium on Discrete Algorithms
 522–539 (SIAM, 2021).
+↩
 Gauss, C. F.
 Theoria Motus Corporum Coelestium in Sectionibus Conicis Solum Ambientium
 (Perthes and Besser, 1809).
+↩
 Hillar, C. J. & Lim, L.-H. Most tensor problems are NP-hard.
 J. ACM
 60
 , 1–39 (2013).
+↩
 Laderman, J. D. A noncommutative algorithm for multiplying 3 × 3 matrices using 23 multiplications.
 Bull. Am. Math. Soc.
 82
 , 126–128 (1976).
+↩
 Hopcroft, J. E. & Kerr, L. R. On minimizing the number of multiplications necessary for matrix multiplication.
 SIAM J. Appl. Math.
 20
 , 30–36 (1971).
+↩
 Vervliet, N., Debals, O., Sorber, L., Van Barel, M. & De Lathauwer, L.
 Tensorlab 3.0
 (2016);
 https://www.tensorlab.net/
+↩
 Smirnov, A. V. The bilinear complexity and practical algorithms for matrix multiplication.
 Comput. Math. Math. Phys.
 53
 , 1781–1795 (2013).
+↩
 Sedoglavic, A. & Smirnov, A. V. The tensor rank of 5x5 matrices multiplication is bounded by 98 and its border rank by 89. In
 Proc. 2021 on International Symposium on Symbolic and Algebraic Computation
 345–351 (ACM, 2021).
+↩
 Heule, M. J., Kauers, M. & Seidl, M. New ways to multiply 3 × 3-matrices.
 J. Symb. Comput.
 104
 , 899–916 (2021).
+↩
 Hubert, T. et al. Learning and planning in complex action spaces. In
 International Conference on Machine Learning
 4476–4486 (PMLR, 2021).
+↩
 Zhang, W. & Dietterich, T. G. A reinforcement learning approach to job-shop scheduling. In
 International Joint Conferences on Artificial Intelligence
 Vol. 95, 1114–1120 (Morgan Kaufmann Publishers, 1995).
+↩
 Vaswani, A. Attention is all you need. In
 International Conference on Neural Information Processing Systems
 Vol 30, 5998–6008 (Curran Associates, 2017).
+↩
 Ho, J., Kalchbrenner, N., Weissenborn, D. & Salimans, T. Axial attention in multidimensional transformers. Preprint at
 https://arxiv.org/abs/1912.12180
 (2019).
+↩
 Drevet, C.-É., Islam, M. N. & Schost, É. Optimization techniques for small matrix multiplication.
 Theor. Comput. Sci.
 412
 , 2219–2236 (2011).
+↩
 Sedoglavic, A. A non-commutative algorithm for multiplying (7 × 7) matrices using 250 multiplications. Preprint at
 https://arxiv.org/abs/1712.07935
 (2017).
+↩
 Battaglia, P. W. et al. Relational inductive biases, deep learning, and graph networks. Preprint at
 https://arxiv.org/abs/1806.01261
 (2018).
+↩
 Balog, M., van Merriënboer, B., Moitra, S., Li, Y. & Tarlow, D. Fast training of sparse graph neural networks on dense hardware. Preprint at
 https://arxiv.org/abs/1906.11786
 (2019).
+↩
 Ye, K. & Lim, L.-H. Fast structured matrix computations: tensor rank and Cohn–Umans method.
 Found. Comput. Math.
 18
 , 45–95 (2018).
+↩
 Bradbury, J. et al. JAX: composable transformations of Python+NumPy programs.
 GitHub
 http://github.com/google/jax
 (2018).
+↩
 Benson, A. R. & Ballard, G. A framework for practical parallel fast matrix multiplication.
 ACM SIGPLAN Not.
 50
 , 42–53 (2015).
+↩
 Huang, J., Smith, T. M., Henry, G. M. & Van De Geijn, R. A. Strassen’s algorithm reloaded. In
 International Conference for High Performance Computing, Networking, Storage and Analysis
 690–701 (IEEE, 2016).
+↩
 Abadi, M. et al. Tensorflow: a system for large-scale machine learning. In
 USENIX Symposium On Operating Systems Design And Implementation
 265–283 (USENIX, 2016).
+↩
 Dabney, W., Rowland, M., Bellemare, M. & Munos, R. Distributional reinforcement learning with quantile regression. In
 AAAI Conference on Artificial Intelligence
 Vol. 32, 2892–2901 (AAAI Press, 2018).
+↩
 Kingma, D. P., & Ba, J. Adam: a method for stochastic optimization. In
 International Conference on Learning Representations (ICLR)
 (2015).
+↩
 Loshchilov, I. & Hutter, F. Decoupled weight decay regularization. In
 International Conference on Learning Representations (ICLR)
 (2019).
+↩
 Silver, D. et al. Mastering the game of Go with deep neural networks and tree search.
 Nature
 529
 , 484–489 (2016).
+↩
 Sedoglavic, A. A non-commutative algorithm for multiplying 5x5 matrices using 99 multiplications. Preprint at
 https://arxiv.org/abs/1707.06860
 (2017).
+↩
 de Groote, H. F. On varieties of optimal algorithms for the computation of bilinear mappings II. optimal algorithms for 2 × 2-matrix multiplication.
 Theor. Comput. Sci.
 7
 , 127–148 (1978).
+↩
 Burichenko, V. P. On symmetries of the Strassen algorithm. Preprint at
 https://arxiv.org/abs/1408.6273
 (2014).
+↩
 Chiantini, L., Ikenmeyer, C., Landsberg, J. M. & Ottaviani, G. The geometry of rank decompositions of matrix multiplication I: 2 × 2 matrices.
 Exp. Math.
 28
 , 322–327 (2019).
+↩
 Grochow, J. A. & Moore, C. Designing Strassen’s algorithm. Preprint at
 https://arxiv.org/abs/1708.09398
 (2017).
+↩
 Ballard, G., Ikenmeyer, C., Landsberg, J. M. & Ryder, N. The geometry of rank decompositions of matrix multiplication II: 3 × 3 matrices.
 J. Pure Appl. Algebra
 223
 , 3205–3224 (2019).
+↩
 Grochow, J. A. & Moore, C. Matrix multiplication algorithms from group orbits. Preprint at
 https://arxiv.org/abs/1612.01527
 (2016).
+↩
 Kolda, T. G. & Bader, B. W. Tensor decompositions and applications.
 SIAM Rev.
 51
 , 455–500 (2009).
+↩
 Bernardi, A., Brachat, J., Comon, P. & Mourrain, B. General tensor decomposition, moment matrices and applications.
 J. Symb. Comput.
 52
 , 51–71 (2013).
+↩
 Elser, V. A network that learns Strassen multiplication.
 J. Mach. Learn. Res.
 17
 , 3964–3976 (2016).
+↩
 Tschannen, M., Khanna, A. & Anandkumar, A, StrassenNets: deep learning with a multiplication budget. In
 International Conference on Machine Learning
 4985–4994 (PMLR, 2018).
+↩
 Huang, J., Yu, C. D. & Geijn, R. A. V. D. Strassen’s algorithm reloaded on GPUs.
 ACM Trans. Math. Softw.
 46
 , 1–22 (2020).
+↩
 Mirhoseini, A. et al. A graph placement methodology for fast chip design.
 Nature
 594
 , 207–212 (2021).
+↩
 Bunel, R., Desmaison, A., Kohli, P., Torr, P. H. & Kumar, M. P. Learning to superoptimize programs. In
 International Conference on Learning Representations (ICLR)
 (2017).
+↩
 Li, Y., Gimeno, F., Kohli, P. & Vinyals, O. Strong generalization and efficiency in neural programs. Preprint at
 https://arxiv.org/abs/2007.03629
 (2020).
+↩
 Lagoudakis, M. G. et al. Algorithm selection using reinforcement learning. In
 International Conference on Machine Learning
 511–518 (Morgan Kaufmann Publishers, 2000).
+↩
 Schmidhuber, J.
 Evolutionary Principles in Self-Referential Learning. On Learning now to Learn: The Meta-Meta-Meta...-Hook
 . Diploma thesis, Technische Univ. Munchen (1987).
+↩
 Kaliszyk, C., Urban, J., Michalewski, H. & Olšák, M. Reinforcement learning of theorem proving. In
 International Conference on Neural Information Processing Systems
 8836–8847 (Curran Associates, 2018).
+↩
 Piotrowski, B. & Urban, J. ATPboost: learning premise selection in binary setting with ATP feedback. In
 International Joint Conference on Automated Reasoning
 566–574 (Springer, 2018).
+↩
 Bansal, K., Loos, S., Rabe, M., Szegedy, C. & Wilcox, S. HOList: an environment for machine learning of higher order logic theorem proving. In
 International Conference on Machine Learning
 454–463 (PMLR, 2019).
+↩
 Zombori, Z., Urban, J. & Brown, C. E. Prolog technology reinforcement learning prover. In
 International Joint Conference on Automated Reasoning
 489–507 (Springer, 2020).
+↩
 Wagner, A. Z. Constructions in combinatorics via neural networks. Preprint at
 https://arxiv.org/abs/2104.14516
 (2021).
+↩
 Popova, M., Isayev, O. & Tropsha, A. Deep reinforcement learning for de novo drug design.
 Sci.
 Adv.
 4
 , eaap7885 (2018).
+↩
 Zhou, Z., Kearnes, S., Li, L., Zare, R. N. & Riley, P. Optimization of molecules via deep reinforcement learning.
 Sci. Rep.
 9
 , 10752 (2019).
+↩
 Segler, M. H., Preuss, M. & Waller, M. P. Planning chemical syntheses with deep neural networks and symbolic AI.
 Nature
 555
 , 604–610 (2018).
+↩
 Dalgaard, M., Motzoi, F., Sørensen, J. J. & Sherson, J. Global optimization of quantum dynamics with AlphaZero deep exploration.
 npj Quantum Inf.
 6
 , 6 (2020).
+↩
 Fast matrix multiplication algorithms catalogue.
 Université de Lille
 https://fmm.univ-lille.fr/
 (2021).
+↩
 
 ==== part 11 (None)
 Acknowledgements

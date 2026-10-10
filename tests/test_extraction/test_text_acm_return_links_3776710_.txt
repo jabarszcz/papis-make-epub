@@ -23,20 +23,30 @@ References
 Andrea Asperti. 2012. A Compact Proof of Decidability for Regular Expression Equivalence.
 In Interactive Theorem Proving Third International Conference, ITP 2012, Princeton, NJ, USA, August 13-15, 2012. Proceedings (Lecture Notes in Computer Science, Vol. 7406)
 , Lennart Beringer and Amy P Felty.(Eds.) Springer, 283-298.
+Crossref
+Google Scholar
 [2]
 Fahad Ausaf, Roy Dyckhoff, and Christian Urban. 2016. POSIX Lexing with Derivatives of Regular Expressions (Proof Pearl).
 In Interactive Theorem Proving - 7th International Conference, ITP 2016, Nancy, France, August 22-25, 2016, Proceedings (Lecture Notes in Computer Science, Vol. 9807)
 , Jasmin Christian Blanchette and Stephan Merz (Eds.). Springer, 69-86.
+Crossref
+Google Scholar
 [3]
 Auréle Barriére and Clément Pit-Claudel. 2024. Linear Matching of JavaScript Regular Expressions.
 Proc. ACM Program. Lang. 8
 , PLDI (2024), 1336-1360.
+Digital Library
+Google Scholar
+↩
 [4]
 Auréle Barriére, Victor Deng, and Clément Pit-Claudel. 2025a.
 Artifact for "Formal Verification for JavaScript Regular Expressions: a Proven Mechanized Semantics and its Applications", at POPL
 2026.
+Digital Library
+Google Scholar
 
-==== part 3 (None)
+==== part 3 (footnotes)
 Footnotes
 2
 https://github.com/google/re2/blob/main/re2/nfa.cc
+↩
