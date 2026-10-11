@@ -5,13 +5,15 @@ A source turns a saved page into :class:`Content`, the article in a
 publisher-independent form: its parts as markup carrying their own
 navigation, the media the markup references, the build counts, and
 the language. It works through an :class:`Extraction`, which holds
-the page's soup and carries the stages every platform needs (math
+the page and carries the stages every platform needs (math
 rendering, figure embedding, heading indexing, part assembly) while
 the source supplies what varies by platform (where the article is,
 what is chrome, how formulas are delivered, which links to repair).
-The writer (:mod:`papis_make_epub.book`) packages the content into
-the EPUB and imports the content types from here; the platform
-modules import nothing from the writer.
+The source reaches the page through :class:`~papis_make_epub.sources.node.Node`
+queries, which record the rules it applies. The writer
+(:mod:`papis_make_epub.book`) packages the content into the EPUB and
+imports the content types from here; the platform modules import
+nothing from the writer.
 """
 
 import base64
@@ -41,8 +43,21 @@ from papis_make_epub.math_renderers import (
     is_math_img,
 )
 from papis_make_epub.saved_page import SavedPage
+from papis_make_epub.sources.node import (
+    Node,
+    Rule,
+    Rules,
+    Target,
+    internal_module,
+    tag_of,
+    target,
+)
 
 logger: Logger = get_logger(__name__)
+
+# the generic stages call no queries for the platforms, so a query
+# from here is recorded at the platform module's call site
+internal_module(__file__)
 
 
 class SourceNotAvailableError(BuildError):
@@ -76,10 +91,6 @@ class BuildStats:
     # or as placeholder anchors (a capture that left out part of the
     # page, such as a collapsed references list, is the usual cause)
     dead_links: int = 0
-    # elements removed per selector a source dropped (the parts of a
-    # comma-separated selector counted apart): a selector's evidence
-    # in the fixtures, which tests/test_selectors.py checks
-    dropped: dict[str, int] = field(default_factory=dict)
 
 
 @dataclass
@@ -114,13 +125,16 @@ class Content:
     as (file name, bytes); the parts' markup already points at those
     names. A part typed ``titlepage`` is the article's own front
     matter; a source whose page carries none leaves the title page
-    to the caller, through :meth:`add_title_page`.
+    to the caller, through :meth:`add_title_page`. *rules* holds the
+    matches of the source's rules, per rule (see
+    :mod:`papis_make_epub.sources.node`).
     """
 
     parts: list[Part]
     media: list[tuple[str, bytes]]
     stats: BuildStats
     language: str | None
+    rules: dict[Rule, int] = field(default_factory=dict)
 
     def add_title_page(self, title: str, authors: Iterable[str]) -> None:
         """Prepend a title page of *title* and *authors*, unless a part
@@ -239,67 +253,89 @@ SVG_ATTRIBUTE_NAMES = {n.lower(): n for n in (
 )}
 
 
-def fragment_targets(a: Tag) -> list[str]:
+def fragment_targets(a: Node) -> list[Target]:
     """The id a fragment link names; nothing for any other link.
 
     The default of :meth:`Extraction.resolve_links`; a platform's own
     function adds the forms its cross-references take.
     """
+    return [target(f) for f in _fragment(tag_of(a))]
+
+
+def _fragment(a: Tag) -> list[str]:
     href = str(a.get("href", ""))
     return [href[1:]] if href.startswith("#") else []
 
 
 class Extraction:
-    """One extraction of a saved page: the soup, and the stages that
+    """One extraction of a saved page: the page, and the stages that
     turn the article's nodes into :class:`Content`.
 
-    The source locates the article in ``soup`` and drives the stages
-    on its nodes: :meth:`drop` for the platform's chrome,
-    :meth:`render_math` for its formulas (and :meth:`drop` again for
-    what rendering leaves behind), :meth:`resolve_links` and
-    :meth:`embed_figures` over every node that becomes a part, then
-    the ``add_*`` methods in reading order, and :meth:`content` to
-    close. The stages rewrite the soup in place; the parts are
-    recorded as nodes, and :meth:`content` runs the generic rules on
-    them (what is never article content, widget markup, inline svg,
-    ARIA references) and serializes them.
+    The source locates the article from :attr:`root`, the page's
+    root node, and drives the stages on its nodes: the nodes' own
+    ``drop`` for the platform's chrome, :meth:`render_math` for its
+    formulas, :meth:`resolve_links` and :meth:`embed_figures` over
+    every node that becomes a part, then the ``add_*`` methods in
+    reading order, and :meth:`content` to close. The stages rewrite
+    the page in place; the parts are recorded as nodes, and
+    :meth:`content` runs the generic rules on them (what is never
+    article content, widget markup, inline svg, ARIA references) and
+    serializes them.
     """
 
     def __init__(self, page: SavedPage,
                  renderers: tuple[MathRenderer, MathRenderer], *,
                  best_effort: bool = False) -> None:
         self.page = page
-        self.soup: BeautifulSoup = BeautifulSoup(page.text, "lxml")
+        self._soup = BeautifulSoup(page.text, "lxml")
+        self._rules = Rules()
+        self.root = Node(self._soup, self._rules)
         self.stats: BuildStats = BuildStats()
         # the parts in reading order, as nodes until content()
         self._parts: list[tuple[Tag, str | None, list[TocEntry]]] = []
         self._inline, self._display = renderers
         self._best_effort = best_effort
         self._math_media: list[tuple[str, bytes]] = []
-        self._ctx = RenderContext(soup=self.soup, math_media=self._math_media)
+        self._ctx = RenderContext(soup=self._soup, math_media=self._math_media)
         self._figures: list[tuple[str, bytes]] = []
         # figures already embedded, by their source URL, and the media
         # names taken; both span every embed_figures call
         self._figure_names: dict[str, str] = {}
         self._used_names: set[str] = set()
+        self._ids: IdGenerator | None = None
 
-    def drop(self, nodes: Sequence[Tag], selector: str) -> None:
-        """Remove every element under *nodes* that *selector* matches,
-        counting the matches of each of its comma-separated parts in
-        ``stats.dropped``.
+    def new(self, name: str, attrs: dict[str, str] | None = None,
+            text: str | None = None) -> Node:
+        """A new element, detached until placed."""
+        tag = self._soup.new_tag(name, attrs=attrs or {})
+        if text is not None:
+            tag.string = text
+        return Node(tag, self._rules)
 
-        Every selector a source passes here must match a fixture of
-        its platform, the dated evidence of the form it handles;
-        ``tests/test_selectors.py`` checks that from the counts, and
-        ``tools/fixture_coverage.py`` names the fixtures that show a
-        given selector's form.
-        """
-        for sub in (s.strip() for s in selector.split(",")):
-            self.stats.dropped[sub] = self.stats.dropped.get(sub, 0) + sum(
-                len(node.select(sub)) for node in nodes)
+    def place(self, node: Node) -> None:
+        """Put a detached node at the end of the page's body, where
+        id minting and the stages see it."""
+        (self._soup.body or self._soup).append(tag_of(node))
+
+    def mint_id(self, base: str) -> str:
+        """An id unique in the page (see :class:`IdGenerator`)."""
+        if self._ids is None:
+            self._ids = IdGenerator(self._soup)
+        return self._ids.mint(base)
+
+    def drop(self, nodes: Sequence[Node], selector: str) -> None:
+        """Remove every element under *nodes* that *selector* matches
+        (see :meth:`Node.drop <papis_make_epub.sources.node.Node.drop>`)."""
         for node in nodes:
-            for el in node.select(selector):
-                el.decompose()
+            node.drop(selector)
+
+    def formula(self, node: Node, *, display: bool, mathml: Node | None = None,
+                tex: str | None = None) -> Formula:
+        """The formula at *node*, carrying the formats the source has,
+        for :meth:`render_math`."""
+        return Formula(node=tag_of(node), display=display,
+                       mathml=tag_of(mathml) if mathml is not None else None,
+                       tex=tex)
 
     def render_math(self, formulas: Iterable[Formula]) -> None:
         """Replace each formula's node with its rendering; count the
@@ -316,14 +352,15 @@ class Extraction:
         self.stats.math += n
         self.stats.math_fallback += degraded
 
-    def resolve_links(self, nodes: Sequence[Tag],
-                      targets: Callable[[Tag], list[str]] = fragment_targets,
+    def resolve_links(self, part_nodes: Sequence[Node],
+                      targets: Callable[[Node], list[Target]] = fragment_targets,
                       ) -> None:
         """Point every cross-reference under *nodes* at its target in
         the document, and turn the ones without a target into text.
 
         *targets* names the ids an ``a`` element means to point at,
-        in preference order, and nothing for one that is not a
+        in preference order, each recorded as a rule (see
+        :func:`~papis_make_epub.sources.node.target`), and nothing for one that is not a
         cross-reference (an external URL, a mailto, a bare anchor),
         which stays as it is; the default reads fragment links, and
         a platform's function adds the forms its own links take (a
@@ -335,14 +372,17 @@ class Extraction:
         stays as the placeholder anchor the HTML standard provides
         for a link without a destination.
         """
+        nodes = [tag_of(n) for n in part_nodes]
         ids = ids_under(nodes)
         unresolved = []
         for node in nodes:
             for a in node.find_all("a"):
-                candidates = targets(a)
+                candidates = targets(Node(a, self._rules))
                 if not candidates:
                     continue
                 hit = next((c for c in candidates if c in ids), None)
+                for c in candidates:
+                    self._rules.record("target", "", int(c is hit), c.site)
                 if hit is None:
                     unresolved.append(a)
                 else:
@@ -363,7 +403,7 @@ class Extraction:
                 "the capture left out (a collapsed references list, for "
                 "instance)", len(unresolved))
 
-    def embed_figures(self, nodes: Iterable[Tag]) -> None:
+    def embed_figures(self, part_nodes: Iterable[Node]) -> None:
         """Rewrite the figures under *nodes* to point at embedded media;
         collect that media.
 
@@ -375,7 +415,7 @@ class Extraction:
         node that will be serialized must be passed, before it is.
         """
         figure_attrs = (("img", "src"), ("object", "data"))
-        for node in nodes:
+        for node in (tag_of(n) for n in part_nodes):
             for el, attr in [(el, attr) for tag, attr in figure_attrs
                              for el in node.find_all(tag)]:
                 if el.name == "img" and is_math_img(el):
@@ -415,7 +455,32 @@ class Extraction:
                 el[attr] = fn
         self.stats.images = len(self._figures)
 
-    def index_headings(self, nodes: Sequence[Tag]) -> list[list[TocEntry]]:
+    def add_part(self, node: Node, epub_type: str | None = None,
+                 entries: list[TocEntry] | None = None) -> None:
+        """Record the node as the next part; a node with no text is
+        dropped with a warning (a part that had not rendered when the
+        page was saved is the usual cause)."""
+        tag = tag_of(node)
+        if not tag.get_text(strip=True):
+            logger.warning("empty %s part dropped; the page may have been "
+                           "saved before it rendered",
+                           epub_type or "untyped")
+            return
+        self._parts.append((tag, epub_type, entries or []))
+
+    def add_abstract(self, node: Node) -> None:
+        """Record the node as the abstract part, with its TOC entry."""
+        self.add_part(node, "abstract", [TocEntry("Abstract", "part-abstract")])
+
+    def add_sections(self, nodes: Sequence[Node],
+                     epub_type: str | None = None) -> None:
+        """Index the nodes' headings, then record one part per node,
+        typed *epub_type*."""
+        for node, entries in zip(nodes, self._index_headings(
+                [tag_of(n) for n in nodes]), strict=True):
+            self.add_part(node, epub_type, entries)
+
+    def _index_headings(self, nodes: Sequence[Tag]) -> list[list[TocEntry]]:
         """Give every h2/h3 heading under the nodes an id; return each
         node's TocEntry tree.
 
@@ -446,33 +511,6 @@ class Extraction:
             result.append(entries)
         return result
 
-    def add_part(self, node: Tag, epub_type: str | None = None,
-                 entries: list[TocEntry] | None = None) -> None:
-        """Record the node as the next part; a node with no text is
-        dropped with a warning (a part that had not rendered when the
-        page was saved is the usual cause)."""
-        if not node.get_text(strip=True):
-            logger.warning("empty %s part dropped; the page may have been "
-                           "saved before it rendered",
-                           epub_type or "untyped")
-            return
-        self._parts.append((node, epub_type, entries or []))
-
-    def add_abstract(self, node: Tag) -> None:
-        """Record the node as the abstract part, with its TOC entry."""
-        self.add_part(node, "abstract", [TocEntry("Abstract", "part-abstract")])
-
-    def add_sections(self, nodes: Sequence[Tag],
-                     epub_type: str | Callable[[Tag], str | None] | None = None,
-                     ) -> None:
-        """Index the nodes' headings, then record one part per node,
-        typed by *epub_type*: a type for all, or a function of the
-        node."""
-        for node, entries in zip(nodes, self.index_headings(nodes),
-                                 strict=True):
-            self.add_part(node, epub_type(node) if callable(epub_type)
-                          else epub_type, entries)
-
     def content(self) -> Content:
         """The content: the recorded parts, serialized once four
         generic rules have run on them (:func:`drop_non_content`,
@@ -493,7 +531,8 @@ class Extraction:
         return Content(parts=parts,
                        media=self._math_media + self._figures,
                        stats=self.stats,
-                       language=page_language(self.page.text))
+                       language=page_language(self.page.text),
+                       rules=dict(self._rules.matches))
 
 
 def drop_non_content(node: Tag) -> None:
@@ -566,20 +605,21 @@ def resolve_aria_references(node: Tag, ids: AbstractSet[str]) -> None:
                 del el[attr]
 
 
-def word_count(node: Tag) -> int:
+def word_count(node: Node) -> int:
     """The words under *node*, for telling an article from a page
     shell or a placeholder."""
-    return len(node.get_text().split())
+    return len(node.text().split())
 
 
-def outermost(nodes: Sequence[Tag]) -> list[Tag]:
+def outermost(nodes: Sequence[Node]) -> list[Node]:
     """The nodes that have no ancestor among *nodes*.
 
     A platform's section selector matches nested sections too; the
     parts are the top-level ones.
     """
-    found = {id(n) for n in nodes}
-    return [n for n in nodes if not any(id(p) in found for p in n.parents)]
+    found = {id(tag_of(n)) for n in nodes}
+    return [n for n in nodes
+            if not any(id(p) in found for p in tag_of(n).parents)]
 
 
 def ids_under(nodes: Iterable[Tag]) -> set[str]:

@@ -2,10 +2,9 @@
 (``/doi/full/``).
 """
 
-import re
 from typing import ClassVar
 
-from papis_make_epub.formula import MATHML, Formula
+from papis_make_epub.formula import MATHML
 from papis_make_epub.math_renderers import MathRenderer
 from papis_make_epub.saved_page import SavedPage
 from papis_make_epub.sources.extraction import (
@@ -44,20 +43,18 @@ class AcmSource(Source):
         inline math).
         """
         extraction = Extraction(page, renderers, best_effort=best_effort)
-        soup = extraction.soup
+        root = extraction.root
         # tight scoping: the abstracts div also holds tab chrome and an
         # AI-summary widget; the backmatter also holds ACM_widgets
         # (Cited By, Recommendations)
-        abstract = (soup.select_one("div#abstracts section#abstract")
-                    or soup.select_one("div#abstracts "
-                                       "section#summary-abstract")
-                    or soup.select_one("div#abstracts"))
-        body = soup.select_one("section#bodymatter")
-        back = (soup.select_one("#backmatter section#bibliography")
-                or soup.select_one("#backmatter"))
+        abstract = root.first("div#abstracts section#abstract",
+                              "div#abstracts section#summary-abstract",
+                              "div#abstracts")
+        body = root.first("section#bodymatter")
+        back = root.first("#backmatter section#bibliography", "#backmatter")
         # the footnotes sit in a sibling container of the bibliography,
         # so the bibliography selection above misses them
-        footnotes = soup.select_one("#backmatter #footnotes")
+        footnotes = root.first("#backmatter #footnotes")
         if body is None:
             raise SourceNotAvailableError(
                 "no #bodymatter: not ACM full-text HTML")
@@ -74,18 +71,17 @@ class AcmSource(Source):
         # div.external-links is the per-reference link row (Google
         # Scholar, Digital Library, Crossref): reader chrome
         extraction.drop(parts, "div.external-links")
-        for el in (el for part in parts for el in part.find_all(True)):
-            for attr in [a for a in el.attrs if a.startswith("data-")]:
-                del el[attr]
+        for part in parts:
+            part.strip_attributes(r"data-.*")
             # role="paragraph" is WAI-ARIA 1.2, which EPUB 3.3
             # predates; the div renders the same without it
-            if el.get("role") == "paragraph":
-                del el["role"]
+            for el in part.select("[role='paragraph']"):
+                el.delete("role")
         extraction.render_math(
-            Formula(node=m, mathml=m,
-                    display=(m.get("display") == "block"
-                             or m.find("mtable") is not None))
-            for part in parts for m in part.find_all("math"))
+            extraction.formula(m, mathml=m,
+                               display=(m.matches("[display='block']")
+                                        or m.has("mtable")))
+            for part in parts for m in part.select("math"))
         # the citations and footnote marks are fragment links to ids
         # the served page carries on every entry and note
         extraction.resolve_links(parts)
@@ -95,8 +91,7 @@ class AcmSource(Source):
         if abstract is not None:
             extraction.add_abstract(abstract)
 
-        sections = outermost(
-            body.find_all("section", id=re.compile(r"^sec-\d+$")))
+        sections = outermost(body.select("section[id^='sec-']"))
         if not sections:
             raise SourceNotAvailableError(
                 "no sec-N sections under #bodymatter")

@@ -10,6 +10,7 @@ saving writes it, figure resolution reads it.
 import os
 import posixpath
 import urllib.parse
+from collections.abc import Sequence
 from dataclasses import dataclass
 from logging import Logger
 from pathlib import Path, PurePath
@@ -60,19 +61,25 @@ class SavedPage:
                    path=path)
 
     def save(self, path: Path, page_url: str,
-             root: Tag | None = None) -> None:
+             scope: Sequence[str] = ()) -> None:
         """Write the html at *path* and its media into the sidecar dir.
 
         Media land inside "<stem>_files" beside the html, keeping
-        their URL-relative structure (see :meth:`media_path`). *root*
-        limits the media to a subtree of the caller's own parse; the
-        whole document is covered otherwise. *page_url* anchors the
-        page's relative media links. Fetch failures propagate.
+        their URL-relative structure (see :meth:`media_path`). *scope*
+        limits the media to the subtree the first matching selector
+        finds (LookupError when none matches, before anything is
+        written); the whole document is covered otherwise. *page_url*
+        anchors the page's relative media links. Fetch failures
+        propagate.
         """
+        doc = BeautifulSoup(self.text, "lxml")
+        root: Tag = doc
+        if scope:
+            found = next((t for s in scope if (t := doc.select_one(s))), None)
+            if found is None:
+                raise LookupError(f"no element matches {', '.join(scope)}")
+            root = found
         self.path = path
-        if root is None:
-            root = BeautifulSoup(self.text, "lxml")
-        doc = root if root.parent is None else list(root.parents)[-1]
         base_url = resolve_base(doc, page_url)
         path.write_text(self.text, encoding="utf-8")
         seen = set()

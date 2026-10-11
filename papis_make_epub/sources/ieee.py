@@ -10,9 +10,7 @@ from collections.abc import Sequence
 from logging import Logger
 from typing import ClassVar
 
-from bs4 import Tag
-
-from papis_make_epub.formula import TEX, Formula
+from papis_make_epub.formula import TEX
 from papis_make_epub.logging import get_logger
 from papis_make_epub.math_renderers import MathRenderer
 from papis_make_epub.saved_page import SavedPage
@@ -25,6 +23,7 @@ from papis_make_epub.sources.extraction import (
     outermost,
     word_count,
 )
+from papis_make_epub.sources.node import Node, Target, target
 
 logger: Logger = get_logger(__name__)
 
@@ -32,18 +31,18 @@ logger: Logger = get_logger(__name__)
 MIN_ARTICLE_WORDS = 500
 
 
-def _link_targets(a: Tag) -> list[str]:
+def _link_targets(a: Node) -> list[Target]:
     """Xplore's cross-references (citations, equation, figure and
     section refs) are ``javascript:void`` links naming their target
     in ``anchor``; a reference entry's id carries an ``-all-ref``
     suffix the citation's anchor lacks."""
-    anchor = a.get("anchor")
+    anchor = a.attr("anchor")
     if not anchor:
         return fragment_targets(a)
-    return [str(anchor), f"{anchor}-all-ref"]
+    return [target(anchor), target(f"{anchor}-all-ref")]
 
 
-def _strip_cruft(part: Tag) -> None:
+def _strip_cruft(part: Node) -> None:
     """Drop Xplore's SPA markup that is not valid XHTML.
 
     The cross-reference links carry ``ref-type``, ``anchor`` (read
@@ -54,26 +53,23 @@ def _strip_cruft(part: Tag) -> None:
     components, ``xplmathjax`` flags math containers, and ``<fig>``
     is Xplore's caption wrapper.
     """
-    for el in (part, *part.find_all(True)):
-        for attr in list(el.attrs):
-            if (attr in ("ref-type", "anchor", "data-range", "xplmathjax")
-                    or attr.startswith("_ng")):
-                del el[attr]
-        if str(el.get("id", "")).startswith("context_ref"):
-            del el["id"]
-    for fig in part.find_all("fig"):
+    part.strip_attributes("ref-type", "anchor", "data-range", "xplmathjax",
+                          r"_ng.*")
+    for el in part.select("[id^='context_ref']"):
+        el.delete("id")
+    for fig in part.select("fig"):
         fig.unwrap()
 
 
-def _figures(extraction: Extraction, parts: Sequence[Tag]) -> None:
+def _figures(extraction: Extraction, parts: Sequence[Node]) -> None:
     """Xplore's figures as HTML figures: ``div.figure`` holds the image
     and its ``div.figcaption``, beside the zoom button's container and
     a "Show All" row, which are reader chrome."""
     extraction.drop(parts, "div.figure .zoom-container, div.figure p.links")
     for fig in (f for part in parts for f in part.select("div.figure")):
-        fig.name = "figure"
+        fig.rename("figure")
         for caption in fig.select("div.figcaption"):
-            caption.name = "figcaption"
+            caption.rename("figcaption")
 
 
 class IeeeSource(Source):
@@ -94,20 +90,20 @@ class IeeeSource(Source):
         """Extract the document from a capture of Xplore's rendered
         full text."""
         extraction = Extraction(page, renderers, best_effort=best_effort)
-        soup = extraction.soup
-        article = soup.select_one("#article")
+        root = extraction.root
+        article = root.first("#article")
         if article is None or word_count(article) < MIN_ARTICLE_WORDS:
             raise SourceNotAvailableError(
                 "no article text: the capture holds Xplore's page shell, "
                 "not the rendered article; save the rendered page with "
                 "its script elements (see the README)")
 
-        abstract = soup.select_one(".abstract-text")
+        abstract = root.first(".abstract-text")
         # the References fold: its toggle button and, once opened, its
         # panel share the id; a capture made with the fold closed
         # carries the button alone
-        references = soup.select_one("div#references")
-        if references is None and soup.select_one("button#references"):
+        references = root.first("div#references")
+        if references is None and root.has("button#references"):
             logger.warning(
                 "the References fold was closed when the page was "
                 "captured: the book gets no bibliography and its citations "
@@ -134,11 +130,11 @@ class IeeeSource(Source):
         formulas = []
         for scr in (s for part in parts
                     for s in part.select('script[type^="math/tex"]')):
-            wrapper = scr.find_parent("tex-math")
-            formulas.append(Formula(
-                node=wrapper if wrapper is not None else scr,
-                tex=scr.get_text().strip(),
-                display="mode=display" in str(scr.get("type"))))
+            wrapper = scr.parent("tex-math")
+            formulas.append(extraction.formula(
+                wrapper if wrapper is not None else scr,
+                tex=scr.text().strip(),
+                display=scr.matches("[type*='mode=display']")))
         extraction.render_math(formulas)
 
         # the references sit outside #article; a collapsed accordion
@@ -157,9 +153,7 @@ class IeeeSource(Source):
         if references is not None:
             # the fold's heading is its toggle button, outside the panel;
             # the part gets one of its own for the TOC
-            heading = soup.new_tag("h2")
-            heading.string = "References"
-            references.insert(0, heading)
+            references.insert(0, extraction.new("h2", text="References"))
             extraction.add_sections([references], "bibliography")
 
         return extraction.content()

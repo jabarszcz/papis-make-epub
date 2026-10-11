@@ -25,9 +25,9 @@ window only; --headed opens one in place of the headless default
 (ieeexplore.ieee.org needs it).
 
 A refresh changes the extraction goldens, so re-pin them in the same
-change; a selector the new page no longer carries fails
-test_selectors, and the old capture (from git history) is then
-reduced to what still carried it.
+change; a rule the new page no longer carries fails test_rules, and
+the old capture (from git history) is then reduced to what still
+carried it.
 """
 
 import argparse

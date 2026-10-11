@@ -8,8 +8,6 @@ running.
 from collections.abc import Iterable
 from typing import ClassVar
 
-from bs4 import Tag
-
 from papis_make_epub.formula import MATHML, Formula
 from papis_make_epub.math_renderers import MathRenderer
 from papis_make_epub.saved_page import SavedPage
@@ -22,26 +20,26 @@ from papis_make_epub.sources.extraction import (
     outermost,
     word_count,
 )
+from papis_make_epub.sources.node import Node, Target, target
 
 # below this many words the capture is the hydration shell
 MIN_ARTICLE_WORDS = 500
 
 
-def _formula(mml: Tag) -> Formula:
+def _formula(extraction: Extraction, mml: Node) -> Formula:
     """A Formula from a ``math`` element."""
     # the hydration framework stamps is=true on every MathML element;
     # the attribute is not MathML
-    for el in mml.find_all(True):
-        el.attrs.pop("is", None)
-    wrapper = mml.find_parent("span", class_="math")
+    mml.strip_attributes("is")
+    wrapper = mml.parent("span.math")
     node = wrapper if wrapper is not None else mml
     # ScienceDirect marks display position structurally: display
     # equations sit in their own block, inline ones inside a <p>
-    display = node.find_parent("p") is None or mml.find("mtable") is not None
-    return Formula(node=node, mathml=mml, display=display)
+    display = node.parent("p") is None or mml.has("mtable")
+    return extraction.formula(node, mathml=mml, display=display)
 
 
-def _unlink_back_references(parts: Iterable[Tag]) -> None:
+def _unlink_back_references(parts: Iterable[Node]) -> None:
     """Take the href off the reference entries' back-links.
 
     They target a citation ``name`` rather than an id and never
@@ -49,14 +47,14 @@ def _unlink_back_references(parts: Iterable[Tag]) -> None:
     """
     for part in parts:
         for a in part.select('a[href^="#bbr"]'):
-            del a["href"]
+            a.delete("href")
 
 
-def _link_targets(a: Tag) -> list[str]:
+def _link_targets(a: Node) -> list[Target]:
     """Body citations point at ``#brNNNN``, but the reference entries
     are id'd ``ref-id-brNNNN``: the link is a side-panel opener in the
     app."""
-    return [t for f in fragment_targets(a) for t in (f, f"ref-id-{f}")]
+    return [t for f in fragment_targets(a) for t in (f, target(f"ref-id-{f}"))]
 
 
 class ScienceDirectSource(Source):
@@ -77,17 +75,17 @@ class ScienceDirectSource(Source):
         """Extract the document from a capture of ScienceDirect's
         rendered page."""
         extraction = Extraction(page, renderers, best_effort=best_effort)
-        soup = extraction.soup
-        body = soup.select_one("#body")
+        root = extraction.root
+        body = root.first("#body")
         if body is None or word_count(body) < MIN_ARTICLE_WORDS:
             raise SourceNotAvailableError(
                 "no article text: the capture holds ScienceDirect's page "
                 "shell, not the rendered article; save the page once it "
                 "has rendered (see the README)")
 
-        abstract = soup.select_one("#abstracts")
-        bibliography = soup.select_one("section.bibliography")
-        sections = outermost(body.find_all("section"))
+        abstract = root.first("#abstracts")
+        bibliography = root.first("section.bibliography")
+        sections = outermost(body.select("section"))
         if not sections:
             raise SourceNotAvailableError("no sections under #body")
 
@@ -98,7 +96,7 @@ class ScienceDirectSource(Source):
         extraction.drop(parts, "div.ReferenceLinks, ol:has(a.download-link), "
                                "svg.icon")
         extraction.render_math(
-            _formula(mml) for part in parts
+            _formula(extraction, mml) for part in parts
             for mml in part.select("span.math > math"))
 
         _unlink_back_references(parts)

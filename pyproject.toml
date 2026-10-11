@@ -31,6 +31,8 @@ dependencies = [
     "papis>=0.14",
     "click>=7",
     "beautifulsoup4>=4.9",
+    # a beautifulsoup4 dependency already, but imported directly
+    "soupsieve",
     "lxml>=4.3",
     "ebooklib>=0.18",
     "pylatexenc>=2.10",
@@ -91,6 +93,8 @@ select = [
     "PL",  # pylint
     "Q",   # flake8-quotes
     "RUF", # ruff
+    "SLF", # flake8-self
+    "TID", # flake8-tidy-imports
     "UP",  # pyupgrade
     "W",   # pycodestyle
 ]
@@ -99,6 +103,19 @@ ignore = [
     # tooling and expensive imports)
     "PLC0415", # import-outside-top-level
 ]
+
+# The platform modules reach the page through the Node queries alone,
+# which record the rules they apply (papis_make_epub/sources/node.py):
+# they import no parser and no unwrapping of a node, and read no
+# private attribute. Everywhere else, both checks are off.
+[tool.ruff.lint.flake8-tidy-imports.banned-api]
+"bs4".msg = "a platform module reaches the page through Node queries"
+"soupsieve".msg = "a platform module reaches the page through Node queries"
+"lxml".msg = "a platform module reaches the page through Node queries"
+"papis_make_epub.sources.node.tag_of".msg = "a platform module reaches the page through Node queries"
+
+[tool.ruff.lint.per-file-ignores]
+"!papis_make_epub/sources/{acm,arxiv,ieee,sciencedirect,springer}.py" = ["SLF001", "TID251"]
 
 [tool.ruff.lint.flake8-quotes]
 docstring-quotes = "double"

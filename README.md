@@ -200,13 +200,22 @@ captures do not, kept under fair use/dealing. A reduction is cut by hand or
 agentically when the form is seen, and stays as cut: evidence that
 the platform served the form at that date.
 
-Every CSS selector a source drops a platform's chrome
-with (its calls to `Extraction.drop`, in
-[`papis_make_epub/sources/extraction.py`](papis_make_epub/sources/extraction.py))
-must match a fixture of its platform, which
-[`tests/test_selectors.py`](tests/test_selectors.py) checks, so each
-has dated evidence of the form it handles, and a change or a
-removal is weighed knowing which saved pages it affects.
+### Rule coverage
+
+Markup-handling code that grows organically/agentically turns
+obscure: a selector sits in a module with no record of the page that
+needed it, and line coverage reports that the query ran, whether or
+not its selector matched anything. Instead, we turn most markup
+knowledge in a platform module into a "rule" of one of three forms: a
+selector, an attribute name or pattern, or an id derived for a link's
+target - all forced (with ruff/mypy) to run through their instrumented
+version in
+[`papis_make_epub/sources/node.py`](papis_make_epub/sources/node.py).
+Each rule needs to be represented in the fixtures:
+[`tests/test_rules.py`](tests/test_rules.py) fails on a rule that
+matched in no fixture of its platform. To see which fixtures (or pages
+in a dir) carry each rule's form, run
+[`tools/fixture_coverage.py`](tools/fixture_coverage.py).
 
 ### Goldens and re-capture
 
@@ -229,7 +238,7 @@ Two occasions call for a reduction.
 
 - A fix: the reduction is cut from the page that showed the problem
   and is its regression test.
-- A re-capture: the selector test fails when the platform has
-  stopped serving a form a selector handles. The reduction, cut from
+- A re-capture: the rule test fails when the platform has stopped
+  serving a form a rule handles. The reduction, cut from
   the previous capture, keeps the form in the corpus, so pages saved
   while the platform served it still build.

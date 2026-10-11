@@ -11,9 +11,6 @@ from http import HTTPStatus
 from pathlib import Path
 from typing import Any, ClassVar
 
-from bs4 import BeautifulSoup, Tag
-from bs4.element import NavigableString
-
 from papis_make_epub.fetch import FetchError, polite_get
 from papis_make_epub.formula import MATHML, TEX, Formula
 from papis_make_epub.math_renderers import MathRenderer
@@ -27,6 +24,7 @@ from papis_make_epub.sources.extraction import (
     outermost,
     page_words,
 )
+from papis_make_epub.sources.node import Node
 
 ARXIV_HTML_BASE = "https://arxiv.org/html/"
 # fallback for papers predating arXiv's native HTML (same LaTeXML output)
@@ -34,8 +32,10 @@ AR5IV_HTML_BASE = "https://ar5iv.labs.arxiv.org/html/"
 # below this many words a conversion is considered silently truncated
 MIN_WORDS = 1500
 
-# LaTeXML section classes that become the document's top-level parts
-PART_CLASSES = {"ltx_section", "ltx_appendix", "ltx_bibliography"}
+# the article, or the page's main column when it has none
+ARTICLE = ("article", ".ltx_page_main")
+# the LaTeXML sections that become the document's top-level parts
+PARTS = "section.ltx_section, section.ltx_appendix, section.ltx_bibliography"
 
 
 def arxiv_id_from_doc(doc: Mapping[str, Any]) -> str | None:
@@ -101,20 +101,16 @@ def fetch_page(arxiv_id: str, dest_dir: str,
     :meth:`papis_make_epub.saved_page.SavedPage.save`).
     """
     html, page_url = fetch_html(arxiv_id)
-    soup = BeautifulSoup(html, "lxml")
-    article = soup.find("article") or soup.find(class_="ltx_page_main")
-    if not isinstance(article, Tag):
-        raise SourceNotAvailableError("no <article> in HTML")
     page = SavedPage(html)
-    page.save(Path(dest_dir) / name, page_url, root=article)
+    try:
+        # the figures of the article alone
+        page.save(Path(dest_dir) / name, page_url, scope=ARTICLE)
+    except LookupError:
+        raise SourceNotAvailableError("no <article> in HTML") from None
     return page
 
 
-def _classes(tag: Tag) -> set[str]:
-    return set(tag.attrs.get("class") or [])
-
-
-def _drop_conversion_errors(extraction: Extraction, article: Tag) -> None:
+def _drop_conversion_errors(extraction: Extraction, article: Node) -> None:
     """Drop what LaTeXML emits for macros it could not expand.
 
     A missing-label span keeps only the text after its colon.
@@ -123,55 +119,50 @@ def _drop_conversion_errors(extraction: Extraction, article: Tag) -> None:
     paragraphs its removal left empty.
     """
     for s in article.select(".ltx_missing_label"):
-        s.replace_with(NavigableString(s.get_text().rsplit(":", 1)[-1]))
+        s.replace_with(s.text().rsplit(":", 1)[-1])
     extraction.drop([article], ".ltx_ERROR")
     for p in article.select("div.ltx_para, p.ltx_p"):
-        if (not p.get_text(strip=True)
-                and not p.find(["img", "object", "figure", "table"])):
-            p.decompose()
+        if (not p.text(strip=True)
+                and not p.has("img, object, figure, table")):
+            p.remove()
 
 
-def _restore_list_markers(extraction: Extraction, article: Tag) -> None:
+def _restore_list_markers(extraction: Extraction, article: Node) -> None:
     """Restore the native list markers.
 
     LaTeXML suppresses them and injects its own bullet or number as a
     span, which renders on a line of its own.
     """
     extraction.drop([article], "li.ltx_item span.ltx_tag")
-    for li in article.select("li.ltx_item"):
-        if li.get("style"):
-            style = re.sub(r"list-style-type\s*:\s*none;?", "",
-                           str(li["style"])).strip()
-            if style:
-                li["style"] = style
-            else:
-                del li["style"]
+    for li in article.select("li.ltx_item[style]"):
+        style = re.sub(r"list-style-type\s*:\s*none;?", "",
+                       li.attr("style") or "").strip()
+        if style:
+            li.set("style", style)
+        else:
+            li.delete("style")
 
 
-def _part_role(section: Tag) -> str | None:
+def _part_role(section: Node) -> str | None:
     """The ``epub:type`` of a top-level LaTeXML section, if typed."""
-    classes = _classes(section)
-    if "ltx_bibliography" in classes:
+    if section.matches(".ltx_bibliography"):
         return "bibliography"
-    if "ltx_appendix" in classes:
+    if section.matches(".ltx_appendix"):
         return "appendix"
     return None
 
 
-def _front_matter(article: Tag) -> tuple[Tag, list[TocEntry]]:
+def _front_matter(article: Node) -> tuple[Node, list[TocEntry]]:
     """The article's front matter, with the abstract's TOC entry: a
     copy of the article with the part sections removed."""
-    front = BeautifulSoup(str(article), "lxml").find("article")
-    if not isinstance(front, Tag):  # str(article) round-trips a Tag
-        raise SourceNotAvailableError("article lost in front-matter copy")
-    for s in front.find_all("section"):
-        # a section nested in one already removed went with it, and
-        # a decomposed tag has no attributes left to read
-        if not s.decomposed and PART_CLASSES & _classes(s):
-            s.decompose()
-    abstract = front.find(class_="ltx_abstract")
-    entries = ([TocEntry("Abstract", str(abstract["id"]))]
-               if isinstance(abstract, Tag) and abstract.get("id") else [])
+    front = article.copy()
+    for s in front.select(PARTS):
+        # a section nested in one already removed went with it
+        if not s.is_removed:
+            s.remove()
+    abstract = front.first(".ltx_abstract")
+    abstract_id = abstract.attr("id") if abstract is not None else None
+    entries = [TocEntry("Abstract", abstract_id)] if abstract_id else []
     return front, entries
 
 
@@ -195,9 +186,8 @@ class ArxivSource(Source):
         (title block, affiliations, abstract) is the title page.
         """
         extraction = Extraction(page, renderers, best_effort=best_effort)
-        soup = extraction.soup
-        article = soup.find("article") or soup.find(class_="ltx_page_main")
-        if not isinstance(article, Tag):
+        article = extraction.root.first(*ARTICLE)
+        if article is None:
             raise SourceNotAvailableError("no <article> in HTML")
 
         # a[download] is LaTeXML's per-listing "download" icon, a
@@ -205,26 +195,26 @@ class ArxivSource(Source):
         # inline; the data: URL is invalid in an EPUB href
         extraction.drop([article], "a[download]")
 
-        def formula(m: Tag) -> Formula:
+        def formula(m: Node) -> Formula:
             # only declared-TeX annotations are read as TeX: the MathML
             # spec allows any payload under any encoding label
-            ann = m.find("annotation", encoding="application/x-tex")
+            ann = m.first("annotation[encoding='application/x-tex']")
             # an empty annotation is no annotation
-            tex = (ann.get_text(strip=True) or None) if ann else None
-            return Formula(node=m, mathml=m, tex=tex,
-                           display=m.get("display") == "block")
+            tex = (ann.text(strip=True) or None) if ann is not None else None
+            return extraction.formula(m, mathml=m, tex=tex,
+                                      display=m.matches("[display='block']"))
 
-        extraction.render_math(formula(m) for m in article.find_all("math"))
+        extraction.render_math(formula(m) for m in article.select("math"))
         _drop_conversion_errors(extraction, article)
         extraction.resolve_links([article])
         _restore_list_markers(extraction, article)
         extraction.embed_figures([article])
 
-        nodes = outermost([s for s in article.find_all("section")
-                           if PART_CLASSES & _classes(s)])
+        nodes = outermost(article.select(PARTS))
 
         front, front_entries = _front_matter(article)
         extraction.add_part(front, "titlepage", front_entries)
-        extraction.add_sections(nodes, _part_role)
+        for node in nodes:
+            extraction.add_sections([node], _part_role(node))
 
         return extraction.content()

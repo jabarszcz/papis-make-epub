@@ -5,7 +5,7 @@ captures, one open-access paper per platform (``fixtures/refresh.py``
 re-captures them), and reductions, pages cut down to the parts that
 exercise a form the captures do not. Each entry's content is
 extracted once per session and shared by the golden, build and
-selector tests.
+rule tests.
 """
 
 import os
@@ -29,6 +29,7 @@ from papis_make_epub.math_renderers import RendererUnavailableError
 from papis_make_epub.saved_page import SavedPage
 from papis_make_epub.sources import SOURCES, acm, ieee, sciencedirect
 from papis_make_epub.sources.extraction import Content, TocEntry
+from papis_make_epub.sources.node import Rule
 
 FIXTURES = Path(__file__).parent / "fixtures"
 
@@ -80,9 +81,9 @@ ENTRIES = _load_entries()
 _WORD_GATES = [(acm, "MIN_BODY_WORDS"), (ieee, "MIN_ARTICLE_WORDS"),
                (sciencedirect, "MIN_ARTICLE_WORDS")]
 
-# matches per (platform, selector) of every selector the sources
-# dropped while the corpus was extracted; test_selectors reads it
-DROP_MATCHES: dict[tuple[str, str], int] = {}
+# the matches of every rule the sources applied while the corpus was
+# extracted, per fixture id; test_rules reads it
+RULE_MATCHES: dict[Rule, dict[str, int]] = {}
 
 
 def build_options(entry: Entry) -> BuildOptions:
@@ -113,9 +114,9 @@ def _extract(entry: Entry) -> Content:
                 mp.setattr(module, name, 0)
         content = source.extract(page, renderers=renderers,
                                  best_effort=options.best_effort)
-    for sub, n in content.stats.dropped.items():
-        key = (entry.platform, sub)
-        DROP_MATCHES[key] = DROP_MATCHES.get(key, 0) + n
+    for rule, n in content.rules.items():
+        by_fixture = RULE_MATCHES.setdefault(rule, {})
+        by_fixture[entry.id] = by_fixture.get(entry.id, 0) + n
     meta = doc_meta(entry)
     content.add_title_page(meta.title, meta.authors)
     return content
