@@ -8,7 +8,7 @@ MathJax (v2) renders.
 import re
 from typing import ClassVar
 
-from papis_make_epub.formula import TEX, Formula
+from papis_make_epub.formula import TEX
 from papis_make_epub.math_renderers import MathRenderer
 from papis_make_epub.saved_page import SavedPage
 from papis_make_epub.sources.extraction import (
@@ -30,21 +30,6 @@ _CHROME_TITLES = (
     "Publish with us", "Rights and permissions",
 )
 _CHROME = ", ".join(f"[data-title='{t}']" for t in _CHROME_TITLES)
-
-
-def _formula(extraction: Extraction, span: Node) -> Formula:
-    """A Formula from a ``span.mathjax-tex``: ``\\(..\\)`` is inline,
-    ``$$..$$`` and ``\\[..\\]`` are display."""
-    raw = span.text().strip()
-    display = False
-    tex = raw
-    for opening, closing, disp in (("\\(", "\\)", False), ("$$", "$$", True),
-                                   ("\\[", "\\]", True)):
-        if raw.startswith(opening) and raw.endswith(closing):
-            tex = raw[len(opening):-len(closing)].strip()
-            display = disp
-            break
-    return extraction.formula(span, tex=tex, display=display)
 
 
 def _content_sections(body: Node) -> tuple[Node | None, list[Node]]:
@@ -129,7 +114,7 @@ class SpringerSource(Source):
                                "div.c-article-section__figure-link")
         _unwrap_pictures(parts)
         extraction.render_math(
-            _formula(extraction, sp) for part in parts
+            extraction.delimited_formula(sp) for part in parts
             for sp in part.select("span.mathjax-tex"))
         extraction.resolve_links(parts, _link_targets)
         extraction.embed_figures(parts)

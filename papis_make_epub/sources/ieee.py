@@ -7,12 +7,11 @@ lives in script elements, which a save must keep (see
 :func:`_formulas`).
 """
 
-import re
 from collections.abc import Sequence
 from logging import Logger
 from typing import ClassVar
 
-from papis_make_epub.formula import TEX, Formula
+from papis_make_epub.formula import TEX, Delimiters, Formula
 from papis_make_epub.logging import get_logger
 from papis_make_epub.math_renderers import MathRenderer
 from papis_make_epub.saved_page import SavedPage
@@ -31,6 +30,11 @@ logger: Logger = get_logger(__name__)
 # below this many words the capture is the page shell
 MIN_ARTICLE_WORDS = 500
 
+# the math delimiters of Xplore's untypeset TeX: TeX's dollar
+# delimiters, escaped
+ESCAPED_DOLLARS: Delimiters = (("\\$\\$", "\\$\\$", True),
+                               ("\\$", "\\$", False))
+
 
 def _formulas(extraction: Extraction, parts: Sequence[Node]) -> list[Formula]:
     """The formulas under *parts*, each with its TeX, whether MathJax
@@ -47,18 +51,13 @@ def _formulas(extraction: Extraction, parts: Sequence[Node]) -> list[Formula]:
                 wrapper if wrapper is not None else script,
                 tex=script.text().strip(),
                 display=script.matches("[type*='mode=display']")))
-        # untypeset: the tex-math holds the TeX as its only content,
-        # delimited by \$ (the ieee-footnotes reduction's panel, caught
-        # before MathJax typeset it)
+        # untypeset: the tex-math holds the TeX as its only content, in
+        # escaped dollar delimiters (the ieee-footnotes reduction's
+        # panel, caught before MathJax typeset it)
         for tex_math in part.select("tex-math:not(:has(*)):not(:empty)"):
-            tex = tex_math.text().strip()
-            if not tex:
-                continue
-            if m := re.fullmatch(r"\\?\$(.*?)\\?\$", tex, re.S):
-                tex = m.group(1).strip()
-            formulas.append(extraction.formula(
-                tex_math, tex=tex,
-                display=tex_math.parent("disp-formula") is not None))
+            if tex_math.text().strip():
+                formulas.append(extraction.delimited_formula(
+                    tex_math, ESCAPED_DOLLARS))
     return formulas
 
 

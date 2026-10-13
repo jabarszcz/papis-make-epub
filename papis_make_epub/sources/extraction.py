@@ -34,7 +34,12 @@ from bs4 import BeautifulSoup, Tag
 from PIL import Image
 
 from papis_make_epub.errors import BuildError
-from papis_make_epub.formula import Formula
+from papis_make_epub.formula import (
+    TEX_DELIMITERS,
+    Delimiters,
+    Formula,
+    strip_math_delimiters,
+)
 from papis_make_epub.logging import get_logger
 from papis_make_epub.math_renderers import (
     MathRenderer,
@@ -340,6 +345,13 @@ class Extraction:
         return Formula(node=tag_of(node), display=display,
                        mathml=tag_of(mathml) if mathml is not None else None,
                        tex=tex)
+
+    def delimited_formula(self, node: Node,
+                          delimiters: Delimiters = TEX_DELIMITERS) -> Formula:
+        """The formula at *node*, whose text is TeX in one of
+        *delimiters*, which also give its position."""
+        tex, display = strip_math_delimiters(node.text(), delimiters)
+        return self.formula(node, tex=tex, display=display)
 
     def render_math(self, formulas: Iterable[Formula]) -> None:
         """Replace each formula's node with its rendering; count the

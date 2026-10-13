@@ -30,6 +30,27 @@ MATHML_NS = "http://www.w3.org/1998/Math/MathML"
 TOKEN_ELEMENTS = ("mi", "mn", "mo", "ms", "mtext")
 
 
+# math delimiters as (opening, closing, display) triples, matched in
+# order, so a delimiter precedes its prefixes
+Delimiters = tuple[tuple[str, str, bool], ...]
+
+# TeX's math delimiters, as MathJax's TeX input reads them
+TEX_DELIMITERS: Delimiters = (("$$", "$$", True), ("\\[", "\\]", True),
+                              ("\\(", "\\)", False), ("$", "$", False))
+
+
+def strip_math_delimiters(
+        raw: str, delimiters: Delimiters = TEX_DELIMITERS) -> tuple[str, bool]:
+    """The TeX inside *raw*'s math delimiters, and whether they mark
+    display math; *raw* itself, inline, when it has none."""
+    raw = raw.strip()
+    for opening, closing, display in delimiters:
+        if (len(raw) >= len(opening) + len(closing)
+                and raw.startswith(opening) and raw.endswith(closing)):
+            return raw[len(opening):len(raw) - len(closing)].strip(), display
+    return raw, False
+
+
 def _declare_namespace(math: Tag) -> Tag:
     """*math* with the MathML namespace declared on it (texmath
     rejects undeclared MathML, and XHTML needs the declaration)."""
