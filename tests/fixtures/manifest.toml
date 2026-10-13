@@ -194,7 +194,9 @@ url = "https://ieeexplore.ieee.org/document/8796365"
 # capture's is References): the two marked paragraphs, and the panel,
 # caught before MathJax typeset it, its TeX \$-delimited text in
 # tex-math elements; the page script is cut to the global the
-# detector reads
+# detector reads. The closed References fold (its toggle button
+# alone) is supplied: the closed Footnotes fold of the ieee capture,
+# relabelled
 captured = 2026-10-11
 best_effort = false
 
