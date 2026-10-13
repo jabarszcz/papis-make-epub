@@ -21,7 +21,6 @@ from papis_make_epub.sources.extraction import (
     Extraction,
     Source,
     SourceNotAvailableError,
-    fragment_targets,
     outermost,
     word_count,
 )
@@ -71,7 +70,7 @@ def _link_targets(a: Node) -> list[Target]:
     a ``footnotes-desktop-`` prefix the mark's anchor lacks."""
     anchor = a.attr("anchor")
     if not anchor:
-        return fragment_targets(a)
+        return []
     return [target(anchor), target(f"{anchor}-all-ref"),
             target(f"footnotes-desktop-{anchor}")]
 

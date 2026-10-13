@@ -32,8 +32,8 @@ AR5IV_HTML_BASE = "https://ar5iv.labs.arxiv.org/html/"
 # below this many words a conversion is considered silently truncated
 MIN_WORDS = 1500
 
-# the article, or the page's main column when it has none
-ARTICLE = ("article", ".ltx_page_main")
+# LaTeXML's article element
+ARTICLE = "article"
 # the LaTeXML sections that become the document's top-level parts
 PARTS = "section.ltx_section, section.ltx_appendix, section.ltx_bibliography"
 
@@ -104,7 +104,7 @@ def fetch_page(arxiv_id: str, dest_dir: str,
     page = SavedPage(html)
     try:
         # the figures of the article alone
-        page.save(Path(dest_dir) / name, page_url, scope=ARTICLE)
+        page.save(Path(dest_dir) / name, page_url, scope=(ARTICLE,))
     except LookupError:
         raise SourceNotAvailableError("no <article> in HTML") from None
     return page
@@ -115,16 +115,11 @@ def _drop_conversion_errors(extraction: Extraction, article: Node) -> None:
 
     A missing-label span keeps only the text after its colon.
     ``ltx_ERROR`` marks an unexpanded macro (e.g. an unfilled
-    ``\\Copyright`` in a template): the marker goes, then the
-    paragraphs its removal left empty.
+    ``\\Copyright`` in a template), and the marker goes.
     """
     for s in article.select(".ltx_missing_label"):
         s.replace_with(s.text().rsplit(":", 1)[-1])
     extraction.drop([article], ".ltx_ERROR")
-    for p in article.select("div.ltx_para, p.ltx_p"):
-        if (not p.text(strip=True)
-                and not p.has("img, object, figure, table")):
-            p.remove()
 
 
 def _restore_list_markers(extraction: Extraction, article: Node) -> None:
@@ -234,7 +229,7 @@ class ArxivSource(Source):
         (title block, affiliations, abstract) is the title page.
         """
         extraction = Extraction(page, renderers, best_effort=best_effort)
-        article = extraction.root.first(*ARTICLE)
+        article = extraction.root.first(ARTICLE)
         if article is None:
             raise SourceNotAvailableError("no <article> in HTML")
 
