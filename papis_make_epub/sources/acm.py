@@ -36,12 +36,7 @@ class AcmSource(Source):
     def extract(self, page: SavedPage, *,
                 renderers: tuple[MathRenderer, MathRenderer],
                 best_effort: bool = False) -> Content:
-        """Extract the document from saved ACM full-text HTML.
-
-        Display math is detected as ``display="block"`` or
-        mtable-bearing (ACM typesets inference rules as tables inside
-        inline math).
-        """
+        """Extract the document from saved ACM full-text HTML."""
         extraction = Extraction(page, renderers, best_effort=best_effort)
         root = extraction.root
         # the author's abstract has the id "abstract" on some pages,
@@ -78,9 +73,9 @@ class AcmSource(Source):
             for el in part.select("[role='paragraph']"):
                 el.delete("role")
         extraction.render_math(
-            extraction.formula(m, mathml=m,
-                               display=(m.matches("[display='block']")
-                                        or m.has("mtable")))
+            extraction.formula(
+                m, mathml=m,
+                display=m.matches("[display='block'], [mode='display']"))
             for part in parts for m in part.select("math"))
         # the citations and footnote marks are fragment links to ids
         # the served page carries on every entry and note

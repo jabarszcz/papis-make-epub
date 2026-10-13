@@ -33,10 +33,8 @@ def _formula(extraction: Extraction, mml: Node) -> Formula:
     mml.strip_attributes("is")
     wrapper = mml.parent("span.math")
     node = wrapper if wrapper is not None else mml
-    # ScienceDirect marks display position structurally: display
-    # equations sit in their own block, inline ones inside a <p>
-    display = node.parent("p") is None or mml.has("mtable")
-    return extraction.formula(node, mathml=mml, display=display)
+    return extraction.formula(node, mathml=mml,
+                              display=mml.matches("[display='block']"))
 
 
 def _unlink_back_references(parts: Iterable[Node]) -> None:

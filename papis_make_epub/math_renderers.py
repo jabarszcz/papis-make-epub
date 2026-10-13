@@ -174,15 +174,21 @@ class MathRenderer(ABC):
 _NONCONFORMING_MATH_ATTRS = ("is", "intent")
 
 
-def _conform_mathml(node: Tag) -> Tag:
-    """Make a source MathML node valid for XHTML: declare the MathML
-    namespace and drop the non-conforming attributes."""
+def _conform_mathml(node: Tag, display: bool) -> Tag:
+    """Make a source MathML node valid for XHTML and explicit about
+    its position: declare the MathML namespace, drop the
+    non-conforming attributes, and state the position as ``display``
+    in place of the ``mode`` that MathML 3 deprecates and MathML Core
+    lacks."""
     if not node.get("xmlns"):
         node["xmlns"] = MATHML_NS
     for el in (node, *node.find_all(True)):
         for attr in _NONCONFORMING_MATH_ATTRS:
             if attr in el.attrs:
                 del el[attr]
+    if "mode" in node.attrs:
+        del node["mode"]
+    node["display"] = "block" if display else "inline"
     return node
 
 
@@ -207,7 +213,7 @@ class MathmlRenderer(MathRenderer):
         if m is None:
             raise _formula_error(
                 "texmath could not produce MathML for formula", formula)
-        return _conform_mathml(m)
+        return _conform_mathml(m, formula.display)
 
 
 class PylatexencRenderer(MathRenderer):

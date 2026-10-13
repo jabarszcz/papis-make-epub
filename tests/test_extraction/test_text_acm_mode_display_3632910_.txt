@@ -1,0 +1,21 @@
+==== part 0 (titlepage)
+acm-mode-display-3632910
+
+==== part 1 (None)
+2 The Marked Lambda Calculus
+2.3 Destructuring Let with Type Annotated Composite Patterns
+Consider the following program:
+let
+(
+a
+,
+b
+)
+=
+(
+1
+,
+2
+)
+in
+e

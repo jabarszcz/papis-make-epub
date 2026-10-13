@@ -98,6 +98,18 @@ captured = 2026-10-03
 best_effort = true
 
 [[fixture]]
+id = "acm-mode-display-3632910"
+kind = "reduction"
+platform = "acm"
+url = "https://dl.acm.org/doi/full/10.1145/3632910"
+# a display formula marked by MathML's deprecated mode="display", where
+# the acm capture marks display="block", with its paragraph and section
+# headings; the page's coloured formulas (mathcolor="brown", outside
+# MathML 3's colour names, which epubcheck rejects) are left out
+captured = 2026-10-13
+best_effort = false
+
+[[fixture]]
 id = "acm-return-links-3776710"
 kind = "reduction"
 platform = "acm"

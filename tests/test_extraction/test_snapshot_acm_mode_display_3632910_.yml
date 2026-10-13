@@ -1,0 +1,38 @@
+language: en
+media_count: 0
+media_extensions: {}
+package:
+  landmarks:
+  - href: content.xhtml#toc
+    text: Start
+    type: bodymatter
+  manifest:
+    content.xhtml: application/xhtml+xml mathml
+    nav.xhtml: application/xhtml+xml nav
+    style.css: text/css
+    toc.ncx: application/x-dtbncx+xml
+  metadata:
+    creator: null
+    identifier: https://dl.acm.org/doi/full/10.1145/3632910
+    language: en
+    title: acm-mode-display-3632910
+  spine:
+  - content.xhtml
+  toc:
+  - 2 The Marked Lambda Calculus:
+    - 2.3 Destructuring Let with Type Annotated Composite Patterns
+parts:
+- epub_type: titlepage
+  text_length: 24
+  toc: []
+- epub_type: null
+  text_length: 152
+  toc:
+  - 2 The Marked Lambda Calculus:
+    - 2.3 Destructuring Let with Type Annotated Composite Patterns
+stats:
+  dead_links: 0
+  images: 0
+  math: 1
+  math_fallback: 0
+  math_images: 0
