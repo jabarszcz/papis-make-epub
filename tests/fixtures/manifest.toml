@@ -91,9 +91,9 @@ id = "springer-chapter"
 kind = "capture"
 platform = "springer"
 url = "https://link.springer.com/chapter/10.1007/978-3-319-94821-8_30"
-# a book chapter on link.springer.com: delimited TeX, figure links
-# carrying the chapter path, and the chapter page's structure, where
-# the other Springer capture is a nature.com article
+# a book chapter on link.springer.com: delimited TeX and the chapter
+# page's structure, where the other Springer capture is a nature.com
+# article
 captured = 2026-10-03
 best_effort = true
 

@@ -79,24 +79,19 @@ def _unwrap_pictures(parts: list[Node]) -> None:
 def _self_link_target(href: str) -> Target | None:
     """The in-document id a Springer cross-reference href points at.
 
-    The link carries the whole article or chapter path. Journal
-    figures, tables, and references are a fragment on that path
-    (nature.com ``/articles/<id>#Fig2``, link.springer.com
-    ``/article/<doi>#ref-CR4``). Book chapters instead number figures
-    and tables in the path itself (``/chapter/<doi>/figures/2``), whose
-    target id is ``Fig2``.
+    The link carries the whole article or chapter path, the target a
+    fragment on it (nature.com ``/articles/<id>#Fig2``,
+    link.springer.com ``/article/<doi>#ref-CR4``).
     """
     if m := re.match(r"/(?:articles?|chapter)/[^#]*#(.+)$", href):
         return target(m.group(1))
-    if m := re.match(r"/chapter/[^#]*/(figures|tables)/(\d+)$", href):
-        return target(("Fig" if m.group(1) == "figures" else "Tab")
-                      + m.group(2))
     return None
 
 
 def _link_targets(a: Node) -> list[Target]:
-    """A whole-path cross-reference names its target in the path (see
-    :func:`_self_link_target`); a fragment link names it directly."""
+    """A whole-path cross-reference names its target in a fragment on
+    the path (see :func:`_self_link_target`); a fragment link names it
+    directly."""
     path_target = _self_link_target(a.attr("href") or "")
     return [path_target] if path_target is not None else fragment_targets(a)
 

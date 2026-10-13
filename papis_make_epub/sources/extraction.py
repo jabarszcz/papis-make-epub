@@ -537,11 +537,17 @@ class Extraction:
 
 def drop_non_content(node: Tag) -> None:
     """Remove from under *node* the elements that are never article
-    content (:data:`NON_CONTENT`), and unwrap javascript links."""
+    content (:data:`NON_CONTENT`), and unwrap the links the book
+    cannot follow: javascript links, and links relative to the
+    platform's site (a browser save's ``/chapter/…``), which the book
+    does not carry. Fragment links stay."""
     for el in node.select(NON_CONTENT):
         el.decompose()
-    for a in node.select('a[href^="javascript:"]'):
-        a.unwrap()
+    for a in node.select("a[href]"):
+        href = str(a["href"])
+        if href.startswith("javascript:") or not (
+                href.startswith("#") or urllib.parse.urlsplit(href).scheme):
+            a.unwrap()
 
 
 def page_words(html: str) -> int:
