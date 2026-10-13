@@ -1,0 +1,13 @@
+==== part 0 (titlepage)
+acm-summary-abstract-3706598.3713120
+
+==== part 1 (abstract)
+Abstract
+Qualitative researchers use tools to collect, sort, and analyze their data. Should qualitative researchers use large language models (LLMs) as part of their practice? LLMs could augment qualitative research, but it is unclear if their use is appropriate, ethical, or aligned with qualitative researchers’ goals and values. We interviewed twenty qualitative researchers to investigate these tensions. Many participants see LLMs as promising interlocutors with attractive use cases across the stages of research, but wrestle with their performance and appropriateness. Participants surface concerns regarding the use of LLMs while protecting participant interests, and call attention to an urgent lack of norms and tooling to guide the ethical use of LLMs in research. We document the rapid and broad adoption of LLMs across surfaces, which can interfere with intentional use vital to qualitative research. We use the tensions surfaced by our participants to outline recommendations for researchers considering using LLMs in qualitative research and design principles for LLM-assisted qualitative research tools.
+
+==== part 2 (None)
+1 Introduction
+The qualitative research process is grounded in deep engagement with participants and their data through an iterative sensemaking process. Today, Large Language Models (LLMs), particularly those accessed through chat-based interfaces like ChatGPT  [59], are popular tools in research-related tasks, including within the social sciences [36, 50]. While a growing number of dedicated tools for qualitative work use LLMs to streamline research processes [19, 30, 32], direct interactions with ChatGPT and similar interfaces may also be increasingly used by qualitative researchers, a topic which has not received thorough investigation to this point.
+•
+•
+•

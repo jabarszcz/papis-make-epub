@@ -112,6 +112,17 @@ captured = 2026-10-02
 best_effort = false
 
 [[fixture]]
+id = "acm-summary-abstract-3706598.3713120"
+kind = "reduction"
+platform = "acm"
+url = "https://dl.acm.org/doi/full/10.1145/3706598.3713120"
+# the author's abstract as section#summary-abstract, where the acm
+# capture has section#abstract; with the body matter's first section,
+# which the source requires
+captured = 2026-10-13
+best_effort = false
+
+[[fixture]]
 id = "arxiv-conversion-error-2509.22908"
 kind = "reduction"
 platform = "arxiv"

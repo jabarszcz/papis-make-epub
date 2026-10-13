@@ -1,0 +1,42 @@
+language: en
+media_count: 0
+media_extensions: {}
+package:
+  landmarks:
+  - href: content.xhtml#part-abstract
+    text: Start
+    type: bodymatter
+  manifest:
+    content.xhtml: application/xhtml+xml
+    fonts/stix.ttf: font/ttf
+    nav.xhtml: application/xhtml+xml nav
+    style.css: text/css
+    toc.ncx: application/x-dtbncx+xml
+  metadata:
+    creator: null
+    identifier: https://dl.acm.org/doi/full/10.1145/3706598.3713120
+    language: en
+    title: acm-summary-abstract-3706598.3713120
+  spine:
+  - content.xhtml
+  toc:
+  - Abstract
+  - 1 Introduction
+parts:
+- epub_type: titlepage
+  text_length: 36
+  toc: []
+- epub_type: abstract
+  text_length: 1119
+  toc:
+  - Abstract
+- epub_type: null
+  text_length: 668
+  toc:
+  - 1 Introduction
+stats:
+  dead_links: 6
+  images: 0
+  math: 0
+  math_fallback: 0
+  math_images: 0

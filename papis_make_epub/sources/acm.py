@@ -44,16 +44,12 @@ class AcmSource(Source):
         """
         extraction = Extraction(page, renderers, best_effort=best_effort)
         root = extraction.root
-        # tight scoping: the abstracts div also holds tab chrome and an
-        # AI-summary widget; the backmatter also holds ACM_widgets
-        # (Cited By, Recommendations)
+        # the author's abstract has the id "abstract" on some pages,
+        # "summary-abstract" on others
         abstract = root.first("div#abstracts section#abstract",
-                              "div#abstracts section#summary-abstract",
-                              "div#abstracts")
+                              "div#abstracts section#summary-abstract")
         body = root.first("section#bodymatter")
-        back = root.first("#backmatter section#bibliography", "#backmatter")
-        # the footnotes sit in a sibling container of the bibliography,
-        # one doc-footnote wrapper per footnote
+        back = root.first("#backmatter section#bibliography")
         footnotes_section = root.first("#backmatter #footnotes")
         if body is None:
             raise SourceNotAvailableError(
@@ -103,6 +99,7 @@ class AcmSource(Source):
         if back is not None:
             extraction.add_bibliography(back, back.select("div.biblioentry"))
         if footnotes_section is not None:
+            # one doc-footnote wrapper per footnote
             extraction.add_footnotes(
                 footnotes_section,
                 footnotes_section.select("[role='doc-footnote']"))
