@@ -34,6 +34,7 @@ from bs4 import BeautifulSoup, Tag
 from PIL import Image
 
 from papis_make_epub.errors import BuildError
+from papis_make_epub.fetch import srcset_urls
 from papis_make_epub.formula import (
     TEX_DELIMITERS,
     Delimiters,
@@ -442,6 +443,8 @@ class Extraction:
                 src = el.get(attr)
                 if not isinstance(src, str) or not src:
                     continue
+                if el.name == "img":
+                    src = _img_src(el, src)
                 if src in self._figure_names:
                     el[attr] = self._figure_names[src]
                     continue
@@ -775,6 +778,19 @@ def core_image(data: bytes, base: str) -> tuple[bytes, str]:
             f"cannot convert non-core image {base!r} ({mt}) to PNG: "
             f"{exc}") from exc
     return buf.getvalue(), os.path.splitext(base)[0] + ".png"
+
+
+def _img_src(img: Tag, src: str) -> str:
+    """The source to embed for *img*, its srcset removed (the other
+    candidates point outside the book). A lazy-loaded image can be
+    saved with an empty src and its data in the srcset."""
+    srcset = str(img.get("srcset", ""))
+    if img.has_attr("srcset"):
+        del img["srcset"]
+    if src.strip() == "data:,":
+        return next((u for u in srcset_urls(srcset)
+                     if u.startswith("data:image/")), src)
+    return src
 
 
 def _data_uri_bytes(src: str) -> tuple[bytes, str] | None:

@@ -96,12 +96,12 @@ parts:
   toc:
   - Main
 - epub_type: null
-  text_length: 3132
+  text_length: 3135
   toc:
   - Algorithms as tensor decomposition:
     - Algorithm 1
 - epub_type: null
-  text_length: 6689
+  text_length: 6685
   toc:
   - DRL for algorithm discovery:
     - Neural network architecture
@@ -109,7 +109,7 @@ parts:
     - Change of basis
     - Data augmentation
 - epub_type: null
-  text_length: 10596
+  text_length: 10597
   toc:
   - Algorithm discovery results:
     - Discovery of matrix multiplication algorithms
@@ -121,7 +121,7 @@ parts:
   toc:
   - Discussion
 - epub_type: null
-  text_length: 23663
+  text_length: 23681
   toc:
   - Methods:
     - TensorGame
@@ -178,5 +178,5 @@ stats:
   dead_links: 0
   images: 5
   math: 107
-  math_fallback: 2
+  math_fallback: 0
   math_images: 0

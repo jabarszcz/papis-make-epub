@@ -197,7 +197,7 @@ parts:
   toc:
   - 2 Overview
 - epub_type: null
-  text_length: 3533
+  text_length: 3524
   toc:
   - 3 λ π -Ware
 - epub_type: null
@@ -205,7 +205,7 @@ parts:
   toc:
   - 4 Semantics and Properties
 - epub_type: null
-  text_length: 10385
+  text_length: 10370
   toc:
   - 5 Combinational and Sequential Combinators:
     - 5.1 Convertibility of Combinational and Sequential Versions
@@ -225,7 +225,7 @@ parts:
   toc:
   - Notes
 - epub_type: bibliography
-  text_length: 3789
+  text_length: 3787
   toc:
   - References
 - epub_type: null

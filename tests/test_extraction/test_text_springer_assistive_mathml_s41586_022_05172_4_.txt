@@ -1,0 +1,89 @@
+==== part 0 (titlepage)
+springer-assistive-mathml-s41586-022-05172-4
+
+==== part 1 (None)
+Algorithms as tensor decomposition
+As matrix multiplication (
+A
+,
+B
+) ↦
+A
+B
+is bilinear (that is, linear in both arguments), it can be fully represented by a 3D tensor: see Fig. 1a for how to represent the 2 × 2 matrix multiplication operation as a 3D tensor of size 4 × 4 × 4, and refs.
+3,5,7
+for more details. We write
+T
+n
+for the tensor describing
+n
+×
+n
+matrix multiplication. The tensor
+T
+n
+is fixed (that is, it is independent of the matrices to be multiplied), has entries in {0, 1}, and is of size
+n
+2
+×
+n
+2
+×
+n
+2
+. More generally, we use
+T
+n
+,
+m
+,
+p
+to describe the rectangular matrix multiplication operation of size
+n
+×
+m
+with
+m
+×
+p
+(note that
+T
+n
+=
+T
+n
+,
+n
+,
+n
+). By a decomposition of
+T
+n
+into
+R
+rank-one terms, we mean
+T
+n
+=
+∑
+r
+=
+1
+R
+⁡
+u
+(
+r
+)
+⊗
+v
+(
+r
+)
+⊗
+w
+(
+r
+)
+,
+(1)

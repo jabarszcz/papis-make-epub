@@ -182,10 +182,7 @@ T
 is at most
 R
 , or
-R
-a
-n
-k
+Rank
 (
 T
 )
@@ -295,9 +292,7 @@ matrices can be multiplied with asymptotic complexity
 O
 (
 N
-l
-o
-g
+log
 n
 (
 R
@@ -308,6 +303,7 @@ R
 for more details.
 Algorithm 1
 A meta-algorithm parameterized by
+{
 u
 (
 r
@@ -322,6 +318,7 @@ w
 (
 r
 )
+}
 r
 =
 1
@@ -335,6 +332,7 @@ B
 R
 controls the number of multiplications between input matrix entries.
 Parameters:
+{
 u
 (
 r
@@ -349,6 +347,7 @@ w
 (
 r
 )
+}
 r
 =
 1
@@ -574,22 +573,14 @@ steps), the agent receives an additional terminal reward equal to
 (
 S
 R
-l
-i
-m
-i
-t
+limit
 )
 , where
 γ
 (
 S
 R
-l
-i
-m
-i
-t
+limit
 )
 is an upper bound on the rank of the terminal tensor. Although this reward optimizes for rank (and hence for the complexity of the resulting algorithm), other reward schemes can be used to optimize other properties, such as practical runtime (see ‘Algorithm discovery results’). Besides, as our aim is to find exact matrix multiplication algorithms, we constrain {
 u
@@ -707,6 +698,7 @@ and
 to multiple grids, and is both more efficient and yields better results than naive self-attention. The proposed architecture, which disregards the order of rows and columns in the grids, is inspired by the invariance of the tensor rank to slice reordering. The final feature representation of the three matrices is passed both to the policy head (an autoregressive model) and the value head (a multilayer perceptron).
 Synthetic demonstrations
 Although tensor decomposition is NP-hard, the inverse task of constructing the tensor from its rank-one factors is elementary. Hence, we generate a large dataset of tensor-factorization pairs (synthetic demonstrations) by first sampling factors
+{
 (
 u
 (
@@ -723,6 +715,7 @@ w
 r
 )
 )
+}
 r
 =
 1
@@ -970,7 +963,8 @@ n
 /
 2
 ∼
-12
+1
+2
 n
 2
 multiplications (where ∼ indicates asymptotic similarity), outperforms the previously known algorithms using  asymptotically
@@ -1169,6 +1163,7 @@ t
 . This factorization is then scored. For example, when optimizing for asymptotic time complexity the score is −
 R
 , and when optimizing for practical runtime the algorithm corresponding to the factorization
+{
 (
 u
 (
@@ -1185,6 +1180,7 @@ w
 t
 )
 )
+}
 t
 =
 1
@@ -1198,11 +1194,7 @@ limit
 on the maximum number of moves in the game, so that a weak player is not stuck in unnecessarily (or even infinitely) long games. When a game ends  because it has run out of moves, a penalty score is given so that it is never advantageous to deliberately exhaust the move limit. For example, when optimizing for asymptotic time complexity, this penalty is derived from an upper bound on the tensor rank of the final residual tensor
 S
 R
-l
-i
-m
-i
-t
+limit
 . This upper bound on the tensor rank is obtained by summing the matrix ranks of the slices of the tensor.
 TensorGame over rings
 We say that the decomposition of
@@ -1366,6 +1358,7 @@ a
 )
 ,
 π
+^
 (
 s
 ,
@@ -1385,6 +1378,7 @@ s
 a
 ) is the action value and
 π
+^
 (
 s
 ,
@@ -1425,6 +1419,7 @@ s
 )
 ⋅
 π
+^
 (
 s
 ,
@@ -1453,6 +1448,7 @@ c
 s
 ) is an exploration factor controlling the influence of the empirical policy
 π
+^
 (
 s
 ,
@@ -1481,6 +1477,7 @@ s
 L
 ), alongside the empirical distribution
 π
+^
 (
 a
 |
@@ -1535,6 +1532,7 @@ s
 ) form a sample-based improved policy. Differently from AlphaZero and Sampled AlphaZero, we use an adaptive temperature scheme to smooth the normalized visit counts distribution as some states can accumulate an order of magnitude more visits than others because of sub-tree reuse and transposition table. Concretely, we define the improved policy as
 I
 π
+^
 (
 s
 ,
@@ -1574,18 +1572,14 @@ where
 s
 )
 =
-l
-o
-g
+log
 ⁡
 N
 (
 s
 )
 /
-l
-o
-g
+log
 ⁡
 N
 ¯
@@ -1598,9 +1592,17 @@ N
 and 1 otherwise, with
 N
 ¯
-being a hyperparameter. For training, we use Iπ^ directly as a target for the network policy
+being a hyperparameter. For training, we use
+I
 π
-. For acting, we additionally discard all actions that have a value lower than the value of the most visited action, and sample proportionally to Iπ^ among those remaining high-value actions.
+^
+directly as a target for the network policy
+π
+. For acting, we additionally discard all actions that have a value lower than the value of the most visited action, and sample proportionally to
+I
+π
+^
+among those remaining high-value actions.
 Learning one agent for multiple target tensors
 We train a single agent to decompose the different tensors
 T
@@ -1624,6 +1626,7 @@ p
 are obtained using multiple runs of this multi-target setting. We also train a single agent to decompose tensors in both arithmetics. Owing to learned transfer between the two arithmetics, this agent discovers a different distribution of algorithms (of the same ranks) in standard arithmetic than the agent trained on standard arithmetic only, thereby increasing the overall diversity of discovered algorithms.
 Synthetic demonstrations
 The synthetic demonstrations buffer contains tensor-factorization pairs, where the factorizations
+{
 (
 u
 (
@@ -1640,6 +1643,7 @@ w
 r
 )
 )
+}
 r
 =
 1
@@ -1814,16 +1818,16 @@ B
 =
 C
 , as this performed better in early experiments, and (2) unimodularity (
-d
-e
-t
+det
 A
 ∈
+{
 −
 1
 ,
 +
 1
+}
 ), which ensures that after converting an integral factorization into the canonical basis it still contains integer entries only (this is for representational convenience and numerical stability of the resulting algorithm). See Supplementary Information for the exact algorithm.
 Signed permutations
 In addition to playing (and training on) games in different bases, we also utilize a data augmentation mechanism whenever the neural network is queried in a new MCTS node. At acting time, when the network is queried, we transform the input tensor by applying a change of basis—where the change of basis matrix is set to a random signed permutation. We then query the network on this transformed input tensor, and finally invert the transformation in the network’s policy predictions. Although this data augmentation procedure can be applied with any generic change of basis matrix (that is, it is not restricted to signed permutation matrices), we use signed permutations mainly for computational efficiency. At training time, whenever the neural network is trained on an (input, policy targets, value target) triplet (Fig.
@@ -2019,17 +2023,20 @@ Value head
 The value head is composed of a four-layer multilayer perceptron whose last layer produces
 q
 outputs corresponding to the
-12
+1
+2
 q
 ,
-32
+3
+2
 q
 ,
 …
 2
 q
 −
-12
+1
+2
 q
 quantiles. In this way, the value head predicts the distribution of returns from this state in the form of values predicted for the aforementioned quantiles
 34
@@ -2070,10 +2077,7 @@ n
 ,
 10
 . However, this does not yield practical algorithms, as such approaches become advantageous only for astronomical matrix sizes. Hence, a significant body of work aims at exhibiting explicit factorizations of matrix multiplication tensors, as these factorizations provide practical algorithms. After Strassen’s breakthrough showing that
-r
-a
-n
-k
+rank
 (
 T
 2

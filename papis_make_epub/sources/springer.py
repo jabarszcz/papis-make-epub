@@ -1,14 +1,15 @@
 """Build an EPUB from a saved Springer Nature article page.
 
 Covers link.springer.com and nature.com, which share the platform
-markup. The math is TeX in ``span.mathjax-tex``, which the page's
-MathJax (v2) renders.
+markup. The page's MathJax (v2) moves the TeX of each formula into a
+script element as it renders it; a save without the page's scripts
+keeps only MathJax's MathML (see :func:`_formula`).
 """
 
 import re
 from typing import ClassVar
 
-from papis_make_epub.formula import TEX
+from papis_make_epub.formula import MATHML, TEX, Formula
 from papis_make_epub.math_renderers import MathRenderer
 from papis_make_epub.saved_page import SavedPage
 from papis_make_epub.sources.extraction import (
@@ -61,6 +62,32 @@ def _unwrap_pictures(parts: list[Node]) -> None:
             pic.remove()
 
 
+def _formula(extraction: Extraction, span: Node) -> Formula:
+    """The formula a ``span.mathjax-tex`` holds, in whichever state
+    the page was saved.
+
+    Once MathJax has rendered it, the span holds the MathML MathJax
+    renders for assistive technology, and, when the save kept the
+    page's scripts, the TeX MathJax moved into a script. The MathML
+    is preferred over texmath's conversion of the TeX, which fails
+    on some of the platform's macros (``\\mathscr``, ``\\bf``).
+    """
+    math = span.first("span.MJX_Assistive_MathML > math")
+    script = span.first('script[type^="math/tex"]')
+    if math is None and script is None:
+        # unrendered: the TeX in its math delimiters
+        return extraction.delimited_formula(span)
+    if math is not None:
+        # MathJax's TeX-atom classes
+        math.strip_attributes("class")
+    return extraction.formula(
+        span, mathml=math,
+        tex=script.text().strip() if script is not None else None,
+        display=(script.matches("[type*='mode=display']")
+                 if script is not None
+                 else span.has("span.MJX_Assistive_MathML_Block")))
+
+
 def _self_link_target(href: str) -> Target | None:
     """The in-document id a Springer cross-reference href points at.
 
@@ -84,8 +111,9 @@ def _link_targets(a: Node) -> list[Target]:
 class SpringerSource(Source):
     key = "springer"
     name = "Springer Nature"
-    # TeX only; no MathML exists
-    math_formats: ClassVar[frozenset[str]] = frozenset({TEX})
+    # MathJax's MathML, with the TeX when the save kept the scripts
+    # (see _formula)
+    math_formats: ClassVar[frozenset[str]] = frozenset({MATHML, TEX})
 
     def matches(self, html_text: str) -> bool:
         return "c-article-body" in html_text
@@ -114,7 +142,7 @@ class SpringerSource(Source):
                                "div.c-article-section__figure-link")
         _unwrap_pictures(parts)
         extraction.render_math(
-            extraction.delimited_formula(sp) for part in parts
+            _formula(extraction, sp) for part in parts
             for sp in part.select("span.mathjax-tex"))
         extraction.resolve_links(parts, _link_targets)
         extraction.embed_figures(parts)

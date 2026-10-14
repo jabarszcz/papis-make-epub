@@ -347,34 +347,23 @@ datatype itself, it is indexed by a context
 representing the arguments to the circuit or any free variables currently in scope. The datatype is also indexed by the circuit’s output type,
 .
 The whole development is parameterized by a type of primitive gates,
-G
-a
-t
-e
+Gate
 :
 U
 B
 →
-S
-e
-t
+Set
 , and the
 constructor creates a circuit from such a fundamental gate. One example of such type of gates is the usual triple (
-N
-O
-T
+{
+NOT
 ,
-A
-N
-D
+AND
 ,
-O
-R
+OR
+}
 ) with
-B
-o
-o
-l
+Bool
 as the chosen base type; circuit designers, however, are free to choose the fundamental gates that best fit their domain.
 Our language does have an eliminator (
 ) for arrow types, but no introduction form. Arrow types can only be introduced by using gates, and this is by design, as we target synthesizability and circuits must be first-order to be synthesized. Using arrow types for gates allows for convenient partial application, while for general abstraction we use host language definitions as metaprograms.
@@ -590,9 +579,7 @@ The second parameter of
 must be a circuit whose value is the same as the first parameter of
 , and we use here the simplest possible such circuit:
 (
-v
-a
-l
+val
 m
 )
 . The third parameter (
@@ -611,16 +598,9 @@ could be somewhat further loosened (as is discussed in Sect.
 ), but we work here with
 loop bodies to simplify the presentation.
 As we have seen, the results from applying each semantic function have different types (
-T
-p
-a
-r
+Tpar
 and
-T
-l
-o
-o
-p
+Tloop
 ), so the relation comparing these results is more subtle than just equality. We define this relation, called
 , as follows:
 Both sides of
@@ -680,17 +660,11 @@ column major
 both
 representations are useful for our purposes, so we show both here:
 Here,
-R
-M
-a
-t
+RMat
 r
 c
 and
-C
-M
-a
-t
+CMat
 r
 c
 both represent matrices with
@@ -804,7 +778,6 @@ Axelsson, E., Claessen, K., Sheeran, M.: Wired: wire-aware circuit design. In: B
 https://doi.org/10.1007/11560548_4
 ↩
 Baaij, C.P.R.: Digital circuits in C
-λ
 λ
 aSH: functional specifications and type-directed synthesis. info:eu-repo/semantics/doctoralThesis. University of Twente, Enschede, January 2015.
 https://doi.org/10.3990/1.9789036538039

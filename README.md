@@ -116,13 +116,12 @@ be used if ever that fails.
 |-----------------|--------------------------------|--------------|
 | `arxiv`         | arxiv.org                      | MathML + TeX |
 | `acm`           | dl.acm.org (`/doi/full/` page) | MathML       |
-| `springer`      | link.springer.com, nature.com  | TeX          |
+| `springer`      | link.springer.com, nature.com  | MathML + TeX |
 | `ieee`          | ieeexplore.ieee.org            | TeX          |
 | `sciencedirect` | sciencedirect.com              | MathML       |
 
 The Math column names what the page carries per formula: MathML,
-or the TeX the platform serves for MathJax to render; arXiv's
-MathML also carries the TeX, as annotations.
+the TeX the platform serves for MathJax to render, or both.
 [Math Rendering](#math-rendering) covers how either is rendered.
 
 Potential future sources:

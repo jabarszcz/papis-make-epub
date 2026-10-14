@@ -143,3 +143,18 @@ def test_406_is_reported_without_retry(server: _State) -> None:
     assert caught.value.status == HTTPStatus.NOT_ACCEPTABLE
     assert "refuses this client" in str(caught.value)
     assert [path for path, _ in server.requests] == [PAGE_PATH]
+
+
+@pytest.mark.parametrize(("value", "urls"), [
+    ("a.png", ["a.png"]),
+    ("a.png 1x, b.png 2x", ["a.png", "b.png"]),
+    ("a.png, b.png", ["a.png", "b.png"]),
+    (" , a.png 100w ", ["a.png"]),
+    # a data: URL holds commas; it runs to the whitespace before its
+    # descriptor
+    ("data:image/webp;base64,AAA= 685w, https://x/y.png 2x",
+     ["data:image/webp;base64,AAA=", "https://x/y.png"]),
+    ("", []),
+])
+def test_srcset_urls(value: str, urls: list[str]) -> None:
+    assert fetch.srcset_urls(value) == urls

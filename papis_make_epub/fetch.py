@@ -125,9 +125,27 @@ def resolve_base(soup: Tag, page_url: str) -> str:
     return page_url
 
 
-def _srcset_urls(value: str) -> list[str]:
-    """The URLs of a srcset candidate list (descriptors dropped)."""
-    return [c.split()[0] for c in value.split(",") if c.strip()]
+def _split_url(rest: str) -> tuple[str, str]:
+    """*rest*'s leading non-whitespace run, and what follows it."""
+    parts = rest.split(None, 1)
+    return parts[0], parts[1] if len(parts) > 1 else ""
+
+
+def srcset_urls(value: str) -> list[str]:
+    """The URLs of a srcset candidate list, split as the HTML parsing
+    algorithm splits it: a URL runs to the next whitespace (a
+    ``data:`` URL holds commas), its trailing commas dropped, and a
+    candidate's descriptors run to the next comma."""
+    urls = []
+    rest = value
+    while rest := rest.lstrip(" \t\n\r\f,"):
+        url, rest = _split_url(rest)
+        if url.endswith(","):
+            urls.append(url.rstrip(","))
+            continue
+        urls.append(url)
+        _, _, rest = rest.partition(",")
+    return urls
 
 
 def media_urls(root: Tag) -> list[str]:
@@ -140,5 +158,5 @@ def media_urls(root: Tag) -> list[str]:
     for tag, attr in MEDIA_SRCSET_ATTRS:
         for el in root.find_all(tag):
             if el.get(attr):
-                urls.extend(_srcset_urls(str(el[attr])))
+                urls.extend(srcset_urls(str(el[attr])))
     return urls
