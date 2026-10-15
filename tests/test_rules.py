@@ -27,9 +27,7 @@ from papis_make_epub.sources.node import Rule, rule_sites
 MODULES = sorted({inspect.getsourcefile(type(s)) or "" for s in SOURCES})
 
 
-# pytest collects the test_-prefixed functions; this one gets the
-# prefix once every rule has its fixture (gaps are open at this point)
-def every_rule_fires_in_a_fixture(contents: dict[str, object]) -> None:
+def test_every_rule_fires_in_a_fixture(contents: dict[str, object]) -> None:
     fired: dict[Rule, int] = {
         rule: sum(by_fixture.values()) for rule, by_fixture in RULE_MATCHES.items()}
     gaps = []
