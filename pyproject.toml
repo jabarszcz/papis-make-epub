@@ -58,17 +58,24 @@ papis-make-epub-demo = "papis_make_epub.math_rendering_demo:main"
 # used instead of the external script when installed in papis's own environment
 make-epub = "papis_make_epub.cli:cli"
 
-# PEP 735: local tooling
+# PEP 735: local tooling. The flake renders these groups through
+# pyproject.nix: test for its test cells, dev for its dev shell.
 [dependency-groups]
-dev = [
-    # beautifulsoup4 ships its own types (py.typed) since 4.13, so no
-    # stub package: one would take precedence over them
-    "mypy>=1.0",
-    "ruff",
+test = [
     "pytest>=7",
     "pytest-cov",
     # golden/characterization tests of the source extractions
     "pytest-regressions>=2",
+]
+dev = [
+    { include-group = "test" },
+    # beautifulsoup4 ships its own types (py.typed) since 4.13, so no
+    # stub package: one would take precedence over them
+    "mypy>=1.0",
+    "ruff",
+    # building and uploading a release
+    "build",
+    "twine",
 ]
 
 [tool.hatch.build.targets.wheel]

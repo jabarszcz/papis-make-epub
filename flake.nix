@@ -42,13 +42,16 @@
         };
         py = pkgs.python3Packages;
 
-        testPyDeps = ps: [
-          ps.papis
-          ps.papis-make-epub
-          ps.pytest
-          ps.pytest-cov
-          ps.pytest-regressions
-        ];
+        # pyproject.toml's dependency groups (PEP 735), rendered against
+        # a python's package set together with the runtime dependencies;
+        # the package itself supplies the scripts and the plugin
+        # registration
+        project = pyproject-nix.lib.project.loadPyproject {
+          projectRoot = ./.;
+        };
+        depsFor = python: groups: ps:
+          [ ps.papis-make-epub ]
+          ++ project.renderers.withPackages { inherit python groups; } ps;
         # external programs of the math renderers (the mathjax
         # renderer runs node)
         mathPrograms = [
@@ -62,16 +65,15 @@
           "${pkgs.mathjax-node-cli}/lib/node_modules/mathjax-node-cli/node_modules";
         testPrograms = mathPrograms ++ [ pkgs.epubcheck ];
 
-        # contributor environment: the package's dependency closure
-        # plus the type-checking and test halves of the dev tooling
-        # (ruff is a standalone binary)
-        devEnv = pkgs.python3.withPackages
-          (ps: testPyDeps ps ++ [ ps.mypy ]);
+        # contributor environment: the dev group (tests, type checking,
+        # linting, release tooling) over the package's dependency closure
+        devEnv = pkgs.python3.withPackages (depsFor pkgs.python3 [ "dev" ]);
 
         # Run suite for an interpreter (building it), report coverage
         testFor = name: python: pkgs.runCommand "pytest-${name}" {
           nativeBuildInputs =
-            [ (python.withPackages testPyDeps) ] ++ testPrograms;
+            [ (python.withPackages (depsFor python [ "test" ])) ]
+            ++ testPrograms;
           NODE_PATH = mathjaxNodePath;
           # every external tool is supplied here, so a skipped test
           # is a malfunction (see tests/conftest.py)
@@ -168,7 +170,7 @@
         packages.papis-with-make-epub = papisWithPlugin;
 
         devShells.default = pkgs.mkShell {
-          packages = [ devEnv pkgs.ruff pkgs.git ] ++ testPrograms
+          packages = [ devEnv pkgs.git ] ++ testPrograms
             # fixture refresh: single-file renders publisher pages
             # into the self-contained captures the saved-page
             # sources read, driving chromium
