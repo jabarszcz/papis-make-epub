@@ -150,9 +150,9 @@ fail on some or be lossy.
 The default renderer, `mathml`, passes the MathML through,
 leaving the rendering to the reading device; every other renderer
 trades something away (text flattens layout, images fix the font
-and size). `papis-make-epub-demo` builds a comparison EPUB, one
-section per renderer over identical formulas, for judging the
-renderers on a device.
+and size). `papis make-epub --math-demo FILE` builds a comparison
+EPUB, one section per renderer over identical formulas, for judging
+the renderers on a device.
 
 The build fails on the first formula the selected renderer
 cannot render. With `--best-effort` it continues: rendering falls

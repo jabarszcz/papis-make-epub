@@ -7,27 +7,24 @@ are LaTeXML-shaped math elements (presentation MathML from texmath,
 with the TeX kept in an annotation), processed by the same apply_math
 pipeline the real builds use.
 
-Run with the ``papis-make-epub-demo`` console script or
-``python -m papis_make_epub.math_rendering_demo``; it needs the
-tooling of all five renderers at once (texmath, mathjax-node,
-lasem-render).
+Run with ``papis make-epub --math-demo FILE``; it needs texmath for
+the sources, and compares whichever renderers have their tooling
+(mathjax-node, lasem-render).
 """
 
 import sys
+from collections.abc import Mapping
 from html import escape
 
-import click
 from bs4 import BeautifulSoup, Tag
 
 from papis_make_epub.book import BuildOptions, DocMeta, write_epub
 from papis_make_epub.formula import Formula
 from papis_make_epub.math_renderers import (
-    RENDERERS,
     MathRenderer,
     RenderContext,
     RendererUnavailableError,
     apply_math,
-    make_renderer,
 )
 from papis_make_epub.sources.extraction import BuildStats, Content, Part, TocEntry
 from papis_make_epub.texmath import find_texmath, tex_to_mathml
@@ -81,20 +78,18 @@ def _sample_html() -> str:
     return "".join(parts)
 
 
-def build_demo(output: str) -> dict[str, tuple[int, int, int]]:
-    """Build the comparison EPUB at ``output``.
+def build_demo(output: str, renderers: Mapping[str, MathRenderer],
+               ) -> dict[str, tuple[int, int, int]]:
+    """Build the comparison EPUB at ``output``, one section per entry
+    of *renderers* (mode name to constructed renderer), in order.
 
     Returns per-renderer (rendered, degraded, images) counts. Raises
-    :class:`RendererUnavailableError` when texmath (which generates
-    the MathML sources) or a renderer's tooling is absent.
+    :class:`RendererUnavailableError` when texmath, which generates
+    the MathML sources, is absent.
     """
     if find_texmath() is None:
         raise RendererUnavailableError(
             "texmath not on PATH (needed to generate the MathML sources)")
-    # constructing every renderer is this tool's availability gate
-    renderers: dict[str, MathRenderer] = {
-        mode: make_renderer(mode) for mode in RENDERERS
-    }
 
     source = _sample_html()
 
@@ -139,23 +134,3 @@ def build_demo(output: str) -> dict[str, tuple[int, int, int]]:
     content.add_title_page(meta.title, meta.authors)
     write_epub(output, meta=meta, content=content, options=BuildOptions())
     return stats
-
-
-@click.command()
-@click.option("-o", "--output", default="math-rendering-demo.epub",
-              type=click.Path(dir_okay=False, writable=True),
-              help="Where to write the comparison EPUB.")
-def main(output: str) -> None:
-    """Build an EPUB rendering the same formulas through all renderers."""
-    try:
-        stats = build_demo(output)
-    except RendererUnavailableError as exc:
-        sys.exit(str(exc))
-    for mode, (rendered, degraded, images) in stats.items():
-        click.echo(f"{mode}: {rendered} formulas, {degraded} fallbacks, "
-                   f"{images} images")
-    click.echo(f"wrote {output}")
-
-
-if __name__ == "__main__":
-    main()

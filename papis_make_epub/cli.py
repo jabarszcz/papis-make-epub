@@ -36,7 +36,13 @@ from papis_make_epub.book import BuildOptions
 from papis_make_epub.errors import BuildError
 from papis_make_epub.fetch import FetchError
 from papis_make_epub.logging import get_logger
-from papis_make_epub.math_renderers import RENDERERS, MathRenderer
+from papis_make_epub.math_renderers import (
+    RENDERERS,
+    MathRenderer,
+    RendererUnavailableError,
+    make_renderer,
+)
+from papis_make_epub.math_rendering_demo import build_demo
 from papis_make_epub.saved_page import SavedPage
 from papis_make_epub.sources import SOURCES, Source
 from papis_make_epub.sources.arxiv import ArxivSource, arxiv_id_from_doc
@@ -87,12 +93,18 @@ _MATH_HELP = "Renderers: " + "; ".join(
               type=click.Path(exists=True, dir_okay=False), default=None,
               help="Stylesheet added after the bundled style.css; its "
                    "rules win on conflicts.")
+@click.option("--math-demo", "math_demo",
+              type=click.Path(dir_okay=False, writable=True), default=None,
+              metavar="FILE",
+              help="Write a renderer-comparison EPUB to FILE and exit: one "
+                   "section per renderer over identical formulas, for "
+                   "judging the renderers on a device.")
 def cli(query: str, source_key: str | None,  # noqa: PLR0913, PLR0917
         file: str | None, _all: bool, force: bool,
         math_both: str | None,
         math_inline: str | None, math_display: str | None,
         best_effort: bool, no_char_normalization: bool,
-        css_file: str | None) -> None:
+        css_file: str | None, math_demo: str | None) -> None:
     """Build EPUB renditions of papis documents.
 
     Each document builds from the saved full-text page detected among
@@ -104,6 +116,10 @@ def cli(query: str, source_key: str | None,  # noqa: PLR0913, PLR0917
     The query must then match exactly one document; ``--from`` picks
     the source when the detection guesses wrong.
     """
+    if math_demo is not None:
+        _build_math_demo(math_demo)
+        return
+
     # the flag defaults mirror BuildOptions, where the pass-through
     # choice is motivated
     math_inline = math_inline or math_both or "mathml"
@@ -158,6 +174,27 @@ def cli(query: str, source_key: str | None,  # noqa: PLR0913, PLR0917
 _Resolver = Callable[[frozenset[str]], tuple[MathRenderer, MathRenderer]]
 # a document's fate in the library loop, tallied for the summary line
 _Outcome = Literal["built", "skipped", "failed"]
+
+
+def _build_math_demo(output: str) -> None:
+    """Write the renderer-comparison EPUB to *output* over the renderers
+    whose tooling is present, reporting each one's counts; missing
+    texmath exits."""
+    renderers: dict[str, MathRenderer] = {}
+    for mode in RENDERERS:
+        try:
+            renderers[mode] = make_renderer(mode)
+        except RendererUnavailableError as exc:
+            logger.warning("Leaving out renderer '%s': %s", mode, exc)
+    try:
+        stats = build_demo(output, renderers)
+    except RendererUnavailableError as exc:
+        logger.error("%s", exc)
+        raise SystemExit(1) from exc
+    for mode, (rendered, degraded, images) in stats.items():
+        logger.info("%s: %d formulas, %d fallbacks, %d images.",
+                    mode, rendered, degraded, images)
+    logger.info("Wrote '%s'.", output)
 
 
 def _file_source(page: SavedPage, file: str, source_key: str | None) -> Source:

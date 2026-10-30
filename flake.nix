@@ -157,13 +157,6 @@
           meta.description = "re-capture the golden fixture pages";
         };
 
-        apps.math-rendering-demo = {
-          type = "app";
-          program = "${wrappedScripts}/bin/papis-make-epub-demo";
-          meta.description =
-            "build a renderer-comparison EPUB for device testing";
-        };
-
         # papis with the plugin loaded as an entry point and the math
         # renderers' external programs on the papis binary's PATH,
         # for installation instead of pkgs.papis.
@@ -213,9 +206,8 @@
             # plain papis dispatching the standalone script from PATH
             (PATH=${pkgs.papis}/bin:${wrappedScripts}/bin:$PATH
              expect_help papis make-epub)
-            # the wrapped scripts themselves (what nix run executes)
+            # the wrapped script itself (what nix run executes)
             expect_help ${wrappedScripts}/bin/papis-make-epub
-            ${wrappedScripts}/bin/papis-make-epub-demo --help > /dev/null
             touch $out
           '';
 

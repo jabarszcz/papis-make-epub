@@ -50,9 +50,6 @@ Repository = "https://github.com/jabarszcz/papis-make-epub"
 # on PATH; verb-qualified so the bare `epub` name stays free for other
 # functionality in papis's flat command namespace
 papis-make-epub = "papis_make_epub.cli:main"
-# builds the renderer-comparison EPUB for judging the renderers on a
-# device (one section per renderer, identical formulas)
-papis-make-epub-demo = "papis_make_epub.math_rendering_demo:main"
 
 [project.entry-points."papis.command"]
 # used instead of the external script when installed in papis's own environment
