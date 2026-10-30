@@ -104,22 +104,6 @@
           pkgs.lib.nameValuePair "test-${name}" (testFor name python))
           matrixCells;
 
-        # the package's console scripts with the math renderers'
-        # programs on their PATH. packages.default stays lean: this
-        # closure is built on `nix run` only.
-        wrappedScripts = pkgs.symlinkJoin {
-          name = "papis-make-epub-wrapped";
-          paths = [ py.papis-make-epub ];
-          nativeBuildInputs = [ pkgs.makeWrapper ];
-          postBuild = ''
-            for prog in "$out"/bin/*; do
-              wrapProgram "$prog" \
-                --prefix PATH : ${pkgs.lib.makeBinPath mathPrograms} \
-                --set NODE_PATH ${mathjaxNodePath}
-            done
-          '';
-        };
-
         papisWithPlugin = import ./nix { inherit pkgs pyproject-nix; };
 
       in {
@@ -129,7 +113,7 @@
         # command `papis make-epub` (works alongside pkgs.papis)
         apps.default = {
           type = "app";
-          program = "${wrappedScripts}/bin/papis-make-epub";
+          program = "${papisWithPlugin}/bin/papis-make-epub";
           meta.description = "build EPUB renditions of papis documents";
         };
 
@@ -197,11 +181,12 @@
             expect_help() { "$@" --help | grep -q "Build EPUB renditions"; }
             # the entry-point plugin inside the composed papis
             expect_help ${papisWithPlugin}/bin/papis make-epub
-            # plain papis dispatching the standalone script from PATH
-            (PATH=${pkgs.papis}/bin:${wrappedScripts}/bin:$PATH
+            # plain papis dispatching the bare package's script from
+            # PATH (neither carries the plugin's entry point)
+            (PATH=${pkgs.papis}/bin:${py.papis-make-epub}/bin:$PATH
              expect_help papis make-epub)
-            # the wrapped script itself (what nix run executes)
-            expect_help ${wrappedScripts}/bin/papis-make-epub
+            # the composed package's wrapped script (what nix run executes)
+            expect_help ${papisWithPlugin}/bin/papis-make-epub
             touch $out
           '';
 
