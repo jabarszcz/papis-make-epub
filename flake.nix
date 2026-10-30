@@ -52,17 +52,11 @@
         depsFor = python: groups: ps:
           [ ps.papis-make-epub ]
           ++ project.renderers.withPackages { inherit python groups; } ps;
-        # external programs of the math renderers (the mathjax
-        # renderer runs node)
-        mathPrograms = [
-          (pkgs.callPackage ./nix/texmath.nix { })
-          pkgs.nodejs
-          pkgs.lasem
-        ];
-        # the mathjax renderer resolves its node library through
-        # NODE_PATH; mathjax-node-cli bundles it
-        mathjaxNodePath =
-          "${pkgs.mathjax-node-cli}/lib/node_modules/mathjax-node-cli/node_modules";
+        # the math renderers' external programs and environment,
+        # shared with the composed papis (nix/default.nix)
+        math = import ./nix/math-programs.nix { inherit pkgs; };
+        mathPrograms = math.programs;
+        mathjaxNodePath = math.env.NODE_PATH;
         testPrograms = mathPrograms ++ [ pkgs.epubcheck ];
 
         # contributor environment: the dev group (tests, type checking,

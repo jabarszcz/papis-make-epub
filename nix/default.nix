@@ -18,14 +18,11 @@ let
       };
     };
   };
-  texmath = pkgs.callPackage ./texmath.nix { };
+  math = import ./math-programs.nix { inherit pkgs; };
 in
 (pkgs.callPackage ./wrap-papis.nix { }) {
   inherit python;
   plugins = ps: [ ps.papis-make-epub ];
-  extraPrograms = [ texmath pkgs.nodejs pkgs.lasem ];
-  # the mathjax renderer resolves its node library through NODE_PATH;
-  # mathjax-node-cli bundles it
-  extraEnv.NODE_PATH =
-    "${pkgs.mathjax-node-cli}/lib/node_modules/mathjax-node-cli/node_modules";
+  extraPrograms = math.programs;
+  extraEnv = math.env;
 }
